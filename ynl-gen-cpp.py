@@ -516,7 +516,7 @@ class TypeBitfield32(Type):
         return f"NLA_POLICY_BITFIELD32({mask})"
 
     def attr_put(self, ri, var):
-        line = f"ynl_attr_put(nlh, {self.enum_name}, &{var}->{self.c_name}, sizeof(struct nla_bitfield32))"
+        line = f"ynl_attr_put(nlh, {self.enum_name}, &(*{var}.{self.c_name}), sizeof(struct nla_bitfield32))"
         self._attr_put_line(ri, var, line)
 
     def _attr_get(self, ri, var):
