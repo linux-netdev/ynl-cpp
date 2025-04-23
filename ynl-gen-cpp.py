@@ -432,7 +432,7 @@ class TypeString(Type):
     def _attr_get(self, ri, var):
         return (
             [
-                f"{var}->{self.c_name}.assign(ynl_attr_get_str(attr), ynl_attr_data_len(attr));",
+                f"{var}->{self.c_name}.assign(ynl_attr_get_str(attr));",
             ],
             None,
             None,
