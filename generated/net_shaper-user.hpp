@@ -65,7 +65,7 @@ struct net_shaper_get_rsp {
 
  */
 std::unique_ptr<net_shaper_get_rsp>
-net_shaper_get(ynl_cpp::ynl_socket&  ys, net_shaper_get_req& req);
+net_shaper_get(ynl_cpp::ynl_socket& ys, net_shaper_get_req& req);
 
 /* NET_SHAPER_CMD_GET - dump */
 struct net_shaper_get_req_dump {
@@ -77,7 +77,7 @@ struct net_shaper_get_list {
 };
 
 std::unique_ptr<net_shaper_get_list>
-net_shaper_get_dump(ynl_cpp::ynl_socket&  ys, net_shaper_get_req_dump& req);
+net_shaper_get_dump(ynl_cpp::ynl_socket& ys, net_shaper_get_req_dump& req);
 
 /* ============== NET_SHAPER_CMD_SET ============== */
 /* NET_SHAPER_CMD_SET - do */
@@ -98,7 +98,7 @@ The set operation can't be used to create a @node scope shaper,
 use the @group operation instead.
 
  */
-int net_shaper_set(ynl_cpp::ynl_socket&  ys, net_shaper_set_req& req);
+int net_shaper_set(ynl_cpp::ynl_socket& ys, net_shaper_set_req& req);
 
 /* ============== NET_SHAPER_CMD_DELETE ============== */
 /* NET_SHAPER_CMD_DELETE - do */
@@ -121,7 +121,7 @@ node with infinite bandwidth. The queue's implicit node
 feeds an implicit RR node at the root of the hierarchy.
 
  */
-int net_shaper_delete(ynl_cpp::ynl_socket&  ys, net_shaper_delete_req& req);
+int net_shaper_delete(ynl_cpp::ynl_socket& ys, net_shaper_delete_req& req);
 
 /* ============== NET_SHAPER_CMD_GROUP ============== */
 /* NET_SHAPER_CMD_GROUP - do */
@@ -166,7 +166,7 @@ as the reply.
 
  */
 std::unique_ptr<net_shaper_group_rsp>
-net_shaper_group(ynl_cpp::ynl_socket&  ys, net_shaper_group_req& req);
+net_shaper_group(ynl_cpp::ynl_socket& ys, net_shaper_group_req& req);
 
 /* ============== NET_SHAPER_CMD_CAP_GET ============== */
 /* NET_SHAPER_CMD_CAP_GET - do */
@@ -194,7 +194,7 @@ for the specified scope.
 
  */
 std::unique_ptr<net_shaper_cap_get_rsp>
-net_shaper_cap_get(ynl_cpp::ynl_socket&  ys, net_shaper_cap_get_req& req);
+net_shaper_cap_get(ynl_cpp::ynl_socket& ys, net_shaper_cap_get_req& req);
 
 /* NET_SHAPER_CMD_CAP_GET - dump */
 struct net_shaper_cap_get_req_dump {
@@ -206,7 +206,7 @@ struct net_shaper_cap_get_list {
 };
 
 std::unique_ptr<net_shaper_cap_get_list>
-net_shaper_cap_get_dump(ynl_cpp::ynl_socket&  ys,
+net_shaper_cap_get_dump(ynl_cpp::ynl_socket& ys,
 			net_shaper_cap_get_req_dump& req);
 
 } //namespace ynl_cpp

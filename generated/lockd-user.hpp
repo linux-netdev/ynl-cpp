@@ -39,7 +39,7 @@ struct lockd_server_set_req {
 /*
  * set the lockd server parameters
  */
-int lockd_server_set(ynl_cpp::ynl_socket&  ys, lockd_server_set_req& req);
+int lockd_server_set(ynl_cpp::ynl_socket& ys, lockd_server_set_req& req);
 
 /* ============== LOCKD_CMD_SERVER_GET ============== */
 /* LOCKD_CMD_SERVER_GET - do */
@@ -54,7 +54,7 @@ struct lockd_server_get_rsp {
  * get the lockd server parameters
  */
 std::unique_ptr<lockd_server_get_rsp>
-lockd_server_get(ynl_cpp::ynl_socket&  ys);
+lockd_server_get(ynl_cpp::ynl_socket& ys);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_LOCKD_GEN_H */

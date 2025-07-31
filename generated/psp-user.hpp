@@ -51,14 +51,14 @@ struct psp_dev_get_rsp {
  * Get / dump information about PSP capable devices on the system.
  */
 std::unique_ptr<psp_dev_get_rsp>
-psp_dev_get(ynl_cpp::ynl_socket&  ys, psp_dev_get_req& req);
+psp_dev_get(ynl_cpp::ynl_socket& ys, psp_dev_get_req& req);
 
 /* PSP_CMD_DEV_GET - dump */
 struct psp_dev_get_list {
 	std::list<psp_dev_get_rsp> objs;
 };
 
-std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket&  ys);
+std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* PSP_CMD_DEV_GET - notify */
 struct psp_dev_get_ntf {
@@ -78,7 +78,7 @@ struct psp_dev_set_rsp {
  * Set the configuration of a PSP device.
  */
 std::unique_ptr<psp_dev_set_rsp>
-psp_dev_set(ynl_cpp::ynl_socket&  ys, psp_dev_set_req& req);
+psp_dev_set(ynl_cpp::ynl_socket& ys, psp_dev_set_req& req);
 
 /* ============== PSP_CMD_KEY_ROTATE ============== */
 /* PSP_CMD_KEY_ROTATE - do */
@@ -94,7 +94,7 @@ struct psp_key_rotate_rsp {
  * Rotate the device key.
  */
 std::unique_ptr<psp_key_rotate_rsp>
-psp_key_rotate(ynl_cpp::ynl_socket&  ys, psp_key_rotate_req& req);
+psp_key_rotate(ynl_cpp::ynl_socket& ys, psp_key_rotate_req& req);
 
 /* PSP_CMD_KEY_ROTATE - notify */
 struct psp_key_rotate_ntf {
@@ -118,7 +118,7 @@ struct psp_rx_assoc_rsp {
  * Allocate a new Rx key + SPI pair, associate it with a socket.
  */
 std::unique_ptr<psp_rx_assoc_rsp>
-psp_rx_assoc(ynl_cpp::ynl_socket&  ys, psp_rx_assoc_req& req);
+psp_rx_assoc(ynl_cpp::ynl_socket& ys, psp_rx_assoc_req& req);
 
 /* ============== PSP_CMD_TX_ASSOC ============== */
 /* PSP_CMD_TX_ASSOC - do */
@@ -136,7 +136,7 @@ struct psp_tx_assoc_rsp {
  * Add a PSP Tx association.
  */
 std::unique_ptr<psp_tx_assoc_rsp>
-psp_tx_assoc(ynl_cpp::ynl_socket&  ys, psp_tx_assoc_req& req);
+psp_tx_assoc(ynl_cpp::ynl_socket& ys, psp_tx_assoc_req& req);
 
 /* ============== PSP_CMD_GET_STATS ============== */
 /* PSP_CMD_GET_STATS - do */
@@ -154,7 +154,7 @@ struct psp_get_stats_rsp {
  * Get device statistics.
  */
 std::unique_ptr<psp_get_stats_rsp>
-psp_get_stats(ynl_cpp::ynl_socket&  ys, psp_get_stats_req& req);
+psp_get_stats(ynl_cpp::ynl_socket& ys, psp_get_stats_req& req);
 
 /* PSP_CMD_GET_STATS - dump */
 struct psp_get_stats_list {
@@ -162,7 +162,7 @@ struct psp_get_stats_list {
 };
 
 std::unique_ptr<psp_get_stats_list>
-psp_get_stats_dump(ynl_cpp::ynl_socket&  ys);
+psp_get_stats_dump(ynl_cpp::ynl_socket& ys);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_PSP_GEN_H */

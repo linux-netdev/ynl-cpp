@@ -78,7 +78,7 @@ struct dpll_device_id_get_rsp {
 
  */
 std::unique_ptr<dpll_device_id_get_rsp>
-dpll_device_id_get(ynl_cpp::ynl_socket&  ys, dpll_device_id_get_req& req);
+dpll_device_id_get(ynl_cpp::ynl_socket& ys, dpll_device_id_get_req& req);
 
 /* ============== DPLL_CMD_DEVICE_GET ============== */
 /* DPLL_CMD_DEVICE_GET - do */
@@ -104,7 +104,7 @@ struct dpll_device_get_rsp {
 
  */
 std::unique_ptr<dpll_device_get_rsp>
-dpll_device_get(ynl_cpp::ynl_socket&  ys, dpll_device_get_req& req);
+dpll_device_get(ynl_cpp::ynl_socket& ys, dpll_device_get_req& req);
 
 /* DPLL_CMD_DEVICE_GET - dump */
 struct dpll_device_get_list {
@@ -112,7 +112,7 @@ struct dpll_device_get_list {
 };
 
 std::unique_ptr<dpll_device_get_list>
-dpll_device_get_dump(ynl_cpp::ynl_socket&  ys);
+dpll_device_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* DPLL_CMD_DEVICE_GET - notify */
 struct dpll_device_get_ntf {
@@ -128,7 +128,7 @@ struct dpll_device_set_req {
 /*
  * Set attributes for a DPLL device
  */
-int dpll_device_set(ynl_cpp::ynl_socket&  ys, dpll_device_set_req& req);
+int dpll_device_set(ynl_cpp::ynl_socket& ys, dpll_device_set_req& req);
 
 /* ============== DPLL_CMD_PIN_ID_GET ============== */
 /* DPLL_CMD_PIN_ID_GET - do */
@@ -150,7 +150,7 @@ struct dpll_pin_id_get_rsp {
 
  */
 std::unique_ptr<dpll_pin_id_get_rsp>
-dpll_pin_id_get(ynl_cpp::ynl_socket&  ys, dpll_pin_id_get_req& req);
+dpll_pin_id_get(ynl_cpp::ynl_socket& ys, dpll_pin_id_get_req& req);
 
 /* ============== DPLL_CMD_PIN_GET ============== */
 /* DPLL_CMD_PIN_GET - do */
@@ -190,7 +190,7 @@ struct dpll_pin_get_rsp {
 
  */
 std::unique_ptr<dpll_pin_get_rsp>
-dpll_pin_get(ynl_cpp::ynl_socket&  ys, dpll_pin_get_req& req);
+dpll_pin_get(ynl_cpp::ynl_socket& ys, dpll_pin_get_req& req);
 
 /* DPLL_CMD_PIN_GET - dump */
 struct dpll_pin_get_req_dump {
@@ -202,7 +202,7 @@ struct dpll_pin_get_list {
 };
 
 std::unique_ptr<dpll_pin_get_list>
-dpll_pin_get_dump(ynl_cpp::ynl_socket&  ys, dpll_pin_get_req_dump& req);
+dpll_pin_get_dump(ynl_cpp::ynl_socket& ys, dpll_pin_get_req_dump& req);
 
 /* DPLL_CMD_PIN_GET - notify */
 struct dpll_pin_get_ntf {
@@ -226,7 +226,7 @@ struct dpll_pin_set_req {
 /*
  * Set attributes of a target pin
  */
-int dpll_pin_set(ynl_cpp::ynl_socket&  ys, dpll_pin_set_req& req);
+int dpll_pin_set(ynl_cpp::ynl_socket& ys, dpll_pin_set_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_DPLL_GEN_H */

@@ -236,7 +236,7 @@ struct ethtool_strset_get_rsp {
  * Get string set from the kernel.
  */
 std::unique_ptr<ethtool_strset_get_rsp>
-ethtool_strset_get(ynl_cpp::ynl_socket&  ys, ethtool_strset_get_req& req);
+ethtool_strset_get(ynl_cpp::ynl_socket& ys, ethtool_strset_get_req& req);
 
 /* ETHTOOL_MSG_STRSET_GET - dump */
 struct ethtool_strset_get_req_dump {
@@ -250,7 +250,7 @@ struct ethtool_strset_get_list {
 };
 
 std::unique_ptr<ethtool_strset_get_list>
-ethtool_strset_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_strset_get_dump(ynl_cpp::ynl_socket& ys,
 			ethtool_strset_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_LINKINFO_GET ============== */
@@ -272,7 +272,7 @@ struct ethtool_linkinfo_get_rsp {
  * Get link info.
  */
 std::unique_ptr<ethtool_linkinfo_get_rsp>
-ethtool_linkinfo_get(ynl_cpp::ynl_socket&  ys, ethtool_linkinfo_get_req& req);
+ethtool_linkinfo_get(ynl_cpp::ynl_socket& ys, ethtool_linkinfo_get_req& req);
 
 /* ETHTOOL_MSG_LINKINFO_GET - dump */
 struct ethtool_linkinfo_get_req_dump {
@@ -284,7 +284,7 @@ struct ethtool_linkinfo_get_list {
 };
 
 std::unique_ptr<ethtool_linkinfo_get_list>
-ethtool_linkinfo_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_linkinfo_get_dump(ynl_cpp::ynl_socket& ys,
 			  ethtool_linkinfo_get_req_dump& req);
 
 /* ETHTOOL_MSG_LINKINFO_GET - notify */
@@ -305,7 +305,7 @@ struct ethtool_linkinfo_set_req {
 /*
  * Set link info.
  */
-int ethtool_linkinfo_set(ynl_cpp::ynl_socket&  ys,
+int ethtool_linkinfo_set(ynl_cpp::ynl_socket& ys,
 			 ethtool_linkinfo_set_req& req);
 
 /* ============== ETHTOOL_MSG_LINKMODES_GET ============== */
@@ -331,7 +331,7 @@ struct ethtool_linkmodes_get_rsp {
  * Get link modes.
  */
 std::unique_ptr<ethtool_linkmodes_get_rsp>
-ethtool_linkmodes_get(ynl_cpp::ynl_socket&  ys, ethtool_linkmodes_get_req& req);
+ethtool_linkmodes_get(ynl_cpp::ynl_socket& ys, ethtool_linkmodes_get_req& req);
 
 /* ETHTOOL_MSG_LINKMODES_GET - dump */
 struct ethtool_linkmodes_get_req_dump {
@@ -343,7 +343,7 @@ struct ethtool_linkmodes_get_list {
 };
 
 std::unique_ptr<ethtool_linkmodes_get_list>
-ethtool_linkmodes_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_linkmodes_get_dump(ynl_cpp::ynl_socket& ys,
 			   ethtool_linkmodes_get_req_dump& req);
 
 /* ETHTOOL_MSG_LINKMODES_GET - notify */
@@ -368,7 +368,7 @@ struct ethtool_linkmodes_set_req {
 /*
  * Set link modes.
  */
-int ethtool_linkmodes_set(ynl_cpp::ynl_socket&  ys,
+int ethtool_linkmodes_set(ynl_cpp::ynl_socket& ys,
 			  ethtool_linkmodes_set_req& req);
 
 /* ============== ETHTOOL_MSG_LINKSTATE_GET ============== */
@@ -391,7 +391,7 @@ struct ethtool_linkstate_get_rsp {
  * Get link state.
  */
 std::unique_ptr<ethtool_linkstate_get_rsp>
-ethtool_linkstate_get(ynl_cpp::ynl_socket&  ys, ethtool_linkstate_get_req& req);
+ethtool_linkstate_get(ynl_cpp::ynl_socket& ys, ethtool_linkstate_get_req& req);
 
 /* ETHTOOL_MSG_LINKSTATE_GET - dump */
 struct ethtool_linkstate_get_req_dump {
@@ -403,7 +403,7 @@ struct ethtool_linkstate_get_list {
 };
 
 std::unique_ptr<ethtool_linkstate_get_list>
-ethtool_linkstate_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_linkstate_get_dump(ynl_cpp::ynl_socket& ys,
 			   ethtool_linkstate_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_DEBUG_GET ============== */
@@ -421,7 +421,7 @@ struct ethtool_debug_get_rsp {
  * Get debug message mask.
  */
 std::unique_ptr<ethtool_debug_get_rsp>
-ethtool_debug_get(ynl_cpp::ynl_socket&  ys, ethtool_debug_get_req& req);
+ethtool_debug_get(ynl_cpp::ynl_socket& ys, ethtool_debug_get_req& req);
 
 /* ETHTOOL_MSG_DEBUG_GET - dump */
 struct ethtool_debug_get_req_dump {
@@ -433,7 +433,7 @@ struct ethtool_debug_get_list {
 };
 
 std::unique_ptr<ethtool_debug_get_list>
-ethtool_debug_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_debug_get_dump(ynl_cpp::ynl_socket& ys,
 		       ethtool_debug_get_req_dump& req);
 
 /* ETHTOOL_MSG_DEBUG_GET - notify */
@@ -450,7 +450,7 @@ struct ethtool_debug_set_req {
 /*
  * Set debug message mask.
  */
-int ethtool_debug_set(ynl_cpp::ynl_socket&  ys, ethtool_debug_set_req& req);
+int ethtool_debug_set(ynl_cpp::ynl_socket& ys, ethtool_debug_set_req& req);
 
 /* ============== ETHTOOL_MSG_WOL_GET ============== */
 /* ETHTOOL_MSG_WOL_GET - do */
@@ -468,7 +468,7 @@ struct ethtool_wol_get_rsp {
  * Get WOL params.
  */
 std::unique_ptr<ethtool_wol_get_rsp>
-ethtool_wol_get(ynl_cpp::ynl_socket&  ys, ethtool_wol_get_req& req);
+ethtool_wol_get(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req& req);
 
 /* ETHTOOL_MSG_WOL_GET - dump */
 struct ethtool_wol_get_req_dump {
@@ -480,7 +480,7 @@ struct ethtool_wol_get_list {
 };
 
 std::unique_ptr<ethtool_wol_get_list>
-ethtool_wol_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_wol_get_req_dump& req);
+ethtool_wol_get_dump(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req_dump& req);
 
 /* ETHTOOL_MSG_WOL_GET - notify */
 struct ethtool_wol_get_ntf {
@@ -497,7 +497,7 @@ struct ethtool_wol_set_req {
 /*
  * Set WOL params.
  */
-int ethtool_wol_set(ynl_cpp::ynl_socket&  ys, ethtool_wol_set_req& req);
+int ethtool_wol_set(ynl_cpp::ynl_socket& ys, ethtool_wol_set_req& req);
 
 /* ============== ETHTOOL_MSG_FEATURES_GET ============== */
 /* ETHTOOL_MSG_FEATURES_GET - do */
@@ -517,7 +517,7 @@ struct ethtool_features_get_rsp {
  * Get features.
  */
 std::unique_ptr<ethtool_features_get_rsp>
-ethtool_features_get(ynl_cpp::ynl_socket&  ys, ethtool_features_get_req& req);
+ethtool_features_get(ynl_cpp::ynl_socket& ys, ethtool_features_get_req& req);
 
 /* ETHTOOL_MSG_FEATURES_GET - dump */
 struct ethtool_features_get_req_dump {
@@ -529,7 +529,7 @@ struct ethtool_features_get_list {
 };
 
 std::unique_ptr<ethtool_features_get_list>
-ethtool_features_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_features_get_dump(ynl_cpp::ynl_socket& ys,
 			  ethtool_features_get_req_dump& req);
 
 /* ETHTOOL_MSG_FEATURES_GET - notify */
@@ -558,7 +558,7 @@ struct ethtool_features_set_rsp {
  * Set features.
  */
 std::unique_ptr<ethtool_features_set_rsp>
-ethtool_features_set(ynl_cpp::ynl_socket&  ys, ethtool_features_set_req& req);
+ethtool_features_set(ynl_cpp::ynl_socket& ys, ethtool_features_set_req& req);
 
 /* ============== ETHTOOL_MSG_PRIVFLAGS_GET ============== */
 /* ETHTOOL_MSG_PRIVFLAGS_GET - do */
@@ -575,7 +575,7 @@ struct ethtool_privflags_get_rsp {
  * Get device private flags.
  */
 std::unique_ptr<ethtool_privflags_get_rsp>
-ethtool_privflags_get(ynl_cpp::ynl_socket&  ys, ethtool_privflags_get_req& req);
+ethtool_privflags_get(ynl_cpp::ynl_socket& ys, ethtool_privflags_get_req& req);
 
 /* ETHTOOL_MSG_PRIVFLAGS_GET - dump */
 struct ethtool_privflags_get_req_dump {
@@ -587,7 +587,7 @@ struct ethtool_privflags_get_list {
 };
 
 std::unique_ptr<ethtool_privflags_get_list>
-ethtool_privflags_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_privflags_get_dump(ynl_cpp::ynl_socket& ys,
 			   ethtool_privflags_get_req_dump& req);
 
 /* ETHTOOL_MSG_PRIVFLAGS_GET - notify */
@@ -604,7 +604,7 @@ struct ethtool_privflags_set_req {
 /*
  * Set device private flags.
  */
-int ethtool_privflags_set(ynl_cpp::ynl_socket&  ys,
+int ethtool_privflags_set(ynl_cpp::ynl_socket& ys,
 			  ethtool_privflags_set_req& req);
 
 /* ============== ETHTOOL_MSG_RINGS_GET ============== */
@@ -638,7 +638,7 @@ struct ethtool_rings_get_rsp {
  * Get ring params.
  */
 std::unique_ptr<ethtool_rings_get_rsp>
-ethtool_rings_get(ynl_cpp::ynl_socket&  ys, ethtool_rings_get_req& req);
+ethtool_rings_get(ynl_cpp::ynl_socket& ys, ethtool_rings_get_req& req);
 
 /* ETHTOOL_MSG_RINGS_GET - dump */
 struct ethtool_rings_get_req_dump {
@@ -650,7 +650,7 @@ struct ethtool_rings_get_list {
 };
 
 std::unique_ptr<ethtool_rings_get_list>
-ethtool_rings_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_rings_get_dump(ynl_cpp::ynl_socket& ys,
 		       ethtool_rings_get_req_dump& req);
 
 /* ETHTOOL_MSG_RINGS_GET - notify */
@@ -683,7 +683,7 @@ struct ethtool_rings_set_req {
 /*
  * Set ring params.
  */
-int ethtool_rings_set(ynl_cpp::ynl_socket&  ys, ethtool_rings_set_req& req);
+int ethtool_rings_set(ynl_cpp::ynl_socket& ys, ethtool_rings_set_req& req);
 
 /* ============== ETHTOOL_MSG_CHANNELS_GET ============== */
 /* ETHTOOL_MSG_CHANNELS_GET - do */
@@ -707,7 +707,7 @@ struct ethtool_channels_get_rsp {
  * Get channel params.
  */
 std::unique_ptr<ethtool_channels_get_rsp>
-ethtool_channels_get(ynl_cpp::ynl_socket&  ys, ethtool_channels_get_req& req);
+ethtool_channels_get(ynl_cpp::ynl_socket& ys, ethtool_channels_get_req& req);
 
 /* ETHTOOL_MSG_CHANNELS_GET - dump */
 struct ethtool_channels_get_req_dump {
@@ -719,7 +719,7 @@ struct ethtool_channels_get_list {
 };
 
 std::unique_ptr<ethtool_channels_get_list>
-ethtool_channels_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_channels_get_dump(ynl_cpp::ynl_socket& ys,
 			  ethtool_channels_get_req_dump& req);
 
 /* ETHTOOL_MSG_CHANNELS_GET - notify */
@@ -743,7 +743,7 @@ struct ethtool_channels_set_req {
 /*
  * Set channel params.
  */
-int ethtool_channels_set(ynl_cpp::ynl_socket&  ys,
+int ethtool_channels_set(ynl_cpp::ynl_socket& ys,
 			 ethtool_channels_set_req& req);
 
 /* ============== ETHTOOL_MSG_COALESCE_GET ============== */
@@ -789,7 +789,7 @@ struct ethtool_coalesce_get_rsp {
  * Get coalesce params.
  */
 std::unique_ptr<ethtool_coalesce_get_rsp>
-ethtool_coalesce_get(ynl_cpp::ynl_socket&  ys, ethtool_coalesce_get_req& req);
+ethtool_coalesce_get(ynl_cpp::ynl_socket& ys, ethtool_coalesce_get_req& req);
 
 /* ETHTOOL_MSG_COALESCE_GET - dump */
 struct ethtool_coalesce_get_req_dump {
@@ -801,7 +801,7 @@ struct ethtool_coalesce_get_list {
 };
 
 std::unique_ptr<ethtool_coalesce_get_list>
-ethtool_coalesce_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_coalesce_get_dump(ynl_cpp::ynl_socket& ys,
 			  ethtool_coalesce_get_req_dump& req);
 
 /* ETHTOOL_MSG_COALESCE_GET - notify */
@@ -846,7 +846,7 @@ struct ethtool_coalesce_set_req {
 /*
  * Set coalesce params.
  */
-int ethtool_coalesce_set(ynl_cpp::ynl_socket&  ys,
+int ethtool_coalesce_set(ynl_cpp::ynl_socket& ys,
 			 ethtool_coalesce_set_req& req);
 
 /* ============== ETHTOOL_MSG_PAUSE_GET ============== */
@@ -868,7 +868,7 @@ struct ethtool_pause_get_rsp {
  * Get pause params.
  */
 std::unique_ptr<ethtool_pause_get_rsp>
-ethtool_pause_get(ynl_cpp::ynl_socket&  ys, ethtool_pause_get_req& req);
+ethtool_pause_get(ynl_cpp::ynl_socket& ys, ethtool_pause_get_req& req);
 
 /* ETHTOOL_MSG_PAUSE_GET - dump */
 struct ethtool_pause_get_req_dump {
@@ -880,7 +880,7 @@ struct ethtool_pause_get_list {
 };
 
 std::unique_ptr<ethtool_pause_get_list>
-ethtool_pause_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_pause_get_dump(ynl_cpp::ynl_socket& ys,
 		       ethtool_pause_get_req_dump& req);
 
 /* ETHTOOL_MSG_PAUSE_GET - notify */
@@ -901,7 +901,7 @@ struct ethtool_pause_set_req {
 /*
  * Set pause params.
  */
-int ethtool_pause_set(ynl_cpp::ynl_socket&  ys, ethtool_pause_set_req& req);
+int ethtool_pause_set(ynl_cpp::ynl_socket& ys, ethtool_pause_set_req& req);
 
 /* ============== ETHTOOL_MSG_EEE_GET ============== */
 /* ETHTOOL_MSG_EEE_GET - do */
@@ -923,7 +923,7 @@ struct ethtool_eee_get_rsp {
  * Get eee params.
  */
 std::unique_ptr<ethtool_eee_get_rsp>
-ethtool_eee_get(ynl_cpp::ynl_socket&  ys, ethtool_eee_get_req& req);
+ethtool_eee_get(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req& req);
 
 /* ETHTOOL_MSG_EEE_GET - dump */
 struct ethtool_eee_get_req_dump {
@@ -935,7 +935,7 @@ struct ethtool_eee_get_list {
 };
 
 std::unique_ptr<ethtool_eee_get_list>
-ethtool_eee_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_eee_get_req_dump& req);
+ethtool_eee_get_dump(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req_dump& req);
 
 /* ETHTOOL_MSG_EEE_GET - notify */
 struct ethtool_eee_get_ntf {
@@ -956,7 +956,7 @@ struct ethtool_eee_set_req {
 /*
  * Set eee params.
  */
-int ethtool_eee_set(ynl_cpp::ynl_socket&  ys, ethtool_eee_set_req& req);
+int ethtool_eee_set(ynl_cpp::ynl_socket& ys, ethtool_eee_set_req& req);
 
 /* ============== ETHTOOL_MSG_TSINFO_GET ============== */
 /* ETHTOOL_MSG_TSINFO_GET - do */
@@ -981,7 +981,7 @@ struct ethtool_tsinfo_get_rsp {
  * Get tsinfo params.
  */
 std::unique_ptr<ethtool_tsinfo_get_rsp>
-ethtool_tsinfo_get(ynl_cpp::ynl_socket&  ys, ethtool_tsinfo_get_req& req);
+ethtool_tsinfo_get(ynl_cpp::ynl_socket& ys, ethtool_tsinfo_get_req& req);
 
 /* ETHTOOL_MSG_TSINFO_GET - dump */
 struct ethtool_tsinfo_get_req_dump {
@@ -994,7 +994,7 @@ struct ethtool_tsinfo_get_list {
 };
 
 std::unique_ptr<ethtool_tsinfo_get_list>
-ethtool_tsinfo_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_tsinfo_get_dump(ynl_cpp::ynl_socket& ys,
 			ethtool_tsinfo_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_CABLE_TEST_ACT ============== */
@@ -1006,7 +1006,7 @@ struct ethtool_cable_test_act_req {
 /*
  * Cable test.
  */
-int ethtool_cable_test_act(ynl_cpp::ynl_socket&  ys,
+int ethtool_cable_test_act(ynl_cpp::ynl_socket& ys,
 			   ethtool_cable_test_act_req& req);
 
 /* ============== ETHTOOL_MSG_CABLE_TEST_TDR_ACT ============== */
@@ -1018,7 +1018,7 @@ struct ethtool_cable_test_tdr_act_req {
 /*
  * Cable test TDR.
  */
-int ethtool_cable_test_tdr_act(ynl_cpp::ynl_socket&  ys,
+int ethtool_cable_test_tdr_act(ynl_cpp::ynl_socket& ys,
 			       ethtool_cable_test_tdr_act_req& req);
 
 /* ============== ETHTOOL_MSG_TUNNEL_INFO_GET ============== */
@@ -1036,7 +1036,7 @@ struct ethtool_tunnel_info_get_rsp {
  * Get tsinfo params.
  */
 std::unique_ptr<ethtool_tunnel_info_get_rsp>
-ethtool_tunnel_info_get(ynl_cpp::ynl_socket&  ys,
+ethtool_tunnel_info_get(ynl_cpp::ynl_socket& ys,
 			ethtool_tunnel_info_get_req& req);
 
 /* ETHTOOL_MSG_TUNNEL_INFO_GET - dump */
@@ -1049,7 +1049,7 @@ struct ethtool_tunnel_info_get_list {
 };
 
 std::unique_ptr<ethtool_tunnel_info_get_list>
-ethtool_tunnel_info_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_tunnel_info_get_dump(ynl_cpp::ynl_socket& ys,
 			     ethtool_tunnel_info_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_FEC_GET ============== */
@@ -1070,7 +1070,7 @@ struct ethtool_fec_get_rsp {
  * Get FEC params.
  */
 std::unique_ptr<ethtool_fec_get_rsp>
-ethtool_fec_get(ynl_cpp::ynl_socket&  ys, ethtool_fec_get_req& req);
+ethtool_fec_get(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req& req);
 
 /* ETHTOOL_MSG_FEC_GET - dump */
 struct ethtool_fec_get_req_dump {
@@ -1082,7 +1082,7 @@ struct ethtool_fec_get_list {
 };
 
 std::unique_ptr<ethtool_fec_get_list>
-ethtool_fec_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_fec_get_req_dump& req);
+ethtool_fec_get_dump(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req_dump& req);
 
 /* ETHTOOL_MSG_FEC_GET - notify */
 struct ethtool_fec_get_ntf {
@@ -1101,7 +1101,7 @@ struct ethtool_fec_set_req {
 /*
  * Set FEC params.
  */
-int ethtool_fec_set(ynl_cpp::ynl_socket&  ys, ethtool_fec_set_req& req);
+int ethtool_fec_set(ynl_cpp::ynl_socket& ys, ethtool_fec_set_req& req);
 
 /* ============== ETHTOOL_MSG_MODULE_EEPROM_GET ============== */
 /* ETHTOOL_MSG_MODULE_EEPROM_GET - do */
@@ -1123,7 +1123,7 @@ struct ethtool_module_eeprom_get_rsp {
  * Get module EEPROM params.
  */
 std::unique_ptr<ethtool_module_eeprom_get_rsp>
-ethtool_module_eeprom_get(ynl_cpp::ynl_socket&  ys,
+ethtool_module_eeprom_get(ynl_cpp::ynl_socket& ys,
 			  ethtool_module_eeprom_get_req& req);
 
 /* ETHTOOL_MSG_MODULE_EEPROM_GET - dump */
@@ -1141,7 +1141,7 @@ struct ethtool_module_eeprom_get_list {
 };
 
 std::unique_ptr<ethtool_module_eeprom_get_list>
-ethtool_module_eeprom_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_module_eeprom_get_dump(ynl_cpp::ynl_socket& ys,
 			       ethtool_module_eeprom_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_STATS_GET ============== */
@@ -1162,7 +1162,7 @@ struct ethtool_stats_get_rsp {
  * Get statistics.
  */
 std::unique_ptr<ethtool_stats_get_rsp>
-ethtool_stats_get(ynl_cpp::ynl_socket&  ys, ethtool_stats_get_req& req);
+ethtool_stats_get(ynl_cpp::ynl_socket& ys, ethtool_stats_get_req& req);
 
 /* ETHTOOL_MSG_STATS_GET - dump */
 struct ethtool_stats_get_req_dump {
@@ -1175,7 +1175,7 @@ struct ethtool_stats_get_list {
 };
 
 std::unique_ptr<ethtool_stats_get_list>
-ethtool_stats_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_stats_get_dump(ynl_cpp::ynl_socket& ys,
 		       ethtool_stats_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_PHC_VCLOCKS_GET ============== */
@@ -1193,7 +1193,7 @@ struct ethtool_phc_vclocks_get_rsp {
  * Get PHC VCLOCKs.
  */
 std::unique_ptr<ethtool_phc_vclocks_get_rsp>
-ethtool_phc_vclocks_get(ynl_cpp::ynl_socket&  ys,
+ethtool_phc_vclocks_get(ynl_cpp::ynl_socket& ys,
 			ethtool_phc_vclocks_get_req& req);
 
 /* ETHTOOL_MSG_PHC_VCLOCKS_GET - dump */
@@ -1206,7 +1206,7 @@ struct ethtool_phc_vclocks_get_list {
 };
 
 std::unique_ptr<ethtool_phc_vclocks_get_list>
-ethtool_phc_vclocks_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_phc_vclocks_get_dump(ynl_cpp::ynl_socket& ys,
 			     ethtool_phc_vclocks_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_MODULE_GET ============== */
@@ -1225,7 +1225,7 @@ struct ethtool_module_get_rsp {
  * Get module params.
  */
 std::unique_ptr<ethtool_module_get_rsp>
-ethtool_module_get(ynl_cpp::ynl_socket&  ys, ethtool_module_get_req& req);
+ethtool_module_get(ynl_cpp::ynl_socket& ys, ethtool_module_get_req& req);
 
 /* ETHTOOL_MSG_MODULE_GET - dump */
 struct ethtool_module_get_req_dump {
@@ -1237,7 +1237,7 @@ struct ethtool_module_get_list {
 };
 
 std::unique_ptr<ethtool_module_get_list>
-ethtool_module_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_module_get_dump(ynl_cpp::ynl_socket& ys,
 			ethtool_module_get_req_dump& req);
 
 /* ETHTOOL_MSG_MODULE_GET - notify */
@@ -1255,7 +1255,7 @@ struct ethtool_module_set_req {
 /*
  * Set module params.
  */
-int ethtool_module_set(ynl_cpp::ynl_socket&  ys, ethtool_module_set_req& req);
+int ethtool_module_set(ynl_cpp::ynl_socket& ys, ethtool_module_set_req& req);
 
 /* ============== ETHTOOL_MSG_PSE_GET ============== */
 /* ETHTOOL_MSG_PSE_GET - do */
@@ -1286,7 +1286,7 @@ struct ethtool_pse_get_rsp {
  * Get Power Sourcing Equipment params.
  */
 std::unique_ptr<ethtool_pse_get_rsp>
-ethtool_pse_get(ynl_cpp::ynl_socket&  ys, ethtool_pse_get_req& req);
+ethtool_pse_get(ynl_cpp::ynl_socket& ys, ethtool_pse_get_req& req);
 
 /* ETHTOOL_MSG_PSE_GET - dump */
 struct ethtool_pse_get_req_dump {
@@ -1298,7 +1298,7 @@ struct ethtool_pse_get_list {
 };
 
 std::unique_ptr<ethtool_pse_get_list>
-ethtool_pse_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_pse_get_req_dump& req);
+ethtool_pse_get_dump(ynl_cpp::ynl_socket& ys, ethtool_pse_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_PSE_SET ============== */
 /* ETHTOOL_MSG_PSE_SET - do */
@@ -1313,7 +1313,7 @@ struct ethtool_pse_set_req {
 /*
  * Set Power Sourcing Equipment params.
  */
-int ethtool_pse_set(ynl_cpp::ynl_socket&  ys, ethtool_pse_set_req& req);
+int ethtool_pse_set(ynl_cpp::ynl_socket& ys, ethtool_pse_set_req& req);
 
 /* ============== ETHTOOL_MSG_RSS_GET ============== */
 /* ETHTOOL_MSG_RSS_GET - do */
@@ -1336,7 +1336,7 @@ struct ethtool_rss_get_rsp {
  * Get RSS params.
  */
 std::unique_ptr<ethtool_rss_get_rsp>
-ethtool_rss_get(ynl_cpp::ynl_socket&  ys, ethtool_rss_get_req& req);
+ethtool_rss_get(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req& req);
 
 /* ETHTOOL_MSG_RSS_GET - dump */
 struct ethtool_rss_get_req_dump {
@@ -1349,7 +1349,7 @@ struct ethtool_rss_get_list {
 };
 
 std::unique_ptr<ethtool_rss_get_list>
-ethtool_rss_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_rss_get_req_dump& req);
+ethtool_rss_get_dump(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req_dump& req);
 
 /* ETHTOOL_MSG_RSS_GET - notify */
 struct ethtool_rss_get_ntf {
@@ -1377,7 +1377,7 @@ struct ethtool_plca_get_cfg_rsp {
  * Get PLCA params.
  */
 std::unique_ptr<ethtool_plca_get_cfg_rsp>
-ethtool_plca_get_cfg(ynl_cpp::ynl_socket&  ys, ethtool_plca_get_cfg_req& req);
+ethtool_plca_get_cfg(ynl_cpp::ynl_socket& ys, ethtool_plca_get_cfg_req& req);
 
 /* ETHTOOL_MSG_PLCA_GET_CFG - dump */
 struct ethtool_plca_get_cfg_req_dump {
@@ -1389,7 +1389,7 @@ struct ethtool_plca_get_cfg_list {
 };
 
 std::unique_ptr<ethtool_plca_get_cfg_list>
-ethtool_plca_get_cfg_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_plca_get_cfg_dump(ynl_cpp::ynl_socket& ys,
 			  ethtool_plca_get_cfg_req_dump& req);
 
 /* ETHTOOL_MSG_PLCA_GET_CFG - notify */
@@ -1413,7 +1413,7 @@ struct ethtool_plca_set_cfg_req {
 /*
  * Set PLCA params.
  */
-int ethtool_plca_set_cfg(ynl_cpp::ynl_socket&  ys,
+int ethtool_plca_set_cfg(ynl_cpp::ynl_socket& ys,
 			 ethtool_plca_set_cfg_req& req);
 
 /* ============== ETHTOOL_MSG_PLCA_GET_STATUS ============== */
@@ -1438,7 +1438,7 @@ struct ethtool_plca_get_status_rsp {
  * Get PLCA status params.
  */
 std::unique_ptr<ethtool_plca_get_status_rsp>
-ethtool_plca_get_status(ynl_cpp::ynl_socket&  ys,
+ethtool_plca_get_status(ynl_cpp::ynl_socket& ys,
 			ethtool_plca_get_status_req& req);
 
 /* ETHTOOL_MSG_PLCA_GET_STATUS - dump */
@@ -1451,7 +1451,7 @@ struct ethtool_plca_get_status_list {
 };
 
 std::unique_ptr<ethtool_plca_get_status_list>
-ethtool_plca_get_status_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_plca_get_status_dump(ynl_cpp::ynl_socket& ys,
 			     ethtool_plca_get_status_req_dump& req);
 
 /* ============== ETHTOOL_MSG_MM_GET ============== */
@@ -1477,7 +1477,7 @@ struct ethtool_mm_get_rsp {
  * Get MAC Merge configuration and state
  */
 std::unique_ptr<ethtool_mm_get_rsp>
-ethtool_mm_get(ynl_cpp::ynl_socket&  ys, ethtool_mm_get_req& req);
+ethtool_mm_get(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req& req);
 
 /* ETHTOOL_MSG_MM_GET - dump */
 struct ethtool_mm_get_req_dump {
@@ -1489,7 +1489,7 @@ struct ethtool_mm_get_list {
 };
 
 std::unique_ptr<ethtool_mm_get_list>
-ethtool_mm_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_mm_get_req_dump& req);
+ethtool_mm_get_dump(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req_dump& req);
 
 /* ETHTOOL_MSG_MM_GET - notify */
 struct ethtool_mm_get_ntf {
@@ -1509,7 +1509,7 @@ struct ethtool_mm_set_req {
 /*
  * Set MAC Merge configuration
  */
-int ethtool_mm_set(ynl_cpp::ynl_socket&  ys, ethtool_mm_set_req& req);
+int ethtool_mm_set(ynl_cpp::ynl_socket& ys, ethtool_mm_set_req& req);
 
 /* ============== ETHTOOL_MSG_MODULE_FW_FLASH_ACT ============== */
 /* ETHTOOL_MSG_MODULE_FW_FLASH_ACT - do */
@@ -1522,7 +1522,7 @@ struct ethtool_module_fw_flash_act_req {
 /*
  * Flash transceiver module firmware.
  */
-int ethtool_module_fw_flash_act(ynl_cpp::ynl_socket&  ys,
+int ethtool_module_fw_flash_act(ynl_cpp::ynl_socket& ys,
 				ethtool_module_fw_flash_act_req& req);
 
 /* ============== ETHTOOL_MSG_PHY_GET ============== */
@@ -1546,7 +1546,7 @@ struct ethtool_phy_get_rsp {
  * Get PHY devices attached to an interface
  */
 std::unique_ptr<ethtool_phy_get_rsp>
-ethtool_phy_get(ynl_cpp::ynl_socket&  ys, ethtool_phy_get_req& req);
+ethtool_phy_get(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req& req);
 
 /* ETHTOOL_MSG_PHY_GET - dump */
 struct ethtool_phy_get_req_dump {
@@ -1558,7 +1558,7 @@ struct ethtool_phy_get_list {
 };
 
 std::unique_ptr<ethtool_phy_get_list>
-ethtool_phy_get_dump(ynl_cpp::ynl_socket&  ys, ethtool_phy_get_req_dump& req);
+ethtool_phy_get_dump(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req_dump& req);
 
 /* ETHTOOL_MSG_PHY_GET - notify */
 struct ethtool_phy_get_ntf {
@@ -1582,7 +1582,7 @@ struct ethtool_tsconfig_get_rsp {
  * Get hwtstamp config.
  */
 std::unique_ptr<ethtool_tsconfig_get_rsp>
-ethtool_tsconfig_get(ynl_cpp::ynl_socket&  ys, ethtool_tsconfig_get_req& req);
+ethtool_tsconfig_get(ynl_cpp::ynl_socket& ys, ethtool_tsconfig_get_req& req);
 
 /* ETHTOOL_MSG_TSCONFIG_GET - dump */
 struct ethtool_tsconfig_get_req_dump {
@@ -1594,7 +1594,7 @@ struct ethtool_tsconfig_get_list {
 };
 
 std::unique_ptr<ethtool_tsconfig_get_list>
-ethtool_tsconfig_get_dump(ynl_cpp::ynl_socket&  ys,
+ethtool_tsconfig_get_dump(ynl_cpp::ynl_socket& ys,
 			  ethtool_tsconfig_get_req_dump& req);
 
 /* ============== ETHTOOL_MSG_TSCONFIG_SET ============== */
@@ -1619,7 +1619,7 @@ struct ethtool_tsconfig_set_rsp {
  * Set hwtstamp config.
  */
 std::unique_ptr<ethtool_tsconfig_set_rsp>
-ethtool_tsconfig_set(ynl_cpp::ynl_socket&  ys, ethtool_tsconfig_set_req& req);
+ethtool_tsconfig_set(ynl_cpp::ynl_socket& ys, ethtool_tsconfig_set_req& req);
 
 /* ============== ETHTOOL_MSG_RSS_SET ============== */
 /* ETHTOOL_MSG_RSS_SET - do */
@@ -1636,7 +1636,7 @@ struct ethtool_rss_set_req {
 /*
  * Set RSS params.
  */
-int ethtool_rss_set(ynl_cpp::ynl_socket&  ys, ethtool_rss_set_req& req);
+int ethtool_rss_set(ynl_cpp::ynl_socket& ys, ethtool_rss_set_req& req);
 
 /* ============== ETHTOOL_MSG_RSS_CREATE_ACT ============== */
 /* ETHTOOL_MSG_RSS_CREATE_ACT - do */
@@ -1662,7 +1662,7 @@ struct ethtool_rss_create_act_rsp {
  * Create an RSS context.
  */
 std::unique_ptr<ethtool_rss_create_act_rsp>
-ethtool_rss_create_act(ynl_cpp::ynl_socket&  ys,
+ethtool_rss_create_act(ynl_cpp::ynl_socket& ys,
 		       ethtool_rss_create_act_req& req);
 
 /* ETHTOOL_MSG_RSS_CREATE_ACT - notify */
@@ -1679,7 +1679,7 @@ struct ethtool_rss_delete_act_req {
 /*
  * Delete an RSS context.
  */
-int ethtool_rss_delete_act(ynl_cpp::ynl_socket&  ys,
+int ethtool_rss_delete_act(ynl_cpp::ynl_socket& ys,
 			   ethtool_rss_delete_act_req& req);
 
 /* ETHTOOL_MSG_CABLE_TEST_NTF - event */

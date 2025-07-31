@@ -57,7 +57,7 @@ struct handshake_accept_rsp {
  * Handler retrieves next queued handshake request
  */
 std::unique_ptr<handshake_accept_rsp>
-handshake_accept(ynl_cpp::ynl_socket&  ys, handshake_accept_req& req);
+handshake_accept(ynl_cpp::ynl_socket& ys, handshake_accept_req& req);
 
 /* HANDSHAKE_CMD_ACCEPT - notify */
 struct handshake_accept_ntf {
@@ -74,7 +74,7 @@ struct handshake_done_req {
 /*
  * Handler reports handshake completion
  */
-int handshake_done(ynl_cpp::ynl_socket&  ys, handshake_done_req& req);
+int handshake_done(ynl_cpp::ynl_socket& ys, handshake_done_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_HANDSHAKE_GEN_H */

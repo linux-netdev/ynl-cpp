@@ -296,7 +296,7 @@ in the request.
 
  */
 std::unique_ptr<nl80211_get_wiphy_rsp>
-nl80211_get_wiphy(ynl_cpp::ynl_socket&  ys, nl80211_get_wiphy_req& req);
+nl80211_get_wiphy(ynl_cpp::ynl_socket& ys, nl80211_get_wiphy_req& req);
 
 /* NL80211_CMD_GET_WIPHY - dump */
 struct nl80211_get_wiphy_req_dump {
@@ -366,7 +366,7 @@ struct nl80211_get_wiphy_rsp_list {
 };
 
 std::unique_ptr<nl80211_get_wiphy_rsp_list>
-nl80211_get_wiphy_dump(ynl_cpp::ynl_socket&  ys,
+nl80211_get_wiphy_dump(ynl_cpp::ynl_socket& ys,
 		       nl80211_get_wiphy_req_dump& req);
 
 /* ============== NL80211_CMD_GET_INTERFACE ============== */
@@ -391,7 +391,7 @@ struct nl80211_get_interface_rsp {
  * Get information about an interface or dump a list of all interfaces
  */
 std::unique_ptr<nl80211_get_interface_rsp>
-nl80211_get_interface(ynl_cpp::ynl_socket&  ys, nl80211_get_interface_req& req);
+nl80211_get_interface(ynl_cpp::ynl_socket& ys, nl80211_get_interface_req& req);
 
 /* NL80211_CMD_GET_INTERFACE - dump */
 struct nl80211_get_interface_req_dump {
@@ -415,7 +415,7 @@ struct nl80211_get_interface_rsp_list {
 };
 
 std::unique_ptr<nl80211_get_interface_rsp_list>
-nl80211_get_interface_dump(ynl_cpp::ynl_socket&  ys,
+nl80211_get_interface_dump(ynl_cpp::ynl_socket& ys,
 			   nl80211_get_interface_req_dump& req);
 
 /* ============== NL80211_CMD_GET_PROTOCOL_FEATURES ============== */
@@ -432,7 +432,7 @@ struct nl80211_get_protocol_features_rsp {
  * Get information about supported protocol features
  */
 std::unique_ptr<nl80211_get_protocol_features_rsp>
-nl80211_get_protocol_features(ynl_cpp::ynl_socket&  ys,
+nl80211_get_protocol_features(ynl_cpp::ynl_socket& ys,
 			      nl80211_get_protocol_features_req& req);
 
 } //namespace ynl_cpp

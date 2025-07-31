@@ -531,7 +531,7 @@ int netdev_dev_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_dev_get_rsp>
-netdev_dev_get(ynl_cpp::ynl_socket&  ys, netdev_dev_get_req& req)
+netdev_dev_get(ynl_cpp::ynl_socket& ys, netdev_dev_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<netdev_dev_get_rsp> rsp;
@@ -559,7 +559,7 @@ netdev_dev_get(ynl_cpp::ynl_socket&  ys, netdev_dev_get_req& req)
 
 /* NETDEV_CMD_DEV_GET - dump */
 std::unique_ptr<netdev_dev_get_list>
-netdev_dev_get_dump(ynl_cpp::ynl_socket&  ys)
+netdev_dev_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -641,7 +641,7 @@ int netdev_page_pool_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_page_pool_get_rsp>
-netdev_page_pool_get(ynl_cpp::ynl_socket&  ys, netdev_page_pool_get_req& req)
+netdev_page_pool_get(ynl_cpp::ynl_socket& ys, netdev_page_pool_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<netdev_page_pool_get_rsp> rsp;
@@ -669,7 +669,7 @@ netdev_page_pool_get(ynl_cpp::ynl_socket&  ys, netdev_page_pool_get_req& req)
 
 /* NETDEV_CMD_PAGE_POOL_GET - dump */
 std::unique_ptr<netdev_page_pool_get_list>
-netdev_page_pool_get_dump(ynl_cpp::ynl_socket&  ys)
+netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -767,7 +767,7 @@ int netdev_page_pool_stats_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_page_pool_stats_get_rsp>
-netdev_page_pool_stats_get(ynl_cpp::ynl_socket&  ys,
+netdev_page_pool_stats_get(ynl_cpp::ynl_socket& ys,
 			   netdev_page_pool_stats_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
@@ -796,7 +796,7 @@ netdev_page_pool_stats_get(ynl_cpp::ynl_socket&  ys,
 
 /* NETDEV_CMD_PAGE_POOL_STATS_GET - dump */
 std::unique_ptr<netdev_page_pool_stats_get_list>
-netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket&  ys)
+netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -877,7 +877,7 @@ int netdev_queue_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_queue_get_rsp>
-netdev_queue_get(ynl_cpp::ynl_socket&  ys, netdev_queue_get_req& req)
+netdev_queue_get(ynl_cpp::ynl_socket& ys, netdev_queue_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<netdev_queue_get_rsp> rsp;
@@ -909,7 +909,7 @@ netdev_queue_get(ynl_cpp::ynl_socket&  ys, netdev_queue_get_req& req)
 
 /* NETDEV_CMD_QUEUE_GET - dump */
 std::unique_ptr<netdev_queue_get_list>
-netdev_queue_get_dump(ynl_cpp::ynl_socket&  ys, netdev_queue_get_req_dump& req)
+netdev_queue_get_dump(ynl_cpp::ynl_socket& ys, netdev_queue_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -988,7 +988,7 @@ int netdev_napi_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_napi_get_rsp>
-netdev_napi_get(ynl_cpp::ynl_socket&  ys, netdev_napi_get_req& req)
+netdev_napi_get(ynl_cpp::ynl_socket& ys, netdev_napi_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<netdev_napi_get_rsp> rsp;
@@ -1016,7 +1016,7 @@ netdev_napi_get(ynl_cpp::ynl_socket&  ys, netdev_napi_get_req& req)
 
 /* NETDEV_CMD_NAPI_GET - dump */
 std::unique_ptr<netdev_napi_get_list>
-netdev_napi_get_dump(ynl_cpp::ynl_socket&  ys, netdev_napi_get_req_dump& req)
+netdev_napi_get_dump(ynl_cpp::ynl_socket& ys, netdev_napi_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -1091,7 +1091,7 @@ int netdev_qstats_get_rsp_dump_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_qstats_get_rsp_list>
-netdev_qstats_get_dump(ynl_cpp::ynl_socket&  ys,
+netdev_qstats_get_dump(ynl_cpp::ynl_socket& ys,
 		       netdev_qstats_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
@@ -1145,7 +1145,7 @@ int netdev_bind_rx_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_bind_rx_rsp>
-netdev_bind_rx(ynl_cpp::ynl_socket&  ys, netdev_bind_rx_req& req)
+netdev_bind_rx(ynl_cpp::ynl_socket& ys, netdev_bind_rx_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<netdev_bind_rx_rsp> rsp;
@@ -1177,7 +1177,7 @@ netdev_bind_rx(ynl_cpp::ynl_socket&  ys, netdev_bind_rx_req& req)
 
 /* ============== NETDEV_CMD_NAPI_SET ============== */
 /* NETDEV_CMD_NAPI_SET - do */
-int netdev_napi_set(ynl_cpp::ynl_socket&  ys, netdev_napi_set_req& req)
+int netdev_napi_set(ynl_cpp::ynl_socket& ys, netdev_napi_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -1228,7 +1228,7 @@ int netdev_bind_tx_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<netdev_bind_tx_rsp>
-netdev_bind_tx(ynl_cpp::ynl_socket&  ys, netdev_bind_tx_req& req)
+netdev_bind_tx(ynl_cpp::ynl_socket& ys, netdev_bind_tx_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<netdev_bind_tx_rsp> rsp;

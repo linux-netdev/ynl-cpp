@@ -48,7 +48,7 @@ struct ynl_policy_nest lockd_server_nest = {
 /* Common nested types */
 /* ============== LOCKD_CMD_SERVER_SET ============== */
 /* LOCKD_CMD_SERVER_SET - do */
-int lockd_server_set(ynl_cpp::ynl_socket&  ys, lockd_server_set_req& req)
+int lockd_server_set(ynl_cpp::ynl_socket& ys, lockd_server_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -102,8 +102,7 @@ int lockd_server_get_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
-std::unique_ptr<lockd_server_get_rsp>
-lockd_server_get(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<lockd_server_get_rsp> lockd_server_get(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<lockd_server_get_rsp> rsp;

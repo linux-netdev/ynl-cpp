@@ -48,7 +48,7 @@ struct mptcp_pm_add_addr_req {
 /*
  * Add endpoint
  */
-int mptcp_pm_add_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_add_addr_req& req);
+int mptcp_pm_add_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_add_addr_req& req);
 
 /* ============== MPTCP_PM_CMD_DEL_ADDR ============== */
 /* MPTCP_PM_CMD_DEL_ADDR - do */
@@ -59,7 +59,7 @@ struct mptcp_pm_del_addr_req {
 /*
  * Delete endpoint
  */
-int mptcp_pm_del_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_del_addr_req& req);
+int mptcp_pm_del_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_del_addr_req& req);
 
 /* ============== MPTCP_PM_CMD_GET_ADDR ============== */
 /* MPTCP_PM_CMD_GET_ADDR - do */
@@ -76,7 +76,7 @@ struct mptcp_pm_get_addr_rsp {
  * Get endpoint information
  */
 std::unique_ptr<mptcp_pm_get_addr_rsp>
-mptcp_pm_get_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_get_addr_req& req);
+mptcp_pm_get_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_get_addr_req& req);
 
 /* MPTCP_PM_CMD_GET_ADDR - dump */
 struct mptcp_pm_get_addr_list {
@@ -84,7 +84,7 @@ struct mptcp_pm_get_addr_list {
 };
 
 std::unique_ptr<mptcp_pm_get_addr_list>
-mptcp_pm_get_addr_dump(ynl_cpp::ynl_socket&  ys);
+mptcp_pm_get_addr_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== MPTCP_PM_CMD_FLUSH_ADDRS ============== */
 /* MPTCP_PM_CMD_FLUSH_ADDRS - do */
@@ -95,7 +95,7 @@ struct mptcp_pm_flush_addrs_req {
 /*
  * Flush addresses
  */
-int mptcp_pm_flush_addrs(ynl_cpp::ynl_socket&  ys,
+int mptcp_pm_flush_addrs(ynl_cpp::ynl_socket& ys,
 			 mptcp_pm_flush_addrs_req& req);
 
 /* ============== MPTCP_PM_CMD_SET_LIMITS ============== */
@@ -108,7 +108,7 @@ struct mptcp_pm_set_limits_req {
 /*
  * Set protocol limits
  */
-int mptcp_pm_set_limits(ynl_cpp::ynl_socket&  ys, mptcp_pm_set_limits_req& req);
+int mptcp_pm_set_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_set_limits_req& req);
 
 /* ============== MPTCP_PM_CMD_GET_LIMITS ============== */
 /* MPTCP_PM_CMD_GET_LIMITS - do */
@@ -126,7 +126,7 @@ struct mptcp_pm_get_limits_rsp {
  * Get protocol limits
  */
 std::unique_ptr<mptcp_pm_get_limits_rsp>
-mptcp_pm_get_limits(ynl_cpp::ynl_socket&  ys, mptcp_pm_get_limits_req& req);
+mptcp_pm_get_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_get_limits_req& req);
 
 /* ============== MPTCP_PM_CMD_SET_FLAGS ============== */
 /* MPTCP_PM_CMD_SET_FLAGS - do */
@@ -139,7 +139,7 @@ struct mptcp_pm_set_flags_req {
 /*
  * Change endpoint flags
  */
-int mptcp_pm_set_flags(ynl_cpp::ynl_socket&  ys, mptcp_pm_set_flags_req& req);
+int mptcp_pm_set_flags(ynl_cpp::ynl_socket& ys, mptcp_pm_set_flags_req& req);
 
 /* ============== MPTCP_PM_CMD_ANNOUNCE ============== */
 /* MPTCP_PM_CMD_ANNOUNCE - do */
@@ -151,7 +151,7 @@ struct mptcp_pm_announce_req {
 /*
  * Announce new address
  */
-int mptcp_pm_announce(ynl_cpp::ynl_socket&  ys, mptcp_pm_announce_req& req);
+int mptcp_pm_announce(ynl_cpp::ynl_socket& ys, mptcp_pm_announce_req& req);
 
 /* ============== MPTCP_PM_CMD_REMOVE ============== */
 /* MPTCP_PM_CMD_REMOVE - do */
@@ -163,7 +163,7 @@ struct mptcp_pm_remove_req {
 /*
  * Announce removal
  */
-int mptcp_pm_remove(ynl_cpp::ynl_socket&  ys, mptcp_pm_remove_req& req);
+int mptcp_pm_remove(ynl_cpp::ynl_socket& ys, mptcp_pm_remove_req& req);
 
 /* ============== MPTCP_PM_CMD_SUBFLOW_CREATE ============== */
 /* MPTCP_PM_CMD_SUBFLOW_CREATE - do */
@@ -176,7 +176,7 @@ struct mptcp_pm_subflow_create_req {
 /*
  * Create subflow
  */
-int mptcp_pm_subflow_create(ynl_cpp::ynl_socket&  ys,
+int mptcp_pm_subflow_create(ynl_cpp::ynl_socket& ys,
 			    mptcp_pm_subflow_create_req& req);
 
 /* ============== MPTCP_PM_CMD_SUBFLOW_DESTROY ============== */
@@ -190,7 +190,7 @@ struct mptcp_pm_subflow_destroy_req {
 /*
  * Destroy subflow
  */
-int mptcp_pm_subflow_destroy(ynl_cpp::ynl_socket&  ys,
+int mptcp_pm_subflow_destroy(ynl_cpp::ynl_socket& ys,
 			     mptcp_pm_subflow_destroy_req& req);
 
 } //namespace ynl_cpp

@@ -215,7 +215,7 @@ int psp_dev_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<psp_dev_get_rsp>
-psp_dev_get(ynl_cpp::ynl_socket&  ys, psp_dev_get_req& req)
+psp_dev_get(ynl_cpp::ynl_socket& ys, psp_dev_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<psp_dev_get_rsp> rsp;
@@ -242,7 +242,7 @@ psp_dev_get(ynl_cpp::ynl_socket&  ys, psp_dev_get_req& req)
 }
 
 /* PSP_CMD_DEV_GET - dump */
-std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -275,7 +275,7 @@ int psp_dev_set_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<psp_dev_set_rsp>
-psp_dev_set(ynl_cpp::ynl_socket&  ys, psp_dev_set_req& req)
+psp_dev_set(ynl_cpp::ynl_socket& ys, psp_dev_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<psp_dev_set_rsp> rsp;
@@ -327,7 +327,7 @@ int psp_key_rotate_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<psp_key_rotate_rsp>
-psp_key_rotate(ynl_cpp::ynl_socket&  ys, psp_key_rotate_req& req)
+psp_key_rotate(ynl_cpp::ynl_socket& ys, psp_key_rotate_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<psp_key_rotate_rsp> rsp;
@@ -392,7 +392,7 @@ int psp_rx_assoc_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<psp_rx_assoc_rsp>
-psp_rx_assoc(ynl_cpp::ynl_socket&  ys, psp_rx_assoc_req& req)
+psp_rx_assoc(ynl_cpp::ynl_socket& ys, psp_rx_assoc_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<psp_rx_assoc_rsp> rsp;
@@ -431,7 +431,7 @@ int psp_tx_assoc_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<psp_tx_assoc_rsp>
-psp_tx_assoc(ynl_cpp::ynl_socket&  ys, psp_tx_assoc_req& req)
+psp_tx_assoc(ynl_cpp::ynl_socket& ys, psp_tx_assoc_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<psp_tx_assoc_rsp> rsp;
@@ -495,7 +495,7 @@ int psp_get_stats_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<psp_get_stats_rsp>
-psp_get_stats(ynl_cpp::ynl_socket&  ys, psp_get_stats_req& req)
+psp_get_stats(ynl_cpp::ynl_socket& ys, psp_get_stats_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<psp_get_stats_rsp> rsp;
@@ -522,8 +522,7 @@ psp_get_stats(ynl_cpp::ynl_socket&  ys, psp_get_stats_req& req)
 }
 
 /* PSP_CMD_GET_STATS - dump */
-std::unique_ptr<psp_get_stats_list>
-psp_get_stats_dump(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<psp_get_stats_list> psp_get_stats_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;

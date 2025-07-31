@@ -241,7 +241,7 @@ int handshake_accept_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<handshake_accept_rsp>
-handshake_accept(ynl_cpp::ynl_socket&  ys, handshake_accept_req& req)
+handshake_accept(ynl_cpp::ynl_socket& ys, handshake_accept_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<handshake_accept_rsp> rsp;
@@ -270,7 +270,7 @@ handshake_accept(ynl_cpp::ynl_socket&  ys, handshake_accept_req& req)
 /* HANDSHAKE_CMD_ACCEPT - notify */
 /* ============== HANDSHAKE_CMD_DONE ============== */
 /* HANDSHAKE_CMD_DONE - do */
-int handshake_done(ynl_cpp::ynl_socket&  ys, handshake_done_req& req)
+int handshake_done(ynl_cpp::ynl_socket& ys, handshake_done_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;

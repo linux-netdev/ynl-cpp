@@ -542,7 +542,7 @@ int dpll_device_id_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<dpll_device_id_get_rsp>
-dpll_device_id_get(ynl_cpp::ynl_socket&  ys, dpll_device_id_get_req& req)
+dpll_device_id_get(ynl_cpp::ynl_socket& ys, dpll_device_id_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<dpll_device_id_get_rsp> rsp;
@@ -646,7 +646,7 @@ int dpll_device_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<dpll_device_get_rsp>
-dpll_device_get(ynl_cpp::ynl_socket&  ys, dpll_device_get_req& req)
+dpll_device_get(ynl_cpp::ynl_socket& ys, dpll_device_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<dpll_device_get_rsp> rsp;
@@ -674,7 +674,7 @@ dpll_device_get(ynl_cpp::ynl_socket&  ys, dpll_device_get_req& req)
 
 /* DPLL_CMD_DEVICE_GET - dump */
 std::unique_ptr<dpll_device_get_list>
-dpll_device_get_dump(ynl_cpp::ynl_socket&  ys)
+dpll_device_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -700,7 +700,7 @@ dpll_device_get_dump(ynl_cpp::ynl_socket&  ys)
 /* DPLL_CMD_DEVICE_GET - notify */
 /* ============== DPLL_CMD_DEVICE_SET ============== */
 /* DPLL_CMD_DEVICE_SET - do */
-int dpll_device_set(ynl_cpp::ynl_socket&  ys, dpll_device_set_req& req)
+int dpll_device_set(ynl_cpp::ynl_socket& ys, dpll_device_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -745,7 +745,7 @@ int dpll_pin_id_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<dpll_pin_id_get_rsp>
-dpll_pin_id_get(ynl_cpp::ynl_socket&  ys, dpll_pin_id_get_req& req)
+dpll_pin_id_get(ynl_cpp::ynl_socket& ys, dpll_pin_id_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<dpll_pin_id_get_rsp> rsp;
@@ -948,7 +948,7 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<dpll_pin_get_rsp>
-dpll_pin_get(ynl_cpp::ynl_socket&  ys, dpll_pin_get_req& req)
+dpll_pin_get(ynl_cpp::ynl_socket& ys, dpll_pin_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<dpll_pin_get_rsp> rsp;
@@ -976,7 +976,7 @@ dpll_pin_get(ynl_cpp::ynl_socket&  ys, dpll_pin_get_req& req)
 
 /* DPLL_CMD_PIN_GET - dump */
 std::unique_ptr<dpll_pin_get_list>
-dpll_pin_get_dump(ynl_cpp::ynl_socket&  ys, dpll_pin_get_req_dump& req)
+dpll_pin_get_dump(ynl_cpp::ynl_socket& ys, dpll_pin_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -1006,7 +1006,7 @@ dpll_pin_get_dump(ynl_cpp::ynl_socket&  ys, dpll_pin_get_req_dump& req)
 /* DPLL_CMD_PIN_GET - notify */
 /* ============== DPLL_CMD_PIN_SET ============== */
 /* DPLL_CMD_PIN_SET - do */
-int dpll_pin_set(ynl_cpp::ynl_socket&  ys, dpll_pin_set_req& req)
+int dpll_pin_set(ynl_cpp::ynl_socket& ys, dpll_pin_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;

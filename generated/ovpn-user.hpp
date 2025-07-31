@@ -81,7 +81,7 @@ struct ovpn_peer_new_req {
 /*
  * Add a remote peer
  */
-int ovpn_peer_new(ynl_cpp::ynl_socket&  ys, ovpn_peer_new_req& req);
+int ovpn_peer_new(ynl_cpp::ynl_socket& ys, ovpn_peer_new_req& req);
 
 /* ============== OVPN_CMD_PEER_SET ============== */
 /* OVPN_CMD_PEER_SET - do */
@@ -93,7 +93,7 @@ struct ovpn_peer_set_req {
 /*
  * modify a remote peer
  */
-int ovpn_peer_set(ynl_cpp::ynl_socket&  ys, ovpn_peer_set_req& req);
+int ovpn_peer_set(ynl_cpp::ynl_socket& ys, ovpn_peer_set_req& req);
 
 /* ============== OVPN_CMD_PEER_GET ============== */
 /* OVPN_CMD_PEER_GET - do */
@@ -110,7 +110,7 @@ struct ovpn_peer_get_rsp {
  * Retrieve data about existing remote peers (or a specific one)
  */
 std::unique_ptr<ovpn_peer_get_rsp>
-ovpn_peer_get(ynl_cpp::ynl_socket&  ys, ovpn_peer_get_req& req);
+ovpn_peer_get(ynl_cpp::ynl_socket& ys, ovpn_peer_get_req& req);
 
 /* OVPN_CMD_PEER_GET - dump */
 struct ovpn_peer_get_req_dump {
@@ -122,7 +122,7 @@ struct ovpn_peer_get_list {
 };
 
 std::unique_ptr<ovpn_peer_get_list>
-ovpn_peer_get_dump(ynl_cpp::ynl_socket&  ys, ovpn_peer_get_req_dump& req);
+ovpn_peer_get_dump(ynl_cpp::ynl_socket& ys, ovpn_peer_get_req_dump& req);
 
 /* OVPN_CMD_PEER_GET - notify */
 struct ovpn_peer_get_ntf {
@@ -138,7 +138,7 @@ struct ovpn_peer_del_req {
 /*
  * Delete existing remote peer
  */
-int ovpn_peer_del(ynl_cpp::ynl_socket&  ys, ovpn_peer_del_req& req);
+int ovpn_peer_del(ynl_cpp::ynl_socket& ys, ovpn_peer_del_req& req);
 
 /* ============== OVPN_CMD_KEY_NEW ============== */
 /* OVPN_CMD_KEY_NEW - do */
@@ -150,7 +150,7 @@ struct ovpn_key_new_req {
 /*
  * Add a cipher key for a specific peer
  */
-int ovpn_key_new(ynl_cpp::ynl_socket&  ys, ovpn_key_new_req& req);
+int ovpn_key_new(ynl_cpp::ynl_socket& ys, ovpn_key_new_req& req);
 
 /* ============== OVPN_CMD_KEY_GET ============== */
 /* OVPN_CMD_KEY_GET - do */
@@ -167,7 +167,7 @@ struct ovpn_key_get_rsp {
  * Retrieve non-sensitive data about peer key and cipher
  */
 std::unique_ptr<ovpn_key_get_rsp>
-ovpn_key_get(ynl_cpp::ynl_socket&  ys, ovpn_key_get_req& req);
+ovpn_key_get(ynl_cpp::ynl_socket& ys, ovpn_key_get_req& req);
 
 /* OVPN_CMD_KEY_GET - notify */
 struct ovpn_key_get_ntf {
@@ -183,7 +183,7 @@ struct ovpn_key_swap_req {
 /*
  * Swap primary and secondary session keys for a specific peer
  */
-int ovpn_key_swap(ynl_cpp::ynl_socket&  ys, ovpn_key_swap_req& req);
+int ovpn_key_swap(ynl_cpp::ynl_socket& ys, ovpn_key_swap_req& req);
 
 /* ============== OVPN_CMD_KEY_DEL ============== */
 /* OVPN_CMD_KEY_DEL - do */
@@ -195,7 +195,7 @@ struct ovpn_key_del_req {
 /*
  * Delete cipher key for a specific peer
  */
-int ovpn_key_del(ynl_cpp::ynl_socket&  ys, ovpn_key_del_req& req);
+int ovpn_key_del(ynl_cpp::ynl_socket& ys, ovpn_key_del_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_OVPN_GEN_H */

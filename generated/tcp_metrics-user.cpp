@@ -206,7 +206,7 @@ int tcp_metrics_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<tcp_metrics_get_rsp>
-tcp_metrics_get(ynl_cpp::ynl_socket&  ys, tcp_metrics_get_req& req)
+tcp_metrics_get(ynl_cpp::ynl_socket& ys, tcp_metrics_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<tcp_metrics_get_rsp> rsp;
@@ -240,7 +240,7 @@ tcp_metrics_get(ynl_cpp::ynl_socket&  ys, tcp_metrics_get_req& req)
 
 /* TCP_METRICS_CMD_GET - dump */
 std::unique_ptr<tcp_metrics_get_list>
-tcp_metrics_get_dump(ynl_cpp::ynl_socket&  ys)
+tcp_metrics_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -265,7 +265,7 @@ tcp_metrics_get_dump(ynl_cpp::ynl_socket&  ys)
 
 /* ============== TCP_METRICS_CMD_DEL ============== */
 /* TCP_METRICS_CMD_DEL - do */
-int tcp_metrics_del(ynl_cpp::ynl_socket&  ys, tcp_metrics_del_req& req)
+int tcp_metrics_del(ynl_cpp::ynl_socket& ys, tcp_metrics_del_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;

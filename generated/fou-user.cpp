@@ -82,7 +82,7 @@ struct ynl_policy_nest fou_nest = {
 /* Common nested types */
 /* ============== FOU_CMD_ADD ============== */
 /* FOU_CMD_ADD - do */
-int fou_add(ynl_cpp::ynl_socket&  ys, fou_add_req& req)
+int fou_add(ynl_cpp::ynl_socket& ys, fou_add_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -121,7 +121,7 @@ int fou_add(ynl_cpp::ynl_socket&  ys, fou_add_req& req)
 
 /* ============== FOU_CMD_DEL ============== */
 /* FOU_CMD_DEL - do */
-int fou_del(ynl_cpp::ynl_socket&  ys, fou_del_req& req)
+int fou_del(ynl_cpp::ynl_socket& ys, fou_del_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -215,8 +215,7 @@ int fou_get_rsp_parse(const struct nlmsghdr *nlh, struct ynl_parse_arg *yarg)
 	return YNL_PARSE_CB_OK;
 }
 
-std::unique_ptr<fou_get_rsp>
-fou_get(ynl_cpp::ynl_socket&  ys, fou_get_req& req)
+std::unique_ptr<fou_get_rsp> fou_get(ynl_cpp::ynl_socket& ys, fou_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<fou_get_rsp> rsp;
@@ -257,7 +256,7 @@ fou_get(ynl_cpp::ynl_socket&  ys, fou_get_req& req)
 }
 
 /* FOU_CMD_GET - dump */
-std::unique_ptr<fou_get_list> fou_get_dump(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<fou_get_list> fou_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;

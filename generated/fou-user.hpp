@@ -47,7 +47,7 @@ struct fou_add_req {
 /*
  * Add port.
  */
-int fou_add(ynl_cpp::ynl_socket&  ys, fou_add_req& req);
+int fou_add(ynl_cpp::ynl_socket& ys, fou_add_req& req);
 
 /* ============== FOU_CMD_DEL ============== */
 /* FOU_CMD_DEL - do */
@@ -65,7 +65,7 @@ struct fou_del_req {
 /*
  * Delete port.
  */
-int fou_del(ynl_cpp::ynl_socket&  ys, fou_del_req& req);
+int fou_del(ynl_cpp::ynl_socket& ys, fou_del_req& req);
 
 /* ============== FOU_CMD_GET ============== */
 /* FOU_CMD_GET - do */
@@ -97,14 +97,14 @@ struct fou_get_rsp {
  * Get tunnel info.
  */
 std::unique_ptr<fou_get_rsp>
-fou_get(ynl_cpp::ynl_socket&  ys, fou_get_req& req);
+fou_get(ynl_cpp::ynl_socket& ys, fou_get_req& req);
 
 /* FOU_CMD_GET - dump */
 struct fou_get_list {
 	std::list<fou_get_rsp> objs;
 };
 
-std::unique_ptr<fou_get_list> fou_get_dump(ynl_cpp::ynl_socket&  ys);
+std::unique_ptr<fou_get_list> fou_get_dump(ynl_cpp::ynl_socket& ys);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_FOU_GEN_H */

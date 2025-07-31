@@ -1532,7 +1532,7 @@ def print_prototype(ri, direction, terminate=True, doc=None):
     if ri.op_mode == "dump":
         fname += "_dump"
 
-    args = ["ynl_cpp::ynl_socket&  ys"]
+    args = ["ynl_cpp::ynl_socket& ys"]
     if "request" in ri.op[ri.op_mode]:
         args.append(
             f"{type_name(ri, direction)}& " + f"{direction_to_suffix[direction][1:]}"

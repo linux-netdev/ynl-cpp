@@ -334,7 +334,7 @@ int nfsd_rpc_status_get_rsp_dump_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<nfsd_rpc_status_get_rsp_list>
-nfsd_rpc_status_get_dump(ynl_cpp::ynl_socket&  ys)
+nfsd_rpc_status_get_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -359,7 +359,7 @@ nfsd_rpc_status_get_dump(ynl_cpp::ynl_socket&  ys)
 
 /* ============== NFSD_CMD_THREADS_SET ============== */
 /* NFSD_CMD_THREADS_SET - do */
-int nfsd_threads_set(ynl_cpp::ynl_socket&  ys, nfsd_threads_set_req& req)
+int nfsd_threads_set(ynl_cpp::ynl_socket& ys, nfsd_threads_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -433,8 +433,7 @@ int nfsd_threads_get_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
-std::unique_ptr<nfsd_threads_get_rsp>
-nfsd_threads_get(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<nfsd_threads_get_rsp> nfsd_threads_get(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<nfsd_threads_get_rsp> rsp;
@@ -459,7 +458,7 @@ nfsd_threads_get(ynl_cpp::ynl_socket&  ys)
 
 /* ============== NFSD_CMD_VERSION_SET ============== */
 /* NFSD_CMD_VERSION_SET - do */
-int nfsd_version_set(ynl_cpp::ynl_socket&  ys, nfsd_version_set_req& req)
+int nfsd_version_set(ynl_cpp::ynl_socket& ys, nfsd_version_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -520,8 +519,7 @@ int nfsd_version_get_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
-std::unique_ptr<nfsd_version_get_rsp>
-nfsd_version_get(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<nfsd_version_get_rsp> nfsd_version_get(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<nfsd_version_get_rsp> rsp;
@@ -546,7 +544,7 @@ nfsd_version_get(ynl_cpp::ynl_socket&  ys)
 
 /* ============== NFSD_CMD_LISTENER_SET ============== */
 /* NFSD_CMD_LISTENER_SET - do */
-int nfsd_listener_set(ynl_cpp::ynl_socket&  ys, nfsd_listener_set_req& req)
+int nfsd_listener_set(ynl_cpp::ynl_socket& ys, nfsd_listener_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -608,7 +606,7 @@ int nfsd_listener_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<nfsd_listener_get_rsp>
-nfsd_listener_get(ynl_cpp::ynl_socket&  ys)
+nfsd_listener_get(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<nfsd_listener_get_rsp> rsp;
@@ -633,7 +631,7 @@ nfsd_listener_get(ynl_cpp::ynl_socket&  ys)
 
 /* ============== NFSD_CMD_POOL_MODE_SET ============== */
 /* NFSD_CMD_POOL_MODE_SET - do */
-int nfsd_pool_mode_set(ynl_cpp::ynl_socket&  ys, nfsd_pool_mode_set_req& req)
+int nfsd_pool_mode_set(ynl_cpp::ynl_socket& ys, nfsd_pool_mode_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -680,7 +678,7 @@ int nfsd_pool_mode_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<nfsd_pool_mode_get_rsp>
-nfsd_pool_mode_get(ynl_cpp::ynl_socket&  ys)
+nfsd_pool_mode_get(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<nfsd_pool_mode_get_rsp> rsp;

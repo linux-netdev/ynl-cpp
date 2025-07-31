@@ -199,7 +199,7 @@ int mptcp_pm_address_parse(struct ynl_parse_arg *yarg,
 
 /* ============== MPTCP_PM_CMD_ADD_ADDR ============== */
 /* MPTCP_PM_CMD_ADD_ADDR - do */
-int mptcp_pm_add_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_add_addr_req& req)
+int mptcp_pm_add_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_add_addr_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -220,7 +220,7 @@ int mptcp_pm_add_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_add_addr_req& req)
 
 /* ============== MPTCP_PM_CMD_DEL_ADDR ============== */
 /* MPTCP_PM_CMD_DEL_ADDR - do */
-int mptcp_pm_del_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_del_addr_req& req)
+int mptcp_pm_del_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_del_addr_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -269,7 +269,7 @@ int mptcp_pm_get_addr_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<mptcp_pm_get_addr_rsp>
-mptcp_pm_get_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_get_addr_req& req)
+mptcp_pm_get_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_get_addr_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<mptcp_pm_get_addr_rsp> rsp;
@@ -299,7 +299,7 @@ mptcp_pm_get_addr(ynl_cpp::ynl_socket&  ys, mptcp_pm_get_addr_req& req)
 
 /* MPTCP_PM_CMD_GET_ADDR - dump */
 std::unique_ptr<mptcp_pm_get_addr_list>
-mptcp_pm_get_addr_dump(ynl_cpp::ynl_socket&  ys)
+mptcp_pm_get_addr_dump(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -324,7 +324,7 @@ mptcp_pm_get_addr_dump(ynl_cpp::ynl_socket&  ys)
 
 /* ============== MPTCP_PM_CMD_FLUSH_ADDRS ============== */
 /* MPTCP_PM_CMD_FLUSH_ADDRS - do */
-int mptcp_pm_flush_addrs(ynl_cpp::ynl_socket&  ys,
+int mptcp_pm_flush_addrs(ynl_cpp::ynl_socket& ys,
 			 mptcp_pm_flush_addrs_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
@@ -346,7 +346,7 @@ int mptcp_pm_flush_addrs(ynl_cpp::ynl_socket&  ys,
 
 /* ============== MPTCP_PM_CMD_SET_LIMITS ============== */
 /* MPTCP_PM_CMD_SET_LIMITS - do */
-int mptcp_pm_set_limits(ynl_cpp::ynl_socket&  ys, mptcp_pm_set_limits_req& req)
+int mptcp_pm_set_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_set_limits_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -395,7 +395,7 @@ int mptcp_pm_get_limits_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<mptcp_pm_get_limits_rsp>
-mptcp_pm_get_limits(ynl_cpp::ynl_socket&  ys, mptcp_pm_get_limits_req& req)
+mptcp_pm_get_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_get_limits_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<mptcp_pm_get_limits_rsp> rsp;
@@ -425,7 +425,7 @@ mptcp_pm_get_limits(ynl_cpp::ynl_socket&  ys, mptcp_pm_get_limits_req& req)
 
 /* ============== MPTCP_PM_CMD_SET_FLAGS ============== */
 /* MPTCP_PM_CMD_SET_FLAGS - do */
-int mptcp_pm_set_flags(ynl_cpp::ynl_socket&  ys, mptcp_pm_set_flags_req& req)
+int mptcp_pm_set_flags(ynl_cpp::ynl_socket& ys, mptcp_pm_set_flags_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -450,7 +450,7 @@ int mptcp_pm_set_flags(ynl_cpp::ynl_socket&  ys, mptcp_pm_set_flags_req& req)
 
 /* ============== MPTCP_PM_CMD_ANNOUNCE ============== */
 /* MPTCP_PM_CMD_ANNOUNCE - do */
-int mptcp_pm_announce(ynl_cpp::ynl_socket&  ys, mptcp_pm_announce_req& req)
+int mptcp_pm_announce(ynl_cpp::ynl_socket& ys, mptcp_pm_announce_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -473,7 +473,7 @@ int mptcp_pm_announce(ynl_cpp::ynl_socket&  ys, mptcp_pm_announce_req& req)
 
 /* ============== MPTCP_PM_CMD_REMOVE ============== */
 /* MPTCP_PM_CMD_REMOVE - do */
-int mptcp_pm_remove(ynl_cpp::ynl_socket&  ys, mptcp_pm_remove_req& req)
+int mptcp_pm_remove(ynl_cpp::ynl_socket& ys, mptcp_pm_remove_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -496,7 +496,7 @@ int mptcp_pm_remove(ynl_cpp::ynl_socket&  ys, mptcp_pm_remove_req& req)
 
 /* ============== MPTCP_PM_CMD_SUBFLOW_CREATE ============== */
 /* MPTCP_PM_CMD_SUBFLOW_CREATE - do */
-int mptcp_pm_subflow_create(ynl_cpp::ynl_socket&  ys,
+int mptcp_pm_subflow_create(ynl_cpp::ynl_socket& ys,
 			    mptcp_pm_subflow_create_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
@@ -522,7 +522,7 @@ int mptcp_pm_subflow_create(ynl_cpp::ynl_socket&  ys,
 
 /* ============== MPTCP_PM_CMD_SUBFLOW_DESTROY ============== */
 /* MPTCP_PM_CMD_SUBFLOW_DESTROY - do */
-int mptcp_pm_subflow_destroy(ynl_cpp::ynl_socket&  ys,
+int mptcp_pm_subflow_destroy(ynl_cpp::ynl_socket& ys,
 			     mptcp_pm_subflow_destroy_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };

@@ -278,7 +278,7 @@ int net_shaper_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<net_shaper_get_rsp>
-net_shaper_get(ynl_cpp::ynl_socket&  ys, net_shaper_get_req& req)
+net_shaper_get(ynl_cpp::ynl_socket& ys, net_shaper_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<net_shaper_get_rsp> rsp;
@@ -308,7 +308,7 @@ net_shaper_get(ynl_cpp::ynl_socket&  ys, net_shaper_get_req& req)
 
 /* NET_SHAPER_CMD_GET - dump */
 std::unique_ptr<net_shaper_get_list>
-net_shaper_get_dump(ynl_cpp::ynl_socket&  ys, net_shaper_get_req_dump& req)
+net_shaper_get_dump(ynl_cpp::ynl_socket& ys, net_shaper_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -337,7 +337,7 @@ net_shaper_get_dump(ynl_cpp::ynl_socket&  ys, net_shaper_get_req_dump& req)
 
 /* ============== NET_SHAPER_CMD_SET ============== */
 /* NET_SHAPER_CMD_SET - do */
-int net_shaper_set(ynl_cpp::ynl_socket&  ys, net_shaper_set_req& req)
+int net_shaper_set(ynl_cpp::ynl_socket& ys, net_shaper_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -372,7 +372,7 @@ int net_shaper_set(ynl_cpp::ynl_socket&  ys, net_shaper_set_req& req)
 
 /* ============== NET_SHAPER_CMD_DELETE ============== */
 /* NET_SHAPER_CMD_DELETE - do */
-int net_shaper_delete(ynl_cpp::ynl_socket&  ys, net_shaper_delete_req& req)
+int net_shaper_delete(ynl_cpp::ynl_socket& ys, net_shaper_delete_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -427,7 +427,7 @@ int net_shaper_group_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<net_shaper_group_rsp>
-net_shaper_group(ynl_cpp::ynl_socket&  ys, net_shaper_group_req& req)
+net_shaper_group(ynl_cpp::ynl_socket& ys, net_shaper_group_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<net_shaper_group_rsp> rsp;
@@ -523,7 +523,7 @@ int net_shaper_cap_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<net_shaper_cap_get_rsp>
-net_shaper_cap_get(ynl_cpp::ynl_socket&  ys, net_shaper_cap_get_req& req)
+net_shaper_cap_get(ynl_cpp::ynl_socket& ys, net_shaper_cap_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<net_shaper_cap_get_rsp> rsp;
@@ -553,7 +553,7 @@ net_shaper_cap_get(ynl_cpp::ynl_socket&  ys, net_shaper_cap_get_req& req)
 
 /* NET_SHAPER_CMD_CAP_GET - dump */
 std::unique_ptr<net_shaper_cap_get_list>
-net_shaper_cap_get_dump(ynl_cpp::ynl_socket&  ys,
+net_shaper_cap_get_dump(ynl_cpp::ynl_socket& ys,
 			net_shaper_cap_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};

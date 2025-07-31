@@ -64,7 +64,7 @@ struct tcp_metrics_get_rsp {
  * Retrieve metrics.
  */
 std::unique_ptr<tcp_metrics_get_rsp>
-tcp_metrics_get(ynl_cpp::ynl_socket&  ys, tcp_metrics_get_req& req);
+tcp_metrics_get(ynl_cpp::ynl_socket& ys, tcp_metrics_get_req& req);
 
 /* TCP_METRICS_CMD_GET - dump */
 struct tcp_metrics_get_list {
@@ -72,7 +72,7 @@ struct tcp_metrics_get_list {
 };
 
 std::unique_ptr<tcp_metrics_get_list>
-tcp_metrics_get_dump(ynl_cpp::ynl_socket&  ys);
+tcp_metrics_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== TCP_METRICS_CMD_DEL ============== */
 /* TCP_METRICS_CMD_DEL - do */
@@ -86,7 +86,7 @@ struct tcp_metrics_del_req {
 /*
  * Delete metrics.
  */
-int tcp_metrics_del(ynl_cpp::ynl_socket&  ys, tcp_metrics_del_req& req);
+int tcp_metrics_del(ynl_cpp::ynl_socket& ys, tcp_metrics_del_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_TCP_METRICS_GEN_H */

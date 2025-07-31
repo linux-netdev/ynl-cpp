@@ -322,7 +322,7 @@ int team_noop_rsp_parse(const struct nlmsghdr *nlh, struct ynl_parse_arg *yarg)
 	return YNL_PARSE_CB_OK;
 }
 
-std::unique_ptr<team_noop_rsp> team_noop(ynl_cpp::ynl_socket&  ys)
+std::unique_ptr<team_noop_rsp> team_noop(ynl_cpp::ynl_socket& ys)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<team_noop_rsp> rsp;
@@ -379,7 +379,7 @@ int team_options_set_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<team_options_set_rsp>
-team_options_set(ynl_cpp::ynl_socket&  ys, team_options_set_req& req)
+team_options_set(ynl_cpp::ynl_socket& ys, team_options_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<team_options_set_rsp> rsp;
@@ -441,7 +441,7 @@ int team_options_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<team_options_get_rsp>
-team_options_get(ynl_cpp::ynl_socket&  ys, team_options_get_req& req)
+team_options_get(ynl_cpp::ynl_socket& ys, team_options_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<team_options_get_rsp> rsp;
@@ -501,7 +501,7 @@ int team_port_list_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<team_port_list_get_rsp>
-team_port_list_get(ynl_cpp::ynl_socket&  ys, team_port_list_get_req& req)
+team_port_list_get(ynl_cpp::ynl_socket& ys, team_port_list_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<team_port_list_get_rsp> rsp;

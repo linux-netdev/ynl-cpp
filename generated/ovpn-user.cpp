@@ -570,7 +570,7 @@ int ovpn_keyconf_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
 
 /* ============== OVPN_CMD_PEER_NEW ============== */
 /* OVPN_CMD_PEER_NEW - do */
-int ovpn_peer_new(ynl_cpp::ynl_socket&  ys, ovpn_peer_new_req& req)
+int ovpn_peer_new(ynl_cpp::ynl_socket& ys, ovpn_peer_new_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -593,7 +593,7 @@ int ovpn_peer_new(ynl_cpp::ynl_socket&  ys, ovpn_peer_new_req& req)
 
 /* ============== OVPN_CMD_PEER_SET ============== */
 /* OVPN_CMD_PEER_SET - do */
-int ovpn_peer_set(ynl_cpp::ynl_socket&  ys, ovpn_peer_set_req& req)
+int ovpn_peer_set(ynl_cpp::ynl_socket& ys, ovpn_peer_set_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -644,7 +644,7 @@ int ovpn_peer_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<ovpn_peer_get_rsp>
-ovpn_peer_get(ynl_cpp::ynl_socket&  ys, ovpn_peer_get_req& req)
+ovpn_peer_get(ynl_cpp::ynl_socket& ys, ovpn_peer_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<ovpn_peer_get_rsp> rsp;
@@ -674,7 +674,7 @@ ovpn_peer_get(ynl_cpp::ynl_socket&  ys, ovpn_peer_get_req& req)
 
 /* OVPN_CMD_PEER_GET - dump */
 std::unique_ptr<ovpn_peer_get_list>
-ovpn_peer_get_dump(ynl_cpp::ynl_socket&  ys, ovpn_peer_get_req_dump& req)
+ovpn_peer_get_dump(ynl_cpp::ynl_socket& ys, ovpn_peer_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -704,7 +704,7 @@ ovpn_peer_get_dump(ynl_cpp::ynl_socket&  ys, ovpn_peer_get_req_dump& req)
 /* OVPN_CMD_PEER_GET - notify */
 /* ============== OVPN_CMD_PEER_DEL ============== */
 /* OVPN_CMD_PEER_DEL - do */
-int ovpn_peer_del(ynl_cpp::ynl_socket&  ys, ovpn_peer_del_req& req)
+int ovpn_peer_del(ynl_cpp::ynl_socket& ys, ovpn_peer_del_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -727,7 +727,7 @@ int ovpn_peer_del(ynl_cpp::ynl_socket&  ys, ovpn_peer_del_req& req)
 
 /* ============== OVPN_CMD_KEY_NEW ============== */
 /* OVPN_CMD_KEY_NEW - do */
-int ovpn_key_new(ynl_cpp::ynl_socket&  ys, ovpn_key_new_req& req)
+int ovpn_key_new(ynl_cpp::ynl_socket& ys, ovpn_key_new_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -778,7 +778,7 @@ int ovpn_key_get_rsp_parse(const struct nlmsghdr *nlh,
 }
 
 std::unique_ptr<ovpn_key_get_rsp>
-ovpn_key_get(ynl_cpp::ynl_socket&  ys, ovpn_key_get_req& req)
+ovpn_key_get(ynl_cpp::ynl_socket& ys, ovpn_key_get_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	std::unique_ptr<ovpn_key_get_rsp> rsp;
@@ -809,7 +809,7 @@ ovpn_key_get(ynl_cpp::ynl_socket&  ys, ovpn_key_get_req& req)
 /* OVPN_CMD_KEY_GET - notify */
 /* ============== OVPN_CMD_KEY_SWAP ============== */
 /* OVPN_CMD_KEY_SWAP - do */
-int ovpn_key_swap(ynl_cpp::ynl_socket&  ys, ovpn_key_swap_req& req)
+int ovpn_key_swap(ynl_cpp::ynl_socket& ys, ovpn_key_swap_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;
@@ -832,7 +832,7 @@ int ovpn_key_swap(ynl_cpp::ynl_socket&  ys, ovpn_key_swap_req& req)
 
 /* ============== OVPN_CMD_KEY_DEL ============== */
 /* OVPN_CMD_KEY_DEL - do */
-int ovpn_key_del(ynl_cpp::ynl_socket&  ys, ovpn_key_del_req& req)
+int ovpn_key_del(ynl_cpp::ynl_socket& ys, ovpn_key_del_req& req)
 {
 	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
 	struct nlmsghdr *nlh;

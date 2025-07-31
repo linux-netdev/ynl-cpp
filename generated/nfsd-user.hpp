@@ -62,7 +62,7 @@ struct nfsd_rpc_status_get_rsp_list {
 };
 
 std::unique_ptr<nfsd_rpc_status_get_rsp_list>
-nfsd_rpc_status_get_dump(ynl_cpp::ynl_socket&  ys);
+nfsd_rpc_status_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== NFSD_CMD_THREADS_SET ============== */
 /* NFSD_CMD_THREADS_SET - do */
@@ -76,7 +76,7 @@ struct nfsd_threads_set_req {
 /*
  * set the number of running threads
  */
-int nfsd_threads_set(ynl_cpp::ynl_socket&  ys, nfsd_threads_set_req& req);
+int nfsd_threads_set(ynl_cpp::ynl_socket& ys, nfsd_threads_set_req& req);
 
 /* ============== NFSD_CMD_THREADS_GET ============== */
 /* NFSD_CMD_THREADS_GET - do */
@@ -92,7 +92,7 @@ struct nfsd_threads_get_rsp {
  * get the number of running threads
  */
 std::unique_ptr<nfsd_threads_get_rsp>
-nfsd_threads_get(ynl_cpp::ynl_socket&  ys);
+nfsd_threads_get(ynl_cpp::ynl_socket& ys);
 
 /* ============== NFSD_CMD_VERSION_SET ============== */
 /* NFSD_CMD_VERSION_SET - do */
@@ -103,7 +103,7 @@ struct nfsd_version_set_req {
 /*
  * set nfs enabled versions
  */
-int nfsd_version_set(ynl_cpp::ynl_socket&  ys, nfsd_version_set_req& req);
+int nfsd_version_set(ynl_cpp::ynl_socket& ys, nfsd_version_set_req& req);
 
 /* ============== NFSD_CMD_VERSION_GET ============== */
 /* NFSD_CMD_VERSION_GET - do */
@@ -116,7 +116,7 @@ struct nfsd_version_get_rsp {
  * get nfs enabled versions
  */
 std::unique_ptr<nfsd_version_get_rsp>
-nfsd_version_get(ynl_cpp::ynl_socket&  ys);
+nfsd_version_get(ynl_cpp::ynl_socket& ys);
 
 /* ============== NFSD_CMD_LISTENER_SET ============== */
 /* NFSD_CMD_LISTENER_SET - do */
@@ -127,7 +127,7 @@ struct nfsd_listener_set_req {
 /*
  * set nfs running sockets
  */
-int nfsd_listener_set(ynl_cpp::ynl_socket&  ys, nfsd_listener_set_req& req);
+int nfsd_listener_set(ynl_cpp::ynl_socket& ys, nfsd_listener_set_req& req);
 
 /* ============== NFSD_CMD_LISTENER_GET ============== */
 /* NFSD_CMD_LISTENER_GET - do */
@@ -140,7 +140,7 @@ struct nfsd_listener_get_rsp {
  * get nfs running listeners
  */
 std::unique_ptr<nfsd_listener_get_rsp>
-nfsd_listener_get(ynl_cpp::ynl_socket&  ys);
+nfsd_listener_get(ynl_cpp::ynl_socket& ys);
 
 /* ============== NFSD_CMD_POOL_MODE_SET ============== */
 /* NFSD_CMD_POOL_MODE_SET - do */
@@ -151,7 +151,7 @@ struct nfsd_pool_mode_set_req {
 /*
  * set the current server pool-mode
  */
-int nfsd_pool_mode_set(ynl_cpp::ynl_socket&  ys, nfsd_pool_mode_set_req& req);
+int nfsd_pool_mode_set(ynl_cpp::ynl_socket& ys, nfsd_pool_mode_set_req& req);
 
 /* ============== NFSD_CMD_POOL_MODE_GET ============== */
 /* NFSD_CMD_POOL_MODE_GET - do */
@@ -165,7 +165,7 @@ struct nfsd_pool_mode_get_rsp {
  * get info about server pool-mode
  */
 std::unique_ptr<nfsd_pool_mode_get_rsp>
-nfsd_pool_mode_get(ynl_cpp::ynl_socket&  ys);
+nfsd_pool_mode_get(ynl_cpp::ynl_socket& ys);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_NFSD_GEN_H */
