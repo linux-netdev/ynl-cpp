@@ -506,8 +506,9 @@ net_shaper_group(ynl_cpp::ynl_socket& ys, net_shaper_group_req& req)
 	if (req.weight.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_WEIGHT, req.weight.value());
 	}
-	for (unsigned int i = 0; i < req.leaves.size(); i++)
+	for (unsigned int i = 0; i < req.leaves.size(); i++) {
 		net_shaper_leaf_info_put(nlh, NET_SHAPER_A_LEAVES, req.leaves[i]);
+	}
 
 	rsp.reset(new net_shaper_group_rsp());
 	yrs.yarg.data = rsp.get();

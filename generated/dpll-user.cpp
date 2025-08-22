@@ -1117,18 +1117,21 @@ int dpll_pin_set(ynl_cpp::ynl_socket& ys, dpll_pin_set_req& req)
 	if (req.state.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_STATE, req.state.value());
 	}
-	for (unsigned int i = 0; i < req.parent_device.size(); i++)
+	for (unsigned int i = 0; i < req.parent_device.size(); i++) {
 		dpll_pin_parent_device_put(nlh, DPLL_A_PIN_PARENT_DEVICE, req.parent_device[i]);
-	for (unsigned int i = 0; i < req.parent_pin.size(); i++)
+	}
+	for (unsigned int i = 0; i < req.parent_pin.size(); i++) {
 		dpll_pin_parent_pin_put(nlh, DPLL_A_PIN_PARENT_PIN, req.parent_pin[i]);
+	}
 	if (req.phase_adjust.has_value()) {
 		ynl_attr_put_s32(nlh, DPLL_A_PIN_PHASE_ADJUST, req.phase_adjust.value());
 	}
 	if (req.esync_frequency.has_value()) {
 		ynl_attr_put_u64(nlh, DPLL_A_PIN_ESYNC_FREQUENCY, req.esync_frequency.value());
 	}
-	for (unsigned int i = 0; i < req.reference_sync.size(); i++)
+	for (unsigned int i = 0; i < req.reference_sync.size(); i++) {
 		dpll_reference_sync_put(nlh, DPLL_A_PIN_REFERENCE_SYNC, req.reference_sync[i]);
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
 	if (err < 0) {

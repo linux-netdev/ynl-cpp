@@ -2492,8 +2492,9 @@ int ethtool_profile_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	for (unsigned int i = 0; i < obj.irq_moderation.size(); i++)
+	for (unsigned int i = 0; i < obj.irq_moderation.size(); i++) {
 		ethtool_irq_moderation_put(nlh, ETHTOOL_A_PROFILE_IRQ_MODERATION, obj.irq_moderation[i]);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2652,8 +2653,9 @@ int ethtool_bitset_bits_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	for (unsigned int i = 0; i < obj.bit.size(); i++)
+	for (unsigned int i = 0; i < obj.bit.size(); i++) {
 		ethtool_bitset_bit_put(nlh, ETHTOOL_A_BITSET_BITS_BIT, obj.bit[i]);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2706,8 +2708,9 @@ int ethtool_strings_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	for (unsigned int i = 0; i < obj.string.size(); i++)
+	for (unsigned int i = 0; i < obj.string.size(); i++) {
 		ethtool_string_put(nlh, ETHTOOL_A_STRINGS_STRING, obj.string[i]);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2843,8 +2846,9 @@ int ethtool_stringset_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	if (obj.count.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_STRINGSET_COUNT, obj.count.value());
 	}
-	for (unsigned int i = 0; i < obj.strings.size(); i++)
+	for (unsigned int i = 0; i < obj.strings.size(); i++) {
 		ethtool_strings_put(nlh, ETHTOOL_A_STRINGSET_STRINGS, obj.strings[i]);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2963,8 +2967,9 @@ int ethtool_stringsets_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	for (unsigned int i = 0; i < obj.stringset.size(); i++)
+	for (unsigned int i = 0; i < obj.stringset.size(); i++) {
 		ethtool_stringset_put(nlh, ETHTOOL_A_STRINGSETS_STRINGSET, obj.stringset[i]);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;

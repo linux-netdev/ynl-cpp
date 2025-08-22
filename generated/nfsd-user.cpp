@@ -393,8 +393,9 @@ int nfsd_threads_set(ynl_cpp::ynl_socket& ys, nfsd_threads_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NFSD_CMD_THREADS_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &nfsd_server_nest;
 
-	for (unsigned int i = 0; i < req.threads.size(); i++)
+	for (unsigned int i = 0; i < req.threads.size(); i++) {
 		ynl_attr_put_u32(nlh, NFSD_A_SERVER_THREADS, req.threads[i]);
+	}
 	if (req.gracetime.has_value()) {
 		ynl_attr_put_u32(nlh, NFSD_A_SERVER_GRACETIME, req.gracetime.value());
 	}
@@ -501,8 +502,9 @@ int nfsd_version_set(ynl_cpp::ynl_socket& ys, nfsd_version_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NFSD_CMD_VERSION_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &nfsd_server_proto_nest;
 
-	for (unsigned int i = 0; i < req.version.size(); i++)
+	for (unsigned int i = 0; i < req.version.size(); i++) {
 		nfsd_version_put(nlh, NFSD_A_SERVER_PROTO_VERSION, req.version[i]);
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
 	if (err < 0) {
@@ -591,8 +593,9 @@ int nfsd_listener_set(ynl_cpp::ynl_socket& ys, nfsd_listener_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NFSD_CMD_LISTENER_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &nfsd_server_sock_nest;
 
-	for (unsigned int i = 0; i < req.addr.size(); i++)
+	for (unsigned int i = 0; i < req.addr.size(); i++) {
 		nfsd_sock_put(nlh, NFSD_A_SERVER_SOCK_ADDR, req.addr[i]);
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
 	if (err < 0) {

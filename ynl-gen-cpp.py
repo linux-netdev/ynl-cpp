@@ -649,18 +649,24 @@ class TypeMultiAttr(Type):
     def attr_put(self, ri, var):
         if self.attr["type"] in scalars:
             put_type = self.type
-            ri.cw.p(f"for (unsigned int i = 0; i < {var}.{self.c_name}.size(); i++)")
+            ri.cw.block_start(
+                line=f"for (unsigned int i = 0; i < {var}.{self.c_name}.size(); i++)"
+            )
             ri.cw.p(
                 f"ynl_attr_put_{put_type}(nlh, {self.enum_name}, {var}.{self.c_name}[i]);"
             )
+            ri.cw.block_end()
         elif "type" not in self.attr or self.attr["type"] == "nest":
-            ri.cw.p(f"for (unsigned int i = 0; i < {var}.{self.c_name}.size(); i++)")
+            ri.cw.block_start(
+                line=f"for (unsigned int i = 0; i < {var}.{self.c_name}.size(); i++)"
+            )
             self._attr_put_line(
                 ri,
                 var,
                 f"{self.nested_render_name}_put(nlh, "
                 + f"{self.enum_name}, {var}.{self.c_name}[i])",
             )
+            ri.cw.block_end()
         else:
             raise Exception(
                 f"Put of MultiAttr sub-type {self.attr['type']} not supported yet"

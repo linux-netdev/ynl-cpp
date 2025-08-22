@@ -1249,8 +1249,9 @@ netdev_bind_rx(ynl_cpp::ynl_socket& ys, netdev_bind_rx_req& req)
 	if (req.fd.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_DMABUF_FD, req.fd.value());
 	}
-	for (unsigned int i = 0; i < req.queues.size(); i++)
+	for (unsigned int i = 0; i < req.queues.size(); i++) {
 		netdev_queue_id_put(nlh, NETDEV_A_DMABUF_QUEUES, req.queues[i]);
+	}
 
 	rsp.reset(new netdev_bind_rx_rsp());
 	yrs.yarg.data = rsp.get();

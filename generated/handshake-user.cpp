@@ -302,8 +302,9 @@ int handshake_done(ynl_cpp::ynl_socket& ys, handshake_done_req& req)
 	if (req.sockfd.has_value()) {
 		ynl_attr_put_s32(nlh, HANDSHAKE_A_DONE_SOCKFD, req.sockfd.value());
 	}
-	for (unsigned int i = 0; i < req.remote_auth.size(); i++)
+	for (unsigned int i = 0; i < req.remote_auth.size(); i++) {
 		ynl_attr_put_u32(nlh, HANDSHAKE_A_DONE_REMOTE_AUTH, req.remote_auth[i]);
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
 	if (err < 0) {
