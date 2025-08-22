@@ -26,8 +26,9 @@ static constexpr std::array<std::string_view, NET_SHAPER_CMD_CAP_GET + 1> net_sh
 
 std::string_view net_shaper_op_str(int op)
 {
-	if (op < 0 || op >= (int)(net_shaper_op_strmap.size()))
+	if (op < 0 || op >= (int)(net_shaper_op_strmap.size())) {
 		return "";
+	}
 	return net_shaper_op_strmap[op];
 }
 
@@ -42,8 +43,9 @@ static constexpr std::array<std::string_view, 3 + 1> net_shaper_scope_strmap = [
 
 std::string_view net_shaper_scope_str(net_shaper_scope value)
 {
-	if (value < 0 || value >= (int)(net_shaper_scope_strmap.size()))
+	if (value < 0 || value >= (int)(net_shaper_scope_strmap.size())) {
 		return "";
+	}
 	return net_shaper_scope_strmap[value];
 }
 
@@ -56,8 +58,9 @@ static constexpr std::array<std::string_view, 1 + 1> net_shaper_metric_strmap = 
 
 std::string_view net_shaper_metric_str(net_shaper_metric value)
 {
-	if (value < 0 || value >= (int)(net_shaper_metric_strmap.size()))
+	if (value < 0 || value >= (int)(net_shaper_metric_strmap.size())) {
 		return "";
+	}
 	return net_shaper_metric_strmap[value];
 }
 
@@ -163,10 +166,12 @@ int net_shaper_handle_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.scope.has_value())
+	if (obj.scope.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_HANDLE_SCOPE, obj.scope.value());
-	if (obj.id.has_value())
+	}
+	if (obj.id.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_HANDLE_ID, obj.id.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -182,12 +187,14 @@ int net_shaper_handle_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NET_SHAPER_A_HANDLE_SCOPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->scope = (enum net_shaper_scope)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_HANDLE_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -201,12 +208,15 @@ int net_shaper_leaf_info_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.handle.has_value())
+	if (obj.handle.has_value()) {
 		net_shaper_handle_put(nlh, NET_SHAPER_A_HANDLE, obj.handle.value());
-	if (obj.priority.has_value())
+	}
+	if (obj.priority.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_PRIORITY, obj.priority.value());
-	if (obj.weight.has_value())
+	}
+	if (obj.weight.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_WEIGHT, obj.weight.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -228,48 +238,59 @@ int net_shaper_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NET_SHAPER_A_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_PARENT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &net_shaper_handle_nest;
 			parg.data = &dst->parent.emplace();
-			if (net_shaper_handle_parse(&parg, attr))
+			if (net_shaper_handle_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_HANDLE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &net_shaper_handle_nest;
 			parg.data = &dst->handle.emplace();
-			if (net_shaper_handle_parse(&parg, attr))
+			if (net_shaper_handle_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_METRIC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->metric = (enum net_shaper_metric)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_BW_MIN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->bw_min = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NET_SHAPER_A_BW_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->bw_max = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NET_SHAPER_A_BURST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->burst = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NET_SHAPER_A_PRIORITY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->priority = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_WEIGHT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->weight = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -289,10 +310,12 @@ net_shaper_get(ynl_cpp::ynl_socket& ys, net_shaper_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_net_shaper_nest;
 	yrs.yarg.rsp_policy = &net_shaper_net_shaper_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_IFINDEX, req.ifindex.value());
-	if (req.handle.has_value())
+	}
+	if (req.handle.has_value()) {
 		net_shaper_handle_put(nlh, NET_SHAPER_A_HANDLE, req.handle.value());
+	}
 
 	rsp.reset(new net_shaper_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -300,8 +323,9 @@ net_shaper_get(ynl_cpp::ynl_socket& ys, net_shaper_get_req& req)
 	yrs.rsp_cmd = NET_SHAPER_CMD_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -325,12 +349,14 @@ net_shaper_get_dump(ynl_cpp::ynl_socket& ys, net_shaper_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NET_SHAPER_CMD_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_net_shaper_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_IFINDEX, req.ifindex.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -346,26 +372,35 @@ int net_shaper_set(ynl_cpp::ynl_socket& ys, net_shaper_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NET_SHAPER_CMD_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_net_shaper_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_IFINDEX, req.ifindex.value());
-	if (req.handle.has_value())
+	}
+	if (req.handle.has_value()) {
 		net_shaper_handle_put(nlh, NET_SHAPER_A_HANDLE, req.handle.value());
-	if (req.metric.has_value())
+	}
+	if (req.metric.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_METRIC, req.metric.value());
-	if (req.bw_min.has_value())
+	}
+	if (req.bw_min.has_value()) {
 		ynl_attr_put_uint(nlh, NET_SHAPER_A_BW_MIN, req.bw_min.value());
-	if (req.bw_max.has_value())
+	}
+	if (req.bw_max.has_value()) {
 		ynl_attr_put_uint(nlh, NET_SHAPER_A_BW_MAX, req.bw_max.value());
-	if (req.burst.has_value())
+	}
+	if (req.burst.has_value()) {
 		ynl_attr_put_uint(nlh, NET_SHAPER_A_BURST, req.burst.value());
-	if (req.priority.has_value())
+	}
+	if (req.priority.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_PRIORITY, req.priority.value());
-	if (req.weight.has_value())
+	}
+	if (req.weight.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_WEIGHT, req.weight.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -381,14 +416,17 @@ int net_shaper_delete(ynl_cpp::ynl_socket& ys, net_shaper_delete_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NET_SHAPER_CMD_DELETE, 1);
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_net_shaper_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_IFINDEX, req.ifindex.value());
-	if (req.handle.has_value())
+	}
+	if (req.handle.has_value()) {
 		net_shaper_handle_put(nlh, NET_SHAPER_A_HANDLE, req.handle.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -409,17 +447,20 @@ int net_shaper_group_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NET_SHAPER_A_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_HANDLE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &net_shaper_handle_nest;
 			parg.data = &dst->handle.emplace();
-			if (net_shaper_handle_parse(&parg, attr))
+			if (net_shaper_handle_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -438,24 +479,33 @@ net_shaper_group(ynl_cpp::ynl_socket& ys, net_shaper_group_req& req)
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_net_shaper_nest;
 	yrs.yarg.rsp_policy = &net_shaper_net_shaper_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_IFINDEX, req.ifindex.value());
-	if (req.parent.has_value())
+	}
+	if (req.parent.has_value()) {
 		net_shaper_handle_put(nlh, NET_SHAPER_A_PARENT, req.parent.value());
-	if (req.handle.has_value())
+	}
+	if (req.handle.has_value()) {
 		net_shaper_handle_put(nlh, NET_SHAPER_A_HANDLE, req.handle.value());
-	if (req.metric.has_value())
+	}
+	if (req.metric.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_METRIC, req.metric.value());
-	if (req.bw_min.has_value())
+	}
+	if (req.bw_min.has_value()) {
 		ynl_attr_put_uint(nlh, NET_SHAPER_A_BW_MIN, req.bw_min.value());
-	if (req.bw_max.has_value())
+	}
+	if (req.bw_max.has_value()) {
 		ynl_attr_put_uint(nlh, NET_SHAPER_A_BW_MAX, req.bw_max.value());
-	if (req.burst.has_value())
+	}
+	if (req.burst.has_value()) {
 		ynl_attr_put_uint(nlh, NET_SHAPER_A_BURST, req.burst.value());
-	if (req.priority.has_value())
+	}
+	if (req.priority.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_PRIORITY, req.priority.value());
-	if (req.weight.has_value())
+	}
+	if (req.weight.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_WEIGHT, req.weight.value());
+	}
 	for (unsigned int i = 0; i < req.leaves.size(); i++)
 		net_shaper_leaf_info_put(nlh, NET_SHAPER_A_LEAVES, req.leaves[i]);
 
@@ -465,8 +515,9 @@ net_shaper_group(ynl_cpp::ynl_socket& ys, net_shaper_group_req& req)
 	yrs.rsp_cmd = NET_SHAPER_CMD_GROUP;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -485,37 +536,47 @@ int net_shaper_cap_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NET_SHAPER_A_CAPS_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_CAPS_SCOPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->scope = (enum net_shaper_scope)ynl_attr_get_u32(attr);
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_METRIC_BPS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_METRIC_PPS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_NESTING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_BW_MIN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_BW_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_BURST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_PRIORITY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NET_SHAPER_A_CAPS_SUPPORT_WEIGHT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -534,10 +595,12 @@ net_shaper_cap_get(ynl_cpp::ynl_socket& ys, net_shaper_cap_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_caps_nest;
 	yrs.yarg.rsp_policy = &net_shaper_caps_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_CAPS_IFINDEX, req.ifindex.value());
-	if (req.scope.has_value())
+	}
+	if (req.scope.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_CAPS_SCOPE, req.scope.value());
+	}
 
 	rsp.reset(new net_shaper_cap_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -545,8 +608,9 @@ net_shaper_cap_get(ynl_cpp::ynl_socket& ys, net_shaper_cap_get_req& req)
 	yrs.rsp_cmd = NET_SHAPER_CMD_CAP_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -571,12 +635,14 @@ net_shaper_cap_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NET_SHAPER_CMD_CAP_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &net_shaper_caps_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NET_SHAPER_A_CAPS_IFINDEX, req.ifindex.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }

@@ -24,8 +24,9 @@ static constexpr std::array<std::string_view, FOU_CMD_GET + 1> fou_op_strmap = [
 
 std::string_view fou_op_str(int op)
 {
-	if (op < 0 || op >= (int)(fou_op_strmap.size()))
+	if (op < 0 || op >= (int)(fou_op_strmap.size())) {
 		return "";
+	}
 	return fou_op_strmap[op];
 }
 
@@ -39,8 +40,9 @@ static constexpr std::array<std::string_view, 2 + 1> fou_encap_type_strmap = [](
 
 std::string_view fou_encap_type_str(int value)
 {
-	if (value < 0 || value >= (int)(fou_encap_type_strmap.size()))
+	if (value < 0 || value >= (int)(fou_encap_type_strmap.size())) {
 		return "";
+	}
 	return fou_encap_type_strmap[value];
 }
 
@@ -91,30 +93,41 @@ int fou_add(ynl_cpp::ynl_socket& ys, fou_add_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, FOU_CMD_ADD, 1);
 	((struct ynl_sock*)ys)->req_policy = &fou_nest;
 
-	if (req.port.has_value())
+	if (req.port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PORT, req.port.value());
-	if (req.ipproto.has_value())
+	}
+	if (req.ipproto.has_value()) {
 		ynl_attr_put_u8(nlh, FOU_ATTR_IPPROTO, req.ipproto.value());
-	if (req.type.has_value())
+	}
+	if (req.type.has_value()) {
 		ynl_attr_put_u8(nlh, FOU_ATTR_TYPE, req.type.value());
-	if (req.remcsum_nopartial)
+	}
+	if (req.remcsum_nopartial) {
 		ynl_attr_put(nlh, FOU_ATTR_REMCSUM_NOPARTIAL, NULL, 0);
-	if (req.local_v4.has_value())
+	}
+	if (req.local_v4.has_value()) {
 		ynl_attr_put_u32(nlh, FOU_ATTR_LOCAL_V4, req.local_v4.value());
-	if (req.peer_v4.has_value())
+	}
+	if (req.peer_v4.has_value()) {
 		ynl_attr_put_u32(nlh, FOU_ATTR_PEER_V4, req.peer_v4.value());
-	if (req.local_v6.size() > 0)
+	}
+	if (req.local_v6.size() > 0) {
 		ynl_attr_put(nlh, FOU_ATTR_LOCAL_V6, req.local_v6.data(), req.local_v6.size());
-	if (req.peer_v6.size() > 0)
+	}
+	if (req.peer_v6.size() > 0) {
 		ynl_attr_put(nlh, FOU_ATTR_PEER_V6, req.peer_v6.data(), req.peer_v6.size());
-	if (req.peer_port.has_value())
+	}
+	if (req.peer_port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PEER_PORT, req.peer_port.value());
-	if (req.ifindex.has_value())
+	}
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_s32(nlh, FOU_ATTR_IFINDEX, req.ifindex.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -130,26 +143,35 @@ int fou_del(ynl_cpp::ynl_socket& ys, fou_del_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, FOU_CMD_DEL, 1);
 	((struct ynl_sock*)ys)->req_policy = &fou_nest;
 
-	if (req.af.has_value())
+	if (req.af.has_value()) {
 		ynl_attr_put_u8(nlh, FOU_ATTR_AF, req.af.value());
-	if (req.ifindex.has_value())
+	}
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_s32(nlh, FOU_ATTR_IFINDEX, req.ifindex.value());
-	if (req.port.has_value())
+	}
+	if (req.port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PORT, req.port.value());
-	if (req.peer_port.has_value())
+	}
+	if (req.peer_port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PEER_PORT, req.peer_port.value());
-	if (req.local_v4.has_value())
+	}
+	if (req.local_v4.has_value()) {
 		ynl_attr_put_u32(nlh, FOU_ATTR_LOCAL_V4, req.local_v4.value());
-	if (req.peer_v4.has_value())
+	}
+	if (req.peer_v4.has_value()) {
 		ynl_attr_put_u32(nlh, FOU_ATTR_PEER_V4, req.peer_v4.value());
-	if (req.local_v6.size() > 0)
+	}
+	if (req.local_v6.size() > 0) {
 		ynl_attr_put(nlh, FOU_ATTR_LOCAL_V6, req.local_v6.data(), req.local_v6.size());
-	if (req.peer_v6.size() > 0)
+	}
+	if (req.peer_v6.size() > 0) {
 		ynl_attr_put(nlh, FOU_ATTR_PEER_V6, req.peer_v6.data(), req.peer_v6.size());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -167,47 +189,57 @@ int fou_get_rsp_parse(const struct nlmsghdr *nlh, struct ynl_parse_arg *yarg)
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == FOU_ATTR_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->port = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == FOU_ATTR_IPPROTO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ipproto = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == FOU_ATTR_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->type = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == FOU_ATTR_REMCSUM_NOPARTIAL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == FOU_ATTR_LOCAL_V4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->local_v4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == FOU_ATTR_PEER_V4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->peer_v4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == FOU_ATTR_LOCAL_V6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->local_v6.assign(data, data + len);
 		} else if (type == FOU_ATTR_PEER_V6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->peer_v6.assign(data, data + len);
 		} else if (type == FOU_ATTR_PEER_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->peer_port = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == FOU_ATTR_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__s32)ynl_attr_get_s32(attr);
 		}
 	}
@@ -226,22 +258,30 @@ std::unique_ptr<fou_get_rsp> fou_get(ynl_cpp::ynl_socket& ys, fou_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &fou_nest;
 	yrs.yarg.rsp_policy = &fou_nest;
 
-	if (req.af.has_value())
+	if (req.af.has_value()) {
 		ynl_attr_put_u8(nlh, FOU_ATTR_AF, req.af.value());
-	if (req.ifindex.has_value())
+	}
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_s32(nlh, FOU_ATTR_IFINDEX, req.ifindex.value());
-	if (req.port.has_value())
+	}
+	if (req.port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PORT, req.port.value());
-	if (req.peer_port.has_value())
+	}
+	if (req.peer_port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PEER_PORT, req.peer_port.value());
-	if (req.local_v4.has_value())
+	}
+	if (req.local_v4.has_value()) {
 		ynl_attr_put_u32(nlh, FOU_ATTR_LOCAL_V4, req.local_v4.value());
-	if (req.peer_v4.has_value())
+	}
+	if (req.peer_v4.has_value()) {
 		ynl_attr_put_u32(nlh, FOU_ATTR_PEER_V4, req.peer_v4.value());
-	if (req.local_v6.size() > 0)
+	}
+	if (req.local_v6.size() > 0) {
 		ynl_attr_put(nlh, FOU_ATTR_LOCAL_V6, req.local_v6.data(), req.local_v6.size());
-	if (req.peer_v6.size() > 0)
+	}
+	if (req.peer_v6.size() > 0) {
 		ynl_attr_put(nlh, FOU_ATTR_PEER_V6, req.peer_v6.data(), req.peer_v6.size());
+	}
 
 	rsp.reset(new fou_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -249,8 +289,9 @@ std::unique_ptr<fou_get_rsp> fou_get(ynl_cpp::ynl_socket& ys, fou_get_req& req)
 	yrs.rsp_cmd = FOU_CMD_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -273,8 +314,9 @@ std::unique_ptr<fou_get_list> fou_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, FOU_CMD_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }

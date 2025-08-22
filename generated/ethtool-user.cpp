@@ -75,8 +75,9 @@ static constexpr std::array<std::string_view, 53 + 1> ethtool_op_strmap = []() {
 
 std::string_view ethtool_op_str(int op)
 {
-	if (op < 0 || op >= (int)(ethtool_op_strmap.size()))
+	if (op < 0 || op >= (int)(ethtool_op_strmap.size())) {
 		return "";
+	}
 	return ethtool_op_strmap[op];
 }
 
@@ -90,8 +91,9 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_udp_tunnel_type_str
 
 std::string_view ethtool_udp_tunnel_type_str(int value)
 {
-	if (value < 0 || value >= (int)(ethtool_udp_tunnel_type_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_udp_tunnel_type_strmap.size())) {
 		return "";
+	}
 	return ethtool_udp_tunnel_type_strmap[value];
 }
 
@@ -102,8 +104,9 @@ static constexpr std::array<std::string_view, 0 + 1> ethtool_stringset_strmap = 
 
 std::string_view ethtool_stringset_str(ethtool_stringset value)
 {
-	if (value < 0 || value >= (int)(ethtool_stringset_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_stringset_strmap.size())) {
 		return "";
+	}
 	return ethtool_stringset_strmap[value];
 }
 
@@ -118,8 +121,9 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_header_flags_strmap
 std::string_view ethtool_header_flags_str(ethtool_header_flags value)
 {
 	value = (ethtool_header_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_header_flags_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_header_flags_strmap.size())) {
 		return "";
+	}
 	return ethtool_header_flags_strmap[value];
 }
 
@@ -135,8 +139,9 @@ static constexpr std::array<std::string_view, 3 + 1> ethtool_module_fw_flash_sta
 std::string_view
 ethtool_module_fw_flash_status_str(ethtool_module_fw_flash_status value)
 {
-	if (value < 0 || value >= (int)(ethtool_module_fw_flash_status_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_module_fw_flash_status_strmap.size())) {
 		return "";
+	}
 	return ethtool_module_fw_flash_status_strmap[value];
 }
 
@@ -156,8 +161,9 @@ static constexpr std::array<std::string_view, 8 + 1> ethtool_c33_pse_ext_state_s
 
 std::string_view ethtool_c33_pse_ext_state_str(ethtool_c33_pse_ext_state value)
 {
-	if (value < 0 || value >= (int)(ethtool_c33_pse_ext_state_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_c33_pse_ext_state_strmap.size())) {
 		return "";
+	}
 	return ethtool_c33_pse_ext_state_strmap[value];
 }
 
@@ -170,8 +176,9 @@ static constexpr std::array<std::string_view, 1 + 1> ethtool_phy_upstream_type_s
 
 std::string_view ethtool_phy_upstream_type_str(phy_upstream value)
 {
-	if (value < 0 || value >= (int)(ethtool_phy_upstream_type_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_phy_upstream_type_strmap.size())) {
 		return "";
+	}
 	return ethtool_phy_upstream_type_strmap[value];
 }
 
@@ -185,8 +192,9 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_tcp_data_split_strm
 
 std::string_view ethtool_tcp_data_split_str(ethtool_tcp_data_split value)
 {
-	if (value < 0 || value >= (int)(ethtool_tcp_data_split_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_tcp_data_split_strmap.size())) {
 		return "";
+	}
 	return ethtool_tcp_data_split_strmap[value];
 }
 
@@ -199,8 +207,9 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_hwtstamp_source_str
 
 std::string_view ethtool_hwtstamp_source_str(hwtstamp_source value)
 {
-	if (value < 0 || value >= (int)(ethtool_hwtstamp_source_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_hwtstamp_source_strmap.size())) {
 		return "";
+	}
 	return ethtool_hwtstamp_source_strmap[value];
 }
 
@@ -219,8 +228,9 @@ static constexpr std::array<std::string_view, 6 + 1> ethtool_pse_event_strmap = 
 std::string_view ethtool_pse_event_str(ethtool_pse_event value)
 {
 	value = (ethtool_pse_event)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_pse_event_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_pse_event_strmap.size())) {
 		return "";
+	}
 	return ethtool_pse_event_strmap[value];
 }
 
@@ -234,8 +244,9 @@ static constexpr std::array<std::string_view, 1 + 1> ethtool_input_xfrm_strmap =
 std::string_view ethtool_input_xfrm_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_input_xfrm_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_input_xfrm_strmap.size())) {
 		return "";
+	}
 	return ethtool_input_xfrm_strmap[value];
 }
 
@@ -256,8 +267,9 @@ static constexpr std::array<std::string_view, 31 + 1> ethtool_rxfh_fields_strmap
 std::string_view ethtool_rxfh_fields_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_rxfh_fields_strmap.size()))
+	if (value < 0 || value >= (int)(ethtool_rxfh_fields_strmap.size())) {
 		return "";
+	}
 	return ethtool_rxfh_fields_strmap[value];
 }
 
@@ -1679,14 +1691,18 @@ int ethtool_header_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.dev_index.has_value())
+	if (obj.dev_index.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_HEADER_DEV_INDEX, obj.dev_index.value());
-	if (obj.dev_name.size() > 0)
+	}
+	if (obj.dev_name.size() > 0) {
 		ynl_attr_put_str(nlh, ETHTOOL_A_HEADER_DEV_NAME, obj.dev_name.data());
-	if (obj.flags.has_value())
+	}
+	if (obj.flags.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_HEADER_FLAGS, obj.flags.value());
-	if (obj.phy_index.has_value())
+	}
+	if (obj.phy_index.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_HEADER_PHY_INDEX, obj.phy_index.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -1702,20 +1718,24 @@ int ethtool_header_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_HEADER_DEV_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dev_index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_HEADER_DEV_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dev_name.assign(ynl_attr_get_str(attr));
 		} else if (type == ETHTOOL_A_HEADER_FLAGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->flags = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_HEADER_PHY_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phy_index = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -1729,10 +1749,12 @@ int ethtool_pause_stat_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.tx_frames.has_value())
+	if (obj.tx_frames.has_value()) {
 		ynl_attr_put_u64(nlh, ETHTOOL_A_PAUSE_STAT_TX_FRAMES, obj.tx_frames.value());
-	if (obj.rx_frames.has_value())
+	}
+	if (obj.rx_frames.has_value()) {
 		ynl_attr_put_u64(nlh, ETHTOOL_A_PAUSE_STAT_RX_FRAMES, obj.rx_frames.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -1748,12 +1770,14 @@ int ethtool_pause_stat_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PAUSE_STAT_TX_FRAMES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_frames = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_PAUSE_STAT_RX_FRAMES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_frames = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
@@ -1771,20 +1795,24 @@ int ethtool_ts_stat_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TS_STAT_TX_PKTS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_pkts = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_TS_STAT_TX_LOST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_lost = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_TS_STAT_TX_ERR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_err = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_TS_STAT_TX_ONESTEP_PKTS_UNCONFIRMED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_onestep_pkts_unconfirmed = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -1799,10 +1827,12 @@ int ethtool_ts_hwtstamp_provider_put(struct nlmsghdr *nlh,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.index.has_value())
+	if (obj.index.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_TS_HWTSTAMP_PROVIDER_INDEX, obj.index.value());
-	if (obj.qualifier.has_value())
+	}
+	if (obj.qualifier.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_TS_HWTSTAMP_PROVIDER_QUALIFIER, obj.qualifier.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -1818,12 +1848,14 @@ int ethtool_ts_hwtstamp_provider_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TS_HWTSTAMP_PROVIDER_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_TS_HWTSTAMP_PROVIDER_QUALIFIER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->qualifier = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -1837,12 +1869,15 @@ int ethtool_fec_stat_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.corrected.size() > 0)
+	if (obj.corrected.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_FEC_STAT_CORRECTED, obj.corrected.data(), obj.corrected.size());
-	if (obj.uncorr.size() > 0)
+	}
+	if (obj.uncorr.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_FEC_STAT_UNCORR, obj.uncorr.data(), obj.uncorr.size());
-	if (obj.corr_bits.size() > 0)
+	}
+	if (obj.corr_bits.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_FEC_STAT_CORR_BITS, obj.corr_bits.data(), obj.corr_bits.size());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -1858,20 +1893,23 @@ int ethtool_fec_stat_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_FEC_STAT_CORRECTED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->corrected.assign(data, data + len);
 		} else if (type == ETHTOOL_A_FEC_STAT_UNCORR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->uncorr.assign(data, data + len);
 		} else if (type == ETHTOOL_A_FEC_STAT_CORR_BITS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->corr_bits.assign(data, data + len);
@@ -1891,12 +1929,14 @@ int ethtool_c33_pse_pw_limit_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_C33_PSE_PW_LIMIT_MIN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->min = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_PW_LIMIT_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->max = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -1910,60 +1950,87 @@ int ethtool_flow_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.ether.has_value())
+	if (obj.ether.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_ETHER, obj.ether.value());
-	if (obj.ip4.has_value())
+	}
+	if (obj.ip4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_IP4, obj.ip4.value());
-	if (obj.ip6.has_value())
+	}
+	if (obj.ip6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_IP6, obj.ip6.value());
-	if (obj.tcp4.has_value())
+	}
+	if (obj.tcp4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_TCP4, obj.tcp4.value());
-	if (obj.tcp6.has_value())
+	}
+	if (obj.tcp6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_TCP6, obj.tcp6.value());
-	if (obj.udp4.has_value())
+	}
+	if (obj.udp4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_UDP4, obj.udp4.value());
-	if (obj.udp6.has_value())
+	}
+	if (obj.udp6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_UDP6, obj.udp6.value());
-	if (obj.sctp4.has_value())
+	}
+	if (obj.sctp4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_SCTP4, obj.sctp4.value());
-	if (obj.sctp6.has_value())
+	}
+	if (obj.sctp6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_SCTP6, obj.sctp6.value());
-	if (obj.ah4.has_value())
+	}
+	if (obj.ah4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_AH4, obj.ah4.value());
-	if (obj.ah6.has_value())
+	}
+	if (obj.ah6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_AH6, obj.ah6.value());
-	if (obj.esp4.has_value())
+	}
+	if (obj.esp4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_ESP4, obj.esp4.value());
-	if (obj.esp6.has_value())
+	}
+	if (obj.esp6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_ESP6, obj.esp6.value());
-	if (obj.ah_esp4.has_value())
+	}
+	if (obj.ah_esp4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_AH_ESP4, obj.ah_esp4.value());
-	if (obj.ah_esp6.has_value())
+	}
+	if (obj.ah_esp6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_AH_ESP6, obj.ah_esp6.value());
-	if (obj.gtpu4.has_value())
+	}
+	if (obj.gtpu4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU4, obj.gtpu4.value());
-	if (obj.gtpu6.has_value())
+	}
+	if (obj.gtpu6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU6, obj.gtpu6.value());
-	if (obj.gtpc4.has_value())
+	}
+	if (obj.gtpc4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPC4, obj.gtpc4.value());
-	if (obj.gtpc6.has_value())
+	}
+	if (obj.gtpc6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPC6, obj.gtpc6.value());
-	if (obj.gtpc_teid4.has_value())
+	}
+	if (obj.gtpc_teid4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPC_TEID4, obj.gtpc_teid4.value());
-	if (obj.gtpc_teid6.has_value())
+	}
+	if (obj.gtpc_teid6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPC_TEID6, obj.gtpc_teid6.value());
-	if (obj.gtpu_eh4.has_value())
+	}
+	if (obj.gtpu_eh4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU_EH4, obj.gtpu_eh4.value());
-	if (obj.gtpu_eh6.has_value())
+	}
+	if (obj.gtpu_eh6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU_EH6, obj.gtpu_eh6.value());
-	if (obj.gtpu_ul4.has_value())
+	}
+	if (obj.gtpu_ul4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU_UL4, obj.gtpu_ul4.value());
-	if (obj.gtpu_ul6.has_value())
+	}
+	if (obj.gtpu_ul6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU_UL6, obj.gtpu_ul6.value());
-	if (obj.gtpu_dl4.has_value())
+	}
+	if (obj.gtpu_dl4.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU_DL4, obj.gtpu_dl4.value());
-	if (obj.gtpu_dl6.has_value())
+	}
+	if (obj.gtpu_dl6.has_value()) {
 		ynl_attr_put_uint(nlh, ETHTOOL_A_FLOW_GTPU_DL6, obj.gtpu_dl6.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -1978,112 +2045,139 @@ int ethtool_flow_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_FLOW_ETHER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ether = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_IP4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ip4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_IP6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ip6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_TCP4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tcp4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_TCP6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tcp6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_UDP4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->udp4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_UDP6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->udp6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_SCTP4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->sctp4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_SCTP6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->sctp6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_AH4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ah4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_AH6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ah6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_ESP4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->esp4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_ESP6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->esp6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_AH_ESP4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ah_esp4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_AH_ESP6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ah_esp6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPC4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpc4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPC6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpc6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPC_TEID4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpc_teid4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPC_TEID6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpc_teid6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU_EH4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu_eh4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU_EH6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu_eh6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU_UL4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu_ul4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU_UL6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu_ul6 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU_DL4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu_dl4 = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_FLOW_GTPU_DL6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gtpu_dl6 = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -2101,28 +2195,34 @@ int ethtool_mm_stat_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_MM_STAT_REASSEMBLY_ERRORS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->reassembly_errors = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_MM_STAT_SMD_ERRORS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->smd_errors = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_MM_STAT_REASSEMBLY_OK) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->reassembly_ok = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_MM_STAT_RX_FRAG_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_frag_count = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_MM_STAT_TX_FRAG_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_frag_count = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_MM_STAT_HOLD_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hold_count = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
@@ -2136,12 +2236,15 @@ int ethtool_irq_moderation_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.usec.has_value())
+	if (obj.usec.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_IRQ_MODERATION_USEC, obj.usec.value());
-	if (obj.pkts.has_value())
+	}
+	if (obj.pkts.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_IRQ_MODERATION_PKTS, obj.pkts.value());
-	if (obj.comps.has_value())
+	}
+	if (obj.comps.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_IRQ_MODERATION_COMPS, obj.comps.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2157,16 +2260,19 @@ int ethtool_irq_moderation_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_IRQ_MODERATION_USEC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->usec = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_IRQ_MODERATION_PKTS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pkts = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_IRQ_MODERATION_COMPS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->comps = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -2184,16 +2290,19 @@ int ethtool_cable_result_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_CABLE_RESULT_PAIR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pair = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_CABLE_RESULT_CODE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->code = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_CABLE_RESULT_SRC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->src = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -2211,16 +2320,19 @@ int ethtool_cable_fault_length_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_CABLE_FAULT_LENGTH_PAIR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pair = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_CABLE_FAULT_LENGTH_CM) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->cm = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CABLE_FAULT_LENGTH_SRC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->src = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -2238,16 +2350,19 @@ int ethtool_stats_grp_hist_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_STATS_GRP_HIST_BKT_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hist_bkt_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_BKT_HI) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hist_bkt_hi = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_VAL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hist_val = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
@@ -2261,12 +2376,15 @@ int ethtool_bitset_bit_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.index.has_value())
+	if (obj.index.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_BITSET_BIT_INDEX, obj.index.value());
-	if (obj.name.size() > 0)
+	}
+	if (obj.name.size() > 0) {
 		ynl_attr_put_str(nlh, ETHTOOL_A_BITSET_BIT_NAME, obj.name.data());
-	if (obj.value)
+	}
+	if (obj.value) {
 		ynl_attr_put(nlh, ETHTOOL_A_BITSET_BIT_VALUE, NULL, 0);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2282,16 +2400,19 @@ int ethtool_bitset_bit_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_BITSET_BIT_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_BITSET_BIT_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->name.assign(ynl_attr_get_str(attr));
 		} else if (type == ETHTOOL_A_BITSET_BIT_VALUE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -2308,12 +2429,14 @@ int ethtool_tunnel_udp_entry_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TUNNEL_UDP_ENTRY_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->port = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == ETHTOOL_A_TUNNEL_UDP_ENTRY_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->type = (int)ynl_attr_get_u32(attr);
 		}
 	}
@@ -2327,10 +2450,12 @@ int ethtool_string_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.index.has_value())
+	if (obj.index.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_STRING_INDEX, obj.index.value());
-	if (obj.value.size() > 0)
+	}
+	if (obj.value.size() > 0) {
 		ynl_attr_put_str(nlh, ETHTOOL_A_STRING_VALUE, obj.value.data());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2346,12 +2471,14 @@ int ethtool_string_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_STRING_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STRING_VALUE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->value.assign(ynl_attr_get_str(attr));
 		}
 	}
@@ -2383,8 +2510,9 @@ int ethtool_profile_parse(struct ynl_parse_arg *yarg,
 
 	parg.ys = yarg->ys;
 
-	if (dst->irq_moderation.size() > 0)
+	if (dst->irq_moderation.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (profile.irq-moderation)");
+	}
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
@@ -2401,8 +2529,9 @@ int ethtool_profile_parse(struct ynl_parse_arg *yarg,
 		ynl_attr_for_each_nested(attr, nested) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_PROFILE_IRQ_MODERATION) {
 				parg.data = &dst->irq_moderation[i];
-				if (ethtool_irq_moderation_parse(&parg, attr))
+				if (ethtool_irq_moderation_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -2424,21 +2553,25 @@ int ethtool_cable_nest_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_CABLE_NEST_RESULT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_cable_result_nest;
 			parg.data = &dst->result.emplace();
-			if (ethtool_cable_result_parse(&parg, attr))
+			if (ethtool_cable_result_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_CABLE_NEST_FAULT_LENGTH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_cable_fault_length_nest;
 			parg.data = &dst->fault_length.emplace();
-			if (ethtool_cable_fault_length_parse(&parg, attr))
+			if (ethtool_cable_fault_length_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -2458,44 +2591,54 @@ int ethtool_stats_grp_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_STATS_GRP_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_SS_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ss_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_STAT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->stat = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_RX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_stats_grp_hist_nest;
 			parg.data = &dst->hist_rx.emplace();
-			if (ethtool_stats_grp_hist_parse(&parg, attr))
+			if (ethtool_stats_grp_hist_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_TX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_stats_grp_hist_nest;
 			parg.data = &dst->hist_tx.emplace();
-			if (ethtool_stats_grp_hist_parse(&parg, attr))
+			if (ethtool_stats_grp_hist_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_BKT_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hist_bkt_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_BKT_HI) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hist_bkt_hi = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STATS_GRP_HIST_VAL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hist_val = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
@@ -2527,8 +2670,9 @@ int ethtool_bitset_bits_parse(struct ynl_parse_arg *yarg,
 
 	parg.ys = yarg->ys;
 
-	if (dst->bit.size() > 0)
+	if (dst->bit.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (bitset-bits.bit)");
+	}
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
@@ -2545,8 +2689,9 @@ int ethtool_bitset_bits_parse(struct ynl_parse_arg *yarg,
 		ynl_attr_for_each_nested(attr, nested) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_BITSET_BITS_BIT) {
 				parg.data = &dst->bit[i];
-				if (ethtool_bitset_bit_parse(&parg, attr))
+				if (ethtool_bitset_bit_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -2579,8 +2724,9 @@ int ethtool_strings_parse(struct ynl_parse_arg *yarg,
 
 	parg.ys = yarg->ys;
 
-	if (dst->string.size() > 0)
+	if (dst->string.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (strings.string)");
+	}
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
@@ -2597,8 +2743,9 @@ int ethtool_strings_parse(struct ynl_parse_arg *yarg,
 		ynl_attr_for_each_nested(attr, nested) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_STRINGS_STRING) {
 				parg.data = &dst->string[i];
-				if (ethtool_string_parse(&parg, attr))
+				if (ethtool_string_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -2613,16 +2760,21 @@ int ethtool_bitset_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.nomask)
+	if (obj.nomask) {
 		ynl_attr_put(nlh, ETHTOOL_A_BITSET_NOMASK, NULL, 0);
-	if (obj.size.has_value())
+	}
+	if (obj.size.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_BITSET_SIZE, obj.size.value());
-	if (obj.bits.has_value())
+	}
+	if (obj.bits.has_value()) {
 		ethtool_bitset_bits_put(nlh, ETHTOOL_A_BITSET_BITS, obj.bits.value());
-	if (obj.value.size() > 0)
+	}
+	if (obj.value.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_BITSET_VALUE, obj.value.data(), obj.value.size());
-	if (obj.mask.size() > 0)
+	}
+	if (obj.mask.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_BITSET_MASK, obj.mask.data(), obj.mask.size());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2641,29 +2793,35 @@ int ethtool_bitset_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_BITSET_NOMASK) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_BITSET_SIZE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->size = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_BITSET_BITS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_bits_nest;
 			parg.data = &dst->bits.emplace();
-			if (ethtool_bitset_bits_parse(&parg, attr))
+			if (ethtool_bitset_bits_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_BITSET_VALUE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->value.assign(data, data + len);
 		} else if (type == ETHTOOL_A_BITSET_MASK) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->mask.assign(data, data + len);
@@ -2679,10 +2837,12 @@ int ethtool_stringset_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.id.has_value())
+	if (obj.id.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_STRINGSET_ID, obj.id.value());
-	if (obj.count.has_value())
+	}
+	if (obj.count.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_STRINGSET_COUNT, obj.count.value());
+	}
 	for (unsigned int i = 0; i < obj.strings.size(); i++)
 		ethtool_strings_put(nlh, ETHTOOL_A_STRINGSET_STRINGS, obj.strings[i]);
 	ynl_attr_nest_end(nlh, nest);
@@ -2701,19 +2861,22 @@ int ethtool_stringset_parse(struct ynl_parse_arg *yarg,
 
 	parg.ys = yarg->ys;
 
-	if (dst->strings.size() > 0)
+	if (dst->strings.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (stringset.strings)");
+	}
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_STRINGSET_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STRINGSET_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->count = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_STRINGSET_STRINGS) {
 			n_strings++;
@@ -2727,8 +2890,9 @@ int ethtool_stringset_parse(struct ynl_parse_arg *yarg,
 		ynl_attr_for_each_nested(attr, nested) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_STRINGSET_STRINGS) {
 				parg.data = &dst->strings[i];
-				if (ethtool_strings_parse(&parg, attr))
+				if (ethtool_strings_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -2748,24 +2912,28 @@ int ethtool_tunnel_udp_table_parse(struct ynl_parse_arg *yarg,
 
 	parg.ys = yarg->ys;
 
-	if (dst->entry.size() > 0)
+	if (dst->entry.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (tunnel-udp-table.entry)");
+	}
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TUNNEL_UDP_TABLE_SIZE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->size = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_TUNNEL_UDP_TABLE_TYPES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->types.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TUNNEL_UDP_TABLE_ENTRY) {
 			n_entry++;
 		}
@@ -2778,8 +2946,9 @@ int ethtool_tunnel_udp_table_parse(struct ynl_parse_arg *yarg,
 		ynl_attr_for_each_nested(attr, nested) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_TUNNEL_UDP_TABLE_ENTRY) {
 				parg.data = &dst->entry[i];
-				if (ethtool_tunnel_udp_entry_parse(&parg, attr))
+				if (ethtool_tunnel_udp_entry_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -2812,8 +2981,9 @@ int ethtool_stringsets_parse(struct ynl_parse_arg *yarg,
 
 	parg.ys = yarg->ys;
 
-	if (dst->stringset.size() > 0)
+	if (dst->stringset.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (stringsets.stringset)");
+	}
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
@@ -2830,8 +3000,9 @@ int ethtool_stringsets_parse(struct ynl_parse_arg *yarg,
 		ynl_attr_for_each_nested(attr, nested) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_STRINGSETS_STRINGSET) {
 				parg.data = &dst->stringset[i];
-				if (ethtool_stringset_parse(&parg, attr))
+				if (ethtool_stringset_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -2853,13 +3024,15 @@ int ethtool_tunnel_udp_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TUNNEL_UDP_TABLE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_tunnel_udp_table_nest;
 			parg.data = &dst->table.emplace();
-			if (ethtool_tunnel_udp_table_parse(&parg, attr))
+			if (ethtool_tunnel_udp_table_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -2882,21 +3055,25 @@ int ethtool_strset_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_STRSET_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_STRSET_STRINGSETS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_stringsets_nest;
 			parg.data = &dst->stringsets.emplace();
-			if (ethtool_stringsets_parse(&parg, attr))
+			if (ethtool_stringsets_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -2915,12 +3092,15 @@ ethtool_strset_get(ynl_cpp::ynl_socket& ys, ethtool_strset_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_strset_nest;
 	yrs.yarg.rsp_policy = &ethtool_strset_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_STRSET_HEADER, req.header.value());
-	if (req.stringsets.has_value())
+	}
+	if (req.stringsets.has_value()) {
 		ethtool_stringsets_put(nlh, ETHTOOL_A_STRSET_STRINGSETS, req.stringsets.value());
-	if (req.counts_only)
+	}
+	if (req.counts_only) {
 		ynl_attr_put(nlh, ETHTOOL_A_STRSET_COUNTS_ONLY, NULL, 0);
+	}
 
 	rsp.reset(new ethtool_strset_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -2928,8 +3108,9 @@ ethtool_strset_get(ynl_cpp::ynl_socket& ys, ethtool_strset_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_STRSET_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -2954,16 +3135,20 @@ ethtool_strset_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_STRSET_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_strset_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_STRSET_HEADER, req.header.value());
-	if (req.stringsets.has_value())
+	}
+	if (req.stringsets.has_value()) {
 		ethtool_stringsets_put(nlh, ETHTOOL_A_STRSET_STRINGSETS, req.stringsets.value());
-	if (req.counts_only)
+	}
+	if (req.counts_only) {
 		ynl_attr_put(nlh, ETHTOOL_A_STRSET_COUNTS_ONLY, NULL, 0);
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -2984,32 +3169,39 @@ int ethtool_linkinfo_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_LINKINFO_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_LINKINFO_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->port = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKINFO_PHYADDR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phyaddr = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKINFO_TP_MDIX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tp_mdix = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKINFO_TP_MDIX_CTRL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tp_mdix_ctrl = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKINFO_TRANSCEIVER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->transceiver = (__u8)ynl_attr_get_u8(attr);
 		}
 	}
@@ -3029,8 +3221,9 @@ ethtool_linkinfo_get(ynl_cpp::ynl_socket& ys, ethtool_linkinfo_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkinfo_nest;
 	yrs.yarg.rsp_policy = &ethtool_linkinfo_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKINFO_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_linkinfo_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3038,8 +3231,9 @@ ethtool_linkinfo_get(ynl_cpp::ynl_socket& ys, ethtool_linkinfo_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_LINKINFO_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3064,12 +3258,14 @@ ethtool_linkinfo_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_LINKINFO_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkinfo_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKINFO_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3087,22 +3283,29 @@ int ethtool_linkinfo_set(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_LINKINFO_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkinfo_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKINFO_HEADER, req.header.value());
-	if (req.port.has_value())
+	}
+	if (req.port.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKINFO_PORT, req.port.value());
-	if (req.phyaddr.has_value())
+	}
+	if (req.phyaddr.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKINFO_PHYADDR, req.phyaddr.value());
-	if (req.tp_mdix.has_value())
+	}
+	if (req.tp_mdix.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKINFO_TP_MDIX, req.tp_mdix.value());
-	if (req.tp_mdix_ctrl.has_value())
+	}
+	if (req.tp_mdix_ctrl.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKINFO_TP_MDIX_CTRL, req.tp_mdix_ctrl.value());
-	if (req.transceiver.has_value())
+	}
+	if (req.transceiver.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKINFO_TRANSCEIVER, req.transceiver.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -3123,56 +3326,69 @@ int ethtool_linkmodes_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_LINKMODES_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_LINKMODES_AUTONEG) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->autoneg = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKMODES_OURS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->ours.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_LINKMODES_PEER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->peer.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_LINKMODES_SPEED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->speed = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_LINKMODES_DUPLEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->duplex = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKMODES_MASTER_SLAVE_CFG) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->master_slave_cfg = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKMODES_MASTER_SLAVE_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->master_slave_state = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKMODES_LANES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->lanes = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_LINKMODES_RATE_MATCHING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rate_matching = (__u8)ynl_attr_get_u8(attr);
 		}
 	}
@@ -3192,8 +3408,9 @@ ethtool_linkmodes_get(ynl_cpp::ynl_socket& ys, ethtool_linkmodes_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkmodes_nest;
 	yrs.yarg.rsp_policy = &ethtool_linkmodes_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKMODES_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_linkmodes_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3201,8 +3418,9 @@ ethtool_linkmodes_get(ynl_cpp::ynl_socket& ys, ethtool_linkmodes_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_LINKMODES_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3227,12 +3445,14 @@ ethtool_linkmodes_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_LINKMODES_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkmodes_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKMODES_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3250,30 +3470,41 @@ int ethtool_linkmodes_set(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_LINKMODES_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkmodes_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKMODES_HEADER, req.header.value());
-	if (req.autoneg.has_value())
+	}
+	if (req.autoneg.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKMODES_AUTONEG, req.autoneg.value());
-	if (req.ours.has_value())
+	}
+	if (req.ours.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_LINKMODES_OURS, req.ours.value());
-	if (req.peer.has_value())
+	}
+	if (req.peer.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_LINKMODES_PEER, req.peer.value());
-	if (req.speed.has_value())
+	}
+	if (req.speed.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_LINKMODES_SPEED, req.speed.value());
-	if (req.duplex.has_value())
+	}
+	if (req.duplex.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKMODES_DUPLEX, req.duplex.value());
-	if (req.master_slave_cfg.has_value())
+	}
+	if (req.master_slave_cfg.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKMODES_MASTER_SLAVE_CFG, req.master_slave_cfg.value());
-	if (req.master_slave_state.has_value())
+	}
+	if (req.master_slave_state.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKMODES_MASTER_SLAVE_STATE, req.master_slave_state.value());
-	if (req.lanes.has_value())
+	}
+	if (req.lanes.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_LINKMODES_LANES, req.lanes.value());
-	if (req.rate_matching.has_value())
+	}
+	if (req.rate_matching.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_LINKMODES_RATE_MATCHING, req.rate_matching.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -3294,36 +3525,44 @@ int ethtool_linkstate_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_LINKSTATE_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_LINKSTATE_LINK) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->link = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKSTATE_SQI) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->sqi = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_LINKSTATE_SQI_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->sqi_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_LINKSTATE_EXT_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ext_state = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKSTATE_EXT_SUBSTATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ext_substate = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_LINKSTATE_EXT_DOWN_CNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ext_down_cnt = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -3343,8 +3582,9 @@ ethtool_linkstate_get(ynl_cpp::ynl_socket& ys, ethtool_linkstate_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkstate_nest;
 	yrs.yarg.rsp_policy = &ethtool_linkstate_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKSTATE_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_linkstate_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3352,8 +3592,9 @@ ethtool_linkstate_get(ynl_cpp::ynl_socket& ys, ethtool_linkstate_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_LINKSTATE_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3378,12 +3619,14 @@ ethtool_linkstate_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_LINKSTATE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_linkstate_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_LINKSTATE_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3404,21 +3647,25 @@ int ethtool_debug_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_DEBUG_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_DEBUG_MSGMASK) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->msgmask.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -3437,8 +3684,9 @@ ethtool_debug_get(ynl_cpp::ynl_socket& ys, ethtool_debug_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_debug_nest;
 	yrs.yarg.rsp_policy = &ethtool_debug_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_DEBUG_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_debug_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3446,8 +3694,9 @@ ethtool_debug_get(ynl_cpp::ynl_socket& ys, ethtool_debug_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_DEBUG_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3472,12 +3721,14 @@ ethtool_debug_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_DEBUG_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_debug_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_DEBUG_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3494,14 +3745,17 @@ int ethtool_debug_set(ynl_cpp::ynl_socket& ys, ethtool_debug_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_DEBUG_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_debug_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_DEBUG_HEADER, req.header.value());
-	if (req.msgmask.has_value())
+	}
+	if (req.msgmask.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_DEBUG_MSGMASK, req.msgmask.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -3522,24 +3776,29 @@ int ethtool_wol_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_WOL_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_WOL_MODES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->modes.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_WOL_SOPASS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->sopass.assign(data, data + len);
@@ -3561,8 +3820,9 @@ ethtool_wol_get(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_wol_nest;
 	yrs.yarg.rsp_policy = &ethtool_wol_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_WOL_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_wol_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3570,8 +3830,9 @@ ethtool_wol_get(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_WOL_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3595,12 +3856,14 @@ ethtool_wol_get_dump(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_WOL_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_wol_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_WOL_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3617,16 +3880,20 @@ int ethtool_wol_set(ynl_cpp::ynl_socket& ys, ethtool_wol_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_WOL_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_wol_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_WOL_HEADER, req.header.value());
-	if (req.modes.has_value())
+	}
+	if (req.modes.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_WOL_MODES, req.modes.value());
-	if (req.sopass.size() > 0)
+	}
+	if (req.sopass.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_WOL_SOPASS, req.sopass.data(), req.sopass.size());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -3647,45 +3914,55 @@ int ethtool_features_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_FEATURES_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_HW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->hw.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_WANTED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->wanted.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_ACTIVE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->active.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_NOCHANGE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->nochange.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -3704,8 +3981,9 @@ ethtool_features_get(ynl_cpp::ynl_socket& ys, ethtool_features_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_features_nest;
 	yrs.yarg.rsp_policy = &ethtool_features_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_FEATURES_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_features_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3713,8 +3991,9 @@ ethtool_features_get(ynl_cpp::ynl_socket& ys, ethtool_features_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_FEATURES_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3739,12 +4018,14 @@ ethtool_features_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_FEATURES_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_features_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_FEATURES_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3766,45 +4047,55 @@ int ethtool_features_set_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_FEATURES_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_HW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->hw.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_WANTED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->wanted.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_ACTIVE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->active.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEATURES_NOCHANGE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->nochange.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -3823,16 +4114,21 @@ ethtool_features_set(ynl_cpp::ynl_socket& ys, ethtool_features_set_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_features_nest;
 	yrs.yarg.rsp_policy = &ethtool_features_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_FEATURES_HEADER, req.header.value());
-	if (req.hw.has_value())
+	}
+	if (req.hw.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_FEATURES_HW, req.hw.value());
-	if (req.wanted.has_value())
+	}
+	if (req.wanted.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_FEATURES_WANTED, req.wanted.value());
-	if (req.active.has_value())
+	}
+	if (req.active.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_FEATURES_ACTIVE, req.active.value());
-	if (req.nochange.has_value())
+	}
+	if (req.nochange.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_FEATURES_NOCHANGE, req.nochange.value());
+	}
 
 	rsp.reset(new ethtool_features_set_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3840,8 +4136,9 @@ ethtool_features_set(ynl_cpp::ynl_socket& ys, ethtool_features_set_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_FEATURES_SET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3862,21 +4159,25 @@ int ethtool_privflags_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PRIVFLAGS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PRIVFLAGS_FLAGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->flags.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -3895,8 +4196,9 @@ ethtool_privflags_get(ynl_cpp::ynl_socket& ys, ethtool_privflags_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_privflags_nest;
 	yrs.yarg.rsp_policy = &ethtool_privflags_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PRIVFLAGS_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_privflags_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -3904,8 +4206,9 @@ ethtool_privflags_get(ynl_cpp::ynl_socket& ys, ethtool_privflags_get_req& req)
 	yrs.rsp_cmd = 14;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -3930,12 +4233,14 @@ ethtool_privflags_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PRIVFLAGS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_privflags_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PRIVFLAGS_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -3953,14 +4258,17 @@ int ethtool_privflags_set(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PRIVFLAGS_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_privflags_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PRIVFLAGS_HEADER, req.header.value());
-	if (req.flags.has_value())
+	}
+	if (req.flags.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_PRIVFLAGS_FLAGS, req.flags.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -3981,80 +4289,99 @@ int ethtool_rings_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_RINGS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_RINGS_RX_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX_MINI_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_mini_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX_JUMBO_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_jumbo_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_TX_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX_MINI) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_mini = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX_JUMBO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_jumbo = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_TX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX_BUF_LEN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_buf_len = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_TCP_DATA_SPLIT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tcp_data_split = (enum ethtool_tcp_data_split)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_RINGS_CQE_SIZE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->cqe_size = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_TX_PUSH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_push = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_RINGS_RX_PUSH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_push = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_RINGS_TX_PUSH_BUF_LEN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_push_buf_len = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_TX_PUSH_BUF_LEN_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_push_buf_len_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_HDS_THRESH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hds_thresh = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RINGS_HDS_THRESH_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hds_thresh_max = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -4074,8 +4401,9 @@ ethtool_rings_get(ynl_cpp::ynl_socket& ys, ethtool_rings_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rings_nest;
 	yrs.yarg.rsp_policy = &ethtool_rings_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RINGS_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_rings_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -4083,8 +4411,9 @@ ethtool_rings_get(ynl_cpp::ynl_socket& ys, ethtool_rings_get_req& req)
 	yrs.rsp_cmd = 16;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -4109,12 +4438,14 @@ ethtool_rings_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_RINGS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rings_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RINGS_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -4131,46 +4462,65 @@ int ethtool_rings_set(ynl_cpp::ynl_socket& ys, ethtool_rings_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_RINGS_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rings_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RINGS_HEADER, req.header.value());
-	if (req.rx_max.has_value())
+	}
+	if (req.rx_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX_MAX, req.rx_max.value());
-	if (req.rx_mini_max.has_value())
+	}
+	if (req.rx_mini_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX_MINI_MAX, req.rx_mini_max.value());
-	if (req.rx_jumbo_max.has_value())
+	}
+	if (req.rx_jumbo_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX_JUMBO_MAX, req.rx_jumbo_max.value());
-	if (req.tx_max.has_value())
+	}
+	if (req.tx_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_TX_MAX, req.tx_max.value());
-	if (req.rx.has_value())
+	}
+	if (req.rx.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX, req.rx.value());
-	if (req.rx_mini.has_value())
+	}
+	if (req.rx_mini.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX_MINI, req.rx_mini.value());
-	if (req.rx_jumbo.has_value())
+	}
+	if (req.rx_jumbo.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX_JUMBO, req.rx_jumbo.value());
-	if (req.tx.has_value())
+	}
+	if (req.tx.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_TX, req.tx.value());
-	if (req.rx_buf_len.has_value())
+	}
+	if (req.rx_buf_len.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_RX_BUF_LEN, req.rx_buf_len.value());
-	if (req.tcp_data_split.has_value())
+	}
+	if (req.tcp_data_split.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_RINGS_TCP_DATA_SPLIT, req.tcp_data_split.value());
-	if (req.cqe_size.has_value())
+	}
+	if (req.cqe_size.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_CQE_SIZE, req.cqe_size.value());
-	if (req.tx_push.has_value())
+	}
+	if (req.tx_push.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_RINGS_TX_PUSH, req.tx_push.value());
-	if (req.rx_push.has_value())
+	}
+	if (req.rx_push.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_RINGS_RX_PUSH, req.rx_push.value());
-	if (req.tx_push_buf_len.has_value())
+	}
+	if (req.tx_push_buf_len.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_TX_PUSH_BUF_LEN, req.tx_push_buf_len.value());
-	if (req.tx_push_buf_len_max.has_value())
+	}
+	if (req.tx_push_buf_len_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_TX_PUSH_BUF_LEN_MAX, req.tx_push_buf_len_max.value());
-	if (req.hds_thresh.has_value())
+	}
+	if (req.hds_thresh.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_HDS_THRESH, req.hds_thresh.value());
-	if (req.hds_thresh_max.has_value())
+	}
+	if (req.hds_thresh_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RINGS_HDS_THRESH_MAX, req.hds_thresh_max.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -4191,44 +4541,54 @@ int ethtool_channels_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_CHANNELS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_CHANNELS_RX_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_TX_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_OTHER_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->other_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_COMBINED_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->combined_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_RX_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_count = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_TX_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_count = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_OTHER_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->other_count = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_CHANNELS_COMBINED_COUNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->combined_count = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -4248,8 +4608,9 @@ ethtool_channels_get(ynl_cpp::ynl_socket& ys, ethtool_channels_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_channels_nest;
 	yrs.yarg.rsp_policy = &ethtool_channels_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_CHANNELS_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_channels_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -4257,8 +4618,9 @@ ethtool_channels_get(ynl_cpp::ynl_socket& ys, ethtool_channels_get_req& req)
 	yrs.rsp_cmd = 18;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -4283,12 +4645,14 @@ ethtool_channels_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_CHANNELS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_channels_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_CHANNELS_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -4306,28 +4670,38 @@ int ethtool_channels_set(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_CHANNELS_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_channels_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_CHANNELS_HEADER, req.header.value());
-	if (req.rx_max.has_value())
+	}
+	if (req.rx_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_RX_MAX, req.rx_max.value());
-	if (req.tx_max.has_value())
+	}
+	if (req.tx_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_TX_MAX, req.tx_max.value());
-	if (req.other_max.has_value())
+	}
+	if (req.other_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_OTHER_MAX, req.other_max.value());
-	if (req.combined_max.has_value())
+	}
+	if (req.combined_max.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_COMBINED_MAX, req.combined_max.value());
-	if (req.rx_count.has_value())
+	}
+	if (req.rx_count.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_RX_COUNT, req.rx_count.value());
-	if (req.tx_count.has_value())
+	}
+	if (req.tx_count.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_TX_COUNT, req.tx_count.value());
-	if (req.other_count.has_value())
+	}
+	if (req.other_count.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_OTHER_COUNT, req.other_count.value());
-	if (req.combined_count.has_value())
+	}
+	if (req.combined_count.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_CHANNELS_COMBINED_COUNT, req.combined_count.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -4348,137 +4722,170 @@ int ethtool_coalesce_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_COALESCE_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_COALESCE_RX_USECS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_usecs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_MAX_FRAMES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_max_frames = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_USECS_IRQ) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_usecs_irq = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_MAX_FRAMES_IRQ) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_max_frames_irq = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_USECS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_usecs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_MAX_FRAMES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_max_frames = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_USECS_IRQ) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_usecs_irq = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_MAX_FRAMES_IRQ) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_max_frames_irq = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_STATS_BLOCK_USECS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->stats_block_usecs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_USE_ADAPTIVE_RX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->use_adaptive_rx = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_COALESCE_USE_ADAPTIVE_TX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->use_adaptive_tx = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_COALESCE_PKT_RATE_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pkt_rate_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_USECS_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_usecs_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_MAX_FRAMES_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_max_frames_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_USECS_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_usecs_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_MAX_FRAMES_LOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_max_frames_low = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_PKT_RATE_HIGH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pkt_rate_high = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_USECS_HIGH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_usecs_high = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_MAX_FRAMES_HIGH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_max_frames_high = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_USECS_HIGH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_usecs_high = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_MAX_FRAMES_HIGH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_max_frames_high = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RATE_SAMPLE_INTERVAL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rate_sample_interval = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_USE_CQE_MODE_TX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->use_cqe_mode_tx = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_COALESCE_USE_CQE_MODE_RX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->use_cqe_mode_rx = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_AGGR_MAX_BYTES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_aggr_max_bytes = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_aggr_max_frames = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_aggr_time_usecs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_COALESCE_RX_PROFILE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_profile_nest;
 			parg.data = &dst->rx_profile.emplace();
-			if (ethtool_profile_parse(&parg, attr))
+			if (ethtool_profile_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_COALESCE_TX_PROFILE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_profile_nest;
 			parg.data = &dst->tx_profile.emplace();
-			if (ethtool_profile_parse(&parg, attr))
+			if (ethtool_profile_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -4497,8 +4904,9 @@ ethtool_coalesce_get(ynl_cpp::ynl_socket& ys, ethtool_coalesce_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_coalesce_nest;
 	yrs.yarg.rsp_policy = &ethtool_coalesce_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_COALESCE_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_coalesce_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -4506,8 +4914,9 @@ ethtool_coalesce_get(ynl_cpp::ynl_socket& ys, ethtool_coalesce_get_req& req)
 	yrs.rsp_cmd = 20;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -4532,12 +4941,14 @@ ethtool_coalesce_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_COALESCE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_coalesce_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_COALESCE_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -4555,70 +4966,101 @@ int ethtool_coalesce_set(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_COALESCE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_coalesce_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_COALESCE_HEADER, req.header.value());
-	if (req.rx_usecs.has_value())
+	}
+	if (req.rx_usecs.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_USECS, req.rx_usecs.value());
-	if (req.rx_max_frames.has_value())
+	}
+	if (req.rx_max_frames.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_MAX_FRAMES, req.rx_max_frames.value());
-	if (req.rx_usecs_irq.has_value())
+	}
+	if (req.rx_usecs_irq.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_USECS_IRQ, req.rx_usecs_irq.value());
-	if (req.rx_max_frames_irq.has_value())
+	}
+	if (req.rx_max_frames_irq.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_MAX_FRAMES_IRQ, req.rx_max_frames_irq.value());
-	if (req.tx_usecs.has_value())
+	}
+	if (req.tx_usecs.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_USECS, req.tx_usecs.value());
-	if (req.tx_max_frames.has_value())
+	}
+	if (req.tx_max_frames.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_MAX_FRAMES, req.tx_max_frames.value());
-	if (req.tx_usecs_irq.has_value())
+	}
+	if (req.tx_usecs_irq.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_USECS_IRQ, req.tx_usecs_irq.value());
-	if (req.tx_max_frames_irq.has_value())
+	}
+	if (req.tx_max_frames_irq.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_MAX_FRAMES_IRQ, req.tx_max_frames_irq.value());
-	if (req.stats_block_usecs.has_value())
+	}
+	if (req.stats_block_usecs.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_STATS_BLOCK_USECS, req.stats_block_usecs.value());
-	if (req.use_adaptive_rx.has_value())
+	}
+	if (req.use_adaptive_rx.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_COALESCE_USE_ADAPTIVE_RX, req.use_adaptive_rx.value());
-	if (req.use_adaptive_tx.has_value())
+	}
+	if (req.use_adaptive_tx.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_COALESCE_USE_ADAPTIVE_TX, req.use_adaptive_tx.value());
-	if (req.pkt_rate_low.has_value())
+	}
+	if (req.pkt_rate_low.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_PKT_RATE_LOW, req.pkt_rate_low.value());
-	if (req.rx_usecs_low.has_value())
+	}
+	if (req.rx_usecs_low.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_USECS_LOW, req.rx_usecs_low.value());
-	if (req.rx_max_frames_low.has_value())
+	}
+	if (req.rx_max_frames_low.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_MAX_FRAMES_LOW, req.rx_max_frames_low.value());
-	if (req.tx_usecs_low.has_value())
+	}
+	if (req.tx_usecs_low.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_USECS_LOW, req.tx_usecs_low.value());
-	if (req.tx_max_frames_low.has_value())
+	}
+	if (req.tx_max_frames_low.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_MAX_FRAMES_LOW, req.tx_max_frames_low.value());
-	if (req.pkt_rate_high.has_value())
+	}
+	if (req.pkt_rate_high.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_PKT_RATE_HIGH, req.pkt_rate_high.value());
-	if (req.rx_usecs_high.has_value())
+	}
+	if (req.rx_usecs_high.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_USECS_HIGH, req.rx_usecs_high.value());
-	if (req.rx_max_frames_high.has_value())
+	}
+	if (req.rx_max_frames_high.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RX_MAX_FRAMES_HIGH, req.rx_max_frames_high.value());
-	if (req.tx_usecs_high.has_value())
+	}
+	if (req.tx_usecs_high.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_USECS_HIGH, req.tx_usecs_high.value());
-	if (req.tx_max_frames_high.has_value())
+	}
+	if (req.tx_max_frames_high.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_MAX_FRAMES_HIGH, req.tx_max_frames_high.value());
-	if (req.rate_sample_interval.has_value())
+	}
+	if (req.rate_sample_interval.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_RATE_SAMPLE_INTERVAL, req.rate_sample_interval.value());
-	if (req.use_cqe_mode_tx.has_value())
+	}
+	if (req.use_cqe_mode_tx.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_COALESCE_USE_CQE_MODE_TX, req.use_cqe_mode_tx.value());
-	if (req.use_cqe_mode_rx.has_value())
+	}
+	if (req.use_cqe_mode_rx.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_COALESCE_USE_CQE_MODE_RX, req.use_cqe_mode_rx.value());
-	if (req.tx_aggr_max_bytes.has_value())
+	}
+	if (req.tx_aggr_max_bytes.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_AGGR_MAX_BYTES, req.tx_aggr_max_bytes.value());
-	if (req.tx_aggr_max_frames.has_value())
+	}
+	if (req.tx_aggr_max_frames.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_AGGR_MAX_FRAMES, req.tx_aggr_max_frames.value());
-	if (req.tx_aggr_time_usecs.has_value())
+	}
+	if (req.tx_aggr_time_usecs.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_COALESCE_TX_AGGR_TIME_USECS, req.tx_aggr_time_usecs.value());
-	if (req.rx_profile.has_value())
+	}
+	if (req.rx_profile.has_value()) {
 		ethtool_profile_put(nlh, ETHTOOL_A_COALESCE_RX_PROFILE, req.rx_profile.value());
-	if (req.tx_profile.has_value())
+	}
+	if (req.tx_profile.has_value()) {
 		ethtool_profile_put(nlh, ETHTOOL_A_COALESCE_TX_PROFILE, req.tx_profile.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -4639,36 +5081,44 @@ int ethtool_pause_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PAUSE_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PAUSE_AUTONEG) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->autoneg = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PAUSE_RX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PAUSE_TX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PAUSE_STATS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_pause_stat_nest;
 			parg.data = &dst->stats.emplace();
-			if (ethtool_pause_stat_parse(&parg, attr))
+			if (ethtool_pause_stat_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PAUSE_STATS_SRC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->stats_src = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -4688,8 +5138,9 @@ ethtool_pause_get(ynl_cpp::ynl_socket& ys, ethtool_pause_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_pause_nest;
 	yrs.yarg.rsp_policy = &ethtool_pause_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PAUSE_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_pause_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -4697,8 +5148,9 @@ ethtool_pause_get(ynl_cpp::ynl_socket& ys, ethtool_pause_get_req& req)
 	yrs.rsp_cmd = 22;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -4723,12 +5175,14 @@ ethtool_pause_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PAUSE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_pause_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PAUSE_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -4745,22 +5199,29 @@ int ethtool_pause_set(ynl_cpp::ynl_socket& ys, ethtool_pause_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PAUSE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_pause_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PAUSE_HEADER, req.header.value());
-	if (req.autoneg.has_value())
+	}
+	if (req.autoneg.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_PAUSE_AUTONEG, req.autoneg.value());
-	if (req.rx.has_value())
+	}
+	if (req.rx.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_PAUSE_RX, req.rx.value());
-	if (req.tx.has_value())
+	}
+	if (req.tx.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_PAUSE_TX, req.tx.value());
-	if (req.stats.has_value())
+	}
+	if (req.stats.has_value()) {
 		ethtool_pause_stat_put(nlh, ETHTOOL_A_PAUSE_STATS, req.stats.value());
-	if (req.stats_src.has_value())
+	}
+	if (req.stats_src.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PAUSE_STATS_SRC, req.stats_src.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -4781,44 +5242,54 @@ int ethtool_eee_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_EEE_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_EEE_MODES_OURS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->modes_ours.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_EEE_MODES_PEER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->modes_peer.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_EEE_ACTIVE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->active = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_EEE_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_EEE_TX_LPI_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_lpi_enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_EEE_TX_LPI_TIMER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_lpi_timer = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -4838,8 +5309,9 @@ ethtool_eee_get(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_eee_nest;
 	yrs.yarg.rsp_policy = &ethtool_eee_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_EEE_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_eee_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -4847,8 +5319,9 @@ ethtool_eee_get(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req& req)
 	yrs.rsp_cmd = 24;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -4872,12 +5345,14 @@ ethtool_eee_get_dump(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_EEE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_eee_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_EEE_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -4894,24 +5369,32 @@ int ethtool_eee_set(ynl_cpp::ynl_socket& ys, ethtool_eee_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_EEE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_eee_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_EEE_HEADER, req.header.value());
-	if (req.modes_ours.has_value())
+	}
+	if (req.modes_ours.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_EEE_MODES_OURS, req.modes_ours.value());
-	if (req.modes_peer.has_value())
+	}
+	if (req.modes_peer.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_EEE_MODES_PEER, req.modes_peer.value());
-	if (req.active.has_value())
+	}
+	if (req.active.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_EEE_ACTIVE, req.active.value());
-	if (req.enabled.has_value())
+	}
+	if (req.enabled.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_EEE_ENABLED, req.enabled.value());
-	if (req.tx_lpi_enabled.has_value())
+	}
+	if (req.tx_lpi_enabled.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_EEE_TX_LPI_ENABLED, req.tx_lpi_enabled.value());
-	if (req.tx_lpi_timer.has_value())
+	}
+	if (req.tx_lpi_timer.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_EEE_TX_LPI_TIMER, req.tx_lpi_timer.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -4932,64 +5415,79 @@ int ethtool_tsinfo_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TSINFO_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSINFO_TIMESTAMPING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->timestamping.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSINFO_TX_TYPES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->tx_types.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSINFO_RX_FILTERS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->rx_filters.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSINFO_PHC_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phc_index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_TSINFO_STATS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_ts_stat_nest;
 			parg.data = &dst->stats.emplace();
-			if (ethtool_ts_stat_parse(&parg, attr))
+			if (ethtool_ts_stat_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_ts_hwtstamp_provider_nest;
 			parg.data = &dst->hwtstamp_provider.emplace();
-			if (ethtool_ts_hwtstamp_provider_parse(&parg, attr))
+			if (ethtool_ts_hwtstamp_provider_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSINFO_HWTSTAMP_SOURCE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hwtstamp_source = (enum hwtstamp_source)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_TSINFO_HWTSTAMP_PHYINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hwtstamp_phyindex = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -5009,10 +5507,12 @@ ethtool_tsinfo_get(ynl_cpp::ynl_socket& ys, ethtool_tsinfo_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tsinfo_nest;
 	yrs.yarg.rsp_policy = &ethtool_tsinfo_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TSINFO_HEADER, req.header.value());
-	if (req.hwtstamp_provider.has_value())
+	}
+	if (req.hwtstamp_provider.has_value()) {
 		ethtool_ts_hwtstamp_provider_put(nlh, ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER, req.hwtstamp_provider.value());
+	}
 
 	rsp.reset(new ethtool_tsinfo_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5020,8 +5520,9 @@ ethtool_tsinfo_get(ynl_cpp::ynl_socket& ys, ethtool_tsinfo_get_req& req)
 	yrs.rsp_cmd = 26;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5046,14 +5547,17 @@ ethtool_tsinfo_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_TSINFO_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tsinfo_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TSINFO_HEADER, req.header.value());
-	if (req.hwtstamp_provider.has_value())
+	}
+	if (req.hwtstamp_provider.has_value()) {
 		ethtool_ts_hwtstamp_provider_put(nlh, ETHTOOL_A_TSINFO_HWTSTAMP_PROVIDER, req.hwtstamp_provider.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5070,12 +5574,14 @@ int ethtool_cable_test_act(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_CABLE_TEST_ACT, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_cable_test_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_CABLE_TEST_HEADER, req.header.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -5092,12 +5598,14 @@ int ethtool_cable_test_tdr_act(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_CABLE_TEST_TDR_ACT, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_cable_test_tdr_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_CABLE_TEST_TDR_HEADER, req.header.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -5118,21 +5626,25 @@ int ethtool_tunnel_info_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TUNNEL_INFO_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TUNNEL_INFO_UDP_PORTS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_tunnel_udp_nest;
 			parg.data = &dst->udp_ports.emplace();
-			if (ethtool_tunnel_udp_parse(&parg, attr))
+			if (ethtool_tunnel_udp_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -5152,8 +5664,9 @@ ethtool_tunnel_info_get(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tunnel_info_nest;
 	yrs.yarg.rsp_policy = &ethtool_tunnel_info_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TUNNEL_INFO_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_tunnel_info_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5161,8 +5674,9 @@ ethtool_tunnel_info_get(ynl_cpp::ynl_socket& ys,
 	yrs.rsp_cmd = 29;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5187,12 +5701,14 @@ ethtool_tunnel_info_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_TUNNEL_INFO_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tunnel_info_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TUNNEL_INFO_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5213,37 +5729,45 @@ int ethtool_fec_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_FEC_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEC_MODES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->modes.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_FEC_AUTO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->auto_ = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_FEC_ACTIVE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->active = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_FEC_STATS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_fec_stat_nest;
 			parg.data = &dst->stats.emplace();
-			if (ethtool_fec_stat_parse(&parg, attr))
+			if (ethtool_fec_stat_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -5262,8 +5786,9 @@ ethtool_fec_get(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_fec_nest;
 	yrs.yarg.rsp_policy = &ethtool_fec_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_FEC_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_fec_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5271,8 +5796,9 @@ ethtool_fec_get(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req& req)
 	yrs.rsp_cmd = 30;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5296,12 +5822,14 @@ ethtool_fec_get_dump(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_FEC_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_fec_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_FEC_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5318,20 +5846,26 @@ int ethtool_fec_set(ynl_cpp::ynl_socket& ys, ethtool_fec_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_FEC_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_fec_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_FEC_HEADER, req.header.value());
-	if (req.modes.has_value())
+	}
+	if (req.modes.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_FEC_MODES, req.modes.value());
-	if (req.auto_.has_value())
+	}
+	if (req.auto_.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_FEC_AUTO, req.auto_.value());
-	if (req.active.has_value())
+	}
+	if (req.active.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_FEC_ACTIVE, req.active.value());
-	if (req.stats.has_value())
+	}
+	if (req.stats.has_value()) {
 		ethtool_fec_stat_put(nlh, ETHTOOL_A_FEC_STATS, req.stats.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -5352,16 +5886,19 @@ int ethtool_module_eeprom_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_MODULE_EEPROM_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_MODULE_EEPROM_DATA) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->data.assign(data, data + len);
@@ -5384,18 +5921,24 @@ ethtool_module_eeprom_get(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &ethtool_module_eeprom_nest;
 	yrs.yarg.rsp_policy = &ethtool_module_eeprom_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MODULE_EEPROM_HEADER, req.header.value());
-	if (req.offset.has_value())
+	}
+	if (req.offset.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MODULE_EEPROM_OFFSET, req.offset.value());
-	if (req.length.has_value())
+	}
+	if (req.length.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MODULE_EEPROM_LENGTH, req.length.value());
-	if (req.page.has_value())
+	}
+	if (req.page.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_EEPROM_PAGE, req.page.value());
-	if (req.bank.has_value())
+	}
+	if (req.bank.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_EEPROM_BANK, req.bank.value());
-	if (req.i2c_address.has_value())
+	}
+	if (req.i2c_address.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_EEPROM_I2C_ADDRESS, req.i2c_address.value());
+	}
 
 	rsp.reset(new ethtool_module_eeprom_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5403,8 +5946,9 @@ ethtool_module_eeprom_get(ynl_cpp::ynl_socket& ys,
 	yrs.rsp_cmd = 32;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5429,22 +5973,29 @@ ethtool_module_eeprom_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_MODULE_EEPROM_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_module_eeprom_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MODULE_EEPROM_HEADER, req.header.value());
-	if (req.offset.has_value())
+	}
+	if (req.offset.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MODULE_EEPROM_OFFSET, req.offset.value());
-	if (req.length.has_value())
+	}
+	if (req.length.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MODULE_EEPROM_LENGTH, req.length.value());
-	if (req.page.has_value())
+	}
+	if (req.page.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_EEPROM_PAGE, req.page.value());
-	if (req.bank.has_value())
+	}
+	if (req.bank.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_EEPROM_BANK, req.bank.value());
-	if (req.i2c_address.has_value())
+	}
+	if (req.i2c_address.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_EEPROM_I2C_ADDRESS, req.i2c_address.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5465,32 +6016,39 @@ int ethtool_stats_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_STATS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_STATS_GROUPS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->groups.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_STATS_GRP) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_stats_grp_nest;
 			parg.data = &dst->grp.emplace();
-			if (ethtool_stats_grp_parse(&parg, attr))
+			if (ethtool_stats_grp_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_STATS_SRC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->src = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -5510,10 +6068,12 @@ ethtool_stats_get(ynl_cpp::ynl_socket& ys, ethtool_stats_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_stats_nest;
 	yrs.yarg.rsp_policy = &ethtool_stats_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_STATS_HEADER, req.header.value());
-	if (req.groups.has_value())
+	}
+	if (req.groups.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_STATS_GROUPS, req.groups.value());
+	}
 
 	rsp.reset(new ethtool_stats_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5521,8 +6081,9 @@ ethtool_stats_get(ynl_cpp::ynl_socket& ys, ethtool_stats_get_req& req)
 	yrs.rsp_cmd = 33;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5547,14 +6108,17 @@ ethtool_stats_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_STATS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_stats_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_STATS_HEADER, req.header.value());
-	if (req.groups.has_value())
+	}
+	if (req.groups.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_STATS_GROUPS, req.groups.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5575,16 +6139,19 @@ int ethtool_phc_vclocks_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PHC_VCLOCKS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PHC_VCLOCKS_NUM) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->num = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -5605,8 +6172,9 @@ ethtool_phc_vclocks_get(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &ethtool_phc_vclocks_nest;
 	yrs.yarg.rsp_policy = &ethtool_phc_vclocks_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PHC_VCLOCKS_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_phc_vclocks_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5614,8 +6182,9 @@ ethtool_phc_vclocks_get(ynl_cpp::ynl_socket& ys,
 	yrs.rsp_cmd = 34;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5640,12 +6209,14 @@ ethtool_phc_vclocks_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PHC_VCLOCKS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_phc_vclocks_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PHC_VCLOCKS_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5666,20 +6237,24 @@ int ethtool_module_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_MODULE_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_MODULE_POWER_MODE_POLICY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->power_mode_policy = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_MODULE_POWER_MODE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->power_mode = (__u8)ynl_attr_get_u8(attr);
 		}
 	}
@@ -5699,8 +6274,9 @@ ethtool_module_get(ynl_cpp::ynl_socket& ys, ethtool_module_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_module_nest;
 	yrs.yarg.rsp_policy = &ethtool_module_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MODULE_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_module_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5708,8 +6284,9 @@ ethtool_module_get(ynl_cpp::ynl_socket& ys, ethtool_module_get_req& req)
 	yrs.rsp_cmd = 35;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5734,12 +6311,14 @@ ethtool_module_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_MODULE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_module_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MODULE_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5756,16 +6335,20 @@ int ethtool_module_set(ynl_cpp::ynl_socket& ys, ethtool_module_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_MODULE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_module_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MODULE_HEADER, req.header.value());
-	if (req.power_mode_policy.has_value())
+	}
+	if (req.power_mode_policy.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_POWER_MODE_POLICY, req.power_mode_policy.value());
-	if (req.power_mode.has_value())
+	}
+	if (req.power_mode.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MODULE_POWER_MODE, req.power_mode.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -5784,77 +6367,94 @@ int ethtool_pse_get_rsp_parse(const struct nlmsghdr *nlh,
 	dst = (ethtool_pse_get_rsp*)yarg->data;
 	parg.ys = yarg->ys;
 
-	if (dst->c33_pse_pw_limit_ranges.size() > 0)
+	if (dst->c33_pse_pw_limit_ranges.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (pse.c33-pse-pw-limit-ranges)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PSE_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PODL_PSE_ADMIN_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->podl_pse_admin_state = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PODL_PSE_ADMIN_CONTROL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->podl_pse_admin_control = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PODL_PSE_PW_D_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->podl_pse_pw_d_status = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_ADMIN_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_admin_state = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_ADMIN_CONTROL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_admin_control = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_PW_D_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_pw_d_status = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_PW_CLASS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_pw_class = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_ACTUAL_PW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_actual_pw = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_EXT_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_ext_state = (enum ethtool_c33_pse_ext_state)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_EXT_SUBSTATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_ext_substate = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_AVAIL_PW_LIMIT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->c33_pse_avail_pw_limit = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_C33_PSE_PW_LIMIT_RANGES) {
 			n_c33_pse_pw_limit_ranges++;
 		} else if (type == ETHTOOL_A_PSE_PW_D_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pse_pw_d_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PSE_PRIO_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pse_prio_max = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PSE_PRIO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pse_prio = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -5866,8 +6466,9 @@ int ethtool_pse_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == ETHTOOL_A_C33_PSE_PW_LIMIT_RANGES) {
 				parg.data = &dst->c33_pse_pw_limit_ranges[i];
-				if (ethtool_c33_pse_pw_limit_parse(&parg, attr))
+				if (ethtool_c33_pse_pw_limit_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -5888,8 +6489,9 @@ ethtool_pse_get(ynl_cpp::ynl_socket& ys, ethtool_pse_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_pse_nest;
 	yrs.yarg.rsp_policy = &ethtool_pse_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PSE_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_pse_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -5897,8 +6499,9 @@ ethtool_pse_get(ynl_cpp::ynl_socket& ys, ethtool_pse_get_req& req)
 	yrs.rsp_cmd = 37;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -5922,12 +6525,14 @@ ethtool_pse_get_dump(ynl_cpp::ynl_socket& ys, ethtool_pse_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PSE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_pse_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PSE_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -5943,20 +6548,26 @@ int ethtool_pse_set(ynl_cpp::ynl_socket& ys, ethtool_pse_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PSE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_pse_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PSE_HEADER, req.header.value());
-	if (req.podl_pse_admin_control.has_value())
+	}
+	if (req.podl_pse_admin_control.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PODL_PSE_ADMIN_CONTROL, req.podl_pse_admin_control.value());
-	if (req.c33_pse_admin_control.has_value())
+	}
+	if (req.c33_pse_admin_control.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_C33_PSE_ADMIN_CONTROL, req.c33_pse_admin_control.value());
-	if (req.c33_pse_avail_pw_limit.has_value())
+	}
+	if (req.c33_pse_avail_pw_limit.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_C33_PSE_AVAIL_PW_LIMIT, req.c33_pse_avail_pw_limit.value());
-	if (req.pse_prio.has_value())
+	}
+	if (req.pse_prio.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PSE_PRIO, req.pse_prio.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -5977,45 +6588,54 @@ int ethtool_rss_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_RSS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_RSS_CONTEXT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->context = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RSS_HFUNC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hfunc = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RSS_INDIR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->indir.assign(data, data + len);
 		} else if (type == ETHTOOL_A_RSS_HKEY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->hkey.assign(data, data + len);
 		} else if (type == ETHTOOL_A_RSS_INPUT_XFRM) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->input_xfrm = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RSS_FLOW_HASH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_flow_nest;
 			parg.data = &dst->flow_hash.emplace();
-			if (ethtool_flow_parse(&parg, attr))
+			if (ethtool_flow_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -6034,10 +6654,12 @@ ethtool_rss_get(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rss_nest;
 	yrs.yarg.rsp_policy = &ethtool_rss_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RSS_HEADER, req.header.value());
-	if (req.context.has_value())
+	}
+	if (req.context.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_CONTEXT, req.context.value());
+	}
 
 	rsp.reset(new ethtool_rss_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6045,8 +6667,9 @@ ethtool_rss_get(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_RSS_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6070,14 +6693,17 @@ ethtool_rss_get_dump(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_RSS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rss_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RSS_HEADER, req.header.value());
-	if (req.start_context.has_value())
+	}
+	if (req.start_context.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_START_CONTEXT, req.start_context.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -6099,44 +6725,54 @@ int ethtool_plca_get_cfg_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PLCA_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PLCA_VERSION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->version = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == ETHTOOL_A_PLCA_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PLCA_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->status = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PLCA_NODE_CNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->node_cnt = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_NODE_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->node_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_TO_TMR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->to_tmr = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_BURST_CNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->burst_cnt = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_BURST_TMR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->burst_tmr = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -6156,8 +6792,9 @@ ethtool_plca_get_cfg(ynl_cpp::ynl_socket& ys, ethtool_plca_get_cfg_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_plca_nest;
 	yrs.yarg.rsp_policy = &ethtool_plca_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PLCA_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_plca_get_cfg_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6165,8 +6802,9 @@ ethtool_plca_get_cfg(ynl_cpp::ynl_socket& ys, ethtool_plca_get_cfg_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_PLCA_GET_CFG;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6191,12 +6829,14 @@ ethtool_plca_get_cfg_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PLCA_GET_CFG, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_plca_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PLCA_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -6214,28 +6854,38 @@ int ethtool_plca_set_cfg(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PLCA_SET_CFG, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_plca_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PLCA_HEADER, req.header.value());
-	if (req.version.has_value())
+	}
+	if (req.version.has_value()) {
 		ynl_attr_put_u16(nlh, ETHTOOL_A_PLCA_VERSION, req.version.value());
-	if (req.enabled.has_value())
+	}
+	if (req.enabled.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_PLCA_ENABLED, req.enabled.value());
-	if (req.status.has_value())
+	}
+	if (req.status.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_PLCA_STATUS, req.status.value());
-	if (req.node_cnt.has_value())
+	}
+	if (req.node_cnt.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PLCA_NODE_CNT, req.node_cnt.value());
-	if (req.node_id.has_value())
+	}
+	if (req.node_id.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PLCA_NODE_ID, req.node_id.value());
-	if (req.to_tmr.has_value())
+	}
+	if (req.to_tmr.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PLCA_TO_TMR, req.to_tmr.value());
-	if (req.burst_cnt.has_value())
+	}
+	if (req.burst_cnt.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PLCA_BURST_CNT, req.burst_cnt.value());
-	if (req.burst_tmr.has_value())
+	}
+	if (req.burst_tmr.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_PLCA_BURST_TMR, req.burst_tmr.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -6256,44 +6906,54 @@ int ethtool_plca_get_status_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PLCA_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PLCA_VERSION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->version = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == ETHTOOL_A_PLCA_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PLCA_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->status = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_PLCA_NODE_CNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->node_cnt = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_NODE_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->node_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_TO_TMR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->to_tmr = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_BURST_CNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->burst_cnt = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PLCA_BURST_TMR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->burst_tmr = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -6314,8 +6974,9 @@ ethtool_plca_get_status(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &ethtool_plca_nest;
 	yrs.yarg.rsp_policy = &ethtool_plca_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PLCA_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_plca_get_status_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6323,8 +6984,9 @@ ethtool_plca_get_status(ynl_cpp::ynl_socket& ys,
 	yrs.rsp_cmd = 40;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6349,12 +7011,14 @@ ethtool_plca_get_status_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PLCA_GET_STATUS, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_plca_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PLCA_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -6375,53 +7039,65 @@ int ethtool_mm_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_MM_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_MM_PMAC_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pmac_enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_MM_TX_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_MM_TX_ACTIVE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_active = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_MM_TX_MIN_FRAG_SIZE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_min_frag_size = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_MM_RX_MIN_FRAG_SIZE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_min_frag_size = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_MM_VERIFY_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->verify_enabled = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_MM_VERIFY_TIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->verify_time = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_MM_MAX_VERIFY_TIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->max_verify_time = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_MM_STATS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_mm_stat_nest;
 			parg.data = &dst->stats.emplace();
-			if (ethtool_mm_stat_parse(&parg, attr))
+			if (ethtool_mm_stat_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -6440,8 +7116,9 @@ ethtool_mm_get(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_mm_nest;
 	yrs.yarg.rsp_policy = &ethtool_mm_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MM_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_mm_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6449,8 +7126,9 @@ ethtool_mm_get(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_MM_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6474,12 +7152,14 @@ ethtool_mm_get_dump(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_MM_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_mm_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MM_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -6496,22 +7176,29 @@ int ethtool_mm_set(ynl_cpp::ynl_socket& ys, ethtool_mm_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_MM_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_mm_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MM_HEADER, req.header.value());
-	if (req.verify_enabled.has_value())
+	}
+	if (req.verify_enabled.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MM_VERIFY_ENABLED, req.verify_enabled.value());
-	if (req.verify_time.has_value())
+	}
+	if (req.verify_time.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MM_VERIFY_TIME, req.verify_time.value());
-	if (req.tx_enabled.has_value())
+	}
+	if (req.tx_enabled.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MM_TX_ENABLED, req.tx_enabled.value());
-	if (req.pmac_enabled.has_value())
+	}
+	if (req.pmac_enabled.has_value()) {
 		ynl_attr_put_u8(nlh, ETHTOOL_A_MM_PMAC_ENABLED, req.pmac_enabled.value());
-	if (req.tx_min_frag_size.has_value())
+	}
+	if (req.tx_min_frag_size.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MM_TX_MIN_FRAG_SIZE, req.tx_min_frag_size.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -6528,16 +7215,20 @@ int ethtool_module_fw_flash_act(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_MODULE_FW_FLASH_ACT, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_module_fw_flash_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_MODULE_FW_FLASH_HEADER, req.header.value());
-	if (req.file_name.size() > 0)
+	}
+	if (req.file_name.size() > 0) {
 		ynl_attr_put_str(nlh, ETHTOOL_A_MODULE_FW_FLASH_FILE_NAME, req.file_name.data());
-	if (req.password.has_value())
+	}
+	if (req.password.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_MODULE_FW_FLASH_PASSWORD, req.password.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -6558,40 +7249,49 @@ int ethtool_phy_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PHY_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PHY_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PHY_DRVNAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->drvname.assign(ynl_attr_get_str(attr));
 		} else if (type == ETHTOOL_A_PHY_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->name.assign(ynl_attr_get_str(attr));
 		} else if (type == ETHTOOL_A_PHY_UPSTREAM_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->upstream_type = (enum phy_upstream)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PHY_UPSTREAM_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->upstream_index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_PHY_UPSTREAM_SFP_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->upstream_sfp_name.assign(ynl_attr_get_str(attr));
 		} else if (type == ETHTOOL_A_PHY_DOWNSTREAM_SFP_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->downstream_sfp_name.assign(ynl_attr_get_str(attr));
 		}
 	}
@@ -6611,8 +7311,9 @@ ethtool_phy_get(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_phy_nest;
 	yrs.yarg.rsp_policy = &ethtool_phy_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PHY_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_phy_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6620,8 +7321,9 @@ ethtool_phy_get(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req& req)
 	yrs.rsp_cmd = ETHTOOL_MSG_PHY_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6645,12 +7347,14 @@ ethtool_phy_get_dump(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_PHY_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_phy_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_PHY_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -6672,45 +7376,55 @@ int ethtool_tsconfig_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TSCONFIG_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_HWTSTAMP_PROVIDER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_ts_hwtstamp_provider_nest;
 			parg.data = &dst->hwtstamp_provider.emplace();
-			if (ethtool_ts_hwtstamp_provider_parse(&parg, attr))
+			if (ethtool_ts_hwtstamp_provider_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_TX_TYPES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->tx_types.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_RX_FILTERS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->rx_filters.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_HWTSTAMP_FLAGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->hwtstamp_flags.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -6729,8 +7443,9 @@ ethtool_tsconfig_get(ynl_cpp::ynl_socket& ys, ethtool_tsconfig_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tsconfig_nest;
 	yrs.yarg.rsp_policy = &ethtool_tsconfig_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TSCONFIG_HEADER, req.header.value());
+	}
 
 	rsp.reset(new ethtool_tsconfig_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6738,8 +7453,9 @@ ethtool_tsconfig_get(ynl_cpp::ynl_socket& ys, ethtool_tsconfig_get_req& req)
 	yrs.rsp_cmd = 47;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6764,12 +7480,14 @@ ethtool_tsconfig_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_TSCONFIG_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tsconfig_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TSCONFIG_HEADER, req.header.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -6790,45 +7508,55 @@ int ethtool_tsconfig_set_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_TSCONFIG_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_HWTSTAMP_PROVIDER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_ts_hwtstamp_provider_nest;
 			parg.data = &dst->hwtstamp_provider.emplace();
-			if (ethtool_ts_hwtstamp_provider_parse(&parg, attr))
+			if (ethtool_ts_hwtstamp_provider_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_TX_TYPES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->tx_types.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_RX_FILTERS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->rx_filters.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_TSCONFIG_HWTSTAMP_FLAGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_bitset_nest;
 			parg.data = &dst->hwtstamp_flags.emplace();
-			if (ethtool_bitset_parse(&parg, attr))
+			if (ethtool_bitset_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -6847,16 +7575,21 @@ ethtool_tsconfig_set(ynl_cpp::ynl_socket& ys, ethtool_tsconfig_set_req& req)
 	((struct ynl_sock*)ys)->req_policy = &ethtool_tsconfig_nest;
 	yrs.yarg.rsp_policy = &ethtool_tsconfig_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_TSCONFIG_HEADER, req.header.value());
-	if (req.hwtstamp_provider.has_value())
+	}
+	if (req.hwtstamp_provider.has_value()) {
 		ethtool_ts_hwtstamp_provider_put(nlh, ETHTOOL_A_TSCONFIG_HWTSTAMP_PROVIDER, req.hwtstamp_provider.value());
-	if (req.tx_types.has_value())
+	}
+	if (req.tx_types.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_TSCONFIG_TX_TYPES, req.tx_types.value());
-	if (req.rx_filters.has_value())
+	}
+	if (req.rx_filters.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_TSCONFIG_RX_FILTERS, req.rx_filters.value());
-	if (req.hwtstamp_flags.has_value())
+	}
+	if (req.hwtstamp_flags.has_value()) {
 		ethtool_bitset_put(nlh, ETHTOOL_A_TSCONFIG_HWTSTAMP_FLAGS, req.hwtstamp_flags.value());
+	}
 
 	rsp.reset(new ethtool_tsconfig_set_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6864,8 +7597,9 @@ ethtool_tsconfig_set(ynl_cpp::ynl_socket& ys, ethtool_tsconfig_set_req& req)
 	yrs.rsp_cmd = 48;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -6881,24 +7615,32 @@ int ethtool_rss_set(ynl_cpp::ynl_socket& ys, ethtool_rss_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_RSS_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rss_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RSS_HEADER, req.header.value());
-	if (req.context.has_value())
+	}
+	if (req.context.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_CONTEXT, req.context.value());
-	if (req.hfunc.has_value())
+	}
+	if (req.hfunc.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_HFUNC, req.hfunc.value());
-	if (req.indir.size() > 0)
+	}
+	if (req.indir.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_RSS_INDIR, req.indir.data(), req.indir.size());
-	if (req.hkey.size() > 0)
+	}
+	if (req.hkey.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_RSS_HKEY, req.hkey.data(), req.hkey.size());
-	if (req.input_xfrm.has_value())
+	}
+	if (req.input_xfrm.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_INPUT_XFRM, req.input_xfrm.value());
-	if (req.flow_hash.has_value())
+	}
+	if (req.flow_hash.has_value()) {
 		ethtool_flow_put(nlh, ETHTOOL_A_RSS_FLOW_HASH, req.flow_hash.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -6919,36 +7661,43 @@ int ethtool_rss_create_act_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_RSS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_RSS_CONTEXT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->context = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RSS_HFUNC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->hfunc = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_RSS_INDIR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->indir.assign(data, data + len);
 		} else if (type == ETHTOOL_A_RSS_HKEY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->hkey.assign(data, data + len);
 		} else if (type == ETHTOOL_A_RSS_INPUT_XFRM) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->input_xfrm = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -6969,18 +7718,24 @@ ethtool_rss_create_act(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rss_nest;
 	yrs.yarg.rsp_policy = &ethtool_rss_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RSS_HEADER, req.header.value());
-	if (req.context.has_value())
+	}
+	if (req.context.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_CONTEXT, req.context.value());
-	if (req.hfunc.has_value())
+	}
+	if (req.hfunc.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_HFUNC, req.hfunc.value());
-	if (req.indir.size() > 0)
+	}
+	if (req.indir.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_RSS_INDIR, req.indir.data(), req.indir.size());
-	if (req.hkey.size() > 0)
+	}
+	if (req.hkey.size() > 0) {
 		ynl_attr_put(nlh, ETHTOOL_A_RSS_HKEY, req.hkey.data(), req.hkey.size());
-	if (req.input_xfrm.has_value())
+	}
+	if (req.input_xfrm.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_INPUT_XFRM, req.input_xfrm.value());
+	}
 
 	rsp.reset(new ethtool_rss_create_act_rsp());
 	yrs.yarg.data = rsp.get();
@@ -6988,8 +7743,9 @@ ethtool_rss_create_act(ynl_cpp::ynl_socket& ys,
 	yrs.rsp_cmd = 51;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -7007,14 +7763,17 @@ int ethtool_rss_delete_act(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, ETHTOOL_MSG_RSS_DELETE_ACT, 1);
 	((struct ynl_sock*)ys)->req_policy = &ethtool_rss_nest;
 
-	if (req.header.has_value())
+	if (req.header.has_value()) {
 		ethtool_header_put(nlh, ETHTOOL_A_RSS_HEADER, req.header.value());
-	if (req.context.has_value())
+	}
+	if (req.context.has_value()) {
 		ynl_attr_put_u32(nlh, ETHTOOL_A_RSS_CONTEXT, req.context.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -7034,16 +7793,19 @@ int ethtool_cable_test_ntf_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_CABLE_TEST_NTF_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_CABLE_TEST_NTF_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->status = (__u8)ynl_attr_get_u8(attr);
 		}
 	}
@@ -7066,25 +7828,30 @@ int ethtool_cable_test_tdr_ntf_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_CABLE_TEST_TDR_NTF_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_CABLE_TEST_TDR_NTF_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->status = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == ETHTOOL_A_CABLE_TEST_TDR_NTF_NEST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_cable_nest_nest;
 			parg.data = &dst->nest.emplace();
-			if (ethtool_cable_nest_parse(&parg, attr))
+			if (ethtool_cable_nest_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -7106,28 +7873,34 @@ int ethtool_module_fw_flash_ntf_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_MODULE_FW_FLASH_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_MODULE_FW_FLASH_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->status = (enum ethtool_module_fw_flash_status)ynl_attr_get_u32(attr);
 		} else if (type == ETHTOOL_A_MODULE_FW_FLASH_STATUS_MSG) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->status_msg.assign(ynl_attr_get_str(attr));
 		} else if (type == ETHTOOL_A_MODULE_FW_FLASH_DONE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->done = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == ETHTOOL_A_MODULE_FW_FLASH_TOTAL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->total = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -7150,16 +7923,19 @@ int ethtool_pse_ntf_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_PSE_NTF_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_PSE_NTF_EVENTS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->events = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -7182,16 +7958,19 @@ int ethtool_rss_delete_ntf_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == ETHTOOL_A_RSS_HEADER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &ethtool_header_nest;
 			parg.data = &dst->header.emplace();
-			if (ethtool_header_parse(&parg, attr))
+			if (ethtool_header_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == ETHTOOL_A_RSS_CONTEXT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->context = (__u32)ynl_attr_get_u32(attr);
 		}
 	}

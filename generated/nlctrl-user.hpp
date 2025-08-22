@@ -45,7 +45,7 @@ struct nlctrl_mcast_group_attrs {
 struct nlctrl_policy_attrs {
 	std::optional<__u32> attr_id;
 	std::optional<__u32> policy_id;
-	std::optional<netlink_attribute_type> type;
+	std::optional<enum netlink_attribute_type> type;
 	std::optional<__s64> min_value_s;
 	std::optional<__s64> max_value_s;
 	std::optional<__u64> min_value_u;
@@ -84,7 +84,7 @@ struct nlctrl_getfamily_rsp {
  * Get / dump genetlink families
  */
 std::unique_ptr<nlctrl_getfamily_rsp>
-nlctrl_getfamily(ynl_cpp::ynl_socket&  ys, nlctrl_getfamily_req& req);
+nlctrl_getfamily(ynl_cpp::ynl_socket& ys, nlctrl_getfamily_req& req);
 
 /* CTRL_CMD_GETFAMILY - dump */
 struct nlctrl_getfamily_list {
@@ -92,7 +92,7 @@ struct nlctrl_getfamily_list {
 };
 
 std::unique_ptr<nlctrl_getfamily_list>
-nlctrl_getfamily_dump(ynl_cpp::ynl_socket&  ys);
+nlctrl_getfamily_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== CTRL_CMD_GETPOLICY ============== */
 /* CTRL_CMD_GETPOLICY - dump */
@@ -113,7 +113,7 @@ struct nlctrl_getpolicy_rsp_list {
 };
 
 std::unique_ptr<nlctrl_getpolicy_rsp_list>
-nlctrl_getpolicy_dump(ynl_cpp::ynl_socket&  ys, nlctrl_getpolicy_req_dump& req);
+nlctrl_getpolicy_dump(ynl_cpp::ynl_socket& ys, nlctrl_getpolicy_req_dump& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_NLCTRL_GEN_H */

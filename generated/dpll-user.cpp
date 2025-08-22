@@ -33,8 +33,9 @@ static constexpr std::array<std::string_view, DPLL_CMD_PIN_CHANGE_NTF + 1> dpll_
 
 std::string_view dpll_op_str(int op)
 {
-	if (op < 0 || op >= (int)(dpll_op_strmap.size()))
+	if (op < 0 || op >= (int)(dpll_op_strmap.size())) {
 		return "";
+	}
 	return dpll_op_strmap[op];
 }
 
@@ -47,8 +48,9 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_mode_strmap = []() {
 
 std::string_view dpll_mode_str(dpll_mode value)
 {
-	if (value < 0 || value >= (int)(dpll_mode_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_mode_strmap.size())) {
 		return "";
+	}
 	return dpll_mode_strmap[value];
 }
 
@@ -63,8 +65,9 @@ static constexpr std::array<std::string_view, 4 + 1> dpll_lock_status_strmap = [
 
 std::string_view dpll_lock_status_str(dpll_lock_status value)
 {
-	if (value < 0 || value >= (int)(dpll_lock_status_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_lock_status_strmap.size())) {
 		return "";
+	}
 	return dpll_lock_status_strmap[value];
 }
 
@@ -79,8 +82,9 @@ static constexpr std::array<std::string_view, 4 + 1> dpll_lock_status_error_strm
 
 std::string_view dpll_lock_status_error_str(dpll_lock_status_error value)
 {
-	if (value < 0 || value >= (int)(dpll_lock_status_error_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_lock_status_error_strmap.size())) {
 		return "";
+	}
 	return dpll_lock_status_error_strmap[value];
 }
 
@@ -99,8 +103,9 @@ static constexpr std::array<std::string_view, 8 + 1> dpll_clock_quality_level_st
 
 std::string_view dpll_clock_quality_level_str(dpll_clock_quality_level value)
 {
-	if (value < 0 || value >= (int)(dpll_clock_quality_level_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_clock_quality_level_strmap.size())) {
 		return "";
+	}
 	return dpll_clock_quality_level_strmap[value];
 }
 
@@ -113,8 +118,9 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_type_strmap = []() {
 
 std::string_view dpll_type_str(dpll_type value)
 {
-	if (value < 0 || value >= (int)(dpll_type_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_type_strmap.size())) {
 		return "";
+	}
 	return dpll_type_strmap[value];
 }
 
@@ -130,8 +136,9 @@ static constexpr std::array<std::string_view, 5 + 1> dpll_pin_type_strmap = []()
 
 std::string_view dpll_pin_type_str(dpll_pin_type value)
 {
-	if (value < 0 || value >= (int)(dpll_pin_type_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_pin_type_strmap.size())) {
 		return "";
+	}
 	return dpll_pin_type_strmap[value];
 }
 
@@ -144,8 +151,9 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_pin_direction_strmap =
 
 std::string_view dpll_pin_direction_str(dpll_pin_direction value)
 {
-	if (value < 0 || value >= (int)(dpll_pin_direction_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_pin_direction_strmap.size())) {
 		return "";
+	}
 	return dpll_pin_direction_strmap[value];
 }
 
@@ -159,8 +167,9 @@ static constexpr std::array<std::string_view, 3 + 1> dpll_pin_state_strmap = [](
 
 std::string_view dpll_pin_state_str(dpll_pin_state value)
 {
-	if (value < 0 || value >= (int)(dpll_pin_state_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_pin_state_strmap.size())) {
 		return "";
+	}
 	return dpll_pin_state_strmap[value];
 }
 
@@ -175,8 +184,9 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_pin_capabilities_strma
 std::string_view dpll_pin_capabilities_str(dpll_pin_capabilities value)
 {
 	value = (dpll_pin_capabilities)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(dpll_pin_capabilities_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_pin_capabilities_strmap.size())) {
 		return "";
+	}
 	return dpll_pin_capabilities_strmap[value];
 }
 
@@ -189,8 +199,9 @@ static constexpr std::array<std::string_view, 1 + 1> dpll_feature_state_strmap =
 
 std::string_view dpll_feature_state_str(dpll_feature_state value)
 {
-	if (value < 0 || value >= (int)(dpll_feature_state_strmap.size()))
+	if (value < 0 || value >= (int)(dpll_feature_state_strmap.size())) {
 		return "";
+	}
 	return dpll_feature_state_strmap[value];
 }
 
@@ -373,12 +384,14 @@ int dpll_frequency_range_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_PIN_FREQUENCY_MIN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->frequency_min = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == DPLL_A_PIN_FREQUENCY_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->frequency_max = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
@@ -392,16 +405,21 @@ int dpll_pin_parent_device_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.parent_id.has_value())
+	if (obj.parent_id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_PARENT_ID, obj.parent_id.value());
-	if (obj.direction.has_value())
+	}
+	if (obj.direction.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_DIRECTION, obj.direction.value());
-	if (obj.prio.has_value())
+	}
+	if (obj.prio.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_PRIO, obj.prio.value());
-	if (obj.state.has_value())
+	}
+	if (obj.state.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_STATE, obj.state.value());
-	if (obj.phase_offset.has_value())
+	}
+	if (obj.phase_offset.has_value()) {
 		ynl_attr_put_s64(nlh, DPLL_A_PIN_PHASE_OFFSET, obj.phase_offset.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -417,24 +435,29 @@ int dpll_pin_parent_device_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_PIN_PARENT_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->parent_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_DIRECTION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->direction = (enum dpll_pin_direction)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_PRIO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->prio = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->state = (enum dpll_pin_state)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_PHASE_OFFSET) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phase_offset = (__s64)ynl_attr_get_s64(attr);
 		}
 	}
@@ -448,10 +471,12 @@ int dpll_pin_parent_pin_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.parent_id.has_value())
+	if (obj.parent_id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_PARENT_ID, obj.parent_id.value());
-	if (obj.state.has_value())
+	}
+	if (obj.state.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_STATE, obj.state.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -467,12 +492,14 @@ int dpll_pin_parent_pin_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_PIN_PARENT_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->parent_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->state = (enum dpll_pin_state)ynl_attr_get_u32(attr);
 		}
 	}
@@ -486,10 +513,12 @@ int dpll_reference_sync_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.id.has_value())
+	if (obj.id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_ID, obj.id.value());
-	if (obj.state.has_value())
+	}
+	if (obj.state.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_STATE, obj.state.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -505,12 +534,14 @@ int dpll_reference_sync_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_PIN_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_STATE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->state = (enum dpll_pin_state)ynl_attr_get_u32(attr);
 		}
 	}
@@ -532,8 +563,9 @@ int dpll_device_id_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -553,12 +585,15 @@ dpll_device_id_get(ynl_cpp::ynl_socket& ys, dpll_device_id_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &dpll_nest;
 	yrs.yarg.rsp_policy = &dpll_nest;
 
-	if (req.module_name.size() > 0)
+	if (req.module_name.size() > 0) {
 		ynl_attr_put_str(nlh, DPLL_A_MODULE_NAME, req.module_name.data());
-	if (req.clock_id.has_value())
+	}
+	if (req.clock_id.has_value()) {
 		ynl_attr_put_u64(nlh, DPLL_A_CLOCK_ID, req.clock_id.value());
-	if (req.type.has_value())
+	}
+	if (req.type.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_TYPE, req.type.value());
+	}
 
 	rsp.reset(new dpll_device_id_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -566,8 +601,9 @@ dpll_device_id_get(ynl_cpp::ynl_socket& ys, dpll_device_id_get_req& req)
 	yrs.rsp_cmd = DPLL_CMD_DEVICE_ID_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -584,49 +620,59 @@ int dpll_device_get_rsp_parse(const struct nlmsghdr *nlh,
 
 	dst = (dpll_device_get_rsp*)yarg->data;
 
-	if (dst->mode_supported.size() > 0)
+	if (dst->mode_supported.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (dpll.mode-supported)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_MODULE_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->module_name.assign(ynl_attr_get_str(attr));
 		} else if (type == DPLL_A_MODE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->mode = (enum dpll_mode)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_MODE_SUPPORTED) {
 			n_mode_supported++;
 		} else if (type == DPLL_A_LOCK_STATUS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->lock_status = (enum dpll_lock_status)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_LOCK_STATUS_ERROR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->lock_status_error = (enum dpll_lock_status_error)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_TEMP) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->temp = (__s32)ynl_attr_get_s32(attr);
 		} else if (type == DPLL_A_CLOCK_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->clock_id = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == DPLL_A_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->type = (enum dpll_type)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PHASE_OFFSET_MONITOR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phase_offset_monitor = (enum dpll_feature_state)ynl_attr_get_u32(attr);
 		}
 	}
@@ -657,8 +703,9 @@ dpll_device_get(ynl_cpp::ynl_socket& ys, dpll_device_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &dpll_nest;
 	yrs.yarg.rsp_policy = &dpll_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_ID, req.id.value());
+	}
 
 	rsp.reset(new dpll_device_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -666,8 +713,9 @@ dpll_device_get(ynl_cpp::ynl_socket& ys, dpll_device_get_req& req)
 	yrs.rsp_cmd = DPLL_CMD_DEVICE_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -691,8 +739,9 @@ dpll_device_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, DPLL_CMD_DEVICE_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -709,14 +758,17 @@ int dpll_device_set(ynl_cpp::ynl_socket& ys, dpll_device_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, DPLL_CMD_DEVICE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &dpll_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_ID, req.id.value());
-	if (req.phase_offset_monitor.has_value())
+	}
+	if (req.phase_offset_monitor.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PHASE_OFFSET_MONITOR, req.phase_offset_monitor.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -735,8 +787,9 @@ int dpll_pin_id_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_PIN_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -756,18 +809,24 @@ dpll_pin_id_get(ynl_cpp::ynl_socket& ys, dpll_pin_id_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &dpll_pin_nest;
 	yrs.yarg.rsp_policy = &dpll_pin_nest;
 
-	if (req.module_name.size() > 0)
+	if (req.module_name.size() > 0) {
 		ynl_attr_put_str(nlh, DPLL_A_PIN_MODULE_NAME, req.module_name.data());
-	if (req.clock_id.has_value())
+	}
+	if (req.clock_id.has_value()) {
 		ynl_attr_put_u64(nlh, DPLL_A_PIN_CLOCK_ID, req.clock_id.value());
-	if (req.board_label.size() > 0)
+	}
+	if (req.board_label.size() > 0) {
 		ynl_attr_put_str(nlh, DPLL_A_PIN_BOARD_LABEL, req.board_label.data());
-	if (req.panel_label.size() > 0)
+	}
+	if (req.panel_label.size() > 0) {
 		ynl_attr_put_str(nlh, DPLL_A_PIN_PANEL_LABEL, req.panel_label.data());
-	if (req.package_label.size() > 0)
+	}
+	if (req.package_label.size() > 0) {
 		ynl_attr_put_str(nlh, DPLL_A_PIN_PACKAGE_LABEL, req.package_label.data());
-	if (req.type.has_value())
+	}
+	if (req.type.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_TYPE, req.type.value());
+	}
 
 	rsp.reset(new dpll_pin_id_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -775,8 +834,9 @@ dpll_pin_id_get(ynl_cpp::ynl_socket& ys, dpll_pin_id_get_req& req)
 	yrs.rsp_cmd = DPLL_CMD_PIN_ID_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -799,79 +859,97 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 	dst = (dpll_pin_get_rsp*)yarg->data;
 	parg.ys = yarg->ys;
 
-	if (dst->esync_frequency_supported.size() > 0)
+	if (dst->esync_frequency_supported.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (pin.esync-frequency-supported)");
-	if (dst->frequency_supported.size() > 0)
+	}
+	if (dst->frequency_supported.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (pin.frequency-supported)");
-	if (dst->parent_device.size() > 0)
+	}
+	if (dst->parent_device.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (pin.parent-device)");
-	if (dst->parent_pin.size() > 0)
+	}
+	if (dst->parent_pin.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (pin.parent-pin)");
-	if (dst->reference_sync.size() > 0)
+	}
+	if (dst->reference_sync.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (pin.reference-sync)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == DPLL_A_PIN_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_BOARD_LABEL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->board_label.assign(ynl_attr_get_str(attr));
 		} else if (type == DPLL_A_PIN_PANEL_LABEL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->panel_label.assign(ynl_attr_get_str(attr));
 		} else if (type == DPLL_A_PIN_PACKAGE_LABEL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->package_label.assign(ynl_attr_get_str(attr));
 		} else if (type == DPLL_A_PIN_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->type = (enum dpll_pin_type)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_FREQUENCY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->frequency = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == DPLL_A_PIN_FREQUENCY_SUPPORTED) {
 			n_frequency_supported++;
 		} else if (type == DPLL_A_PIN_CAPABILITIES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->capabilities = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_PARENT_DEVICE) {
 			n_parent_device++;
 		} else if (type == DPLL_A_PIN_PARENT_PIN) {
 			n_parent_pin++;
 		} else if (type == DPLL_A_PIN_PHASE_ADJUST_MIN) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phase_adjust_min = (__s32)ynl_attr_get_s32(attr);
 		} else if (type == DPLL_A_PIN_PHASE_ADJUST_MAX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phase_adjust_max = (__s32)ynl_attr_get_s32(attr);
 		} else if (type == DPLL_A_PIN_PHASE_ADJUST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->phase_adjust = (__s32)ynl_attr_get_s32(attr);
 		} else if (type == DPLL_A_PIN_FRACTIONAL_FREQUENCY_OFFSET) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->fractional_frequency_offset = (__s64)ynl_attr_get_sint(attr);
 		} else if (type == DPLL_A_PIN_ESYNC_FREQUENCY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->esync_frequency = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == DPLL_A_PIN_ESYNC_FREQUENCY_SUPPORTED) {
 			n_esync_frequency_supported++;
 		} else if (type == DPLL_A_PIN_ESYNC_PULSE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->esync_pulse = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_REFERENCE_SYNC) {
 			n_reference_sync++;
@@ -885,8 +963,9 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == DPLL_A_PIN_ESYNC_FREQUENCY_SUPPORTED) {
 				parg.data = &dst->esync_frequency_supported[i];
-				if (dpll_frequency_range_parse(&parg, attr))
+				if (dpll_frequency_range_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -898,8 +977,9 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == DPLL_A_PIN_FREQUENCY_SUPPORTED) {
 				parg.data = &dst->frequency_supported[i];
-				if (dpll_frequency_range_parse(&parg, attr))
+				if (dpll_frequency_range_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -911,8 +991,9 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == DPLL_A_PIN_PARENT_DEVICE) {
 				parg.data = &dst->parent_device[i];
-				if (dpll_pin_parent_device_parse(&parg, attr))
+				if (dpll_pin_parent_device_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -924,8 +1005,9 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == DPLL_A_PIN_PARENT_PIN) {
 				parg.data = &dst->parent_pin[i];
-				if (dpll_pin_parent_pin_parse(&parg, attr))
+				if (dpll_pin_parent_pin_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -937,8 +1019,9 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == DPLL_A_PIN_REFERENCE_SYNC) {
 				parg.data = &dst->reference_sync[i];
-				if (dpll_reference_sync_parse(&parg, attr))
+				if (dpll_reference_sync_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -959,8 +1042,9 @@ dpll_pin_get(ynl_cpp::ynl_socket& ys, dpll_pin_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &dpll_pin_nest;
 	yrs.yarg.rsp_policy = &dpll_pin_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_ID, req.id.value());
+	}
 
 	rsp.reset(new dpll_pin_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -968,8 +1052,9 @@ dpll_pin_get(ynl_cpp::ynl_socket& ys, dpll_pin_get_req& req)
 	yrs.rsp_cmd = DPLL_CMD_PIN_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -993,12 +1078,14 @@ dpll_pin_get_dump(ynl_cpp::ynl_socket& ys, dpll_pin_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, DPLL_CMD_PIN_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &dpll_pin_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_ID, req.id.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -1015,30 +1102,38 @@ int dpll_pin_set(ynl_cpp::ynl_socket& ys, dpll_pin_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, DPLL_CMD_PIN_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &dpll_pin_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_ID, req.id.value());
-	if (req.frequency.has_value())
+	}
+	if (req.frequency.has_value()) {
 		ynl_attr_put_u64(nlh, DPLL_A_PIN_FREQUENCY, req.frequency.value());
-	if (req.direction.has_value())
+	}
+	if (req.direction.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_DIRECTION, req.direction.value());
-	if (req.prio.has_value())
+	}
+	if (req.prio.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_PRIO, req.prio.value());
-	if (req.state.has_value())
+	}
+	if (req.state.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PIN_STATE, req.state.value());
+	}
 	for (unsigned int i = 0; i < req.parent_device.size(); i++)
 		dpll_pin_parent_device_put(nlh, DPLL_A_PIN_PARENT_DEVICE, req.parent_device[i]);
 	for (unsigned int i = 0; i < req.parent_pin.size(); i++)
 		dpll_pin_parent_pin_put(nlh, DPLL_A_PIN_PARENT_PIN, req.parent_pin[i]);
-	if (req.phase_adjust.has_value())
+	if (req.phase_adjust.has_value()) {
 		ynl_attr_put_s32(nlh, DPLL_A_PIN_PHASE_ADJUST, req.phase_adjust.value());
-	if (req.esync_frequency.has_value())
+	}
+	if (req.esync_frequency.has_value()) {
 		ynl_attr_put_u64(nlh, DPLL_A_PIN_ESYNC_FREQUENCY, req.esync_frequency.value());
+	}
 	for (unsigned int i = 0; i < req.reference_sync.size(); i++)
 		dpll_reference_sync_put(nlh, DPLL_A_PIN_REFERENCE_SYNC, req.reference_sync[i]);
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }

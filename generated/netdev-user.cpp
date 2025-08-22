@@ -36,8 +36,9 @@ static constexpr std::array<std::string_view, NETDEV_CMD_BIND_TX + 1> netdev_op_
 
 std::string_view netdev_op_str(int op)
 {
-	if (op < 0 || op >= (int)(netdev_op_strmap.size()))
+	if (op < 0 || op >= (int)(netdev_op_strmap.size())) {
 		return "";
+	}
 	return netdev_op_strmap[op];
 }
 
@@ -56,8 +57,9 @@ static constexpr std::array<std::string_view, 6 + 1> netdev_xdp_act_strmap = [](
 std::string_view netdev_xdp_act_str(netdev_xdp_act value)
 {
 	value = (netdev_xdp_act)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_xdp_act_strmap.size()))
+	if (value < 0 || value >= (int)(netdev_xdp_act_strmap.size())) {
 		return "";
+	}
 	return netdev_xdp_act_strmap[value];
 }
 
@@ -72,8 +74,9 @@ static constexpr std::array<std::string_view, 2 + 1> netdev_xdp_rx_metadata_strm
 std::string_view netdev_xdp_rx_metadata_str(netdev_xdp_rx_metadata value)
 {
 	value = (netdev_xdp_rx_metadata)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_xdp_rx_metadata_strmap.size()))
+	if (value < 0 || value >= (int)(netdev_xdp_rx_metadata_strmap.size())) {
 		return "";
+	}
 	return netdev_xdp_rx_metadata_strmap[value];
 }
 
@@ -88,8 +91,9 @@ static constexpr std::array<std::string_view, 2 + 1> netdev_xsk_flags_strmap = [
 std::string_view netdev_xsk_flags_str(netdev_xsk_flags value)
 {
 	value = (netdev_xsk_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_xsk_flags_strmap.size()))
+	if (value < 0 || value >= (int)(netdev_xsk_flags_strmap.size())) {
 		return "";
+	}
 	return netdev_xsk_flags_strmap[value];
 }
 
@@ -102,8 +106,9 @@ static constexpr std::array<std::string_view, 1 + 1> netdev_queue_type_strmap = 
 
 std::string_view netdev_queue_type_str(netdev_queue_type value)
 {
-	if (value < 0 || value >= (int)(netdev_queue_type_strmap.size()))
+	if (value < 0 || value >= (int)(netdev_queue_type_strmap.size())) {
 		return "";
+	}
 	return netdev_queue_type_strmap[value];
 }
 
@@ -116,8 +121,9 @@ static constexpr std::array<std::string_view, 0 + 1> netdev_qstats_scope_strmap 
 std::string_view netdev_qstats_scope_str(netdev_qstats_scope value)
 {
 	value = (netdev_qstats_scope)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_qstats_scope_strmap.size()))
+	if (value < 0 || value >= (int)(netdev_qstats_scope_strmap.size())) {
 		return "";
+	}
 	return netdev_qstats_scope_strmap[value];
 }
 
@@ -130,8 +136,9 @@ static constexpr std::array<std::string_view, 1 + 1> netdev_napi_threaded_strmap
 
 std::string_view netdev_napi_threaded_str(netdev_napi_threaded value)
 {
-	if (value < 0 || value >= (int)(netdev_napi_threaded_strmap.size()))
+	if (value < 0 || value >= (int)(netdev_napi_threaded_strmap.size())) {
 		return "";
+	}
 	return netdev_napi_threaded_strmap[value];
 }
 
@@ -431,10 +438,12 @@ int netdev_page_pool_info_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.id.has_value())
+	if (obj.id.has_value()) {
 		ynl_attr_put_uint(nlh, NETDEV_A_PAGE_POOL_ID, obj.id.value());
-	if (obj.ifindex.has_value())
+	}
+	if (obj.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_PAGE_POOL_IFINDEX, obj.ifindex.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -450,12 +459,14 @@ int netdev_page_pool_info_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_PAGE_POOL_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -482,10 +493,12 @@ int netdev_queue_id_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.id.has_value())
+	if (obj.id.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_ID, obj.id.value());
-	if (obj.type.has_value())
+	}
+	if (obj.type.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_TYPE, obj.type.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -505,24 +518,29 @@ int netdev_dev_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_DEV_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_DEV_XDP_FEATURES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->xdp_features = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == NETDEV_A_DEV_XDP_ZC_MAX_SEGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->xdp_zc_max_segs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_DEV_XDP_RX_METADATA_FEATURES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->xdp_rx_metadata_features = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == NETDEV_A_DEV_XSK_FEATURES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->xsk_features = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
@@ -542,8 +560,9 @@ netdev_dev_get(ynl_cpp::ynl_socket& ys, netdev_dev_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &netdev_dev_nest;
 	yrs.yarg.rsp_policy = &netdev_dev_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_DEV_IFINDEX, req.ifindex.value());
+	}
 
 	rsp.reset(new netdev_dev_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -551,8 +570,9 @@ netdev_dev_get(ynl_cpp::ynl_socket& ys, netdev_dev_get_req& req)
 	yrs.rsp_cmd = NETDEV_CMD_DEV_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -576,8 +596,9 @@ netdev_dev_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_DEV_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -599,41 +620,50 @@ int netdev_page_pool_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_PAGE_POOL_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_NAPI_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->napi_id = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_INFLIGHT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->inflight = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_INFLIGHT_MEM) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->inflight_mem = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_DETACH_TIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->detach_time = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_DMABUF) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dmabuf = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_IO_URING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &netdev_io_uring_provider_info_nest;
 			parg.data = &dst->io_uring.emplace();
-			if (netdev_io_uring_provider_info_parse(&parg, attr))
+			if (netdev_io_uring_provider_info_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -652,8 +682,9 @@ netdev_page_pool_get(ynl_cpp::ynl_socket& ys, netdev_page_pool_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &netdev_page_pool_nest;
 	yrs.yarg.rsp_policy = &netdev_page_pool_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_uint(nlh, NETDEV_A_PAGE_POOL_ID, req.id.value());
+	}
 
 	rsp.reset(new netdev_page_pool_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -661,8 +692,9 @@ netdev_page_pool_get(ynl_cpp::ynl_socket& ys, netdev_page_pool_get_req& req)
 	yrs.rsp_cmd = NETDEV_CMD_PAGE_POOL_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -686,8 +718,9 @@ netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_PAGE_POOL_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -709,56 +742,69 @@ int netdev_page_pool_stats_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_PAGE_POOL_STATS_INFO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &netdev_page_pool_info_nest;
 			parg.data = &dst->info.emplace();
-			if (netdev_page_pool_info_parse(&parg, attr))
+			if (netdev_page_pool_info_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_ALLOC_FAST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->alloc_fast = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_ALLOC_SLOW) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->alloc_slow = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_ALLOC_SLOW_HIGH_ORDER) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->alloc_slow_high_order = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_ALLOC_EMPTY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->alloc_empty = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_ALLOC_REFILL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->alloc_refill = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_ALLOC_WAIVE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->alloc_waive = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_RECYCLE_CACHED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->recycle_cached = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_RECYCLE_CACHE_FULL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->recycle_cache_full = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_RECYCLE_RING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->recycle_ring = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_RECYCLE_RING_FULL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->recycle_ring_full = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_PAGE_POOL_STATS_RECYCLE_RELEASED_REFCNT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->recycle_released_refcnt = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -779,8 +825,9 @@ netdev_page_pool_stats_get(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &netdev_page_pool_stats_nest;
 	yrs.yarg.rsp_policy = &netdev_page_pool_stats_nest;
 
-	if (req.info.has_value())
+	if (req.info.has_value()) {
 		netdev_page_pool_info_put(nlh, NETDEV_A_PAGE_POOL_STATS_INFO, req.info.value());
+	}
 
 	rsp.reset(new netdev_page_pool_stats_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -788,8 +835,9 @@ netdev_page_pool_stats_get(ynl_cpp::ynl_socket& ys,
 	yrs.rsp_cmd = NETDEV_CMD_PAGE_POOL_STATS_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -813,8 +861,9 @@ netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_PAGE_POOL_STATS_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -835,41 +884,50 @@ int netdev_queue_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_QUEUE_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QUEUE_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->type = (enum netdev_queue_type)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QUEUE_NAPI_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->napi_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QUEUE_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QUEUE_DMABUF) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dmabuf = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QUEUE_IO_URING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &netdev_io_uring_provider_info_nest;
 			parg.data = &dst->io_uring.emplace();
-			if (netdev_io_uring_provider_info_parse(&parg, attr))
+			if (netdev_io_uring_provider_info_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == NETDEV_A_QUEUE_XSK) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &netdev_xsk_info_nest;
 			parg.data = &dst->xsk.emplace();
-			if (netdev_xsk_info_parse(&parg, attr))
+			if (netdev_xsk_info_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -888,12 +946,15 @@ netdev_queue_get(ynl_cpp::ynl_socket& ys, netdev_queue_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &netdev_queue_nest;
 	yrs.yarg.rsp_policy = &netdev_queue_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_IFINDEX, req.ifindex.value());
-	if (req.type.has_value())
+	}
+	if (req.type.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_TYPE, req.type.value());
-	if (req.id.has_value())
+	}
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_ID, req.id.value());
+	}
 
 	rsp.reset(new netdev_queue_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -901,8 +962,9 @@ netdev_queue_get(ynl_cpp::ynl_socket& ys, netdev_queue_get_req& req)
 	yrs.rsp_cmd = NETDEV_CMD_QUEUE_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -926,12 +988,14 @@ netdev_queue_get_dump(ynl_cpp::ynl_socket& ys, netdev_queue_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_QUEUE_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &netdev_queue_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_IFINDEX, req.ifindex.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -950,36 +1014,44 @@ int netdev_napi_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_NAPI_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_NAPI_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_NAPI_IRQ) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->irq = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_NAPI_PID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->pid = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_NAPI_DEFER_HARD_IRQS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->defer_hard_irqs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_NAPI_GRO_FLUSH_TIMEOUT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gro_flush_timeout = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_NAPI_IRQ_SUSPEND_TIMEOUT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->irq_suspend_timeout = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_NAPI_THREADED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->threaded = (enum netdev_napi_threaded)ynl_attr_get_u32(attr);
 		}
 	}
@@ -999,8 +1071,9 @@ netdev_napi_get(ynl_cpp::ynl_socket& ys, netdev_napi_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &netdev_napi_nest;
 	yrs.yarg.rsp_policy = &netdev_napi_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_NAPI_ID, req.id.value());
+	}
 
 	rsp.reset(new netdev_napi_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -1008,8 +1081,9 @@ netdev_napi_get(ynl_cpp::ynl_socket& ys, netdev_napi_get_req& req)
 	yrs.rsp_cmd = NETDEV_CMD_NAPI_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -1033,12 +1107,14 @@ netdev_napi_get_dump(ynl_cpp::ynl_socket& ys, netdev_napi_get_req_dump& req)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_NAPI_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &netdev_napi_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_NAPI_IFINDEX, req.ifindex.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -1057,32 +1133,39 @@ int netdev_qstats_get_rsp_dump_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_QSTATS_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QSTATS_QUEUE_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->queue_type = (enum netdev_queue_type)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QSTATS_QUEUE_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->queue_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NETDEV_A_QSTATS_RX_PACKETS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_packets = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_QSTATS_RX_BYTES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rx_bytes = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_QSTATS_TX_PACKETS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_packets = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == NETDEV_A_QSTATS_TX_BYTES) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tx_bytes = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -1109,14 +1192,17 @@ netdev_qstats_get_dump(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_QSTATS_GET, 1);
 	((struct ynl_sock*)ys)->req_policy = &netdev_qstats_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_QSTATS_IFINDEX, req.ifindex.value());
-	if (req.scope.has_value())
+	}
+	if (req.scope.has_value()) {
 		ynl_attr_put_uint(nlh, NETDEV_A_QSTATS_SCOPE, req.scope.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -1135,8 +1221,9 @@ int netdev_bind_rx_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_DMABUF_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -1156,10 +1243,12 @@ netdev_bind_rx(ynl_cpp::ynl_socket& ys, netdev_bind_rx_req& req)
 	((struct ynl_sock*)ys)->req_policy = &netdev_dmabuf_nest;
 	yrs.yarg.rsp_policy = &netdev_dmabuf_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_DMABUF_IFINDEX, req.ifindex.value());
-	if (req.fd.has_value())
+	}
+	if (req.fd.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_DMABUF_FD, req.fd.value());
+	}
 	for (unsigned int i = 0; i < req.queues.size(); i++)
 		netdev_queue_id_put(nlh, NETDEV_A_DMABUF_QUEUES, req.queues[i]);
 
@@ -1169,8 +1258,9 @@ netdev_bind_rx(ynl_cpp::ynl_socket& ys, netdev_bind_rx_req& req)
 	yrs.rsp_cmd = NETDEV_CMD_BIND_RX;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -1186,20 +1276,26 @@ int netdev_napi_set(ynl_cpp::ynl_socket& ys, netdev_napi_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_NAPI_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &netdev_napi_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_NAPI_ID, req.id.value());
-	if (req.defer_hard_irqs.has_value())
+	}
+	if (req.defer_hard_irqs.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_NAPI_DEFER_HARD_IRQS, req.defer_hard_irqs.value());
-	if (req.gro_flush_timeout.has_value())
+	}
+	if (req.gro_flush_timeout.has_value()) {
 		ynl_attr_put_uint(nlh, NETDEV_A_NAPI_GRO_FLUSH_TIMEOUT, req.gro_flush_timeout.value());
-	if (req.irq_suspend_timeout.has_value())
+	}
+	if (req.irq_suspend_timeout.has_value()) {
 		ynl_attr_put_uint(nlh, NETDEV_A_NAPI_IRQ_SUSPEND_TIMEOUT, req.irq_suspend_timeout.value());
-	if (req.threaded.has_value())
+	}
+	if (req.threaded.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_NAPI_THREADED, req.threaded.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -1218,8 +1314,9 @@ int netdev_bind_tx_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NETDEV_A_DMABUF_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -1239,10 +1336,12 @@ netdev_bind_tx(ynl_cpp::ynl_socket& ys, netdev_bind_tx_req& req)
 	((struct ynl_sock*)ys)->req_policy = &netdev_dmabuf_nest;
 	yrs.yarg.rsp_policy = &netdev_dmabuf_nest;
 
-	if (req.ifindex.has_value())
+	if (req.ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_DMABUF_IFINDEX, req.ifindex.value());
-	if (req.fd.has_value())
+	}
+	if (req.fd.has_value()) {
 		ynl_attr_put_u32(nlh, NETDEV_A_DMABUF_FD, req.fd.value());
+	}
 
 	rsp.reset(new netdev_bind_tx_rsp());
 	yrs.yarg.data = rsp.get();
@@ -1250,8 +1349,9 @@ netdev_bind_tx(ynl_cpp::ynl_socket& ys, netdev_bind_tx_req& req)
 	yrs.rsp_cmd = NETDEV_CMD_BIND_TX;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }

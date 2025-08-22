@@ -23,8 +23,9 @@ static constexpr std::array<std::string_view, TCP_METRICS_CMD_DEL + 1> tcp_metri
 
 std::string_view tcp_metrics_op_str(int op)
 {
-	if (op < 0 || op >= (int)(tcp_metrics_op_strmap.size()))
+	if (op < 0 || op >= (int)(tcp_metrics_op_strmap.size())) {
 		return "";
+	}
 	return tcp_metrics_op_strmap[op];
 }
 
@@ -101,32 +102,39 @@ int tcp_metrics_metrics_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TCP_METRICS_A_METRICS_RTT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rtt = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_A_METRICS_RTTVAR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rttvar = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_A_METRICS_SSTHRESH) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ssthresh = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_A_METRICS_CWND) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->cwnd = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_A_METRICS_REODERING) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->reodering = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_A_METRICS_RTT_US) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rtt_us = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_A_METRICS_RTTVAR_US) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rttvar_us = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -150,52 +158,63 @@ int tcp_metrics_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TCP_METRICS_ATTR_ADDR_IPV4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->addr_ipv4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_ATTR_ADDR_IPV6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->addr_ipv6.assign(data, data + len);
 		} else if (type == TCP_METRICS_ATTR_SADDR_IPV4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->saddr_ipv4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TCP_METRICS_ATTR_SADDR_IPV6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->saddr_ipv6.assign(data, data + len);
 		} else if (type == TCP_METRICS_ATTR_AGE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->age = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == TCP_METRICS_ATTR_VALS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &tcp_metrics_metrics_nest;
 			parg.data = &dst->vals.emplace();
-			if (tcp_metrics_metrics_parse(&parg, attr))
+			if (tcp_metrics_metrics_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == TCP_METRICS_ATTR_FOPEN_MSS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->fopen_mss = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == TCP_METRICS_ATTR_FOPEN_SYN_DROPS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->fopen_syn_drops = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == TCP_METRICS_ATTR_FOPEN_SYN_DROP_TS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->fopen_syn_drop_ts = (__u64)ynl_attr_get_u64(attr);
 		} else if (type == TCP_METRICS_ATTR_FOPEN_COOKIE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->fopen_cookie.assign(data, data + len);
@@ -217,14 +236,18 @@ tcp_metrics_get(ynl_cpp::ynl_socket& ys, tcp_metrics_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &tcp_metrics_nest;
 	yrs.yarg.rsp_policy = &tcp_metrics_nest;
 
-	if (req.addr_ipv4.has_value())
+	if (req.addr_ipv4.has_value()) {
 		ynl_attr_put_u32(nlh, TCP_METRICS_ATTR_ADDR_IPV4, req.addr_ipv4.value());
-	if (req.addr_ipv6.size() > 0)
+	}
+	if (req.addr_ipv6.size() > 0) {
 		ynl_attr_put(nlh, TCP_METRICS_ATTR_ADDR_IPV6, req.addr_ipv6.data(), req.addr_ipv6.size());
-	if (req.saddr_ipv4.has_value())
+	}
+	if (req.saddr_ipv4.has_value()) {
 		ynl_attr_put_u32(nlh, TCP_METRICS_ATTR_SADDR_IPV4, req.saddr_ipv4.value());
-	if (req.saddr_ipv6.size() > 0)
+	}
+	if (req.saddr_ipv6.size() > 0) {
 		ynl_attr_put(nlh, TCP_METRICS_ATTR_SADDR_IPV6, req.saddr_ipv6.data(), req.saddr_ipv6.size());
+	}
 
 	rsp.reset(new tcp_metrics_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -232,8 +255,9 @@ tcp_metrics_get(ynl_cpp::ynl_socket& ys, tcp_metrics_get_req& req)
 	yrs.rsp_cmd = TCP_METRICS_CMD_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -257,8 +281,9 @@ tcp_metrics_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, TCP_METRICS_CMD_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -274,18 +299,23 @@ int tcp_metrics_del(ynl_cpp::ynl_socket& ys, tcp_metrics_del_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, TCP_METRICS_CMD_DEL, 1);
 	((struct ynl_sock*)ys)->req_policy = &tcp_metrics_nest;
 
-	if (req.addr_ipv4.has_value())
+	if (req.addr_ipv4.has_value()) {
 		ynl_attr_put_u32(nlh, TCP_METRICS_ATTR_ADDR_IPV4, req.addr_ipv4.value());
-	if (req.addr_ipv6.size() > 0)
+	}
+	if (req.addr_ipv6.size() > 0) {
 		ynl_attr_put(nlh, TCP_METRICS_ATTR_ADDR_IPV6, req.addr_ipv6.data(), req.addr_ipv6.size());
-	if (req.saddr_ipv4.has_value())
+	}
+	if (req.saddr_ipv4.has_value()) {
 		ynl_attr_put_u32(nlh, TCP_METRICS_ATTR_SADDR_IPV4, req.saddr_ipv4.value());
-	if (req.saddr_ipv6.size() > 0)
+	}
+	if (req.saddr_ipv6.size() > 0) {
 		ynl_attr_put(nlh, TCP_METRICS_ATTR_SADDR_IPV6, req.saddr_ipv6.data(), req.saddr_ipv6.size());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }

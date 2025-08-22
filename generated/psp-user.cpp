@@ -31,8 +31,9 @@ static constexpr std::array<std::string_view, PSP_CMD_GET_STATS + 1> psp_op_strm
 
 std::string_view psp_op_str(int op)
 {
-	if (op < 0 || op >= (int)(psp_op_strmap.size()))
+	if (op < 0 || op >= (int)(psp_op_strmap.size())) {
 		return "";
+	}
 	return psp_op_strmap[op];
 }
 
@@ -47,8 +48,9 @@ static constexpr std::array<std::string_view, 3 + 1> psp_version_strmap = []() {
 
 std::string_view psp_version_str(psp_version value)
 {
-	if (value < 0 || value >= (int)(psp_version_strmap.size()))
+	if (value < 0 || value >= (int)(psp_version_strmap.size())) {
 		return "";
+	}
 	return psp_version_strmap[value];
 }
 
@@ -146,10 +148,12 @@ int psp_keys_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.key.size() > 0)
+	if (obj.key.size() > 0) {
 		ynl_attr_put(nlh, PSP_A_KEYS_KEY, obj.key.data(), obj.key.size());
-	if (obj.spi.has_value())
+	}
+	if (obj.spi.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_KEYS_SPI, obj.spi.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -164,14 +168,16 @@ int psp_keys_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == PSP_A_KEYS_KEY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->key.assign(data, data + len);
 		} else if (type == PSP_A_KEYS_SPI) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->spi = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -193,20 +199,24 @@ int psp_dev_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == PSP_A_DEV_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == PSP_A_DEV_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == PSP_A_DEV_PSP_VERSIONS_CAP) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->psp_versions_cap = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == PSP_A_DEV_PSP_VERSIONS_ENA) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->psp_versions_ena = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -226,8 +236,9 @@ psp_dev_get(ynl_cpp::ynl_socket& ys, psp_dev_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &psp_dev_nest;
 	yrs.yarg.rsp_policy = &psp_dev_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_DEV_ID, req.id.value());
+	}
 
 	rsp.reset(new psp_dev_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -235,8 +246,9 @@ psp_dev_get(ynl_cpp::ynl_socket& ys, psp_dev_get_req& req)
 	yrs.rsp_cmd = PSP_CMD_DEV_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -259,8 +271,9 @@ std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, PSP_CMD_DEV_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -286,10 +299,12 @@ psp_dev_set(ynl_cpp::ynl_socket& ys, psp_dev_set_req& req)
 	((struct ynl_sock*)ys)->req_policy = &psp_dev_nest;
 	yrs.yarg.rsp_policy = &psp_dev_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_DEV_ID, req.id.value());
-	if (req.psp_versions_ena.has_value())
+	}
+	if (req.psp_versions_ena.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_DEV_PSP_VERSIONS_ENA, req.psp_versions_ena.value());
+	}
 
 	rsp.reset(new psp_dev_set_rsp());
 	yrs.yarg.data = rsp.get();
@@ -297,8 +312,9 @@ psp_dev_set(ynl_cpp::ynl_socket& ys, psp_dev_set_req& req)
 	yrs.rsp_cmd = PSP_CMD_DEV_SET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -317,8 +333,9 @@ int psp_key_rotate_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == PSP_A_DEV_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -338,8 +355,9 @@ psp_key_rotate(ynl_cpp::ynl_socket& ys, psp_key_rotate_req& req)
 	((struct ynl_sock*)ys)->req_policy = &psp_dev_nest;
 	yrs.yarg.rsp_policy = &psp_dev_nest;
 
-	if (req.id.has_value())
+	if (req.id.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_DEV_ID, req.id.value());
+	}
 
 	rsp.reset(new psp_key_rotate_rsp());
 	yrs.yarg.data = rsp.get();
@@ -347,8 +365,9 @@ psp_key_rotate(ynl_cpp::ynl_socket& ys, psp_key_rotate_req& req)
 	yrs.rsp_cmd = PSP_CMD_KEY_ROTATE;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -370,21 +389,25 @@ int psp_rx_assoc_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == PSP_A_ASSOC_DEV_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dev_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == PSP_A_ASSOC_VERSION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->version = (enum psp_version)ynl_attr_get_u32(attr);
 		} else if (type == PSP_A_ASSOC_RX_KEY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &psp_keys_nest;
 			parg.data = &dst->rx_key.emplace();
-			if (psp_keys_parse(&parg, attr))
+			if (psp_keys_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -403,12 +426,15 @@ psp_rx_assoc(ynl_cpp::ynl_socket& ys, psp_rx_assoc_req& req)
 	((struct ynl_sock*)ys)->req_policy = &psp_assoc_nest;
 	yrs.yarg.rsp_policy = &psp_assoc_nest;
 
-	if (req.dev_id.has_value())
+	if (req.dev_id.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_ASSOC_DEV_ID, req.dev_id.value());
-	if (req.version.has_value())
+	}
+	if (req.version.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_ASSOC_VERSION, req.version.value());
-	if (req.sock_fd.has_value())
+	}
+	if (req.sock_fd.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_ASSOC_SOCK_FD, req.sock_fd.value());
+	}
 
 	rsp.reset(new psp_rx_assoc_rsp());
 	yrs.yarg.data = rsp.get();
@@ -416,8 +442,9 @@ psp_rx_assoc(ynl_cpp::ynl_socket& ys, psp_rx_assoc_req& req)
 	yrs.rsp_cmd = PSP_CMD_RX_ASSOC;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -442,14 +469,18 @@ psp_tx_assoc(ynl_cpp::ynl_socket& ys, psp_tx_assoc_req& req)
 	((struct ynl_sock*)ys)->req_policy = &psp_assoc_nest;
 	yrs.yarg.rsp_policy = &psp_assoc_nest;
 
-	if (req.dev_id.has_value())
+	if (req.dev_id.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_ASSOC_DEV_ID, req.dev_id.value());
-	if (req.version.has_value())
+	}
+	if (req.version.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_ASSOC_VERSION, req.version.value());
-	if (req.tx_key.has_value())
+	}
+	if (req.tx_key.has_value()) {
 		psp_keys_put(nlh, PSP_A_ASSOC_TX_KEY, req.tx_key.value());
-	if (req.sock_fd.has_value())
+	}
+	if (req.sock_fd.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_ASSOC_SOCK_FD, req.sock_fd.value());
+	}
 
 	rsp.reset(new psp_tx_assoc_rsp());
 	yrs.yarg.data = rsp.get();
@@ -457,8 +488,9 @@ psp_tx_assoc(ynl_cpp::ynl_socket& ys, psp_tx_assoc_req& req)
 	yrs.rsp_cmd = PSP_CMD_TX_ASSOC;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -477,16 +509,19 @@ int psp_get_stats_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == PSP_A_STATS_DEV_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dev_id = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == PSP_A_STATS_KEY_ROTATIONS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->key_rotations = (__u64)ynl_attr_get_uint(attr);
 		} else if (type == PSP_A_STATS_STALE_EVENTS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->stale_events = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
@@ -506,8 +541,9 @@ psp_get_stats(ynl_cpp::ynl_socket& ys, psp_get_stats_req& req)
 	((struct ynl_sock*)ys)->req_policy = &psp_stats_nest;
 	yrs.yarg.rsp_policy = &psp_stats_nest;
 
-	if (req.dev_id.has_value())
+	if (req.dev_id.has_value()) {
 		ynl_attr_put_u32(nlh, PSP_A_STATS_DEV_ID, req.dev_id.value());
+	}
 
 	rsp.reset(new psp_get_stats_rsp());
 	yrs.yarg.data = rsp.get();
@@ -515,8 +551,9 @@ psp_get_stats(ynl_cpp::ynl_socket& ys, psp_get_stats_req& req)
 	yrs.rsp_cmd = PSP_CMD_GET_STATS;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -539,8 +576,9 @@ std::unique_ptr<psp_get_stats_list> psp_get_stats_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, PSP_CMD_GET_STATS, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }

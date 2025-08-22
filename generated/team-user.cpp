@@ -24,8 +24,9 @@ static constexpr std::array<std::string_view, TEAM_CMD_PORT_LIST_GET + 1> team_o
 
 std::string_view team_op_str(int op)
 {
-	if (op < 0 || op >= (int)(team_op_strmap.size()))
+	if (op < 0 || op >= (int)(team_op_strmap.size())) {
 		return "";
+	}
 	return team_op_strmap[op];
 }
 
@@ -137,20 +138,27 @@ int team_attr_option_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.name.size() > 0)
+	if (obj.name.size() > 0) {
 		ynl_attr_put_str(nlh, TEAM_ATTR_OPTION_NAME, obj.name.data());
-	if (obj.changed)
+	}
+	if (obj.changed) {
 		ynl_attr_put(nlh, TEAM_ATTR_OPTION_CHANGED, NULL, 0);
-	if (obj.type.has_value())
+	}
+	if (obj.type.has_value()) {
 		ynl_attr_put_u8(nlh, TEAM_ATTR_OPTION_TYPE, obj.type.value());
-	if (obj.data.size() > 0)
+	}
+	if (obj.data.size() > 0) {
 		ynl_attr_put(nlh, TEAM_ATTR_OPTION_DATA, obj.data.data(), obj.data.size());
-	if (obj.removed)
+	}
+	if (obj.removed) {
 		ynl_attr_put(nlh, TEAM_ATTR_OPTION_REMOVED, NULL, 0);
-	if (obj.port_ifindex.has_value())
+	}
+	if (obj.port_ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, TEAM_ATTR_OPTION_PORT_IFINDEX, obj.port_ifindex.value());
-	if (obj.array_index.has_value())
+	}
+	if (obj.array_index.has_value()) {
 		ynl_attr_put_u32(nlh, TEAM_ATTR_OPTION_ARRAY_INDEX, obj.array_index.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -166,32 +174,39 @@ int team_attr_option_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_OPTION_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->name.assign(ynl_attr_get_str(attr));
 		} else if (type == TEAM_ATTR_OPTION_CHANGED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == TEAM_ATTR_OPTION_TYPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->type = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == TEAM_ATTR_OPTION_DATA) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->data.assign(data, data + len);
 		} else if (type == TEAM_ATTR_OPTION_REMOVED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == TEAM_ATTR_OPTION_PORT_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->port_ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TEAM_ATTR_OPTION_ARRAY_INDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->array_index = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -209,26 +224,32 @@ int team_attr_port_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_PORT_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TEAM_ATTR_PORT_CHANGED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == TEAM_ATTR_PORT_LINKUP) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		} else if (type == TEAM_ATTR_PORT_SPEED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->speed = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TEAM_ATTR_PORT_DUPLEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->duplex = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == TEAM_ATTR_PORT_REMOVED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -241,8 +262,9 @@ int team_item_option_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.option.has_value())
+	if (obj.option.has_value()) {
 		team_attr_option_put(nlh, TEAM_ATTR_ITEM_OPTION, obj.option.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -261,13 +283,15 @@ int team_item_option_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_ITEM_OPTION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &team_attr_option_nest;
 			parg.data = &dst->option.emplace();
-			if (team_attr_option_parse(&parg, attr))
+			if (team_attr_option_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -287,13 +311,15 @@ int team_item_port_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_ITEM_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &team_attr_port_nest;
 			parg.data = &dst->port.emplace();
-			if (team_attr_port_parse(&parg, attr))
+			if (team_attr_port_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -313,8 +339,9 @@ int team_noop_rsp_parse(const struct nlmsghdr *nlh, struct ynl_parse_arg *yarg)
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_TEAM_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->team_ifindex = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -339,8 +366,9 @@ std::unique_ptr<team_noop_rsp> team_noop(ynl_cpp::ynl_socket& ys)
 	yrs.rsp_cmd = TEAM_CMD_NOOP;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -361,17 +389,20 @@ int team_options_set_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_TEAM_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->team_ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TEAM_ATTR_LIST_OPTION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &team_item_option_nest;
 			parg.data = &dst->list_option.emplace();
-			if (team_item_option_parse(&parg, attr))
+			if (team_item_option_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -390,10 +421,12 @@ team_options_set(ynl_cpp::ynl_socket& ys, team_options_set_req& req)
 	((struct ynl_sock*)ys)->req_policy = &team_nest;
 	yrs.yarg.rsp_policy = &team_nest;
 
-	if (req.team_ifindex.has_value())
+	if (req.team_ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, TEAM_ATTR_TEAM_IFINDEX, req.team_ifindex.value());
-	if (req.list_option.has_value())
+	}
+	if (req.list_option.has_value()) {
 		team_item_option_put(nlh, TEAM_ATTR_LIST_OPTION, req.list_option.value());
+	}
 
 	rsp.reset(new team_options_set_rsp());
 	yrs.yarg.data = rsp.get();
@@ -401,8 +434,9 @@ team_options_set(ynl_cpp::ynl_socket& ys, team_options_set_req& req)
 	yrs.rsp_cmd = TEAM_CMD_OPTIONS_SET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -423,17 +457,20 @@ int team_options_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_TEAM_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->team_ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TEAM_ATTR_LIST_OPTION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &team_item_option_nest;
 			parg.data = &dst->list_option.emplace();
-			if (team_item_option_parse(&parg, attr))
+			if (team_item_option_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -452,8 +489,9 @@ team_options_get(ynl_cpp::ynl_socket& ys, team_options_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &team_nest;
 	yrs.yarg.rsp_policy = &team_nest;
 
-	if (req.team_ifindex.has_value())
+	if (req.team_ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, TEAM_ATTR_TEAM_IFINDEX, req.team_ifindex.value());
+	}
 
 	rsp.reset(new team_options_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -461,8 +499,9 @@ team_options_get(ynl_cpp::ynl_socket& ys, team_options_get_req& req)
 	yrs.rsp_cmd = TEAM_CMD_OPTIONS_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -483,17 +522,20 @@ int team_port_list_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == TEAM_ATTR_TEAM_IFINDEX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->team_ifindex = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == TEAM_ATTR_LIST_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &team_item_port_nest;
 			parg.data = &dst->list_port.emplace();
-			if (team_item_port_parse(&parg, attr))
+			if (team_item_port_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -512,8 +554,9 @@ team_port_list_get(ynl_cpp::ynl_socket& ys, team_port_list_get_req& req)
 	((struct ynl_sock*)ys)->req_policy = &team_nest;
 	yrs.yarg.rsp_policy = &team_nest;
 
-	if (req.team_ifindex.has_value())
+	if (req.team_ifindex.has_value()) {
 		ynl_attr_put_u32(nlh, TEAM_ATTR_TEAM_IFINDEX, req.team_ifindex.value());
+	}
 
 	rsp.reset(new team_port_list_get_rsp());
 	yrs.yarg.data = rsp.get();
@@ -521,8 +564,9 @@ team_port_list_get(ynl_cpp::ynl_socket& ys, team_port_list_get_req& req)
 	yrs.rsp_cmd = TEAM_CMD_PORT_LIST_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }

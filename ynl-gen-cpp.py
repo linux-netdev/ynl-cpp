@@ -176,8 +176,10 @@ class Type(SpecAttr):
             cw.p(f"arr[{self.enum_name}].{key} = {val};")
 
     def _attr_put_line(self, ri, var, line):
+        new_block = False
         if self.presence_type() == "flag":
-            ri.cw.p(f"if ({var}.{self.c_name})")
+            ri.cw.block_start(line=f"if ({var}.{self.c_name})")
+            new_block = True
         elif self.presence_type() == "bit":
             member = self._complex_member_type(ri)
             vec = True if self.is_multi_val() else False
@@ -185,13 +187,17 @@ class Type(SpecAttr):
                 vec = True
 
             if vec:
-                ri.cw.p(f"if ({var}.{self.c_name}.size() > 0)")
+                ri.cw.block_start(line=f"if ({var}.{self.c_name}.size() > 0)")
             else:
-                ri.cw.p(f"if ({var}.{self.c_name}.has_value())")
-
+                ri.cw.block_start(line=f"if ({var}.{self.c_name}.has_value())")
+            new_block = True
         elif self.presence_type() == "len":
-            ri.cw.p(f"if ({var}.{self.c_name}.size() > 0)")
+            ri.cw.block_start(line=f"if ({var}.{self.c_name}.size() > 0)")
+            new_block = True
         ri.cw.p(f"{line};")
+
+        if new_block:
+            ri.cw.block_end()
 
     def _attr_put_simple(self, ri, var, put_type):
         if self.presence_type() == "len":
@@ -221,8 +227,9 @@ class Type(SpecAttr):
             ri.cw.nl()
 
         if not self.is_multi_val():
-            ri.cw.p("if (ynl_attr_validate(yarg, attr))")
+            ri.cw.block_start(line="if (ynl_attr_validate(yarg, attr))")
             ri.cw.p("return YNL_PARSE_CB_ERROR;")
+            ri.cw.block_end()
 
         if init_lines:
             ri.cw.nl()
@@ -598,8 +605,9 @@ class TypeNest(Type):
 
     def _attr_get(self, ri, var):
         get_lines = [
-            f"if ({self.nested_render_name}_parse(&parg, attr))",
-            "return YNL_PARSE_CB_ERROR;",
+            f"if ({self.nested_render_name}_parse(&parg, attr)) {{",
+            "\treturn YNL_PARSE_CB_ERROR;",
+            "}",
         ]
         init_lines = [
             f"parg.rsp_policy = &{self.nested_render_name}_nest;",
@@ -1623,8 +1631,11 @@ def _put_enum_to_str_helper(cw, render_name, map_name, arg_name, enum=None):
     cw.block_start()
     if enum and enum.type == "flags":
         cw.p(f"{arg_name} = ({enum.user_type})(ffs({arg_name}) - 1);")
-    cw.p(f"if ({arg_name} < 0 || {arg_name} >= (int)({map_name}.size()))")
+    cw.block_start(
+        line=f"if ({arg_name} < 0 || {arg_name} >= (int)({map_name}.size()))"
+    )
     cw.p('return "";')
+    cw.block_end()
     cw.p(f"return {map_name}[{arg_name}];")
     cw.block_end()
     cw.nl()
@@ -1779,10 +1790,11 @@ def _multi_parse(ri, struct, init_lines, local_vars):
         ri.cw.p(f"memcpy(&dst->_hdr, hdr, sizeof({ri.fixed_hdr}));")
     for anest in sorted(all_multi):
         aspec = struct[anest]
-        ri.cw.p(f"if (dst->{aspec.c_name}.size() > 0)")
+        ri.cw.block_start(line=f"if (dst->{aspec.c_name}.size() > 0)")
         ri.cw.p(
             f'return ynl_error_parse(yarg, "attribute already present ({struct.attr_set.name}.{aspec.name})");'
         )
+        ri.cw.block_end()
 
     ri.cw.nl()
     ri.cw.block_start(line=iter_line)
@@ -1810,10 +1822,11 @@ def _multi_parse(ri, struct, init_lines, local_vars):
         ri.cw.block_start(line=f"ynl_attr_for_each_nested(attr, attr_{aspec.c_name})")
         if "nested-attributes" in aspec:
             ri.cw.p(f"parg.data = &dst->{aspec.c_name}[i];")
-            ri.cw.p(
-                f"if ({aspec.nested_render_name}_parse(&parg, attr, ynl_attr_type(attr)))"
+            ri.cw.block_start(
+                line=f"if ({aspec.nested_render_name}_parse(&parg, attr, ynl_attr_type(attr)))"
             )
             ri.cw.p("return YNL_PARSE_CB_ERROR;")
+            ri.cw.block_end()
         elif aspec.sub_type in scalars:
             ri.cw.p(f"dst->{aspec.c_name}[i] = ynl_attr_get_{aspec.sub_type}(attr);")
         else:
@@ -1835,8 +1848,11 @@ def _multi_parse(ri, struct, init_lines, local_vars):
         ri.cw.block_start(line=f"if (ynl_attr_type(attr) == {aspec.enum_name})")
         if "nested-attributes" in aspec:
             ri.cw.p(f"parg.data = &dst->{aspec.c_name}[i];")
-            ri.cw.p(f"if ({aspec.nested_render_name}_parse(&parg, attr))")
+            ri.cw.block_start(
+                line=f"if ({aspec.nested_render_name}_parse(&parg, attr))"
+            )
             ri.cw.p("return YNL_PARSE_CB_ERROR;")
+            ri.cw.block_end()
         elif aspec.type in scalars:
             ri.cw.p(f"dst->{aspec.c_name}[i] = ynl_attr_get_{aspec.type}(attr);")
         else:
@@ -1959,11 +1975,12 @@ def print_req(ri):
             ri.cw.p(f"yrs.rsp_cmd = {ri.op.rsp_value};")
         ri.cw.nl()
     ri.cw.p("err = ynl_exec(ys, nlh, &yrs);")
-    ri.cw.p("if (err < 0)")
+    ri.cw.block_start(line="if (err < 0)")
     if "reply" in ri.op[ri.op_mode]:
         ri.cw.p("return nullptr;")
     else:
         ri.cw.p("return -1;")
+    ri.cw.block_end()
     ri.cw.nl()
 
     ri.cw.p(f"return {ret_ok};")
@@ -2025,8 +2042,9 @@ def print_dump(ri):
     ri.cw.nl()
 
     ri.cw.p("err = ynl_exec_dump_no_alloc(ys, nlh, &yds);")
-    ri.cw.p("if (err < 0)")
+    ri.cw.block_start(line="if (err < 0)")
     ri.cw.p("return nullptr;")
+    ri.cw.block_end()
     ri.cw.nl()
 
     ri.cw.p("return ret;")

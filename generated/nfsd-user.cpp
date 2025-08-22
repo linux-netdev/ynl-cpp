@@ -30,8 +30,9 @@ static constexpr std::array<std::string_view, NFSD_CMD_POOL_MODE_GET + 1> nfsd_o
 
 std::string_view nfsd_op_str(int op)
 {
-	if (op < 0 || op >= (int)(nfsd_op_strmap.size()))
+	if (op < 0 || op >= (int)(nfsd_op_strmap.size())) {
 		return "";
+	}
 	return nfsd_op_strmap[op];
 }
 
@@ -169,12 +170,15 @@ int nfsd_version_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.major.has_value())
+	if (obj.major.has_value()) {
 		ynl_attr_put_u32(nlh, NFSD_A_VERSION_MAJOR, obj.major.value());
-	if (obj.minor.has_value())
+	}
+	if (obj.minor.has_value()) {
 		ynl_attr_put_u32(nlh, NFSD_A_VERSION_MINOR, obj.minor.value());
-	if (obj.enabled)
+	}
+	if (obj.enabled) {
 		ynl_attr_put(nlh, NFSD_A_VERSION_ENABLED, NULL, 0);
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -189,16 +193,19 @@ int nfsd_version_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NFSD_A_VERSION_MAJOR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->major = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_VERSION_MINOR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->minor = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_VERSION_ENABLED) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -211,10 +218,12 @@ int nfsd_sock_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.addr.size() > 0)
+	if (obj.addr.size() > 0) {
 		ynl_attr_put(nlh, NFSD_A_SOCK_ADDR, obj.addr.data(), obj.addr.size());
-	if (obj.transport_name.size() > 0)
+	}
+	if (obj.transport_name.size() > 0) {
 		ynl_attr_put_str(nlh, NFSD_A_SOCK_TRANSPORT_NAME, obj.transport_name.data());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -229,14 +238,16 @@ int nfsd_sock_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NFSD_A_SOCK_ADDR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->addr.assign(data, data + len);
 		} else if (type == NFSD_A_SOCK_TRANSPORT_NAME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->transport_name.assign(ynl_attr_get_str(attr));
 		}
 	}
@@ -256,63 +267,76 @@ int nfsd_rpc_status_get_rsp_dump_parse(const struct nlmsghdr *nlh,
 
 	dst = (nfsd_rpc_status_get_rsp_dump*)yarg->data;
 
-	if (dst->compound_ops.size() > 0)
+	if (dst->compound_ops.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (rpc-status.compound-ops)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NFSD_A_RPC_STATUS_XID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->xid = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_RPC_STATUS_FLAGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->flags = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_RPC_STATUS_PROG) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->prog = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_RPC_STATUS_VERSION) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->version = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == NFSD_A_RPC_STATUS_PROC) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->proc = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_RPC_STATUS_SERVICE_TIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->service_time = (__s64)ynl_attr_get_s64(attr);
 		} else if (type == NFSD_A_RPC_STATUS_SADDR4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->saddr4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_RPC_STATUS_DADDR4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->daddr4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_RPC_STATUS_SADDR6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->saddr6.assign(data, data + len);
 		} else if (type == NFSD_A_RPC_STATUS_DADDR6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->daddr6.assign(data, data + len);
 		} else if (type == NFSD_A_RPC_STATUS_SPORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->sport = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == NFSD_A_RPC_STATUS_DPORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->dport = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == NFSD_A_RPC_STATUS_COMPOUND_OPS) {
 			n_compound_ops++;
@@ -351,8 +375,9 @@ nfsd_rpc_status_get_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NFSD_CMD_RPC_STATUS_GET, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -370,16 +395,20 @@ int nfsd_threads_set(ynl_cpp::ynl_socket& ys, nfsd_threads_set_req& req)
 
 	for (unsigned int i = 0; i < req.threads.size(); i++)
 		ynl_attr_put_u32(nlh, NFSD_A_SERVER_THREADS, req.threads[i]);
-	if (req.gracetime.has_value())
+	if (req.gracetime.has_value()) {
 		ynl_attr_put_u32(nlh, NFSD_A_SERVER_GRACETIME, req.gracetime.value());
-	if (req.leasetime.has_value())
+	}
+	if (req.leasetime.has_value()) {
 		ynl_attr_put_u32(nlh, NFSD_A_SERVER_LEASETIME, req.leasetime.value());
-	if (req.scope.size() > 0)
+	}
+	if (req.scope.size() > 0) {
 		ynl_attr_put_str(nlh, NFSD_A_SERVER_SCOPE, req.scope.data());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -396,8 +425,9 @@ int nfsd_threads_get_rsp_parse(const struct nlmsghdr *nlh,
 
 	dst = (nfsd_threads_get_rsp*)yarg->data;
 
-	if (dst->threads.size() > 0)
+	if (dst->threads.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (server.threads)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
@@ -405,16 +435,19 @@ int nfsd_threads_get_rsp_parse(const struct nlmsghdr *nlh,
 		if (type == NFSD_A_SERVER_THREADS) {
 			n_threads++;
 		} else if (type == NFSD_A_SERVER_GRACETIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gracetime = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_SERVER_LEASETIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->leasetime = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == NFSD_A_SERVER_SCOPE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->scope.assign(ynl_attr_get_str(attr));
 		}
 	}
@@ -450,8 +483,9 @@ std::unique_ptr<nfsd_threads_get_rsp> nfsd_threads_get(ynl_cpp::ynl_socket& ys)
 	yrs.rsp_cmd = NFSD_CMD_THREADS_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -471,8 +505,9 @@ int nfsd_version_set(ynl_cpp::ynl_socket& ys, nfsd_version_set_req& req)
 		nfsd_version_put(nlh, NFSD_A_SERVER_PROTO_VERSION, req.version[i]);
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -491,8 +526,9 @@ int nfsd_version_get_rsp_parse(const struct nlmsghdr *nlh,
 	dst = (nfsd_version_get_rsp*)yarg->data;
 	parg.ys = yarg->ys;
 
-	if (dst->version.size() > 0)
+	if (dst->version.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (server-proto.version)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
@@ -509,8 +545,9 @@ int nfsd_version_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == NFSD_A_SERVER_PROTO_VERSION) {
 				parg.data = &dst->version[i];
-				if (nfsd_version_parse(&parg, attr))
+				if (nfsd_version_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -536,8 +573,9 @@ std::unique_ptr<nfsd_version_get_rsp> nfsd_version_get(ynl_cpp::ynl_socket& ys)
 	yrs.rsp_cmd = NFSD_CMD_VERSION_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -557,8 +595,9 @@ int nfsd_listener_set(ynl_cpp::ynl_socket& ys, nfsd_listener_set_req& req)
 		nfsd_sock_put(nlh, NFSD_A_SERVER_SOCK_ADDR, req.addr[i]);
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -577,8 +616,9 @@ int nfsd_listener_get_rsp_parse(const struct nlmsghdr *nlh,
 	dst = (nfsd_listener_get_rsp*)yarg->data;
 	parg.ys = yarg->ys;
 
-	if (dst->addr.size() > 0)
+	if (dst->addr.size() > 0) {
 		return ynl_error_parse(yarg, "attribute already present (server-sock.addr)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
@@ -595,8 +635,9 @@ int nfsd_listener_get_rsp_parse(const struct nlmsghdr *nlh,
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == NFSD_A_SERVER_SOCK_ADDR) {
 				parg.data = &dst->addr[i];
-				if (nfsd_sock_parse(&parg, attr))
+				if (nfsd_sock_parse(&parg, attr)) {
 					return YNL_PARSE_CB_ERROR;
+				}
 				i++;
 			}
 		}
@@ -623,8 +664,9 @@ nfsd_listener_get(ynl_cpp::ynl_socket& ys)
 	yrs.rsp_cmd = NFSD_CMD_LISTENER_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -640,12 +682,14 @@ int nfsd_pool_mode_set(ynl_cpp::ynl_socket& ys, nfsd_pool_mode_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NFSD_CMD_POOL_MODE_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &nfsd_pool_mode_nest;
 
-	if (req.mode.size() > 0)
+	if (req.mode.size() > 0) {
 		ynl_attr_put_str(nlh, NFSD_A_POOL_MODE_MODE, req.mode.data());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -664,12 +708,14 @@ int nfsd_pool_mode_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == NFSD_A_POOL_MODE_MODE) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->mode.assign(ynl_attr_get_str(attr));
 		} else if (type == NFSD_A_POOL_MODE_NPOOLS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->npools = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -695,8 +741,9 @@ nfsd_pool_mode_get(ynl_cpp::ynl_socket& ys)
 	yrs.rsp_cmd = NFSD_CMD_POOL_MODE_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }

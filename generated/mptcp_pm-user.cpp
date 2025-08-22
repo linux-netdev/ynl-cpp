@@ -32,8 +32,9 @@ static constexpr std::array<std::string_view, MPTCP_PM_CMD_SUBFLOW_DESTROY + 1> 
 
 std::string_view mptcp_pm_op_str(int op)
 {
-	if (op < 0 || op >= (int)(mptcp_pm_op_strmap.size()))
+	if (op < 0 || op >= (int)(mptcp_pm_op_strmap.size())) {
 		return "";
+	}
 	return mptcp_pm_op_strmap[op];
 }
 
@@ -55,8 +56,9 @@ static constexpr std::array<std::string_view, 16 + 1> mptcp_pm_event_type_strmap
 
 std::string_view mptcp_pm_event_type_str(mptcp_event_type value)
 {
-	if (value < 0 || value >= (int)(mptcp_pm_event_type_strmap.size()))
+	if (value < 0 || value >= (int)(mptcp_pm_event_type_strmap.size())) {
 		return "";
+	}
 	return mptcp_pm_event_type_strmap[value];
 }
 
@@ -133,20 +135,27 @@ int mptcp_pm_address_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	struct nlattr *nest;
 
 	nest = ynl_attr_nest_start(nlh, attr_type);
-	if (obj.family.has_value())
+	if (obj.family.has_value()) {
 		ynl_attr_put_u16(nlh, MPTCP_PM_ADDR_ATTR_FAMILY, obj.family.value());
-	if (obj.id.has_value())
+	}
+	if (obj.id.has_value()) {
 		ynl_attr_put_u8(nlh, MPTCP_PM_ADDR_ATTR_ID, obj.id.value());
-	if (obj.addr4.has_value())
+	}
+	if (obj.addr4.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ADDR_ATTR_ADDR4, obj.addr4.value());
-	if (obj.addr6.size() > 0)
+	}
+	if (obj.addr6.size() > 0) {
 		ynl_attr_put(nlh, MPTCP_PM_ADDR_ATTR_ADDR6, obj.addr6.data(), obj.addr6.size());
-	if (obj.port.has_value())
+	}
+	if (obj.port.has_value()) {
 		ynl_attr_put_u16(nlh, MPTCP_PM_ADDR_ATTR_PORT, obj.port.value());
-	if (obj.flags.has_value())
+	}
+	if (obj.flags.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ADDR_ATTR_FLAGS, obj.flags.value());
-	if (obj.if_idx.has_value())
+	}
+	if (obj.if_idx.has_value()) {
 		ynl_attr_put_s32(nlh, MPTCP_PM_ADDR_ATTR_IF_IDX, obj.if_idx.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -162,34 +171,41 @@ int mptcp_pm_address_parse(struct ynl_parse_arg *yarg,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == MPTCP_PM_ADDR_ATTR_FAMILY) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->family = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == MPTCP_PM_ADDR_ATTR_ID) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->id = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == MPTCP_PM_ADDR_ATTR_ADDR4) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->addr4 = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == MPTCP_PM_ADDR_ATTR_ADDR6) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->addr6.assign(data, data + len);
 		} else if (type == MPTCP_PM_ADDR_ATTR_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->port = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == MPTCP_PM_ADDR_ATTR_FLAGS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->flags = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == MPTCP_PM_ADDR_ATTR_IF_IDX) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->if_idx = (__s32)ynl_attr_get_s32(attr);
 		}
 	}
@@ -208,12 +224,14 @@ int mptcp_pm_add_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_add_addr_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_ADD_ADDR, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_endpoint_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ENDPOINT_ADDR, req.addr.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -229,12 +247,14 @@ int mptcp_pm_del_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_del_addr_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_DEL_ADDR, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_endpoint_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ENDPOINT_ADDR, req.addr.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -255,13 +275,15 @@ int mptcp_pm_get_addr_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == MPTCP_PM_ATTR_ADDR) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 
 			parg.rsp_policy = &mptcp_pm_address_nest;
 			parg.data = &dst->addr.emplace();
-			if (mptcp_pm_address_parse(&parg, attr))
+			if (mptcp_pm_address_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 		}
 	}
 
@@ -280,10 +302,12 @@ mptcp_pm_get_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_get_addr_req& req)
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 	yrs.yarg.rsp_policy = &mptcp_pm_attr_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR, req.addr.value());
-	if (req.token.has_value())
+	}
+	if (req.token.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_TOKEN, req.token.value());
+	}
 
 	rsp.reset(new mptcp_pm_get_addr_rsp());
 	yrs.yarg.data = rsp.get();
@@ -291,8 +315,9 @@ mptcp_pm_get_addr(ynl_cpp::ynl_socket& ys, mptcp_pm_get_addr_req& req)
 	yrs.rsp_cmd = MPTCP_PM_CMD_GET_ADDR;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -316,8 +341,9 @@ mptcp_pm_get_addr_dump(ynl_cpp::ynl_socket& ys)
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_GET_ADDR, 1);
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -334,12 +360,14 @@ int mptcp_pm_flush_addrs(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_FLUSH_ADDRS, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_endpoint_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ENDPOINT_ADDR, req.addr.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -355,14 +383,17 @@ int mptcp_pm_set_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_set_limits_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_SET_LIMITS, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 
-	if (req.rcv_add_addrs.has_value())
+	if (req.rcv_add_addrs.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_RCV_ADD_ADDRS, req.rcv_add_addrs.value());
-	if (req.subflows.has_value())
+	}
+	if (req.subflows.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_SUBFLOWS, req.subflows.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -381,12 +412,14 @@ int mptcp_pm_get_limits_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == MPTCP_PM_ATTR_RCV_ADD_ADDRS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->rcv_add_addrs = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == MPTCP_PM_ATTR_SUBFLOWS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->subflows = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
@@ -406,10 +439,12 @@ mptcp_pm_get_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_get_limits_req& req)
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 	yrs.yarg.rsp_policy = &mptcp_pm_attr_nest;
 
-	if (req.rcv_add_addrs.has_value())
+	if (req.rcv_add_addrs.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_RCV_ADD_ADDRS, req.rcv_add_addrs.value());
-	if (req.subflows.has_value())
+	}
+	if (req.subflows.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_SUBFLOWS, req.subflows.value());
+	}
 
 	rsp.reset(new mptcp_pm_get_limits_rsp());
 	yrs.yarg.data = rsp.get();
@@ -417,8 +452,9 @@ mptcp_pm_get_limits(ynl_cpp::ynl_socket& ys, mptcp_pm_get_limits_req& req)
 	yrs.rsp_cmd = MPTCP_PM_CMD_GET_LIMITS;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -434,16 +470,20 @@ int mptcp_pm_set_flags(ynl_cpp::ynl_socket& ys, mptcp_pm_set_flags_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_SET_FLAGS, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR, req.addr.value());
-	if (req.token.has_value())
+	}
+	if (req.token.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_TOKEN, req.token.value());
-	if (req.addr_remote.has_value())
+	}
+	if (req.addr_remote.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR_REMOTE, req.addr_remote.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -459,14 +499,17 @@ int mptcp_pm_announce(ynl_cpp::ynl_socket& ys, mptcp_pm_announce_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_ANNOUNCE, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR, req.addr.value());
-	if (req.token.has_value())
+	}
+	if (req.token.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_TOKEN, req.token.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -482,14 +525,17 @@ int mptcp_pm_remove(ynl_cpp::ynl_socket& ys, mptcp_pm_remove_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_REMOVE, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 
-	if (req.token.has_value())
+	if (req.token.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_TOKEN, req.token.value());
-	if (req.loc_id.has_value())
+	}
+	if (req.loc_id.has_value()) {
 		ynl_attr_put_u8(nlh, MPTCP_PM_ATTR_LOC_ID, req.loc_id.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -506,16 +552,20 @@ int mptcp_pm_subflow_create(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_SUBFLOW_CREATE, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR, req.addr.value());
-	if (req.token.has_value())
+	}
+	if (req.token.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_TOKEN, req.token.value());
-	if (req.addr_remote.has_value())
+	}
+	if (req.addr_remote.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR_REMOTE, req.addr_remote.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -532,16 +582,20 @@ int mptcp_pm_subflow_destroy(ynl_cpp::ynl_socket& ys,
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, MPTCP_PM_CMD_SUBFLOW_DESTROY, 1);
 	((struct ynl_sock*)ys)->req_policy = &mptcp_pm_attr_nest;
 
-	if (req.addr.has_value())
+	if (req.addr.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR, req.addr.value());
-	if (req.token.has_value())
+	}
+	if (req.token.has_value()) {
 		ynl_attr_put_u32(nlh, MPTCP_PM_ATTR_TOKEN, req.token.value());
-	if (req.addr_remote.has_value())
+	}
+	if (req.addr_remote.has_value()) {
 		mptcp_pm_address_put(nlh, MPTCP_PM_ATTR_ADDR_REMOTE, req.addr_remote.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }

@@ -23,8 +23,9 @@ static constexpr std::array<std::string_view, LOCKD_CMD_SERVER_GET + 1> lockd_op
 
 std::string_view lockd_op_str(int op)
 {
-	if (op < 0 || op >= (int)(lockd_op_strmap.size()))
+	if (op < 0 || op >= (int)(lockd_op_strmap.size())) {
 		return "";
+	}
 	return lockd_op_strmap[op];
 }
 
@@ -57,16 +58,20 @@ int lockd_server_set(ynl_cpp::ynl_socket& ys, lockd_server_set_req& req)
 	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, LOCKD_CMD_SERVER_SET, 1);
 	((struct ynl_sock*)ys)->req_policy = &lockd_server_nest;
 
-	if (req.gracetime.has_value())
+	if (req.gracetime.has_value()) {
 		ynl_attr_put_u32(nlh, LOCKD_A_SERVER_GRACETIME, req.gracetime.value());
-	if (req.tcp_port.has_value())
+	}
+	if (req.tcp_port.has_value()) {
 		ynl_attr_put_u16(nlh, LOCKD_A_SERVER_TCP_PORT, req.tcp_port.value());
-	if (req.udp_port.has_value())
+	}
+	if (req.udp_port.has_value()) {
 		ynl_attr_put_u16(nlh, LOCKD_A_SERVER_UDP_PORT, req.udp_port.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -85,16 +90,19 @@ int lockd_server_get_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == LOCKD_A_SERVER_GRACETIME) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->gracetime = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == LOCKD_A_SERVER_TCP_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->tcp_port = (__u16)ynl_attr_get_u16(attr);
 		} else if (type == LOCKD_A_SERVER_UDP_PORT) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->udp_port = (__u16)ynl_attr_get_u16(attr);
 		}
 	}
@@ -119,8 +127,9 @@ std::unique_ptr<lockd_server_get_rsp> lockd_server_get(ynl_cpp::ynl_socket& ys)
 	yrs.rsp_cmd = LOCKD_CMD_SERVER_GET;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }

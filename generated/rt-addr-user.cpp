@@ -23,8 +23,9 @@ static constexpr std::array<std::string_view, RTM_GETMULTICAST + 1> rt_addr_op_s
 
 std::string_view rt_addr_op_str(int op)
 {
-	if (op < 0 || op >= (int)(rt_addr_op_strmap.size()))
+	if (op < 0 || op >= (int)(rt_addr_op_strmap.size())) {
 		return "";
+	}
 	return rt_addr_op_strmap[op];
 }
 
@@ -48,8 +49,9 @@ static constexpr std::array<std::string_view, 11 + 1> rt_addr_ifa_flags_strmap =
 std::string_view rt_addr_ifa_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_addr_ifa_flags_strmap.size()))
+	if (value < 0 || value >= (int)(rt_addr_ifa_flags_strmap.size())) {
 		return "";
+	}
 	return rt_addr_ifa_flags_strmap[value];
 }
 
@@ -104,18 +106,23 @@ int rt_addr_newaddr(ynl_cpp::ynl_socket& ys, rt_addr_newaddr_req& req)
 	hdr = ynl_nlmsg_put_extra_header(nlh, hdr_len);
 	memcpy(hdr, &req._hdr, hdr_len);
 
-	if (req.address.size() > 0)
+	if (req.address.size() > 0) {
 		ynl_attr_put(nlh, IFA_ADDRESS, req.address.data(), req.address.size());
-	if (req.label.size() > 0)
+	}
+	if (req.label.size() > 0) {
 		ynl_attr_put_str(nlh, IFA_LABEL, req.label.data());
-	if (req.local.size() > 0)
+	}
+	if (req.local.size() > 0) {
 		ynl_attr_put(nlh, IFA_LOCAL, req.local.data(), req.local.size());
-	if (req.cacheinfo)
+	}
+	if (req.cacheinfo) {
 		ynl_attr_put(nlh, IFA_CACHEINFO, &*req.cacheinfo, sizeof(struct ifa_cacheinfo));
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -137,14 +144,17 @@ int rt_addr_deladdr(ynl_cpp::ynl_socket& ys, rt_addr_deladdr_req& req)
 	hdr = ynl_nlmsg_put_extra_header(nlh, hdr_len);
 	memcpy(hdr, &req._hdr, hdr_len);
 
-	if (req.address.size() > 0)
+	if (req.address.size() > 0) {
 		ynl_attr_put(nlh, IFA_ADDRESS, req.address.data(), req.address.size());
-	if (req.local.size() > 0)
+	}
+	if (req.local.size() > 0) {
 		ynl_attr_put(nlh, IFA_LOCAL, req.local.data(), req.local.size());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return -1;
+	}
 
 	return 0;
 }
@@ -167,24 +177,28 @@ int rt_addr_getaddr_rsp_dump_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == IFA_ADDRESS) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->address.assign(data, data + len);
 		} else if (type == IFA_LABEL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			dst->label.assign(ynl_attr_get_str(attr));
 		} else if (type == IFA_LOCAL) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->local.assign(data, data + len);
 		} else if (type == IFA_CACHEINFO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			unsigned int struct_sz = sizeof(struct ifa_cacheinfo);
 			dst->cacheinfo.emplace();
@@ -220,8 +234,9 @@ rt_addr_getaddr_dump(ynl_cpp::ynl_socket& ys, rt_addr_getaddr_req_dump& req)
 	((struct ynl_sock*)ys)->req_policy = &rt_addr_addr_attrs_nest;
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }
@@ -244,14 +259,16 @@ int rt_addr_getmulticast_rsp_parse(const struct nlmsghdr *nlh,
 		unsigned int type = ynl_attr_type(attr);
 
 		if (type == IFA_MULTICAST) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->multicast.assign(data, data + len);
 		} else if (type == IFA_CACHEINFO) {
-			if (ynl_attr_validate(yarg, attr))
+			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
+			}
 			unsigned int len = ynl_attr_data_len(attr);
 			unsigned int struct_sz = sizeof(struct ifa_cacheinfo);
 			dst->cacheinfo.emplace();
@@ -286,8 +303,9 @@ rt_addr_getmulticast(ynl_cpp::ynl_socket& ys, rt_addr_getmulticast_req& req)
 	yrs.rsp_cmd = RTM_GETMULTICAST;
 
 	err = ynl_exec(ys, nlh, &yrs);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return rsp;
 }
@@ -319,8 +337,9 @@ rt_addr_getmulticast_dump(ynl_cpp::ynl_socket& ys,
 	((struct ynl_sock*)ys)->req_policy = &rt_addr_addr_attrs_nest;
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
-	if (err < 0)
+	if (err < 0) {
 		return nullptr;
+	}
 
 	return ret;
 }

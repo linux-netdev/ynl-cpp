@@ -42,8 +42,8 @@ struct ovs_datapath_get_rsp {
 
 	std::string name;
 	std::optional<__u32> upcall_pid;
-	std::vector<__u8> stats;
-	std::vector<__u8> megaflow_stats;
+	std::optional<struct ovs_dp_stats> stats;
+	std::optional<struct ovs_dp_megaflow_stats> megaflow_stats;
 	std::optional<__u32> user_features;
 	std::optional<__u32> masks_cache_size;
 	std::vector<__u8> per_cpu_pids;
@@ -53,7 +53,7 @@ struct ovs_datapath_get_rsp {
  * Get / dump OVS data path configuration and state
  */
 std::unique_ptr<ovs_datapath_get_rsp>
-ovs_datapath_get(ynl_cpp::ynl_socket&  ys, ovs_datapath_get_req& req);
+ovs_datapath_get(ynl_cpp::ynl_socket& ys, ovs_datapath_get_req& req);
 
 /* OVS_DP_CMD_GET - dump */
 struct ovs_datapath_get_req_dump {
@@ -67,7 +67,7 @@ struct ovs_datapath_get_list {
 };
 
 std::unique_ptr<ovs_datapath_get_list>
-ovs_datapath_get_dump(ynl_cpp::ynl_socket&  ys, ovs_datapath_get_req_dump& req);
+ovs_datapath_get_dump(ynl_cpp::ynl_socket& ys, ovs_datapath_get_req_dump& req);
 
 /* ============== OVS_DP_CMD_NEW ============== */
 /* OVS_DP_CMD_NEW - do */
@@ -82,7 +82,7 @@ struct ovs_datapath_new_req {
 /*
  * Create new OVS data path
  */
-int ovs_datapath_new(ynl_cpp::ynl_socket&  ys, ovs_datapath_new_req& req);
+int ovs_datapath_new(ynl_cpp::ynl_socket& ys, ovs_datapath_new_req& req);
 
 /* ============== OVS_DP_CMD_DEL ============== */
 /* OVS_DP_CMD_DEL - do */
@@ -95,7 +95,7 @@ struct ovs_datapath_del_req {
 /*
  * Delete existing OVS data path
  */
-int ovs_datapath_del(ynl_cpp::ynl_socket&  ys, ovs_datapath_del_req& req);
+int ovs_datapath_del(ynl_cpp::ynl_socket& ys, ovs_datapath_del_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_OVS_DATAPATH_GEN_H */
