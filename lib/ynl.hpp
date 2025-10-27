@@ -14,6 +14,13 @@ namespace ynl_cpp {
 class ynl_socket {
  public:
   explicit ynl_socket(const ynl_family& family, ynl_error* err = nullptr);
+
+  ynl_socket(const ynl_socket&) = delete;
+  ynl_socket& operator=(const ynl_socket&) = delete;
+
+  ynl_socket(ynl_socket&& other) noexcept;
+  ynl_socket& operator=(ynl_socket&& other) noexcept;
+
   ~ynl_socket();
 
   operator bool() const {
