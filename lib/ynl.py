@@ -753,7 +753,7 @@ class YnlFamily(SpecFamily):
                 decoded.update(subdict)
             else:
                 raise Exception(
-                    f"Unknown attribute-set '{attr_space}' when decoding '{attr_spec.name}'"
+                    f"Unknown attribute-set '{msg_format.attr_set}' when decoding '{attr_spec.name}'"
                 )
         return decoded
 
