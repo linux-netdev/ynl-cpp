@@ -17,6 +17,7 @@
 #include <string>
 #include <string_view>
 #include <vector>
+#include <array>
 
 #include "ynl.hpp"
 
@@ -53,11 +54,12 @@ std::string_view devlink_param_cmode_str(devlink_param_cmode value);
 std::string_view devlink_flash_overwrite_str(devlink_flash_overwrite value);
 std::string_view devlink_trap_action_str(devlink_trap_action value);
 std::string_view devlink_trap_type_str(devlink_trap_type value);
+std::string_view devlink_var_attr_type_str(devlink_var_attr_type value);
 
 /* Common nested types */
 struct devlink_dl_dpipe_match {
-	std::optional<devlink_dpipe_match_type> dpipe_match_type;
-	std::optional<devlink_dpipe_header_id> dpipe_header_id;
+	std::optional<enum devlink_dpipe_match_type> dpipe_match_type;
+	std::optional<enum devlink_dpipe_header_id> dpipe_header_id;
 	std::optional<__u8> dpipe_header_global;
 	std::optional<__u32> dpipe_header_index;
 	std::optional<__u32> dpipe_field_id;
@@ -71,8 +73,8 @@ struct devlink_dl_dpipe_match_value {
 };
 
 struct devlink_dl_dpipe_action {
-	std::optional<devlink_dpipe_action_type> dpipe_action_type;
-	std::optional<devlink_dpipe_header_id> dpipe_header_id;
+	std::optional<enum devlink_dpipe_action_type> dpipe_action_type;
+	std::optional<enum devlink_dpipe_header_id> dpipe_header_id;
 	std::optional<__u8> dpipe_header_global;
 	std::optional<__u32> dpipe_header_index;
 	std::optional<__u32> dpipe_field_id;
@@ -89,7 +91,7 @@ struct devlink_dl_dpipe_field {
 	std::string dpipe_field_name;
 	std::optional<__u32> dpipe_field_id;
 	std::optional<__u32> dpipe_field_bitwidth;
-	std::optional<devlink_dpipe_field_mapping_type> dpipe_field_mapping_type;
+	std::optional<enum devlink_dpipe_field_mapping_type> dpipe_field_mapping_type;
 };
 
 struct devlink_dl_resource {
@@ -101,14 +103,14 @@ struct devlink_dl_resource {
 	std::optional<__u64> resource_size_min;
 	std::optional<__u64> resource_size_max;
 	std::optional<__u64> resource_size_gran;
-	std::optional<devlink_resource_unit> resource_unit;
+	std::optional<enum devlink_resource_unit> resource_unit;
 	std::optional<__u64> resource_occ;
 };
 
 struct devlink_dl_param {
 	std::string param_name;
 	bool param_generic{};
-	std::optional<__u8> param_type;
+	std::optional<enum devlink_var_attr_type> param_type;
 };
 
 struct devlink_dl_region_snapshot {
@@ -143,6 +145,7 @@ struct devlink_dl_health_reporter {
 	std::optional<__u64> health_reporter_dump_ts;
 	std::optional<__u64> health_reporter_dump_ts_ns;
 	std::optional<__u8> health_reporter_auto_dump;
+	std::optional<__u64> health_reporter_burst_period;
 };
 
 struct devlink_dl_attr_stats {
@@ -158,8 +161,8 @@ struct devlink_dl_trap_metadata {
 
 struct devlink_dl_port_function {
 	std::vector<__u8> hw_addr;
-	std::optional<devlink_port_fn_state> state;
-	std::optional<devlink_port_fn_opstate> opstate;
+	std::optional<enum devlink_port_fn_state> state;
+	std::optional<enum devlink_port_fn_opstate> opstate;
 	std::optional<struct nla_bitfield32> caps;
 };
 
@@ -178,6 +181,11 @@ struct devlink_dl_linecard_supported_types {
 
 struct devlink_dl_selftest_id {
 	bool flash{};
+};
+
+struct devlink_dl_rate_tc_bws {
+	std::optional<__u8> index;
+	std::optional<__u32> bw;
 };
 
 struct devlink_dl_dpipe_table_matches {
@@ -213,7 +221,7 @@ struct devlink_dl_region_chunks {
 };
 
 struct devlink_dl_reload_act_info {
-	std::optional<devlink_reload_action> reload_action;
+	std::optional<enum devlink_reload_action> reload_action;
 	std::vector<devlink_dl_reload_act_stats> reload_action_stats;
 };
 
@@ -236,7 +244,7 @@ struct devlink_dl_dpipe_entry {
 
 struct devlink_dl_dpipe_header {
 	std::string dpipe_header_name;
-	std::optional<devlink_dpipe_header_id> dpipe_header_id;
+	std::optional<enum devlink_dpipe_header_id> dpipe_header_id;
 	std::optional<__u8> dpipe_header_global;
 	std::optional<devlink_dl_dpipe_header_fields> dpipe_header_fields;
 };
@@ -280,14 +288,14 @@ struct devlink_get_rsp {
  * Get devlink instances.
  */
 std::unique_ptr<devlink_get_rsp>
-devlink_get(ynl_cpp::ynl_socket&  ys, devlink_get_req& req);
+devlink_get(ynl_cpp::ynl_socket& ys, devlink_get_req& req);
 
 /* DEVLINK_CMD_GET - dump */
 struct devlink_get_list {
 	std::list<devlink_get_rsp> objs;
 };
 
-std::unique_ptr<devlink_get_list> devlink_get_dump(ynl_cpp::ynl_socket&  ys);
+std::unique_ptr<devlink_get_list> devlink_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== DEVLINK_CMD_PORT_GET ============== */
 /* DEVLINK_CMD_PORT_GET - do */
@@ -307,7 +315,7 @@ struct devlink_port_get_rsp {
  * Get devlink port instances.
  */
 std::unique_ptr<devlink_port_get_rsp>
-devlink_port_get(ynl_cpp::ynl_socket&  ys, devlink_port_get_req& req);
+devlink_port_get(ynl_cpp::ynl_socket& ys, devlink_port_get_req& req);
 
 /* DEVLINK_CMD_PORT_GET - dump */
 struct devlink_port_get_req_dump {
@@ -326,7 +334,7 @@ struct devlink_port_get_rsp_list {
 };
 
 std::unique_ptr<devlink_port_get_rsp_list>
-devlink_port_get_dump(ynl_cpp::ynl_socket&  ys, devlink_port_get_req_dump& req);
+devlink_port_get_dump(ynl_cpp::ynl_socket& ys, devlink_port_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_PORT_SET ============== */
 /* DEVLINK_CMD_PORT_SET - do */
@@ -334,14 +342,14 @@ struct devlink_port_set_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u32> port_index;
-	std::optional<devlink_port_type> port_type;
+	std::optional<enum devlink_port_type> port_type;
 	std::optional<devlink_dl_port_function> port_function;
 };
 
 /*
  * Set devlink port instances.
  */
-int devlink_port_set(ynl_cpp::ynl_socket&  ys, devlink_port_set_req& req);
+int devlink_port_set(ynl_cpp::ynl_socket& ys, devlink_port_set_req& req);
 
 /* ============== DEVLINK_CMD_PORT_NEW ============== */
 /* DEVLINK_CMD_PORT_NEW - do */
@@ -349,7 +357,7 @@ struct devlink_port_new_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u32> port_index;
-	std::optional<devlink_port_flavour> port_flavour;
+	std::optional<enum devlink_port_flavour> port_flavour;
 	std::optional<__u16> port_pci_pf_number;
 	std::optional<__u32> port_pci_sf_number;
 	std::optional<__u32> port_controller_number;
@@ -365,7 +373,7 @@ struct devlink_port_new_rsp {
  * Create devlink port instances.
  */
 std::unique_ptr<devlink_port_new_rsp>
-devlink_port_new(ynl_cpp::ynl_socket&  ys, devlink_port_new_req& req);
+devlink_port_new(ynl_cpp::ynl_socket& ys, devlink_port_new_req& req);
 
 /* ============== DEVLINK_CMD_PORT_DEL ============== */
 /* DEVLINK_CMD_PORT_DEL - do */
@@ -378,7 +386,7 @@ struct devlink_port_del_req {
 /*
  * Delete devlink port instances.
  */
-int devlink_port_del(ynl_cpp::ynl_socket&  ys, devlink_port_del_req& req);
+int devlink_port_del(ynl_cpp::ynl_socket& ys, devlink_port_del_req& req);
 
 /* ============== DEVLINK_CMD_PORT_SPLIT ============== */
 /* DEVLINK_CMD_PORT_SPLIT - do */
@@ -392,7 +400,7 @@ struct devlink_port_split_req {
 /*
  * Split devlink port instances.
  */
-int devlink_port_split(ynl_cpp::ynl_socket&  ys, devlink_port_split_req& req);
+int devlink_port_split(ynl_cpp::ynl_socket& ys, devlink_port_split_req& req);
 
 /* ============== DEVLINK_CMD_PORT_UNSPLIT ============== */
 /* DEVLINK_CMD_PORT_UNSPLIT - do */
@@ -405,7 +413,7 @@ struct devlink_port_unsplit_req {
 /*
  * Unplit devlink port instances.
  */
-int devlink_port_unsplit(ynl_cpp::ynl_socket&  ys,
+int devlink_port_unsplit(ynl_cpp::ynl_socket& ys,
 			 devlink_port_unsplit_req& req);
 
 /* ============== DEVLINK_CMD_SB_GET ============== */
@@ -426,7 +434,7 @@ struct devlink_sb_get_rsp {
  * Get shared buffer instances.
  */
 std::unique_ptr<devlink_sb_get_rsp>
-devlink_sb_get(ynl_cpp::ynl_socket&  ys, devlink_sb_get_req& req);
+devlink_sb_get(ynl_cpp::ynl_socket& ys, devlink_sb_get_req& req);
 
 /* DEVLINK_CMD_SB_GET - dump */
 struct devlink_sb_get_req_dump {
@@ -439,7 +447,7 @@ struct devlink_sb_get_list {
 };
 
 std::unique_ptr<devlink_sb_get_list>
-devlink_sb_get_dump(ynl_cpp::ynl_socket&  ys, devlink_sb_get_req_dump& req);
+devlink_sb_get_dump(ynl_cpp::ynl_socket& ys, devlink_sb_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_SB_POOL_GET ============== */
 /* DEVLINK_CMD_SB_POOL_GET - do */
@@ -461,7 +469,7 @@ struct devlink_sb_pool_get_rsp {
  * Get shared buffer pool instances.
  */
 std::unique_ptr<devlink_sb_pool_get_rsp>
-devlink_sb_pool_get(ynl_cpp::ynl_socket&  ys, devlink_sb_pool_get_req& req);
+devlink_sb_pool_get(ynl_cpp::ynl_socket& ys, devlink_sb_pool_get_req& req);
 
 /* DEVLINK_CMD_SB_POOL_GET - dump */
 struct devlink_sb_pool_get_req_dump {
@@ -474,7 +482,7 @@ struct devlink_sb_pool_get_list {
 };
 
 std::unique_ptr<devlink_sb_pool_get_list>
-devlink_sb_pool_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_sb_pool_get_dump(ynl_cpp::ynl_socket& ys,
 			 devlink_sb_pool_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_SB_POOL_SET ============== */
@@ -484,14 +492,14 @@ struct devlink_sb_pool_set_req {
 	std::string dev_name;
 	std::optional<__u32> sb_index;
 	std::optional<__u16> sb_pool_index;
-	std::optional<devlink_sb_threshold_type> sb_pool_threshold_type;
+	std::optional<enum devlink_sb_threshold_type> sb_pool_threshold_type;
 	std::optional<__u32> sb_pool_size;
 };
 
 /*
  * Set shared buffer pool instances.
  */
-int devlink_sb_pool_set(ynl_cpp::ynl_socket&  ys, devlink_sb_pool_set_req& req);
+int devlink_sb_pool_set(ynl_cpp::ynl_socket& ys, devlink_sb_pool_set_req& req);
 
 /* ============== DEVLINK_CMD_SB_PORT_POOL_GET ============== */
 /* DEVLINK_CMD_SB_PORT_POOL_GET - do */
@@ -515,7 +523,7 @@ struct devlink_sb_port_pool_get_rsp {
  * Get shared buffer port-pool combinations and threshold.
  */
 std::unique_ptr<devlink_sb_port_pool_get_rsp>
-devlink_sb_port_pool_get(ynl_cpp::ynl_socket&  ys,
+devlink_sb_port_pool_get(ynl_cpp::ynl_socket& ys,
 			 devlink_sb_port_pool_get_req& req);
 
 /* DEVLINK_CMD_SB_PORT_POOL_GET - dump */
@@ -529,7 +537,7 @@ struct devlink_sb_port_pool_get_list {
 };
 
 std::unique_ptr<devlink_sb_port_pool_get_list>
-devlink_sb_port_pool_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_sb_port_pool_get_dump(ynl_cpp::ynl_socket& ys,
 			      devlink_sb_port_pool_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_SB_PORT_POOL_SET ============== */
@@ -546,7 +554,7 @@ struct devlink_sb_port_pool_set_req {
 /*
  * Set shared buffer port-pool combinations and threshold.
  */
-int devlink_sb_port_pool_set(ynl_cpp::ynl_socket&  ys,
+int devlink_sb_port_pool_set(ynl_cpp::ynl_socket& ys,
 			     devlink_sb_port_pool_set_req& req);
 
 /* ============== DEVLINK_CMD_SB_TC_POOL_BIND_GET ============== */
@@ -556,7 +564,7 @@ struct devlink_sb_tc_pool_bind_get_req {
 	std::string dev_name;
 	std::optional<__u32> port_index;
 	std::optional<__u32> sb_index;
-	std::optional<devlink_sb_pool_type> sb_pool_type;
+	std::optional<enum devlink_sb_pool_type> sb_pool_type;
 	std::optional<__u16> sb_tc_index;
 };
 
@@ -565,7 +573,7 @@ struct devlink_sb_tc_pool_bind_get_rsp {
 	std::string dev_name;
 	std::optional<__u32> port_index;
 	std::optional<__u32> sb_index;
-	std::optional<devlink_sb_pool_type> sb_pool_type;
+	std::optional<enum devlink_sb_pool_type> sb_pool_type;
 	std::optional<__u16> sb_tc_index;
 };
 
@@ -573,7 +581,7 @@ struct devlink_sb_tc_pool_bind_get_rsp {
  * Get shared buffer port-TC to pool bindings and threshold.
  */
 std::unique_ptr<devlink_sb_tc_pool_bind_get_rsp>
-devlink_sb_tc_pool_bind_get(ynl_cpp::ynl_socket&  ys,
+devlink_sb_tc_pool_bind_get(ynl_cpp::ynl_socket& ys,
 			    devlink_sb_tc_pool_bind_get_req& req);
 
 /* DEVLINK_CMD_SB_TC_POOL_BIND_GET - dump */
@@ -587,7 +595,7 @@ struct devlink_sb_tc_pool_bind_get_list {
 };
 
 std::unique_ptr<devlink_sb_tc_pool_bind_get_list>
-devlink_sb_tc_pool_bind_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_sb_tc_pool_bind_get_dump(ynl_cpp::ynl_socket& ys,
 				 devlink_sb_tc_pool_bind_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_SB_TC_POOL_BIND_SET ============== */
@@ -598,7 +606,7 @@ struct devlink_sb_tc_pool_bind_set_req {
 	std::optional<__u32> port_index;
 	std::optional<__u32> sb_index;
 	std::optional<__u16> sb_pool_index;
-	std::optional<devlink_sb_pool_type> sb_pool_type;
+	std::optional<enum devlink_sb_pool_type> sb_pool_type;
 	std::optional<__u16> sb_tc_index;
 	std::optional<__u32> sb_threshold;
 };
@@ -606,7 +614,7 @@ struct devlink_sb_tc_pool_bind_set_req {
 /*
  * Set shared buffer port-TC to pool bindings and threshold.
  */
-int devlink_sb_tc_pool_bind_set(ynl_cpp::ynl_socket&  ys,
+int devlink_sb_tc_pool_bind_set(ynl_cpp::ynl_socket& ys,
 				devlink_sb_tc_pool_bind_set_req& req);
 
 /* ============== DEVLINK_CMD_SB_OCC_SNAPSHOT ============== */
@@ -620,7 +628,7 @@ struct devlink_sb_occ_snapshot_req {
 /*
  * Take occupancy snapshot of shared buffer.
  */
-int devlink_sb_occ_snapshot(ynl_cpp::ynl_socket&  ys,
+int devlink_sb_occ_snapshot(ynl_cpp::ynl_socket& ys,
 			    devlink_sb_occ_snapshot_req& req);
 
 /* ============== DEVLINK_CMD_SB_OCC_MAX_CLEAR ============== */
@@ -634,7 +642,7 @@ struct devlink_sb_occ_max_clear_req {
 /*
  * Clear occupancy watermarks of shared buffer.
  */
-int devlink_sb_occ_max_clear(ynl_cpp::ynl_socket&  ys,
+int devlink_sb_occ_max_clear(ynl_cpp::ynl_socket& ys,
 			     devlink_sb_occ_max_clear_req& req);
 
 /* ============== DEVLINK_CMD_ESWITCH_GET ============== */
@@ -647,31 +655,31 @@ struct devlink_eswitch_get_req {
 struct devlink_eswitch_get_rsp {
 	std::string bus_name;
 	std::string dev_name;
-	std::optional<devlink_eswitch_mode> eswitch_mode;
-	std::optional<devlink_eswitch_inline_mode> eswitch_inline_mode;
-	std::optional<devlink_eswitch_encap_mode> eswitch_encap_mode;
+	std::optional<enum devlink_eswitch_mode> eswitch_mode;
+	std::optional<enum devlink_eswitch_inline_mode> eswitch_inline_mode;
+	std::optional<enum devlink_eswitch_encap_mode> eswitch_encap_mode;
 };
 
 /*
  * Get eswitch attributes.
  */
 std::unique_ptr<devlink_eswitch_get_rsp>
-devlink_eswitch_get(ynl_cpp::ynl_socket&  ys, devlink_eswitch_get_req& req);
+devlink_eswitch_get(ynl_cpp::ynl_socket& ys, devlink_eswitch_get_req& req);
 
 /* ============== DEVLINK_CMD_ESWITCH_SET ============== */
 /* DEVLINK_CMD_ESWITCH_SET - do */
 struct devlink_eswitch_set_req {
 	std::string bus_name;
 	std::string dev_name;
-	std::optional<devlink_eswitch_mode> eswitch_mode;
-	std::optional<devlink_eswitch_inline_mode> eswitch_inline_mode;
-	std::optional<devlink_eswitch_encap_mode> eswitch_encap_mode;
+	std::optional<enum devlink_eswitch_mode> eswitch_mode;
+	std::optional<enum devlink_eswitch_inline_mode> eswitch_inline_mode;
+	std::optional<enum devlink_eswitch_encap_mode> eswitch_encap_mode;
 };
 
 /*
  * Set eswitch attributes.
  */
-int devlink_eswitch_set(ynl_cpp::ynl_socket&  ys, devlink_eswitch_set_req& req);
+int devlink_eswitch_set(ynl_cpp::ynl_socket& ys, devlink_eswitch_set_req& req);
 
 /* ============== DEVLINK_CMD_DPIPE_TABLE_GET ============== */
 /* DEVLINK_CMD_DPIPE_TABLE_GET - do */
@@ -691,7 +699,7 @@ struct devlink_dpipe_table_get_rsp {
  * Get dpipe table attributes.
  */
 std::unique_ptr<devlink_dpipe_table_get_rsp>
-devlink_dpipe_table_get(ynl_cpp::ynl_socket&  ys,
+devlink_dpipe_table_get(ynl_cpp::ynl_socket& ys,
 			devlink_dpipe_table_get_req& req);
 
 /* ============== DEVLINK_CMD_DPIPE_ENTRIES_GET ============== */
@@ -712,7 +720,7 @@ struct devlink_dpipe_entries_get_rsp {
  * Get dpipe entries attributes.
  */
 std::unique_ptr<devlink_dpipe_entries_get_rsp>
-devlink_dpipe_entries_get(ynl_cpp::ynl_socket&  ys,
+devlink_dpipe_entries_get(ynl_cpp::ynl_socket& ys,
 			  devlink_dpipe_entries_get_req& req);
 
 /* ============== DEVLINK_CMD_DPIPE_HEADERS_GET ============== */
@@ -732,7 +740,7 @@ struct devlink_dpipe_headers_get_rsp {
  * Get dpipe headers attributes.
  */
 std::unique_ptr<devlink_dpipe_headers_get_rsp>
-devlink_dpipe_headers_get(ynl_cpp::ynl_socket&  ys,
+devlink_dpipe_headers_get(ynl_cpp::ynl_socket& ys,
 			  devlink_dpipe_headers_get_req& req);
 
 /* ============== DEVLINK_CMD_DPIPE_TABLE_COUNTERS_SET ============== */
@@ -747,7 +755,7 @@ struct devlink_dpipe_table_counters_set_req {
 /*
  * Set dpipe counter attributes.
  */
-int devlink_dpipe_table_counters_set(ynl_cpp::ynl_socket&  ys,
+int devlink_dpipe_table_counters_set(ynl_cpp::ynl_socket& ys,
 				     devlink_dpipe_table_counters_set_req& req);
 
 /* ============== DEVLINK_CMD_RESOURCE_SET ============== */
@@ -762,7 +770,7 @@ struct devlink_resource_set_req {
 /*
  * Set resource attributes.
  */
-int devlink_resource_set(ynl_cpp::ynl_socket&  ys,
+int devlink_resource_set(ynl_cpp::ynl_socket& ys,
 			 devlink_resource_set_req& req);
 
 /* ============== DEVLINK_CMD_RESOURCE_DUMP ============== */
@@ -782,14 +790,14 @@ struct devlink_resource_dump_rsp {
  * Get resource attributes.
  */
 std::unique_ptr<devlink_resource_dump_rsp>
-devlink_resource_dump(ynl_cpp::ynl_socket&  ys, devlink_resource_dump_req& req);
+devlink_resource_dump(ynl_cpp::ynl_socket& ys, devlink_resource_dump_req& req);
 
 /* ============== DEVLINK_CMD_RELOAD ============== */
 /* DEVLINK_CMD_RELOAD - do */
 struct devlink_reload_req {
 	std::string bus_name;
 	std::string dev_name;
-	std::optional<devlink_reload_action> reload_action;
+	std::optional<enum devlink_reload_action> reload_action;
 	std::optional<struct nla_bitfield32> reload_limits;
 	std::optional<__u32> netns_pid;
 	std::optional<__u32> netns_fd;
@@ -806,7 +814,7 @@ struct devlink_reload_rsp {
  * Reload devlink.
  */
 std::unique_ptr<devlink_reload_rsp>
-devlink_reload(ynl_cpp::ynl_socket&  ys, devlink_reload_req& req);
+devlink_reload(ynl_cpp::ynl_socket& ys, devlink_reload_req& req);
 
 /* ============== DEVLINK_CMD_PARAM_GET ============== */
 /* DEVLINK_CMD_PARAM_GET - do */
@@ -826,7 +834,7 @@ struct devlink_param_get_rsp {
  * Get param instances.
  */
 std::unique_ptr<devlink_param_get_rsp>
-devlink_param_get(ynl_cpp::ynl_socket&  ys, devlink_param_get_req& req);
+devlink_param_get(ynl_cpp::ynl_socket& ys, devlink_param_get_req& req);
 
 /* DEVLINK_CMD_PARAM_GET - dump */
 struct devlink_param_get_req_dump {
@@ -839,7 +847,7 @@ struct devlink_param_get_list {
 };
 
 std::unique_ptr<devlink_param_get_list>
-devlink_param_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_param_get_dump(ynl_cpp::ynl_socket& ys,
 		       devlink_param_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_PARAM_SET ============== */
@@ -848,14 +856,14 @@ struct devlink_param_set_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::string param_name;
-	std::optional<__u8> param_type;
-	std::optional<devlink_param_cmode> param_value_cmode;
+	std::optional<enum devlink_var_attr_type> param_type;
+	std::optional<enum devlink_param_cmode> param_value_cmode;
 };
 
 /*
  * Set param instances.
  */
-int devlink_param_set(ynl_cpp::ynl_socket&  ys, devlink_param_set_req& req);
+int devlink_param_set(ynl_cpp::ynl_socket& ys, devlink_param_set_req& req);
 
 /* ============== DEVLINK_CMD_REGION_GET ============== */
 /* DEVLINK_CMD_REGION_GET - do */
@@ -877,7 +885,7 @@ struct devlink_region_get_rsp {
  * Get region instances.
  */
 std::unique_ptr<devlink_region_get_rsp>
-devlink_region_get(ynl_cpp::ynl_socket&  ys, devlink_region_get_req& req);
+devlink_region_get(ynl_cpp::ynl_socket& ys, devlink_region_get_req& req);
 
 /* DEVLINK_CMD_REGION_GET - dump */
 struct devlink_region_get_req_dump {
@@ -890,7 +898,7 @@ struct devlink_region_get_list {
 };
 
 std::unique_ptr<devlink_region_get_list>
-devlink_region_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_region_get_dump(ynl_cpp::ynl_socket& ys,
 			devlink_region_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_REGION_NEW ============== */
@@ -915,7 +923,7 @@ struct devlink_region_new_rsp {
  * Create region snapshot.
  */
 std::unique_ptr<devlink_region_new_rsp>
-devlink_region_new(ynl_cpp::ynl_socket&  ys, devlink_region_new_req& req);
+devlink_region_new(ynl_cpp::ynl_socket& ys, devlink_region_new_req& req);
 
 /* ============== DEVLINK_CMD_REGION_DEL ============== */
 /* DEVLINK_CMD_REGION_DEL - do */
@@ -930,11 +938,11 @@ struct devlink_region_del_req {
 /*
  * Delete region snapshot.
  */
-int devlink_region_del(ynl_cpp::ynl_socket&  ys, devlink_region_del_req& req);
+int devlink_region_del(ynl_cpp::ynl_socket& ys, devlink_region_del_req& req);
 
 /* ============== DEVLINK_CMD_REGION_READ ============== */
 /* DEVLINK_CMD_REGION_READ - dump */
-struct devlink_region_read_req_dump {
+struct devlink_region_read_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u32> port_index;
@@ -945,20 +953,19 @@ struct devlink_region_read_req_dump {
 	std::optional<__u64> region_chunk_len;
 };
 
-struct devlink_region_read_rsp_dump {
+struct devlink_region_read_rsp {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u32> port_index;
 	std::string region_name;
 };
 
-struct devlink_region_read_rsp_list {
-	std::list<devlink_region_read_rsp_dump> objs;
+struct devlink_region_read_list {
+	std::list<devlink_region_read_rsp> objs;
 };
 
-std::unique_ptr<devlink_region_read_rsp_list>
-devlink_region_read_dump(ynl_cpp::ynl_socket&  ys,
-			 devlink_region_read_req_dump& req);
+std::unique_ptr<devlink_region_read_list>
+devlink_region_read_dump(ynl_cpp::ynl_socket& ys, devlink_region_read_req& req);
 
 /* ============== DEVLINK_CMD_PORT_PARAM_GET ============== */
 /* DEVLINK_CMD_PORT_PARAM_GET - do */
@@ -978,7 +985,7 @@ struct devlink_port_param_get_rsp {
  * Get port param instances.
  */
 std::unique_ptr<devlink_port_param_get_rsp>
-devlink_port_param_get(ynl_cpp::ynl_socket&  ys,
+devlink_port_param_get(ynl_cpp::ynl_socket& ys,
 		       devlink_port_param_get_req& req);
 
 /* DEVLINK_CMD_PORT_PARAM_GET - dump */
@@ -987,7 +994,7 @@ struct devlink_port_param_get_list {
 };
 
 std::unique_ptr<devlink_port_param_get_list>
-devlink_port_param_get_dump(ynl_cpp::ynl_socket&  ys);
+devlink_port_param_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== DEVLINK_CMD_PORT_PARAM_SET ============== */
 /* DEVLINK_CMD_PORT_PARAM_SET - do */
@@ -1000,7 +1007,7 @@ struct devlink_port_param_set_req {
 /*
  * Set port param instances.
  */
-int devlink_port_param_set(ynl_cpp::ynl_socket&  ys,
+int devlink_port_param_set(ynl_cpp::ynl_socket& ys,
 			   devlink_port_param_set_req& req);
 
 /* ============== DEVLINK_CMD_INFO_GET ============== */
@@ -1018,13 +1025,16 @@ struct devlink_info_get_rsp {
 	std::vector<devlink_dl_info_version> info_version_fixed;
 	std::vector<devlink_dl_info_version> info_version_running;
 	std::vector<devlink_dl_info_version> info_version_stored;
+	std::string info_board_serial_number;
 };
 
 /*
- * Get device information, like driver name, hardware and firmware versions etc.
+ * Get device information, like driver name, hardware and firmware versions
+etc.
+
  */
 std::unique_ptr<devlink_info_get_rsp>
-devlink_info_get(ynl_cpp::ynl_socket&  ys, devlink_info_get_req& req);
+devlink_info_get(ynl_cpp::ynl_socket& ys, devlink_info_get_req& req);
 
 /* DEVLINK_CMD_INFO_GET - dump */
 struct devlink_info_get_list {
@@ -1032,7 +1042,7 @@ struct devlink_info_get_list {
 };
 
 std::unique_ptr<devlink_info_get_list>
-devlink_info_get_dump(ynl_cpp::ynl_socket&  ys);
+devlink_info_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_GET ============== */
 /* DEVLINK_CMD_HEALTH_REPORTER_GET - do */
@@ -1054,7 +1064,7 @@ struct devlink_health_reporter_get_rsp {
  * Get health reporter instances.
  */
 std::unique_ptr<devlink_health_reporter_get_rsp>
-devlink_health_reporter_get(ynl_cpp::ynl_socket&  ys,
+devlink_health_reporter_get(ynl_cpp::ynl_socket& ys,
 			    devlink_health_reporter_get_req& req);
 
 /* DEVLINK_CMD_HEALTH_REPORTER_GET - dump */
@@ -1069,7 +1079,7 @@ struct devlink_health_reporter_get_list {
 };
 
 std::unique_ptr<devlink_health_reporter_get_list>
-devlink_health_reporter_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_health_reporter_get_dump(ynl_cpp::ynl_socket& ys,
 				 devlink_health_reporter_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_SET ============== */
@@ -1082,12 +1092,13 @@ struct devlink_health_reporter_set_req {
 	std::optional<__u64> health_reporter_graceful_period;
 	std::optional<__u8> health_reporter_auto_recover;
 	std::optional<__u8> health_reporter_auto_dump;
+	std::optional<__u64> health_reporter_burst_period;
 };
 
 /*
  * Set health reporter instances.
  */
-int devlink_health_reporter_set(ynl_cpp::ynl_socket&  ys,
+int devlink_health_reporter_set(ynl_cpp::ynl_socket& ys,
 				devlink_health_reporter_set_req& req);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_RECOVER ============== */
@@ -1102,7 +1113,7 @@ struct devlink_health_reporter_recover_req {
 /*
  * Recover health reporter instances.
  */
-int devlink_health_reporter_recover(ynl_cpp::ynl_socket&  ys,
+int devlink_health_reporter_recover(ynl_cpp::ynl_socket& ys,
 				    devlink_health_reporter_recover_req& req);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_DIAGNOSE ============== */
@@ -1117,29 +1128,29 @@ struct devlink_health_reporter_diagnose_req {
 /*
  * Diagnose health reporter instances.
  */
-int devlink_health_reporter_diagnose(ynl_cpp::ynl_socket&  ys,
+int devlink_health_reporter_diagnose(ynl_cpp::ynl_socket& ys,
 				     devlink_health_reporter_diagnose_req& req);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_DUMP_GET ============== */
 /* DEVLINK_CMD_HEALTH_REPORTER_DUMP_GET - dump */
-struct devlink_health_reporter_dump_get_req_dump {
+struct devlink_health_reporter_dump_get_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u32> port_index;
 	std::string health_reporter_name;
 };
 
-struct devlink_health_reporter_dump_get_rsp_dump {
+struct devlink_health_reporter_dump_get_rsp {
 	std::optional<devlink_dl_fmsg> fmsg;
 };
 
-struct devlink_health_reporter_dump_get_rsp_list {
-	std::list<devlink_health_reporter_dump_get_rsp_dump> objs;
+struct devlink_health_reporter_dump_get_list {
+	std::list<devlink_health_reporter_dump_get_rsp> objs;
 };
 
-std::unique_ptr<devlink_health_reporter_dump_get_rsp_list>
-devlink_health_reporter_dump_get_dump(ynl_cpp::ynl_socket&  ys,
-				      devlink_health_reporter_dump_get_req_dump& req);
+std::unique_ptr<devlink_health_reporter_dump_get_list>
+devlink_health_reporter_dump_get_dump(ynl_cpp::ynl_socket& ys,
+				      devlink_health_reporter_dump_get_req& req);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_DUMP_CLEAR ============== */
 /* DEVLINK_CMD_HEALTH_REPORTER_DUMP_CLEAR - do */
@@ -1153,7 +1164,7 @@ struct devlink_health_reporter_dump_clear_req {
 /*
  * Clear dump of health reporter instances.
  */
-int devlink_health_reporter_dump_clear(ynl_cpp::ynl_socket&  ys,
+int devlink_health_reporter_dump_clear(ynl_cpp::ynl_socket& ys,
 				       devlink_health_reporter_dump_clear_req& req);
 
 /* ============== DEVLINK_CMD_FLASH_UPDATE ============== */
@@ -1169,7 +1180,7 @@ struct devlink_flash_update_req {
 /*
  * Flash update devlink instances.
  */
-int devlink_flash_update(ynl_cpp::ynl_socket&  ys,
+int devlink_flash_update(ynl_cpp::ynl_socket& ys,
 			 devlink_flash_update_req& req);
 
 /* ============== DEVLINK_CMD_TRAP_GET ============== */
@@ -1190,7 +1201,7 @@ struct devlink_trap_get_rsp {
  * Get trap instances.
  */
 std::unique_ptr<devlink_trap_get_rsp>
-devlink_trap_get(ynl_cpp::ynl_socket&  ys, devlink_trap_get_req& req);
+devlink_trap_get(ynl_cpp::ynl_socket& ys, devlink_trap_get_req& req);
 
 /* DEVLINK_CMD_TRAP_GET - dump */
 struct devlink_trap_get_req_dump {
@@ -1203,7 +1214,7 @@ struct devlink_trap_get_list {
 };
 
 std::unique_ptr<devlink_trap_get_list>
-devlink_trap_get_dump(ynl_cpp::ynl_socket&  ys, devlink_trap_get_req_dump& req);
+devlink_trap_get_dump(ynl_cpp::ynl_socket& ys, devlink_trap_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_TRAP_SET ============== */
 /* DEVLINK_CMD_TRAP_SET - do */
@@ -1211,13 +1222,13 @@ struct devlink_trap_set_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::string trap_name;
-	std::optional<devlink_trap_action> trap_action;
+	std::optional<enum devlink_trap_action> trap_action;
 };
 
 /*
  * Set trap instances.
  */
-int devlink_trap_set(ynl_cpp::ynl_socket&  ys, devlink_trap_set_req& req);
+int devlink_trap_set(ynl_cpp::ynl_socket& ys, devlink_trap_set_req& req);
 
 /* ============== DEVLINK_CMD_TRAP_GROUP_GET ============== */
 /* DEVLINK_CMD_TRAP_GROUP_GET - do */
@@ -1237,7 +1248,7 @@ struct devlink_trap_group_get_rsp {
  * Get trap group instances.
  */
 std::unique_ptr<devlink_trap_group_get_rsp>
-devlink_trap_group_get(ynl_cpp::ynl_socket&  ys,
+devlink_trap_group_get(ynl_cpp::ynl_socket& ys,
 		       devlink_trap_group_get_req& req);
 
 /* DEVLINK_CMD_TRAP_GROUP_GET - dump */
@@ -1251,7 +1262,7 @@ struct devlink_trap_group_get_list {
 };
 
 std::unique_ptr<devlink_trap_group_get_list>
-devlink_trap_group_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_trap_group_get_dump(ynl_cpp::ynl_socket& ys,
 			    devlink_trap_group_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_TRAP_GROUP_SET ============== */
@@ -1260,14 +1271,14 @@ struct devlink_trap_group_set_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::string trap_group_name;
-	std::optional<devlink_trap_action> trap_action;
+	std::optional<enum devlink_trap_action> trap_action;
 	std::optional<__u32> trap_policer_id;
 };
 
 /*
  * Set trap group instances.
  */
-int devlink_trap_group_set(ynl_cpp::ynl_socket&  ys,
+int devlink_trap_group_set(ynl_cpp::ynl_socket& ys,
 			   devlink_trap_group_set_req& req);
 
 /* ============== DEVLINK_CMD_TRAP_POLICER_GET ============== */
@@ -1288,7 +1299,7 @@ struct devlink_trap_policer_get_rsp {
  * Get trap policer instances.
  */
 std::unique_ptr<devlink_trap_policer_get_rsp>
-devlink_trap_policer_get(ynl_cpp::ynl_socket&  ys,
+devlink_trap_policer_get(ynl_cpp::ynl_socket& ys,
 			 devlink_trap_policer_get_req& req);
 
 /* DEVLINK_CMD_TRAP_POLICER_GET - dump */
@@ -1302,7 +1313,7 @@ struct devlink_trap_policer_get_list {
 };
 
 std::unique_ptr<devlink_trap_policer_get_list>
-devlink_trap_policer_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_trap_policer_get_dump(ynl_cpp::ynl_socket& ys,
 			      devlink_trap_policer_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_TRAP_POLICER_SET ============== */
@@ -1318,7 +1329,7 @@ struct devlink_trap_policer_set_req {
 /*
  * Get trap policer instances.
  */
-int devlink_trap_policer_set(ynl_cpp::ynl_socket&  ys,
+int devlink_trap_policer_set(ynl_cpp::ynl_socket& ys,
 			     devlink_trap_policer_set_req& req);
 
 /* ============== DEVLINK_CMD_HEALTH_REPORTER_TEST ============== */
@@ -1333,7 +1344,7 @@ struct devlink_health_reporter_test_req {
 /*
  * Test health reporter instances.
  */
-int devlink_health_reporter_test(ynl_cpp::ynl_socket&  ys,
+int devlink_health_reporter_test(ynl_cpp::ynl_socket& ys,
 				 devlink_health_reporter_test_req& req);
 
 /* ============== DEVLINK_CMD_RATE_GET ============== */
@@ -1356,7 +1367,7 @@ struct devlink_rate_get_rsp {
  * Get rate instances.
  */
 std::unique_ptr<devlink_rate_get_rsp>
-devlink_rate_get(ynl_cpp::ynl_socket&  ys, devlink_rate_get_req& req);
+devlink_rate_get(ynl_cpp::ynl_socket& ys, devlink_rate_get_req& req);
 
 /* DEVLINK_CMD_RATE_GET - dump */
 struct devlink_rate_get_req_dump {
@@ -1369,7 +1380,7 @@ struct devlink_rate_get_list {
 };
 
 std::unique_ptr<devlink_rate_get_list>
-devlink_rate_get_dump(ynl_cpp::ynl_socket&  ys, devlink_rate_get_req_dump& req);
+devlink_rate_get_dump(ynl_cpp::ynl_socket& ys, devlink_rate_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_RATE_SET ============== */
 /* DEVLINK_CMD_RATE_SET - do */
@@ -1382,12 +1393,13 @@ struct devlink_rate_set_req {
 	std::optional<__u32> rate_tx_priority;
 	std::optional<__u32> rate_tx_weight;
 	std::string rate_parent_node_name;
+	std::vector<devlink_dl_rate_tc_bws> rate_tc_bws;
 };
 
 /*
  * Set rate instances.
  */
-int devlink_rate_set(ynl_cpp::ynl_socket&  ys, devlink_rate_set_req& req);
+int devlink_rate_set(ynl_cpp::ynl_socket& ys, devlink_rate_set_req& req);
 
 /* ============== DEVLINK_CMD_RATE_NEW ============== */
 /* DEVLINK_CMD_RATE_NEW - do */
@@ -1400,12 +1412,13 @@ struct devlink_rate_new_req {
 	std::optional<__u32> rate_tx_priority;
 	std::optional<__u32> rate_tx_weight;
 	std::string rate_parent_node_name;
+	std::vector<devlink_dl_rate_tc_bws> rate_tc_bws;
 };
 
 /*
  * Create rate instances.
  */
-int devlink_rate_new(ynl_cpp::ynl_socket&  ys, devlink_rate_new_req& req);
+int devlink_rate_new(ynl_cpp::ynl_socket& ys, devlink_rate_new_req& req);
 
 /* ============== DEVLINK_CMD_RATE_DEL ============== */
 /* DEVLINK_CMD_RATE_DEL - do */
@@ -1418,7 +1431,7 @@ struct devlink_rate_del_req {
 /*
  * Delete rate instances.
  */
-int devlink_rate_del(ynl_cpp::ynl_socket&  ys, devlink_rate_del_req& req);
+int devlink_rate_del(ynl_cpp::ynl_socket& ys, devlink_rate_del_req& req);
 
 /* ============== DEVLINK_CMD_LINECARD_GET ============== */
 /* DEVLINK_CMD_LINECARD_GET - do */
@@ -1438,7 +1451,7 @@ struct devlink_linecard_get_rsp {
  * Get line card instances.
  */
 std::unique_ptr<devlink_linecard_get_rsp>
-devlink_linecard_get(ynl_cpp::ynl_socket&  ys, devlink_linecard_get_req& req);
+devlink_linecard_get(ynl_cpp::ynl_socket& ys, devlink_linecard_get_req& req);
 
 /* DEVLINK_CMD_LINECARD_GET - dump */
 struct devlink_linecard_get_req_dump {
@@ -1451,7 +1464,7 @@ struct devlink_linecard_get_list {
 };
 
 std::unique_ptr<devlink_linecard_get_list>
-devlink_linecard_get_dump(ynl_cpp::ynl_socket&  ys,
+devlink_linecard_get_dump(ynl_cpp::ynl_socket& ys,
 			  devlink_linecard_get_req_dump& req);
 
 /* ============== DEVLINK_CMD_LINECARD_SET ============== */
@@ -1466,7 +1479,7 @@ struct devlink_linecard_set_req {
 /*
  * Set line card instances.
  */
-int devlink_linecard_set(ynl_cpp::ynl_socket&  ys,
+int devlink_linecard_set(ynl_cpp::ynl_socket& ys,
 			 devlink_linecard_set_req& req);
 
 /* ============== DEVLINK_CMD_SELFTESTS_GET ============== */
@@ -1485,7 +1498,7 @@ struct devlink_selftests_get_rsp {
  * Get device selftest instances.
  */
 std::unique_ptr<devlink_selftests_get_rsp>
-devlink_selftests_get(ynl_cpp::ynl_socket&  ys, devlink_selftests_get_req& req);
+devlink_selftests_get(ynl_cpp::ynl_socket& ys, devlink_selftests_get_req& req);
 
 /* DEVLINK_CMD_SELFTESTS_GET - dump */
 struct devlink_selftests_get_list {
@@ -1493,7 +1506,7 @@ struct devlink_selftests_get_list {
 };
 
 std::unique_ptr<devlink_selftests_get_list>
-devlink_selftests_get_dump(ynl_cpp::ynl_socket&  ys);
+devlink_selftests_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* ============== DEVLINK_CMD_SELFTESTS_RUN ============== */
 /* DEVLINK_CMD_SELFTESTS_RUN - do */
@@ -1506,7 +1519,7 @@ struct devlink_selftests_run_req {
 /*
  * Run device selftest instances.
  */
-int devlink_selftests_run(ynl_cpp::ynl_socket&  ys,
+int devlink_selftests_run(ynl_cpp::ynl_socket& ys,
 			  devlink_selftests_run_req& req);
 
 /* ============== DEVLINK_CMD_NOTIFY_FILTER_SET ============== */
@@ -1520,7 +1533,7 @@ struct devlink_notify_filter_set_req {
 /*
  * Set notification messages socket filter.
  */
-int devlink_notify_filter_set(ynl_cpp::ynl_socket&  ys,
+int devlink_notify_filter_set(ynl_cpp::ynl_socket& ys,
 			      devlink_notify_filter_set_req& req);
 
 } //namespace ynl_cpp

@@ -97,11 +97,24 @@ class Type(SpecAttr):
         value = self.checks.get(limit, default)
         if value is None:
             return value
-        elif value in self.family.consts:
+        if isinstance(value, int):
+            return value
+        if value in self.family.consts:
+            return self.family.consts[value]["value"]
+        return limit_to_number(value)
+
+    def get_limit_str(self, limit, default=None, suffix=''):
+        value = self.checks.get(limit, default)
+        if value is None:
+            return ''
+        if isinstance(value, int):
+            return str(value) + suffix
+        if value in self.family.consts:
+            const = self.family.consts[value]
+            if const.get('header'):
+                return c_upper(value)
             return c_upper(f"{self.family['name']}-{value}")
-        if not isinstance(value, int):
-            value = limit_to_number(value)
-        return value
+        return c_upper(value)
 
     def resolve(self):
         if "parent-sub-message" in self.attr:
@@ -365,11 +378,11 @@ class TypeScalar(Type):
         elif "full-range" in self.checks:
             return f"NLA_POLICY_FULL_RANGE({policy}, &{c_lower(self.enum_name)}_range)"
         elif "range" in self.checks:
-            return f"NLA_POLICY_RANGE({policy}, {self.get_limit('min')}, {self.get_limit('max')})"
+            return f"NLA_POLICY_RANGE({policy}, {self.get_limit_str('min')}, {self.get_limit_str('max')})"
         elif "min" in self.checks:
-            return f"NLA_POLICY_MIN({policy}, {self.get_limit('min')})"
+            return f"NLA_POLICY_MIN({policy}, {self.get_limit_str('min')})"
         elif "max" in self.checks:
-            return f"NLA_POLICY_MAX({policy}, {self.get_limit('max')})"
+            return f"NLA_POLICY_MAX({policy}, {self.get_limit_str('max')})"
         return super()._attr_policy(policy)
 
     def _attr_typol(self):
@@ -432,11 +445,11 @@ class TypeString(Type):
 
     def _attr_policy(self, policy):
         if "exact-len" in self.checks:
-            mem = "NLA_POLICY_EXACT_LEN(" + str(self.get_limit("exact-len")) + ")"
+            mem = "NLA_POLICY_EXACT_LEN(" + str(self.get_limit_str("exact-len")) + ")"
         else:
             mem = "{ .type = " + policy
             if "max-len" in self.checks:
-                mem += ", .len = " + str(self.get_limit("max-len"))
+                mem += ", .len = " + str(self.get_limit_str("max-len"))
             mem += ", }"
         return mem
 
@@ -482,11 +495,11 @@ class TypeBinary(Type):
 
     def _attr_policy(self, policy):
         if "exact-len" in self.checks:
-            mem = "NLA_POLICY_EXACT_LEN(" + str(self.get_limit("exact-len")) + ")"
+            mem = "NLA_POLICY_EXACT_LEN(" + str(self.get_limit_str("exact-len")) + ")"
         else:
             mem = "{ "
             if len(self.checks) == 1 and "min-len" in self.checks:
-                mem += ".len = " + str(self.get_limit("min-len"))
+                mem += ".len = " + str(self.get_limit_str("min-len"))
             elif len(self.checks) == 0:
                 mem += ".type = NLA_BINARY"
             else:
