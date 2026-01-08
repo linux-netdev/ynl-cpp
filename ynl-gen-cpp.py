@@ -610,24 +610,44 @@ class TypeNest(Type):
         return "NLA_POLICY_NESTED(" + self.nested_render_name + "_nl_policy)"
 
     def attr_put(self, ri, var):
-        # at = "" if self.is_recursive_for_op(ri) else "&"
-        at = ""
-        self._attr_put_line(
-            ri,
-            var,
-            f"{self.nested_render_name}_put(nlh, "
-            + f"{self.enum_name}, {at}{var}.{self.c_name}.value())",
-        )
+        if self.is_recursive_for_op(ri):
+            # Recursive types are stored as std::vector
+            ri.cw.p(f"for (unsigned int i = 0; i < {var}.{self.c_name}.size(); i++)")
+            ri.cw.p(
+                f"{self.nested_render_name}_put(nlh, "
+                + f"{self.enum_name}, {var}.{self.c_name}[i]);"
+            )
+        else:
+            # Non-recursive types are stored as std::optional
+            self._attr_put_line(
+                ri,
+                var,
+                f"{self.nested_render_name}_put(nlh, "
+                + f"{self.enum_name}, {var}.{self.c_name}.value())",
+            )
 
     def _attr_get(self, ri, var):
-        get_lines = [
-            f"if ({self.nested_render_name}_parse(&parg, attr))",
-            "return YNL_PARSE_CB_ERROR;",
-        ]
-        init_lines = [
-            f"parg.rsp_policy = &{self.nested_render_name}_nest;",
-            f"parg.data = &{var}->{self.c_name}.emplace();",
-        ]
+        if self.is_recursive_for_op(ri):
+            # Recursive types are stored as std::vector
+            get_lines = [
+                f"if ({self.nested_render_name}_parse(&parg, attr))",
+                "return YNL_PARSE_CB_ERROR;",
+            ]
+            init_lines = [
+                f"parg.rsp_policy = &{self.nested_render_name}_nest;",
+                f"{var}->{self.c_name}.emplace_back();",
+                f"parg.data = &{var}->{self.c_name}.back();",
+            ]
+        else:
+            # Non-recursive types are stored as std::optional
+            get_lines = [
+                f"if ({self.nested_render_name}_parse(&parg, attr))",
+                "return YNL_PARSE_CB_ERROR;",
+            ]
+            init_lines = [
+                f"parg.rsp_policy = &{self.nested_render_name}_nest;",
+                f"parg.data = &{var}->{self.c_name}.emplace();",
+            ]
         return get_lines, init_lines, None
 
 
@@ -1353,11 +1373,16 @@ class Family(SpecFamily):
         # Propagate the request / reply / recursive
         for attr_set, struct in reversed(self.pure_nested_structs.items()):
             for _, spec in self.attr_sets[attr_set].items():
-                child_name = None
+                if attr_set in struct.child_nests:
+                    struct.recursive = True
+
                 if "nested-attributes" in spec:
                     child_name = spec["nested-attributes"]
                 elif "sub-message" in spec:
                     child_name = spec["sub-message"]
+                else:
+                    continue
+
                 struct.child_nests.add(child_name)
                 child = self.pure_nested_structs.get(child_name)
                 if child:
@@ -1365,8 +1390,6 @@ class Family(SpecFamily):
                         struct.child_nests.update(child.child_nests)
                     child.request |= struct.request
                     child.reply |= struct.reply
-                if attr_set in struct.child_nests:
-                    struct.recursive = True
 
         self._sort_pure_types()
 
@@ -2698,6 +2721,23 @@ def main():
         cw.nl()
 
         cw.p("/* Common nested types */")
+        # Forward declarations if it's referenced before being defined
+        defined_structs = set()
+        needs_forward_decl = set()
+        for attr_set, struct in parsed.pure_nested_structs.items():
+            # Check if any nested attributes reference structs not yet defined
+            for _, attr in struct.member_list():
+                if hasattr(attr, 'nested_attrs'):
+                    if attr.nested_attrs not in defined_structs:
+                        needs_forward_decl.add(attr.nested_attrs)
+            defined_structs.add(attr_set)
+        if needs_forward_decl:
+            for attr_set, struct in parsed.pure_nested_structs.items():
+                if attr_set in needs_forward_decl:
+                    cw.p(f"struct {struct.struct_name};")
+            cw.nl()
+
+        # Actual struct definitions
         for attr_set, struct in parsed.pure_nested_structs.items():
             ri = RenderInfo(cw, parsed, args.mode, "", "", attr_set)
             print_type_full(ri, struct)
