@@ -522,7 +522,7 @@ int nlctrl_getpolicy_rsp_parse(const struct nlmsghdr *nlh,
 
 			parg.rsp_policy = &nlctrl_op_policy_attrs_nest;
 			parg.data = &dst->op_policy.emplace();
-			attr_op_id = ynl_attr_data(attr);
+			attr_op_id = (const struct nlattr*)ynl_attr_data(attr);
 			op_id = ynl_attr_type(attr_op_id);
 			nlctrl_op_policy_attrs_parse(&parg, attr_op_id, op_id);
 		} else if (type == CTRL_ATTR_POLICY) {
@@ -535,9 +535,9 @@ int nlctrl_getpolicy_rsp_parse(const struct nlmsghdr *nlh,
 
 			parg.rsp_policy = &nlctrl_policy_attrs_nest;
 			parg.data = &dst->policy.emplace();
-			attr_policy_id = ynl_attr_data(attr);
+			attr_policy_id = (const struct nlattr*)ynl_attr_data(attr);
 			policy_id = ynl_attr_type(attr_policy_id);
-			attr_attr_id = ynl_attr_data(attr_policy_id);
+			attr_attr_id = (const struct nlattr*)ynl_attr_data(attr_policy_id);
 			attr_id = ynl_attr_type(attr_attr_id);
 			nlctrl_policy_attrs_parse(&parg, attr_attr_id, policy_id, attr_id);
 		}

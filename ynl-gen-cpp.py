@@ -813,7 +813,7 @@ class TypeNestTypeValue(Type):
             local_vars += [f'__u32 {", ".join(tv_names)};']
             for level in self.attr["type-value"]:
                 level = c_lower(level)
-                get_lines += [f"attr_{level} = ynl_attr_data({prev});"]
+                get_lines += [f"attr_{level} = (const struct nlattr*)ynl_attr_data({prev});"]
                 get_lines += [f"{level} = ynl_attr_type(attr_{level});"]
                 prev = "attr_" + level
 
