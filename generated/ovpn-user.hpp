@@ -127,6 +127,11 @@ ovpn_peer_get_dump(ynl_cpp::ynl_socket& ys, ovpn_peer_get_req_dump& req);
 
 /* OVPN_CMD_PEER_GET - notify */
 struct ovpn_peer_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ovpn_peer_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== OVPN_CMD_PEER_DEL ============== */
@@ -172,6 +177,11 @@ ovpn_key_get(ynl_cpp::ynl_socket& ys, ovpn_key_get_req& req);
 
 /* OVPN_CMD_KEY_GET - notify */
 struct ovpn_key_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ovpn_key_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== OVPN_CMD_KEY_SWAP ============== */

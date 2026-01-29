@@ -311,6 +311,11 @@ ethtool_linkinfo_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_LINKINFO_GET - notify */
 struct ethtool_linkinfo_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_linkinfo_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_LINKINFO_SET ============== */
@@ -370,6 +375,11 @@ ethtool_linkmodes_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_LINKMODES_GET - notify */
 struct ethtool_linkmodes_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_linkmodes_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_LINKMODES_SET ============== */
@@ -460,6 +470,11 @@ ethtool_debug_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_DEBUG_GET - notify */
 struct ethtool_debug_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_debug_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_DEBUG_SET ============== */
@@ -506,6 +521,11 @@ ethtool_wol_get_dump(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req_dump& req);
 
 /* ETHTOOL_MSG_WOL_GET - notify */
 struct ethtool_wol_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_wol_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_WOL_SET ============== */
@@ -556,6 +576,11 @@ ethtool_features_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_FEATURES_GET - notify */
 struct ethtool_features_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_features_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_FEATURES_SET ============== */
@@ -614,6 +639,11 @@ ethtool_privflags_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_PRIVFLAGS_GET - notify */
 struct ethtool_privflags_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_privflags_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_PRIVFLAGS_SET ============== */
@@ -677,6 +707,11 @@ ethtool_rings_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_RINGS_GET - notify */
 struct ethtool_rings_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_rings_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_RINGS_SET ============== */
@@ -746,6 +781,11 @@ ethtool_channels_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_CHANNELS_GET - notify */
 struct ethtool_channels_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_channels_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_CHANNELS_SET ============== */
@@ -828,6 +868,11 @@ ethtool_coalesce_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_COALESCE_GET - notify */
 struct ethtool_coalesce_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_coalesce_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_COALESCE_SET ============== */
@@ -907,6 +952,11 @@ ethtool_pause_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_PAUSE_GET - notify */
 struct ethtool_pause_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_pause_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_PAUSE_SET ============== */
@@ -961,6 +1011,11 @@ ethtool_eee_get_dump(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req_dump& req);
 
 /* ETHTOOL_MSG_EEE_GET - notify */
 struct ethtool_eee_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_eee_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_EEE_SET ============== */
@@ -1108,6 +1163,11 @@ ethtool_fec_get_dump(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req_dump& req);
 
 /* ETHTOOL_MSG_FEC_GET - notify */
 struct ethtool_fec_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_fec_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_FEC_SET ============== */
@@ -1264,6 +1324,11 @@ ethtool_module_get_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_MODULE_GET - notify */
 struct ethtool_module_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_module_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_MODULE_SET ============== */
@@ -1375,6 +1440,11 @@ ethtool_rss_get_dump(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req_dump& req);
 
 /* ETHTOOL_MSG_RSS_GET - notify */
 struct ethtool_rss_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_rss_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_PLCA_GET_CFG ============== */
@@ -1416,6 +1486,11 @@ ethtool_plca_get_cfg_dump(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_PLCA_GET_CFG - notify */
 struct ethtool_plca_get_cfg_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_plca_get_cfg_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_PLCA_SET_CFG ============== */
@@ -1515,6 +1590,11 @@ ethtool_mm_get_dump(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req_dump& req);
 
 /* ETHTOOL_MSG_MM_GET - notify */
 struct ethtool_mm_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_mm_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_MM_SET ============== */
@@ -1584,6 +1664,11 @@ ethtool_phy_get_dump(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req_dump& req);
 
 /* ETHTOOL_MSG_PHY_GET - notify */
 struct ethtool_phy_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_phy_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_TSCONFIG_GET ============== */
@@ -1689,6 +1774,11 @@ ethtool_rss_create_act(ynl_cpp::ynl_socket& ys,
 
 /* ETHTOOL_MSG_RSS_CREATE_ACT - notify */
 struct ethtool_rss_create_act_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_rss_create_act_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== ETHTOOL_MSG_RSS_DELETE_ACT ============== */
@@ -1746,6 +1836,11 @@ struct ethtool_cable_test_ntf_rsp {
 };
 
 struct ethtool_cable_test_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_cable_test_ntf_rsp obj __attribute__((aligned(8)));
 };
 
 /* ETHTOOL_MSG_CABLE_TEST_TDR_NTF - event */
@@ -1756,6 +1851,11 @@ struct ethtool_cable_test_tdr_ntf_rsp {
 };
 
 struct ethtool_cable_test_tdr_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_cable_test_tdr_ntf_rsp obj __attribute__((aligned(8)));
 };
 
 /* ETHTOOL_MSG_MODULE_FW_FLASH_NTF - event */
@@ -1768,6 +1868,11 @@ struct ethtool_module_fw_flash_ntf_rsp {
 };
 
 struct ethtool_module_fw_flash_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_module_fw_flash_ntf_rsp obj __attribute__((aligned(8)));
 };
 
 /* ETHTOOL_MSG_PSE_NTF - event */
@@ -1777,6 +1882,11 @@ struct ethtool_pse_ntf_rsp {
 };
 
 struct ethtool_pse_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_pse_ntf_rsp obj __attribute__((aligned(8)));
 };
 
 /* ETHTOOL_MSG_RSS_DELETE_NTF - event */
@@ -1786,6 +1896,11 @@ struct ethtool_rss_delete_ntf_rsp {
 };
 
 struct ethtool_rss_delete_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	ethtool_rss_delete_ntf_rsp obj __attribute__((aligned(8)));
 };
 
 } //namespace ynl_cpp

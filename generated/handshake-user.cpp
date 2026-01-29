@@ -285,6 +285,12 @@ handshake_accept(ynl_cpp::ynl_socket& ys, handshake_accept_req& req)
 }
 
 /* HANDSHAKE_CMD_ACCEPT - notify */
+static void handshake_accept_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<handshake_accept_ntf*>(ntf);
+	typed_ntf->obj.~handshake_accept_rsp();
+	free(ntf);
+}
+
 /* ============== HANDSHAKE_CMD_DONE ============== */
 /* HANDSHAKE_CMD_DONE - do */
 int handshake_done(ynl_cpp::ynl_socket& ys, handshake_done_req& req)
@@ -318,6 +324,8 @@ static constexpr std::array<ynl_ntf_info, HANDSHAKE_CMD_READY + 1> handshake_ntf
 	std::array<ynl_ntf_info, HANDSHAKE_CMD_READY + 1> arr{};
 	arr[HANDSHAKE_CMD_READY].policy		= &handshake_accept_nest;
 	arr[HANDSHAKE_CMD_READY].cb		= handshake_accept_rsp_parse;
+	arr[HANDSHAKE_CMD_READY].alloc_sz	= sizeof(handshake_accept_ntf);
+	arr[HANDSHAKE_CMD_READY].free		= handshake_accept_ntf_free;
 	return arr;
 } ();
 

@@ -756,6 +756,12 @@ dpll_device_get_dump(ynl_cpp::ynl_socket& ys)
 }
 
 /* DPLL_CMD_DEVICE_GET - notify */
+static void dpll_device_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<dpll_device_get_ntf*>(ntf);
+	typed_ntf->obj.~dpll_device_get_rsp();
+	free(ntf);
+}
+
 /* ============== DPLL_CMD_DEVICE_SET ============== */
 /* DPLL_CMD_DEVICE_SET - do */
 int dpll_device_set(ynl_cpp::ynl_socket& ys, dpll_device_set_req& req)
@@ -1118,6 +1124,12 @@ dpll_pin_get_dump(ynl_cpp::ynl_socket& ys, dpll_pin_get_req_dump& req)
 }
 
 /* DPLL_CMD_PIN_GET - notify */
+static void dpll_pin_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<dpll_pin_get_ntf*>(ntf);
+	typed_ntf->obj.~dpll_pin_get_rsp();
+	free(ntf);
+}
+
 /* ============== DPLL_CMD_PIN_SET ============== */
 /* DPLL_CMD_PIN_SET - do */
 int dpll_pin_set(ynl_cpp::ynl_socket& ys, dpll_pin_set_req& req)
@@ -1172,16 +1184,28 @@ static constexpr std::array<ynl_ntf_info, DPLL_CMD_PIN_CHANGE_NTF + 1> dpll_ntf_
 	std::array<ynl_ntf_info, DPLL_CMD_PIN_CHANGE_NTF + 1> arr{};
 	arr[DPLL_CMD_DEVICE_CREATE_NTF].policy		= &dpll_nest;
 	arr[DPLL_CMD_DEVICE_CREATE_NTF].cb		= dpll_device_get_rsp_parse;
+	arr[DPLL_CMD_DEVICE_CREATE_NTF].alloc_sz	= sizeof(dpll_device_get_ntf);
+	arr[DPLL_CMD_DEVICE_CREATE_NTF].free		= dpll_device_get_ntf_free;
 	arr[DPLL_CMD_DEVICE_DELETE_NTF].policy		= &dpll_nest;
 	arr[DPLL_CMD_DEVICE_DELETE_NTF].cb		= dpll_device_get_rsp_parse;
+	arr[DPLL_CMD_DEVICE_DELETE_NTF].alloc_sz	= sizeof(dpll_device_get_ntf);
+	arr[DPLL_CMD_DEVICE_DELETE_NTF].free		= dpll_device_get_ntf_free;
 	arr[DPLL_CMD_DEVICE_CHANGE_NTF].policy		= &dpll_nest;
 	arr[DPLL_CMD_DEVICE_CHANGE_NTF].cb		= dpll_device_get_rsp_parse;
+	arr[DPLL_CMD_DEVICE_CHANGE_NTF].alloc_sz	= sizeof(dpll_device_get_ntf);
+	arr[DPLL_CMD_DEVICE_CHANGE_NTF].free		= dpll_device_get_ntf_free;
 	arr[DPLL_CMD_PIN_CREATE_NTF].policy		= &dpll_pin_nest;
 	arr[DPLL_CMD_PIN_CREATE_NTF].cb		= dpll_pin_get_rsp_parse;
+	arr[DPLL_CMD_PIN_CREATE_NTF].alloc_sz	= sizeof(dpll_pin_get_ntf);
+	arr[DPLL_CMD_PIN_CREATE_NTF].free		= dpll_pin_get_ntf_free;
 	arr[DPLL_CMD_PIN_DELETE_NTF].policy		= &dpll_pin_nest;
 	arr[DPLL_CMD_PIN_DELETE_NTF].cb		= dpll_pin_get_rsp_parse;
+	arr[DPLL_CMD_PIN_DELETE_NTF].alloc_sz	= sizeof(dpll_pin_get_ntf);
+	arr[DPLL_CMD_PIN_DELETE_NTF].free		= dpll_pin_get_ntf_free;
 	arr[DPLL_CMD_PIN_CHANGE_NTF].policy		= &dpll_pin_nest;
 	arr[DPLL_CMD_PIN_CHANGE_NTF].cb		= dpll_pin_get_rsp_parse;
+	arr[DPLL_CMD_PIN_CHANGE_NTF].alloc_sz	= sizeof(dpll_pin_get_ntf);
+	arr[DPLL_CMD_PIN_CHANGE_NTF].free		= dpll_pin_get_ntf_free;
 	return arr;
 } ();
 

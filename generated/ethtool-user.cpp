@@ -3523,6 +3523,12 @@ ethtool_linkinfo_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_LINKINFO_GET - notify */
+static void ethtool_linkinfo_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_linkinfo_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_linkinfo_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_LINKINFO_SET ============== */
 /* ETHTOOL_MSG_LINKINFO_SET - do */
 int ethtool_linkinfo_set(ynl_cpp::ynl_socket& ys,
@@ -3710,6 +3716,12 @@ ethtool_linkmodes_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_LINKMODES_GET - notify */
+static void ethtool_linkmodes_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_linkmodes_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_linkmodes_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_LINKMODES_SET ============== */
 /* ETHTOOL_MSG_LINKMODES_SET - do */
 int ethtool_linkmodes_set(ynl_cpp::ynl_socket& ys,
@@ -3986,6 +3998,12 @@ ethtool_debug_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_DEBUG_GET - notify */
+static void ethtool_debug_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_debug_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_debug_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_DEBUG_SET ============== */
 /* ETHTOOL_MSG_DEBUG_SET - do */
 int ethtool_debug_set(ynl_cpp::ynl_socket& ys, ethtool_debug_set_req& req)
@@ -4121,6 +4139,12 @@ ethtool_wol_get_dump(ynl_cpp::ynl_socket& ys, ethtool_wol_get_req_dump& req)
 }
 
 /* ETHTOOL_MSG_WOL_GET - notify */
+static void ethtool_wol_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_wol_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_wol_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_WOL_SET ============== */
 /* ETHTOOL_MSG_WOL_SET - do */
 int ethtool_wol_set(ynl_cpp::ynl_socket& ys, ethtool_wol_set_req& req)
@@ -4283,6 +4307,12 @@ ethtool_features_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_FEATURES_GET - notify */
+static void ethtool_features_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_features_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_features_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_FEATURES_SET ============== */
 /* ETHTOOL_MSG_FEATURES_SET - do */
 int ethtool_features_set_rsp_parse(const struct nlmsghdr *nlh,
@@ -4498,6 +4528,12 @@ ethtool_privflags_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_PRIVFLAGS_GET - notify */
+static void ethtool_privflags_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_privflags_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_privflags_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_PRIVFLAGS_SET ============== */
 /* ETHTOOL_MSG_PRIVFLAGS_SET - do */
 int ethtool_privflags_set(ynl_cpp::ynl_socket& ys,
@@ -4703,6 +4739,12 @@ ethtool_rings_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_RINGS_GET - notify */
+static void ethtool_rings_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_rings_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_rings_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_RINGS_SET ============== */
 /* ETHTOOL_MSG_RINGS_SET - do */
 int ethtool_rings_set(ynl_cpp::ynl_socket& ys, ethtool_rings_set_req& req)
@@ -4910,6 +4952,12 @@ ethtool_channels_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_CHANNELS_GET - notify */
+static void ethtool_channels_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_channels_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_channels_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_CHANNELS_SET ============== */
 /* ETHTOOL_MSG_CHANNELS_SET - do */
 int ethtool_channels_set(ynl_cpp::ynl_socket& ys,
@@ -5206,6 +5254,12 @@ ethtool_coalesce_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_COALESCE_GET - notify */
+static void ethtool_coalesce_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_coalesce_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_coalesce_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_COALESCE_SET ============== */
 /* ETHTOOL_MSG_COALESCE_SET - do */
 int ethtool_coalesce_set(ynl_cpp::ynl_socket& ys,
@@ -5440,6 +5494,12 @@ ethtool_pause_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_PAUSE_GET - notify */
+static void ethtool_pause_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_pause_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_pause_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_PAUSE_SET ============== */
 /* ETHTOOL_MSG_PAUSE_SET - do */
 int ethtool_pause_set(ynl_cpp::ynl_socket& ys, ethtool_pause_set_req& req)
@@ -5610,6 +5670,12 @@ ethtool_eee_get_dump(ynl_cpp::ynl_socket& ys, ethtool_eee_get_req_dump& req)
 }
 
 /* ETHTOOL_MSG_EEE_GET - notify */
+static void ethtool_eee_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_eee_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_eee_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_EEE_SET ============== */
 /* ETHTOOL_MSG_EEE_SET - do */
 int ethtool_eee_set(ynl_cpp::ynl_socket& ys, ethtool_eee_set_req& req)
@@ -6087,6 +6153,12 @@ ethtool_fec_get_dump(ynl_cpp::ynl_socket& ys, ethtool_fec_get_req_dump& req)
 }
 
 /* ETHTOOL_MSG_FEC_GET - notify */
+static void ethtool_fec_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_fec_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_fec_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_FEC_SET ============== */
 /* ETHTOOL_MSG_FEC_SET - do */
 int ethtool_fec_set(ynl_cpp::ynl_socket& ys, ethtool_fec_set_req& req)
@@ -6576,6 +6648,12 @@ ethtool_module_get_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_MODULE_GET - notify */
+static void ethtool_module_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_module_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_module_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_MODULE_SET ============== */
 /* ETHTOOL_MSG_MODULE_SET - do */
 int ethtool_module_set(ynl_cpp::ynl_socket& ys, ethtool_module_set_req& req)
@@ -6961,6 +7039,12 @@ ethtool_rss_get_dump(ynl_cpp::ynl_socket& ys, ethtool_rss_get_req_dump& req)
 }
 
 /* ETHTOOL_MSG_RSS_GET - notify */
+static void ethtool_rss_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_rss_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_rss_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_PLCA_GET_CFG ============== */
 /* ETHTOOL_MSG_PLCA_GET_CFG - do */
 int ethtool_plca_get_cfg_rsp_parse(const struct nlmsghdr *nlh,
@@ -7094,6 +7178,12 @@ ethtool_plca_get_cfg_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_PLCA_GET_CFG - notify */
+static void ethtool_plca_get_cfg_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_plca_get_cfg_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_plca_get_cfg_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_PLCA_SET_CFG ============== */
 /* ETHTOOL_MSG_PLCA_SET_CFG - do */
 int ethtool_plca_set_cfg(ynl_cpp::ynl_socket& ys,
@@ -7417,6 +7507,12 @@ ethtool_mm_get_dump(ynl_cpp::ynl_socket& ys, ethtool_mm_get_req_dump& req)
 }
 
 /* ETHTOOL_MSG_MM_GET - notify */
+static void ethtool_mm_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_mm_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_mm_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_MM_SET ============== */
 /* ETHTOOL_MSG_MM_SET - do */
 int ethtool_mm_set(ynl_cpp::ynl_socket& ys, ethtool_mm_set_req& req)
@@ -7612,6 +7708,12 @@ ethtool_phy_get_dump(ynl_cpp::ynl_socket& ys, ethtool_phy_get_req_dump& req)
 }
 
 /* ETHTOOL_MSG_PHY_GET - notify */
+static void ethtool_phy_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_phy_get_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_phy_get_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_TSCONFIG_GET ============== */
 /* ETHTOOL_MSG_TSCONFIG_GET - do */
 int ethtool_tsconfig_get_rsp_parse(const struct nlmsghdr *nlh,
@@ -8003,6 +8105,12 @@ ethtool_rss_create_act(ynl_cpp::ynl_socket& ys,
 }
 
 /* ETHTOOL_MSG_RSS_CREATE_ACT - notify */
+static void ethtool_rss_create_act_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_rss_create_act_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_rss_create_act_rsp();
+	free(ntf);
+}
+
 /* ============== ETHTOOL_MSG_RSS_DELETE_ACT ============== */
 /* ETHTOOL_MSG_RSS_DELETE_ACT - do */
 int ethtool_rss_delete_act(ynl_cpp::ynl_socket& ys,
@@ -8226,6 +8334,12 @@ int ethtool_cable_test_ntf_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
+static void ethtool_cable_test_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_cable_test_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_cable_test_ntf_rsp();
+	free(ntf);
+}
+
 /* ETHTOOL_MSG_CABLE_TEST_TDR_NTF - event */
 int ethtool_cable_test_tdr_ntf_rsp_parse(const struct nlmsghdr *nlh,
 					 struct ynl_parse_arg *yarg)
@@ -8269,6 +8383,12 @@ int ethtool_cable_test_tdr_ntf_rsp_parse(const struct nlmsghdr *nlh,
 	}
 
 	return YNL_PARSE_CB_OK;
+}
+
+static void ethtool_cable_test_tdr_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_cable_test_tdr_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_cable_test_tdr_ntf_rsp();
+	free(ntf);
 }
 
 /* ETHTOOL_MSG_MODULE_FW_FLASH_NTF - event */
@@ -8321,6 +8441,12 @@ int ethtool_module_fw_flash_ntf_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
+static void ethtool_module_fw_flash_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_module_fw_flash_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_module_fw_flash_ntf_rsp();
+	free(ntf);
+}
+
 /* ETHTOOL_MSG_PSE_NTF - event */
 int ethtool_pse_ntf_rsp_parse(const struct nlmsghdr *nlh,
 			      struct ynl_parse_arg *yarg)
@@ -8354,6 +8480,12 @@ int ethtool_pse_ntf_rsp_parse(const struct nlmsghdr *nlh,
 	}
 
 	return YNL_PARSE_CB_OK;
+}
+
+static void ethtool_pse_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_pse_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_pse_ntf_rsp();
+	free(ntf);
 }
 
 /* ETHTOOL_MSG_RSS_DELETE_NTF - event */
@@ -8391,54 +8523,106 @@ int ethtool_rss_delete_ntf_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
+static void ethtool_rss_delete_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ethtool_rss_delete_ntf*>(ntf);
+	typed_ntf->obj.~ethtool_rss_delete_ntf_rsp();
+	free(ntf);
+}
+
 static constexpr std::array<ynl_ntf_info, ETHTOOL_MSG_RSS_DELETE_NTF + 1> ethtool_ntf_info = []() {
 	std::array<ynl_ntf_info, ETHTOOL_MSG_RSS_DELETE_NTF + 1> arr{};
 	arr[ETHTOOL_MSG_LINKINFO_NTF].policy		= &ethtool_linkinfo_nest;
 	arr[ETHTOOL_MSG_LINKINFO_NTF].cb		= ethtool_linkinfo_get_rsp_parse;
+	arr[ETHTOOL_MSG_LINKINFO_NTF].alloc_sz	= sizeof(ethtool_linkinfo_get_ntf);
+	arr[ETHTOOL_MSG_LINKINFO_NTF].free		= ethtool_linkinfo_get_ntf_free;
 	arr[ETHTOOL_MSG_LINKMODES_NTF].policy		= &ethtool_linkmodes_nest;
 	arr[ETHTOOL_MSG_LINKMODES_NTF].cb		= ethtool_linkmodes_get_rsp_parse;
+	arr[ETHTOOL_MSG_LINKMODES_NTF].alloc_sz	= sizeof(ethtool_linkmodes_get_ntf);
+	arr[ETHTOOL_MSG_LINKMODES_NTF].free		= ethtool_linkmodes_get_ntf_free;
 	arr[ETHTOOL_MSG_DEBUG_NTF].policy		= &ethtool_debug_nest;
 	arr[ETHTOOL_MSG_DEBUG_NTF].cb		= ethtool_debug_get_rsp_parse;
+	arr[ETHTOOL_MSG_DEBUG_NTF].alloc_sz	= sizeof(ethtool_debug_get_ntf);
+	arr[ETHTOOL_MSG_DEBUG_NTF].free		= ethtool_debug_get_ntf_free;
 	arr[ETHTOOL_MSG_WOL_NTF].policy		= &ethtool_wol_nest;
 	arr[ETHTOOL_MSG_WOL_NTF].cb		= ethtool_wol_get_rsp_parse;
+	arr[ETHTOOL_MSG_WOL_NTF].alloc_sz	= sizeof(ethtool_wol_get_ntf);
+	arr[ETHTOOL_MSG_WOL_NTF].free		= ethtool_wol_get_ntf_free;
 	arr[ETHTOOL_MSG_FEATURES_NTF].policy		= &ethtool_features_nest;
 	arr[ETHTOOL_MSG_FEATURES_NTF].cb		= ethtool_features_get_rsp_parse;
+	arr[ETHTOOL_MSG_FEATURES_NTF].alloc_sz	= sizeof(ethtool_features_get_ntf);
+	arr[ETHTOOL_MSG_FEATURES_NTF].free		= ethtool_features_get_ntf_free;
 	arr[ETHTOOL_MSG_PRIVFLAGS_NTF].policy		= &ethtool_privflags_nest;
 	arr[ETHTOOL_MSG_PRIVFLAGS_NTF].cb		= ethtool_privflags_get_rsp_parse;
+	arr[ETHTOOL_MSG_PRIVFLAGS_NTF].alloc_sz	= sizeof(ethtool_privflags_get_ntf);
+	arr[ETHTOOL_MSG_PRIVFLAGS_NTF].free		= ethtool_privflags_get_ntf_free;
 	arr[ETHTOOL_MSG_RINGS_NTF].policy		= &ethtool_rings_nest;
 	arr[ETHTOOL_MSG_RINGS_NTF].cb		= ethtool_rings_get_rsp_parse;
+	arr[ETHTOOL_MSG_RINGS_NTF].alloc_sz	= sizeof(ethtool_rings_get_ntf);
+	arr[ETHTOOL_MSG_RINGS_NTF].free		= ethtool_rings_get_ntf_free;
 	arr[ETHTOOL_MSG_CHANNELS_NTF].policy		= &ethtool_channels_nest;
 	arr[ETHTOOL_MSG_CHANNELS_NTF].cb		= ethtool_channels_get_rsp_parse;
+	arr[ETHTOOL_MSG_CHANNELS_NTF].alloc_sz	= sizeof(ethtool_channels_get_ntf);
+	arr[ETHTOOL_MSG_CHANNELS_NTF].free		= ethtool_channels_get_ntf_free;
 	arr[ETHTOOL_MSG_COALESCE_NTF].policy		= &ethtool_coalesce_nest;
 	arr[ETHTOOL_MSG_COALESCE_NTF].cb		= ethtool_coalesce_get_rsp_parse;
+	arr[ETHTOOL_MSG_COALESCE_NTF].alloc_sz	= sizeof(ethtool_coalesce_get_ntf);
+	arr[ETHTOOL_MSG_COALESCE_NTF].free		= ethtool_coalesce_get_ntf_free;
 	arr[ETHTOOL_MSG_PAUSE_NTF].policy		= &ethtool_pause_nest;
 	arr[ETHTOOL_MSG_PAUSE_NTF].cb		= ethtool_pause_get_rsp_parse;
+	arr[ETHTOOL_MSG_PAUSE_NTF].alloc_sz	= sizeof(ethtool_pause_get_ntf);
+	arr[ETHTOOL_MSG_PAUSE_NTF].free		= ethtool_pause_get_ntf_free;
 	arr[ETHTOOL_MSG_EEE_NTF].policy		= &ethtool_eee_nest;
 	arr[ETHTOOL_MSG_EEE_NTF].cb		= ethtool_eee_get_rsp_parse;
+	arr[ETHTOOL_MSG_EEE_NTF].alloc_sz	= sizeof(ethtool_eee_get_ntf);
+	arr[ETHTOOL_MSG_EEE_NTF].free		= ethtool_eee_get_ntf_free;
 	arr[ETHTOOL_MSG_CABLE_TEST_NTF].policy		= &ethtool_cable_test_ntf_nest;
 	arr[ETHTOOL_MSG_CABLE_TEST_NTF].cb		= ethtool_cable_test_ntf_rsp_parse;
+	arr[ETHTOOL_MSG_CABLE_TEST_NTF].alloc_sz	= sizeof(ethtool_cable_test_ntf);
+	arr[ETHTOOL_MSG_CABLE_TEST_NTF].free		= ethtool_cable_test_ntf_free;
 	arr[ETHTOOL_MSG_CABLE_TEST_TDR_NTF].policy		= &ethtool_cable_test_tdr_ntf_nest;
 	arr[ETHTOOL_MSG_CABLE_TEST_TDR_NTF].cb		= ethtool_cable_test_tdr_ntf_rsp_parse;
+	arr[ETHTOOL_MSG_CABLE_TEST_TDR_NTF].alloc_sz	= sizeof(ethtool_cable_test_tdr_ntf);
+	arr[ETHTOOL_MSG_CABLE_TEST_TDR_NTF].free		= ethtool_cable_test_tdr_ntf_free;
 	arr[ETHTOOL_MSG_FEC_NTF].policy		= &ethtool_fec_nest;
 	arr[ETHTOOL_MSG_FEC_NTF].cb		= ethtool_fec_get_rsp_parse;
+	arr[ETHTOOL_MSG_FEC_NTF].alloc_sz	= sizeof(ethtool_fec_get_ntf);
+	arr[ETHTOOL_MSG_FEC_NTF].free		= ethtool_fec_get_ntf_free;
 	arr[ETHTOOL_MSG_MODULE_NTF].policy		= &ethtool_module_nest;
 	arr[ETHTOOL_MSG_MODULE_NTF].cb		= ethtool_module_get_rsp_parse;
+	arr[ETHTOOL_MSG_MODULE_NTF].alloc_sz	= sizeof(ethtool_module_get_ntf);
+	arr[ETHTOOL_MSG_MODULE_NTF].free		= ethtool_module_get_ntf_free;
 	arr[ETHTOOL_MSG_PLCA_NTF].policy		= &ethtool_plca_nest;
 	arr[ETHTOOL_MSG_PLCA_NTF].cb		= ethtool_plca_get_cfg_rsp_parse;
+	arr[ETHTOOL_MSG_PLCA_NTF].alloc_sz	= sizeof(ethtool_plca_get_cfg_ntf);
+	arr[ETHTOOL_MSG_PLCA_NTF].free		= ethtool_plca_get_cfg_ntf_free;
 	arr[ETHTOOL_MSG_MM_NTF].policy		= &ethtool_mm_nest;
 	arr[ETHTOOL_MSG_MM_NTF].cb		= ethtool_mm_get_rsp_parse;
+	arr[ETHTOOL_MSG_MM_NTF].alloc_sz	= sizeof(ethtool_mm_get_ntf);
+	arr[ETHTOOL_MSG_MM_NTF].free		= ethtool_mm_get_ntf_free;
 	arr[ETHTOOL_MSG_MODULE_FW_FLASH_NTF].policy		= &ethtool_module_fw_flash_nest;
 	arr[ETHTOOL_MSG_MODULE_FW_FLASH_NTF].cb		= ethtool_module_fw_flash_ntf_rsp_parse;
+	arr[ETHTOOL_MSG_MODULE_FW_FLASH_NTF].alloc_sz	= sizeof(ethtool_module_fw_flash_ntf);
+	arr[ETHTOOL_MSG_MODULE_FW_FLASH_NTF].free		= ethtool_module_fw_flash_ntf_free;
 	arr[ETHTOOL_MSG_PHY_NTF].policy		= &ethtool_phy_nest;
 	arr[ETHTOOL_MSG_PHY_NTF].cb		= ethtool_phy_get_rsp_parse;
+	arr[ETHTOOL_MSG_PHY_NTF].alloc_sz	= sizeof(ethtool_phy_get_ntf);
+	arr[ETHTOOL_MSG_PHY_NTF].free		= ethtool_phy_get_ntf_free;
 	arr[ETHTOOL_MSG_PSE_NTF].policy		= &ethtool_pse_ntf_nest;
 	arr[ETHTOOL_MSG_PSE_NTF].cb		= ethtool_pse_ntf_rsp_parse;
+	arr[ETHTOOL_MSG_PSE_NTF].alloc_sz	= sizeof(ethtool_pse_ntf);
+	arr[ETHTOOL_MSG_PSE_NTF].free		= ethtool_pse_ntf_free;
 	arr[ETHTOOL_MSG_RSS_NTF].policy		= &ethtool_rss_nest;
 	arr[ETHTOOL_MSG_RSS_NTF].cb		= ethtool_rss_get_rsp_parse;
+	arr[ETHTOOL_MSG_RSS_NTF].alloc_sz	= sizeof(ethtool_rss_get_ntf);
+	arr[ETHTOOL_MSG_RSS_NTF].free		= ethtool_rss_get_ntf_free;
 	arr[ETHTOOL_MSG_RSS_CREATE_NTF].policy		= &ethtool_rss_nest;
 	arr[ETHTOOL_MSG_RSS_CREATE_NTF].cb		= ethtool_rss_create_act_rsp_parse;
+	arr[ETHTOOL_MSG_RSS_CREATE_NTF].alloc_sz	= sizeof(ethtool_rss_create_act_ntf);
+	arr[ETHTOOL_MSG_RSS_CREATE_NTF].free		= ethtool_rss_create_act_ntf_free;
 	arr[ETHTOOL_MSG_RSS_DELETE_NTF].policy		= &ethtool_rss_nest;
 	arr[ETHTOOL_MSG_RSS_DELETE_NTF].cb		= ethtool_rss_delete_ntf_rsp_parse;
+	arr[ETHTOOL_MSG_RSS_DELETE_NTF].alloc_sz	= sizeof(ethtool_rss_delete_ntf);
+	arr[ETHTOOL_MSG_RSS_DELETE_NTF].free		= ethtool_rss_delete_ntf_free;
 	return arr;
 } ();
 

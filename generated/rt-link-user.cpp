@@ -6193,6 +6193,12 @@ rt_link_getlink_dump(ynl_cpp::ynl_socket& ys, rt_link_getlink_req_dump& req)
 }
 
 /* RTM_GETLINK - notify */
+static void rt_link_getlink_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<rt_link_getlink_ntf*>(ntf);
+	typed_ntf->obj.~rt_link_getlink_rsp();
+	free(ntf);
+}
+
 /* ============== RTM_SETLINK ============== */
 /* RTM_SETLINK - do */
 int rt_link_setlink(ynl_cpp::ynl_socket& ys, rt_link_setlink_req& req)
@@ -6537,6 +6543,8 @@ static constexpr std::array<ynl_ntf_info, RTM_NEWLINK + 1> rt_link_ntf_info = []
 	std::array<ynl_ntf_info, RTM_NEWLINK + 1> arr{};
 	arr[RTM_NEWLINK].policy		= &rt_link_link_attrs_nest;
 	arr[RTM_NEWLINK].cb		= rt_link_getlink_rsp_parse;
+	arr[RTM_NEWLINK].alloc_sz	= sizeof(rt_link_getlink_ntf);
+	arr[RTM_NEWLINK].free		= rt_link_getlink_ntf_free;
 	return arr;
 } ();
 

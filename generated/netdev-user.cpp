@@ -605,6 +605,12 @@ netdev_dev_get_dump(ynl_cpp::ynl_socket& ys)
 }
 
 /* NETDEV_CMD_DEV_GET - notify */
+static void netdev_dev_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<netdev_dev_get_ntf*>(ntf);
+	typed_ntf->obj.~netdev_dev_get_rsp();
+	free(ntf);
+}
+
 /* ============== NETDEV_CMD_PAGE_POOL_GET ============== */
 /* NETDEV_CMD_PAGE_POOL_GET - do */
 int netdev_page_pool_get_rsp_parse(const struct nlmsghdr *nlh,
@@ -727,6 +733,12 @@ netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys)
 }
 
 /* NETDEV_CMD_PAGE_POOL_GET - notify */
+static void netdev_page_pool_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<netdev_page_pool_get_ntf*>(ntf);
+	typed_ntf->obj.~netdev_page_pool_get_rsp();
+	free(ntf);
+}
+
 /* ============== NETDEV_CMD_PAGE_POOL_STATS_GET ============== */
 /* NETDEV_CMD_PAGE_POOL_STATS_GET - do */
 int netdev_page_pool_stats_get_rsp_parse(const struct nlmsghdr *nlh,
@@ -1361,16 +1373,28 @@ static constexpr std::array<ynl_ntf_info, NETDEV_CMD_PAGE_POOL_CHANGE_NTF + 1> n
 	std::array<ynl_ntf_info, NETDEV_CMD_PAGE_POOL_CHANGE_NTF + 1> arr{};
 	arr[NETDEV_CMD_DEV_ADD_NTF].policy		= &netdev_dev_nest;
 	arr[NETDEV_CMD_DEV_ADD_NTF].cb		= netdev_dev_get_rsp_parse;
+	arr[NETDEV_CMD_DEV_ADD_NTF].alloc_sz	= sizeof(netdev_dev_get_ntf);
+	arr[NETDEV_CMD_DEV_ADD_NTF].free		= netdev_dev_get_ntf_free;
 	arr[NETDEV_CMD_DEV_DEL_NTF].policy		= &netdev_dev_nest;
 	arr[NETDEV_CMD_DEV_DEL_NTF].cb		= netdev_dev_get_rsp_parse;
+	arr[NETDEV_CMD_DEV_DEL_NTF].alloc_sz	= sizeof(netdev_dev_get_ntf);
+	arr[NETDEV_CMD_DEV_DEL_NTF].free		= netdev_dev_get_ntf_free;
 	arr[NETDEV_CMD_DEV_CHANGE_NTF].policy		= &netdev_dev_nest;
 	arr[NETDEV_CMD_DEV_CHANGE_NTF].cb		= netdev_dev_get_rsp_parse;
+	arr[NETDEV_CMD_DEV_CHANGE_NTF].alloc_sz	= sizeof(netdev_dev_get_ntf);
+	arr[NETDEV_CMD_DEV_CHANGE_NTF].free		= netdev_dev_get_ntf_free;
 	arr[NETDEV_CMD_PAGE_POOL_ADD_NTF].policy		= &netdev_page_pool_nest;
 	arr[NETDEV_CMD_PAGE_POOL_ADD_NTF].cb		= netdev_page_pool_get_rsp_parse;
+	arr[NETDEV_CMD_PAGE_POOL_ADD_NTF].alloc_sz	= sizeof(netdev_page_pool_get_ntf);
+	arr[NETDEV_CMD_PAGE_POOL_ADD_NTF].free		= netdev_page_pool_get_ntf_free;
 	arr[NETDEV_CMD_PAGE_POOL_DEL_NTF].policy		= &netdev_page_pool_nest;
 	arr[NETDEV_CMD_PAGE_POOL_DEL_NTF].cb		= netdev_page_pool_get_rsp_parse;
+	arr[NETDEV_CMD_PAGE_POOL_DEL_NTF].alloc_sz	= sizeof(netdev_page_pool_get_ntf);
+	arr[NETDEV_CMD_PAGE_POOL_DEL_NTF].free		= netdev_page_pool_get_ntf_free;
 	arr[NETDEV_CMD_PAGE_POOL_CHANGE_NTF].policy		= &netdev_page_pool_nest;
 	arr[NETDEV_CMD_PAGE_POOL_CHANGE_NTF].cb		= netdev_page_pool_get_rsp_parse;
+	arr[NETDEV_CMD_PAGE_POOL_CHANGE_NTF].alloc_sz	= sizeof(netdev_page_pool_get_ntf);
+	arr[NETDEV_CMD_PAGE_POOL_CHANGE_NTF].free		= netdev_page_pool_get_ntf_free;
 	return arr;
 } ();
 

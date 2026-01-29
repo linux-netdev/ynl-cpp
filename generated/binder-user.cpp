@@ -127,10 +127,18 @@ int binder_report_rsp_parse(const struct nlmsghdr *nlh,
 	return YNL_PARSE_CB_OK;
 }
 
+static void binder_report_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<binder_report*>(ntf);
+	typed_ntf->obj.~binder_report_rsp();
+	free(ntf);
+}
+
 static constexpr std::array<ynl_ntf_info, BINDER_CMD_REPORT + 1> binder_ntf_info = []() {
 	std::array<ynl_ntf_info, BINDER_CMD_REPORT + 1> arr{};
 	arr[BINDER_CMD_REPORT].policy		= &binder_report_nest;
 	arr[BINDER_CMD_REPORT].cb		= binder_report_rsp_parse;
+	arr[BINDER_CMD_REPORT].alloc_sz	= sizeof(binder_report);
+	arr[BINDER_CMD_REPORT].free		= binder_report_free;
 	return arr;
 } ();
 

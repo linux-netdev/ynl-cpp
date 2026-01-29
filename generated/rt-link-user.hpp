@@ -656,6 +656,11 @@ rt_link_getlink_dump(ynl_cpp::ynl_socket& ys, rt_link_getlink_req_dump& req);
 
 /* RTM_GETLINK - notify */
 struct rt_link_getlink_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	rt_link_getlink_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== RTM_SETLINK ============== */

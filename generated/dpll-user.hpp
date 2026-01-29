@@ -118,6 +118,11 @@ dpll_device_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* DPLL_CMD_DEVICE_GET - notify */
 struct dpll_device_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	dpll_device_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== DPLL_CMD_DEVICE_SET ============== */
@@ -212,6 +217,11 @@ dpll_pin_get_dump(ynl_cpp::ynl_socket& ys, dpll_pin_get_req_dump& req);
 
 /* DPLL_CMD_PIN_GET - notify */
 struct dpll_pin_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	dpll_pin_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== DPLL_CMD_PIN_SET ============== */

@@ -44,6 +44,11 @@ struct binder_report_rsp {
 };
 
 struct binder_report {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	binder_report_rsp obj __attribute__((aligned(8)));
 };
 
 } //namespace ynl_cpp

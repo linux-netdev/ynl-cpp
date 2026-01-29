@@ -147,6 +147,11 @@ rt_neigh_getneigh_dump(ynl_cpp::ynl_socket& ys,
 
 /* RTM_GETNEIGH - notify */
 struct rt_neigh_getneigh_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	rt_neigh_getneigh_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== RTM_GETNEIGHTBL ============== */

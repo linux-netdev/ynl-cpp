@@ -493,13 +493,22 @@ rt_rule_getrule_dump(ynl_cpp::ynl_socket& ys, rt_rule_getrule_req& req)
 }
 
 /* RTM_GETRULE - notify */
+static void rt_rule_getrule_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<rt_rule_getrule_ntf*>(ntf);
+	typed_ntf->obj.~rt_rule_getrule_rsp();
+	free(ntf);
+}
 
 static constexpr std::array<ynl_ntf_info, RTM_DELRULE + 1> rt_rule_ntf_info = []() {
 	std::array<ynl_ntf_info, RTM_DELRULE + 1> arr{};
 	arr[RTM_NEWRULE].policy		= &rt_rule_fib_rule_attrs_nest;
 	arr[RTM_NEWRULE].cb		= rt_rule_getrule_rsp_parse;
+	arr[RTM_NEWRULE].alloc_sz	= sizeof(rt_rule_getrule_ntf);
+	arr[RTM_NEWRULE].free		= rt_rule_getrule_ntf_free;
 	arr[RTM_DELRULE].policy		= &rt_rule_fib_rule_attrs_nest;
 	arr[RTM_DELRULE].cb		= rt_rule_getrule_rsp_parse;
+	arr[RTM_DELRULE].alloc_sz	= sizeof(rt_rule_getrule_ntf);
+	arr[RTM_DELRULE].free		= rt_rule_getrule_ntf_free;
 	return arr;
 } ();
 

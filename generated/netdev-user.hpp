@@ -81,6 +81,11 @@ netdev_dev_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* NETDEV_CMD_DEV_GET - notify */
 struct netdev_dev_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	netdev_dev_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== NETDEV_CMD_PAGE_POOL_GET ============== */
@@ -118,6 +123,11 @@ netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* NETDEV_CMD_PAGE_POOL_GET - notify */
 struct netdev_page_pool_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	netdev_page_pool_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== NETDEV_CMD_PAGE_POOL_STATS_GET ============== */

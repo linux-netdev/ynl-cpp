@@ -63,6 +63,11 @@ std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* PSP_CMD_DEV_GET - notify */
 struct psp_dev_get_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	psp_dev_get_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== PSP_CMD_DEV_SET ============== */
@@ -99,6 +104,11 @@ psp_key_rotate(ynl_cpp::ynl_socket& ys, psp_key_rotate_req& req);
 
 /* PSP_CMD_KEY_ROTATE - notify */
 struct psp_key_rotate_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	psp_key_rotate_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== PSP_CMD_RX_ASSOC ============== */

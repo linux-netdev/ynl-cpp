@@ -62,6 +62,11 @@ handshake_accept(ynl_cpp::ynl_socket& ys, handshake_accept_req& req);
 
 /* HANDSHAKE_CMD_ACCEPT - notify */
 struct handshake_accept_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	handshake_accept_rsp obj __attribute__((aligned(8)));
 };
 
 /* ============== HANDSHAKE_CMD_DONE ============== */

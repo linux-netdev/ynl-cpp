@@ -671,6 +671,12 @@ rt_neigh_getneigh_dump(ynl_cpp::ynl_socket& ys,
 }
 
 /* RTM_GETNEIGH - notify */
+static void rt_neigh_getneigh_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<rt_neigh_getneigh_ntf*>(ntf);
+	typed_ntf->obj.~rt_neigh_getneigh_rsp();
+	free(ntf);
+}
+
 /* ============== RTM_GETNEIGHTBL ============== */
 /* RTM_GETNEIGHTBL - dump */
 int rt_neigh_getneightbl_rsp_parse(const struct nlmsghdr *nlh,
@@ -829,8 +835,12 @@ static constexpr std::array<ynl_ntf_info, RTM_DELNEIGH + 1> rt_neigh_ntf_info = 
 	std::array<ynl_ntf_info, RTM_DELNEIGH + 1> arr{};
 	arr[RTM_DELNEIGH].policy		= &rt_neigh_neighbour_attrs_nest;
 	arr[RTM_DELNEIGH].cb		= rt_neigh_getneigh_rsp_parse;
+	arr[RTM_DELNEIGH].alloc_sz	= sizeof(rt_neigh_getneigh_ntf);
+	arr[RTM_DELNEIGH].free		= rt_neigh_getneigh_ntf_free;
 	arr[RTM_NEWNEIGH].policy		= &rt_neigh_neighbour_attrs_nest;
 	arr[RTM_NEWNEIGH].cb		= rt_neigh_getneigh_rsp_parse;
+	arr[RTM_NEWNEIGH].alloc_sz	= sizeof(rt_neigh_getneigh_ntf);
+	arr[RTM_NEWNEIGH].free		= rt_neigh_getneigh_ntf_free;
 	return arr;
 } ();
 

@@ -2461,6 +2461,32 @@ def print_wrapped_type(ri):
     ri.cw.nl()
 
 
+def print_ntf_type(ri):
+    """Generate a type that mirrors the layout of ynl_ntf_base_type"""
+    ntf_name = f"{op_prefix(ri, 'notify')}"
+    rsp_type = type_name(ri, 'reply', deref=True)
+    ri.cw.block_start(line=f"struct {ntf_name}")
+    ri.cw.p("__u16 family;")
+    ri.cw.p("__u8 cmd;")
+    ri.cw.p("struct ynl_ntf_base_type* next;")
+    ri.cw.p("void (*free)(struct ynl_ntf_base_type* ntf);")
+    ri.cw.p(f"{rsp_type} obj __attribute__((aligned(8)));")
+    ri.cw.block_end(line=";")
+    ri.cw.nl()
+
+
+def print_ntf_free(ri):
+    ntf_name = f"{op_prefix(ri, 'notify')}"
+    rsp_type = type_name(ri, 'reply', deref=True)
+    func_name = f"{ntf_name}_free"
+    ri.cw.block_start(line=f"static void {func_name}(struct ynl_ntf_base_type* ntf)")
+    ri.cw.p(f"auto* typed_ntf = reinterpret_cast<{ntf_name}*>(ntf);")
+    ri.cw.p(f"typed_ntf->obj.~{rsp_type}();")
+    ri.cw.p("free(ntf);")
+    ri.cw.block_end()
+    ri.cw.nl()
+
+
 def print_req_policy_fwd(cw, struct, ri=None, terminate=True):
     if terminate and ri and policy_should_be_static(struct.family):
         return
@@ -2509,10 +2535,11 @@ def policy_should_be_static(family):
 def _render_user_ntf_entry(ri, op):
     if ri.family.is_classic():
         op = ri.family.req_by_value[op.rsp_value]
+    ntf_name = f"{op_prefix(ri, 'notify')}"
     ri.cw.p(f"arr[{op.enum_name}].policy\t\t= &{ri.struct['reply'].render_name}_nest;")
     ri.cw.p(f"arr[{op.enum_name}].cb\t\t= {op_prefix(ri, 'reply', deref=True)}_parse;")
-    # ri.cw.p(f"arr[{op.enum_name}].alloc_sz\t= sizeof({type_name(ri, 'event')});")
-    # ri.cw.p(f"arr[{op.enum_name}].free\t\t= (void *){op_prefix(ri, 'notify')}_free;")
+    ri.cw.p(f"arr[{op.enum_name}].alloc_sz\t= sizeof({ntf_name});")
+    ri.cw.p(f"arr[{op.enum_name}].free\t\t= {ntf_name}_free;")
 
 
 def render_user_family(family, cw, prototype):
@@ -2772,7 +2799,7 @@ def main():
                     raise Exception(
                         f"Only notifications with consistent types supported ({op.name})"
                     )
-                print_wrapped_type(ri)
+                print_ntf_type(ri)
 
         for op_name, op in parsed.ntfs.items():
             if "event" in op:
@@ -2780,7 +2807,7 @@ def main():
                 cw.p(f"/* {op.enum_name} - event */")
                 print_rsp_type(ri)
                 cw.nl()
-                print_wrapped_type(ri)
+                print_ntf_type(ri)
         cw.nl()
     else:
         cw.p("/* Enums */")
@@ -2848,6 +2875,7 @@ def main():
                     raise Exception(
                         f"Only notifications with consistent types supported ({op.name})"
                     )
+                print_ntf_free(ri)
 
         for op_name, op in parsed.ntfs.items():
             if "event" in op:
@@ -2857,6 +2885,7 @@ def main():
                 parse_rsp_msg(ri)
 
                 ri = RenderInfo(cw, parsed, args.mode, op, "event")
+                print_ntf_free(ri)
         cw.nl()
         render_user_family(parsed, cw, False)
 

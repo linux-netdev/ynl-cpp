@@ -147,6 +147,11 @@ rt_rule_getrule_dump(ynl_cpp::ynl_socket& ys, rt_rule_getrule_req& req);
 
 /* RTM_GETRULE - notify */
 struct rt_rule_getrule_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	rt_rule_getrule_rsp obj __attribute__((aligned(8)));
 };
 
 } //namespace ynl_cpp

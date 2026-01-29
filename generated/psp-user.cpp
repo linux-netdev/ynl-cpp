@@ -246,6 +246,12 @@ std::unique_ptr<psp_dev_get_list> psp_dev_get_dump(ynl_cpp::ynl_socket& ys)
 }
 
 /* PSP_CMD_DEV_GET - notify */
+static void psp_dev_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<psp_dev_get_ntf*>(ntf);
+	typed_ntf->obj.~psp_dev_get_rsp();
+	free(ntf);
+}
+
 /* ============== PSP_CMD_DEV_SET ============== */
 /* PSP_CMD_DEV_SET - do */
 int psp_dev_set_rsp_parse(const struct nlmsghdr *nlh,
@@ -340,6 +346,12 @@ psp_key_rotate(ynl_cpp::ynl_socket& ys, psp_key_rotate_req& req)
 }
 
 /* PSP_CMD_KEY_ROTATE - notify */
+static void psp_key_rotate_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<psp_key_rotate_ntf*>(ntf);
+	typed_ntf->obj.~psp_key_rotate_rsp();
+	free(ntf);
+}
+
 /* ============== PSP_CMD_RX_ASSOC ============== */
 /* PSP_CMD_RX_ASSOC - do */
 int psp_rx_assoc_rsp_parse(const struct nlmsghdr *nlh,
@@ -461,12 +473,20 @@ static constexpr std::array<ynl_ntf_info, PSP_CMD_KEY_ROTATE_NTF + 1> psp_ntf_in
 	std::array<ynl_ntf_info, PSP_CMD_KEY_ROTATE_NTF + 1> arr{};
 	arr[PSP_CMD_DEV_ADD_NTF].policy		= &psp_dev_nest;
 	arr[PSP_CMD_DEV_ADD_NTF].cb		= psp_dev_get_rsp_parse;
+	arr[PSP_CMD_DEV_ADD_NTF].alloc_sz	= sizeof(psp_dev_get_ntf);
+	arr[PSP_CMD_DEV_ADD_NTF].free		= psp_dev_get_ntf_free;
 	arr[PSP_CMD_DEV_DEL_NTF].policy		= &psp_dev_nest;
 	arr[PSP_CMD_DEV_DEL_NTF].cb		= psp_dev_get_rsp_parse;
+	arr[PSP_CMD_DEV_DEL_NTF].alloc_sz	= sizeof(psp_dev_get_ntf);
+	arr[PSP_CMD_DEV_DEL_NTF].free		= psp_dev_get_ntf_free;
 	arr[PSP_CMD_DEV_CHANGE_NTF].policy		= &psp_dev_nest;
 	arr[PSP_CMD_DEV_CHANGE_NTF].cb		= psp_dev_get_rsp_parse;
+	arr[PSP_CMD_DEV_CHANGE_NTF].alloc_sz	= sizeof(psp_dev_get_ntf);
+	arr[PSP_CMD_DEV_CHANGE_NTF].free		= psp_dev_get_ntf_free;
 	arr[PSP_CMD_KEY_ROTATE_NTF].policy		= &psp_dev_nest;
 	arr[PSP_CMD_KEY_ROTATE_NTF].cb		= psp_key_rotate_rsp_parse;
+	arr[PSP_CMD_KEY_ROTATE_NTF].alloc_sz	= sizeof(psp_key_rotate_ntf);
+	arr[PSP_CMD_KEY_ROTATE_NTF].free		= psp_key_rotate_ntf_free;
 	return arr;
 } ();
 

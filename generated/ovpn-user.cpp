@@ -783,6 +783,12 @@ ovpn_peer_get_dump(ynl_cpp::ynl_socket& ys, ovpn_peer_get_req_dump& req)
 }
 
 /* OVPN_CMD_PEER_GET - notify */
+static void ovpn_peer_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ovpn_peer_get_ntf*>(ntf);
+	typed_ntf->obj.~ovpn_peer_get_rsp();
+	free(ntf);
+}
+
 /* ============== OVPN_CMD_PEER_DEL ============== */
 /* OVPN_CMD_PEER_DEL - do */
 int ovpn_peer_del(ynl_cpp::ynl_socket& ys, ovpn_peer_del_req& req)
@@ -899,6 +905,12 @@ ovpn_key_get(ynl_cpp::ynl_socket& ys, ovpn_key_get_req& req)
 }
 
 /* OVPN_CMD_KEY_GET - notify */
+static void ovpn_key_get_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<ovpn_key_get_ntf*>(ntf);
+	typed_ntf->obj.~ovpn_key_get_rsp();
+	free(ntf);
+}
+
 /* ============== OVPN_CMD_KEY_SWAP ============== */
 /* OVPN_CMD_KEY_SWAP - do */
 int ovpn_key_swap(ynl_cpp::ynl_socket& ys, ovpn_key_swap_req& req)
@@ -955,8 +967,12 @@ static constexpr std::array<ynl_ntf_info, OVPN_CMD_KEY_SWAP_NTF + 1> ovpn_ntf_in
 	std::array<ynl_ntf_info, OVPN_CMD_KEY_SWAP_NTF + 1> arr{};
 	arr[OVPN_CMD_PEER_DEL_NTF].policy		= &ovpn_nest;
 	arr[OVPN_CMD_PEER_DEL_NTF].cb		= ovpn_peer_get_rsp_parse;
+	arr[OVPN_CMD_PEER_DEL_NTF].alloc_sz	= sizeof(ovpn_peer_get_ntf);
+	arr[OVPN_CMD_PEER_DEL_NTF].free		= ovpn_peer_get_ntf_free;
 	arr[OVPN_CMD_KEY_SWAP_NTF].policy		= &ovpn_ovpn_keyconf_get_nest;
 	arr[OVPN_CMD_KEY_SWAP_NTF].cb		= ovpn_key_get_rsp_parse;
+	arr[OVPN_CMD_KEY_SWAP_NTF].alloc_sz	= sizeof(ovpn_key_get_ntf);
+	arr[OVPN_CMD_KEY_SWAP_NTF].free		= ovpn_key_get_ntf_free;
 	return arr;
 } ();
 
