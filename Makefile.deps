@@ -7,7 +7,7 @@
 # by selectively including just the uAPI header of the family directly
 # from the kernel sources.
 
-UAPI_PATH:=../
+UAPI_PATH:=../include/
 
 # scripts/headers_install.sh strips "_UAPI" from header guards so we
 # need the explicit -D matching what's in /usr, to avoid multiple definitions.
