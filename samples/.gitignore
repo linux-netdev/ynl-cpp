@@ -1,5 +1,6 @@
 ethtool
 netdev
+psp
 rt-addr
 rt-link
 rt-route
