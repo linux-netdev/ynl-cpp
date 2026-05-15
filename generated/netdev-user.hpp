@@ -51,6 +51,12 @@ struct netdev_queue_id {
 	std::optional<enum netdev_queue_type> type;
 };
 
+struct netdev_lease {
+	std::optional<__u32> ifindex;
+	std::optional<netdev_queue_id> queue;
+	std::optional<__s32> netns_id;
+};
+
 /* ============== NETDEV_CMD_DEV_GET ============== */
 /* NETDEV_CMD_DEV_GET - do */
 struct netdev_dev_get_req {
@@ -184,6 +190,7 @@ struct netdev_queue_get_rsp {
 	std::optional<__u32> dmabuf;
 	std::optional<netdev_io_uring_provider_info> io_uring;
 	std::optional<netdev_xsk_info> xsk;
+	std::optional<netdev_lease> lease;
 };
 
 /*
@@ -335,6 +342,26 @@ struct netdev_bind_tx_rsp {
  */
 std::unique_ptr<netdev_bind_tx_rsp>
 netdev_bind_tx(ynl_cpp::ynl_socket& ys, netdev_bind_tx_req& req);
+
+/* ============== NETDEV_CMD_QUEUE_CREATE ============== */
+/* NETDEV_CMD_QUEUE_CREATE - do */
+struct netdev_queue_create_req {
+	std::optional<__u32> ifindex;
+	std::optional<enum netdev_queue_type> type;
+	std::optional<netdev_lease> lease;
+};
+
+struct netdev_queue_create_rsp {
+	std::optional<__u32> id;
+};
+
+/*
+ * Create a new queue for the given netdevice. Whether this operation
+is supported depends on the device and the driver.
+
+ */
+std::unique_ptr<netdev_queue_create_rsp>
+netdev_queue_create(ynl_cpp::ynl_socket& ys, netdev_queue_create_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_NETDEV_GEN_H */

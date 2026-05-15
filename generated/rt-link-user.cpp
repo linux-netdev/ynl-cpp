@@ -370,6 +370,21 @@ std::string_view rt_link_netkit_scrub_str(int value)
 	return rt_link_netkit_scrub_strmap[value];
 }
 
+static constexpr std::array<std::string_view, 1 + 1> rt_link_netkit_pairing_strmap = []() {
+	std::array<std::string_view, 1 + 1> arr{};
+	arr[0] = "pair";
+	arr[1] = "single";
+	return arr;
+} ();
+
+std::string_view rt_link_netkit_pairing_str(netkit_pairing value)
+{
+	if (value < 0 || value >= (int)(rt_link_netkit_pairing_strmap.size())) {
+		return "";
+	}
+	return rt_link_netkit_pairing_strmap[value];
+}
+
 static constexpr std::array<std::string_view, 1 + 1> rt_link_ovpn_mode_strmap = []() {
 	std::array<std::string_view, 1 + 1> arr{};
 	arr[0] = "p2p";
@@ -383,6 +398,22 @@ std::string_view rt_link_ovpn_mode_str(ovpn_mode value)
 		return "";
 	}
 	return rt_link_ovpn_mode_strmap[value];
+}
+
+static constexpr std::array<std::string_view, 2 + 1> rt_link_br_stp_mode_strmap = []() {
+	std::array<std::string_view, 2 + 1> arr{};
+	arr[0] = "auto";
+	arr[1] = "user";
+	arr[2] = "kernel";
+	return arr;
+} ();
+
+std::string_view rt_link_br_stp_mode_str(br_stp_mode value)
+{
+	if (value < 0 || value >= (int)(rt_link_br_stp_mode_strmap.size())) {
+		return "";
+	}
+	return rt_link_br_stp_mode_strmap[value];
 }
 
 /* Policies */
@@ -624,6 +655,8 @@ static std::array<ynl_policy_attr,IFLA_BR_MAX + 1> rt_link_linkinfo_bridge_attrs
 	arr[IFLA_BR_FDB_N_LEARNED].type = YNL_PT_U32;
 	arr[IFLA_BR_FDB_MAX_LEARNED].name = "fdb-max-learned";
 	arr[IFLA_BR_FDB_MAX_LEARNED].type = YNL_PT_U32;
+	arr[IFLA_BR_STP_MODE].name = "stp-mode";
+	arr[IFLA_BR_STP_MODE].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -1002,6 +1035,8 @@ static std::array<ynl_policy_attr,IFLA_NETKIT_MAX + 1> rt_link_linkinfo_netkit_a
 	arr[IFLA_NETKIT_HEADROOM].type = YNL_PT_U16;
 	arr[IFLA_NETKIT_TAILROOM].name = "tailroom";
 	arr[IFLA_NETKIT_TAILROOM].type = YNL_PT_U16;
+	arr[IFLA_NETKIT_PAIRING].name = "pairing";
+	arr[IFLA_NETKIT_PAIRING].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -2229,6 +2264,9 @@ int rt_link_linkinfo_bridge_attrs_put(struct nlmsghdr *nlh,
 	if (obj.fdb_max_learned.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BR_FDB_MAX_LEARNED, obj.fdb_max_learned.value());
 	}
+	if (obj.stp_mode.has_value()) {
+		ynl_attr_put_u32(nlh, IFLA_BR_STP_MODE, obj.stp_mode.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -2498,6 +2536,11 @@ int rt_link_linkinfo_bridge_attrs_parse(struct ynl_parse_arg *yarg,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->fdb_max_learned = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == IFLA_BR_STP_MODE) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->stp_mode = (enum br_stp_mode)ynl_attr_get_u32(attr);
 		}
 	}
 
@@ -3834,6 +3877,9 @@ int rt_link_linkinfo_netkit_attrs_put(struct nlmsghdr *nlh,
 	if (obj.tailroom.has_value()) {
 		ynl_attr_put_u16(nlh, IFLA_NETKIT_TAILROOM, obj.tailroom.value());
 	}
+	if (obj.pairing.has_value()) {
+		ynl_attr_put_u32(nlh, IFLA_NETKIT_PAIRING, obj.pairing.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -3895,6 +3941,11 @@ int rt_link_linkinfo_netkit_attrs_parse(struct ynl_parse_arg *yarg,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->tailroom = (__u16)ynl_attr_get_u16(attr);
+		} else if (type == IFLA_NETKIT_PAIRING) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->pairing = (enum netkit_pairing)ynl_attr_get_u32(attr);
 		}
 	}
 

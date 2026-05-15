@@ -7,7 +7,7 @@ ifeq ("$(DEBUG)","1")
   CFLAGS += -g -fsanitize=address -fsanitize=leak -static-libasan
 endif
 
-CXXFLAGS=-I../lib/ -I../
+CXXFLAGS=-I../lib/ -I../  -I../include/
 
 include ../Makefile.deps
 

@@ -73,6 +73,7 @@ struct nfsd_threads_set_req {
 	std::optional<__u32> leasetime;
 	std::string scope;
 	std::optional<__u32> min_threads;
+	std::vector<__u8> fh_key;
 };
 
 /*

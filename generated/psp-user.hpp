@@ -158,6 +158,14 @@ struct psp_get_stats_rsp {
 	std::optional<__u32> dev_id;
 	std::optional<__u64> key_rotations;
 	std::optional<__u64> stale_events;
+	std::optional<__u64> rx_packets;
+	std::optional<__u64> rx_bytes;
+	std::optional<__u64> rx_auth_fail;
+	std::optional<__u64> rx_error;
+	std::optional<__u64> rx_bad;
+	std::optional<__u64> tx_packets;
+	std::optional<__u64> tx_bytes;
+	std::optional<__u64> tx_error;
 };
 
 /*

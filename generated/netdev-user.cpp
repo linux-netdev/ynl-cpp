@@ -14,8 +14,8 @@
 namespace ynl_cpp {
 
 /* Enums */
-static constexpr std::array<std::string_view, NETDEV_CMD_BIND_TX + 1> netdev_op_strmap = []() {
-	std::array<std::string_view, NETDEV_CMD_BIND_TX + 1> arr{};
+static constexpr std::array<std::string_view, NETDEV_CMD_QUEUE_CREATE + 1> netdev_op_strmap = []() {
+	std::array<std::string_view, NETDEV_CMD_QUEUE_CREATE + 1> arr{};
 	arr[NETDEV_CMD_DEV_GET] = "dev-get";
 	arr[NETDEV_CMD_DEV_ADD_NTF] = "dev-add-ntf";
 	arr[NETDEV_CMD_DEV_DEL_NTF] = "dev-del-ntf";
@@ -31,6 +31,7 @@ static constexpr std::array<std::string_view, NETDEV_CMD_BIND_TX + 1> netdev_op_
 	arr[NETDEV_CMD_BIND_RX] = "bind-rx";
 	arr[NETDEV_CMD_NAPI_SET] = "napi-set";
 	arr[NETDEV_CMD_BIND_TX] = "bind-tx";
+	arr[NETDEV_CMD_QUEUE_CREATE] = "queue-create";
 	return arr;
 } ();
 
@@ -192,6 +193,23 @@ struct ynl_policy_nest netdev_queue_id_nest = {
 	.table = netdev_queue_id_policy.data(),
 };
 
+static std::array<ynl_policy_attr,NETDEV_A_LEASE_MAX + 1> netdev_lease_policy = []() {
+	std::array<ynl_policy_attr,NETDEV_A_LEASE_MAX + 1> arr{};
+	arr[NETDEV_A_LEASE_IFINDEX].name = "ifindex";
+	arr[NETDEV_A_LEASE_IFINDEX].type = YNL_PT_U32;
+	arr[NETDEV_A_LEASE_QUEUE].name = "queue";
+	arr[NETDEV_A_LEASE_QUEUE].type = YNL_PT_NEST;
+	arr[NETDEV_A_LEASE_QUEUE].nest = &netdev_queue_id_nest;
+	arr[NETDEV_A_LEASE_NETNS_ID].name = "netns-id";
+	arr[NETDEV_A_LEASE_NETNS_ID].type = YNL_PT_U32;
+	return arr;
+} ();
+
+struct ynl_policy_nest netdev_lease_nest = {
+	.max_attr = static_cast<unsigned int>(NETDEV_A_LEASE_MAX),
+	.table = netdev_lease_policy.data(),
+};
+
 static std::array<ynl_policy_attr,NETDEV_A_DEV_MAX + 1> netdev_dev_policy = []() {
 	std::array<ynl_policy_attr,NETDEV_A_DEV_MAX + 1> arr{};
 	arr[NETDEV_A_DEV_IFINDEX].name = "ifindex";
@@ -294,6 +312,9 @@ static std::array<ynl_policy_attr,NETDEV_A_QUEUE_MAX + 1> netdev_queue_policy = 
 	arr[NETDEV_A_QUEUE_XSK].name = "xsk";
 	arr[NETDEV_A_QUEUE_XSK].type = YNL_PT_NEST;
 	arr[NETDEV_A_QUEUE_XSK].nest = &netdev_xsk_info_nest;
+	arr[NETDEV_A_QUEUE_LEASE].name = "lease";
+	arr[NETDEV_A_QUEUE_LEASE].type = YNL_PT_NEST;
+	arr[NETDEV_A_QUEUE_LEASE].nest = &netdev_lease_nest;
 	return arr;
 } ();
 
@@ -501,6 +522,88 @@ int netdev_queue_id_put(struct nlmsghdr *nlh, unsigned int attr_type,
 		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_TYPE, obj.type.value());
 	}
 	ynl_attr_nest_end(nlh, nest);
+
+	return 0;
+}
+
+int netdev_queue_id_parse(struct ynl_parse_arg *yarg,
+			  const struct nlattr *nested)
+{
+	netdev_queue_id *dst = (netdev_queue_id *)yarg->data;
+	const struct nlattr *attr;
+
+	ynl_attr_for_each_nested(attr, nested) {
+		unsigned int type = ynl_attr_type(attr);
+
+		if (type == NETDEV_A_QUEUE_ID) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->id = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == NETDEV_A_QUEUE_TYPE) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->type = (enum netdev_queue_type)ynl_attr_get_u32(attr);
+		}
+	}
+
+	return 0;
+}
+
+int netdev_lease_put(struct nlmsghdr *nlh, unsigned int attr_type,
+		     const netdev_lease&  obj)
+{
+	struct nlattr *nest;
+
+	nest = ynl_attr_nest_start(nlh, attr_type);
+	if (obj.ifindex.has_value()) {
+		ynl_attr_put_u32(nlh, NETDEV_A_LEASE_IFINDEX, obj.ifindex.value());
+	}
+	if (obj.queue.has_value()) {
+		netdev_queue_id_put(nlh, NETDEV_A_LEASE_QUEUE, obj.queue.value());
+	}
+	if (obj.netns_id.has_value()) {
+		ynl_attr_put_s32(nlh, NETDEV_A_LEASE_NETNS_ID, obj.netns_id.value());
+	}
+	ynl_attr_nest_end(nlh, nest);
+
+	return 0;
+}
+
+int netdev_lease_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
+{
+	netdev_lease *dst = (netdev_lease *)yarg->data;
+	const struct nlattr *attr;
+	struct ynl_parse_arg parg;
+
+	parg.ys = yarg->ys;
+
+	ynl_attr_for_each_nested(attr, nested) {
+		unsigned int type = ynl_attr_type(attr);
+
+		if (type == NETDEV_A_LEASE_IFINDEX) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == NETDEV_A_LEASE_QUEUE) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+
+			parg.rsp_policy = &netdev_queue_id_nest;
+			parg.data = &dst->queue.emplace();
+			if (netdev_queue_id_parse(&parg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+		} else if (type == NETDEV_A_LEASE_NETNS_ID) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->netns_id = (__s32)ynl_attr_get_s32(attr);
+		}
+	}
 
 	return 0;
 }
@@ -939,6 +1042,16 @@ int netdev_queue_get_rsp_parse(const struct nlmsghdr *nlh,
 			parg.rsp_policy = &netdev_xsk_info_nest;
 			parg.data = &dst->xsk.emplace();
 			if (netdev_xsk_info_parse(&parg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+		} else if (type == NETDEV_A_QUEUE_LEASE) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+
+			parg.rsp_policy = &netdev_lease_nest;
+			parg.data = &dst->lease.emplace();
+			if (netdev_lease_parse(&parg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
 		}
@@ -1475,6 +1588,65 @@ netdev_bind_tx(ynl_cpp::ynl_socket& ys, netdev_bind_tx_req& req)
 	yrs.yarg.data = rsp.get();
 	yrs.cb = netdev_bind_tx_rsp_parse;
 	yrs.rsp_cmd = NETDEV_CMD_BIND_TX;
+
+	err = ynl_exec(ys, nlh, &yrs);
+	if (err < 0) {
+		return nullptr;
+	}
+
+	return rsp;
+}
+
+/* ============== NETDEV_CMD_QUEUE_CREATE ============== */
+/* NETDEV_CMD_QUEUE_CREATE - do */
+int netdev_queue_create_rsp_parse(const struct nlmsghdr *nlh,
+				  struct ynl_parse_arg *yarg)
+{
+	netdev_queue_create_rsp *dst;
+	const struct nlattr *attr;
+
+	dst = (netdev_queue_create_rsp*)yarg->data;
+
+	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
+		unsigned int type = ynl_attr_type(attr);
+
+		if (type == NETDEV_A_QUEUE_ID) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->id = (__u32)ynl_attr_get_u32(attr);
+		}
+	}
+
+	return YNL_PARSE_CB_OK;
+}
+
+std::unique_ptr<netdev_queue_create_rsp>
+netdev_queue_create(ynl_cpp::ynl_socket& ys, netdev_queue_create_req& req)
+{
+	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
+	std::unique_ptr<netdev_queue_create_rsp> rsp;
+	struct nlmsghdr *nlh;
+	int err;
+
+	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_QUEUE_CREATE, 1);
+	((struct ynl_sock*)ys)->req_policy = &netdev_queue_nest;
+	yrs.yarg.rsp_policy = &netdev_queue_nest;
+
+	if (req.ifindex.has_value()) {
+		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_IFINDEX, req.ifindex.value());
+	}
+	if (req.type.has_value()) {
+		ynl_attr_put_u32(nlh, NETDEV_A_QUEUE_TYPE, req.type.value());
+	}
+	if (req.lease.has_value()) {
+		netdev_lease_put(nlh, NETDEV_A_QUEUE_LEASE, req.lease.value());
+	}
+
+	rsp.reset(new netdev_queue_create_rsp());
+	yrs.yarg.data = rsp.get();
+	yrs.cb = netdev_queue_create_rsp_parse;
+	yrs.rsp_cmd = NETDEV_CMD_QUEUE_CREATE;
 
 	err = ynl_exec(ys, nlh, &yrs);
 	if (err < 0) {

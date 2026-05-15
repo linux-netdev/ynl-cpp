@@ -530,6 +530,46 @@ int psp_get_stats_rsp_parse(const struct nlmsghdr *nlh,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->stale_events = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_RX_PACKETS) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->rx_packets = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_RX_BYTES) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->rx_bytes = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_RX_AUTH_FAIL) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->rx_auth_fail = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_RX_ERROR) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->rx_error = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_RX_BAD) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->rx_bad = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_TX_PACKETS) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->tx_packets = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_TX_BYTES) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->tx_bytes = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == PSP_A_STATS_TX_ERROR) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->tx_error = (__u64)ynl_attr_get_uint(attr);
 		}
 	}
 

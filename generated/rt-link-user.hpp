@@ -43,7 +43,9 @@ std::string_view rt_link_rtext_filter_str(int value);
 std::string_view rt_link_netkit_policy_str(int value);
 std::string_view rt_link_netkit_mode_str(netkit_mode value);
 std::string_view rt_link_netkit_scrub_str(int value);
+std::string_view rt_link_netkit_pairing_str(netkit_pairing value);
 std::string_view rt_link_ovpn_mode_str(ovpn_mode value);
+std::string_view rt_link_br_stp_mode_str(br_stp_mode value);
 
 /* Common nested types */
 struct rt_link_vf_ports_attrs {
@@ -147,6 +149,7 @@ struct rt_link_linkinfo_bridge_attrs {
 	std::vector<__u8> mcast_querier_state;
 	std::optional<__u32> fdb_n_learned;
 	std::optional<__u32> fdb_max_learned;
+	std::optional<enum br_stp_mode> stp_mode;
 };
 
 struct rt_link_linkinfo_gre_attrs {
@@ -314,6 +317,7 @@ struct rt_link_linkinfo_netkit_attrs {
 	std::optional<int> peer_scrub;
 	std::optional<__u16> headroom;
 	std::optional<__u16> tailroom;
+	std::optional<enum netkit_pairing> pairing;
 };
 
 struct rt_link_linkinfo_ovpn_attrs {

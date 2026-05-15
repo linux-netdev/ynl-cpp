@@ -307,6 +307,21 @@ std::string_view devlink_resource_unit_str(devlink_resource_unit value)
 	return devlink_resource_unit_strmap[value];
 }
 
+static constexpr std::array<std::string_view, 1 + 1> devlink_resource_scope_strmap = []() {
+	std::array<std::string_view, 1 + 1> arr{};
+	arr[0] = "dev";
+	arr[1] = "port";
+	return arr;
+} ();
+
+std::string_view devlink_resource_scope_str(devlink_resource_scope value)
+{
+	if (value < 0 || value >= (int)(devlink_resource_scope_strmap.size())) {
+		return "";
+	}
+	return devlink_resource_scope_strmap[value];
+}
+
 static constexpr std::array<std::string_view, 2 + 1> devlink_reload_action_strmap = []() {
 	std::array<std::string_view, 2 + 1> arr{};
 	arr[1] = "driver-reinit";
@@ -1402,6 +1417,8 @@ static std::array<ynl_policy_attr,DEVLINK_ATTR_MAX + 1> devlink_policy = []() {
 	arr[DEVLINK_ATTR_PARAM_RESET_DEFAULT].type = YNL_PT_FLAG;
 	arr[DEVLINK_ATTR_INDEX].name = "index";
 	arr[DEVLINK_ATTR_INDEX].type = YNL_PT_UINT;
+	arr[DEVLINK_ATTR_RESOURCE_SCOPE_MASK].name = "resource-scope-mask";
+	arr[DEVLINK_ATTR_RESOURCE_SCOPE_MASK].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -4211,6 +4228,11 @@ int devlink_resource_dump_rsp_parse(const struct nlmsghdr *nlh,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->index = (__u64)ynl_attr_get_uint(attr);
+		} else if (type == DEVLINK_ATTR_PORT_INDEX) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->port_index = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DEVLINK_ATTR_RESOURCE_LIST) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -4248,6 +4270,9 @@ devlink_resource_dump(ynl_cpp::ynl_socket& ys, devlink_resource_dump_req& req)
 	if (req.index.has_value()) {
 		ynl_attr_put_uint(nlh, DEVLINK_ATTR_INDEX, req.index.value());
 	}
+	if (req.port_index.has_value()) {
+		ynl_attr_put_u32(nlh, DEVLINK_ATTR_PORT_INDEX, req.port_index.value());
+	}
 
 	rsp.reset(new devlink_resource_dump_rsp());
 	yrs.yarg.data = rsp.get();
@@ -4260,6 +4285,47 @@ devlink_resource_dump(ynl_cpp::ynl_socket& ys, devlink_resource_dump_req& req)
 	}
 
 	return rsp;
+}
+
+/* DEVLINK_CMD_RESOURCE_DUMP - dump */
+std::unique_ptr<devlink_resource_dump_list>
+devlink_resource_dump_dump(ynl_cpp::ynl_socket& ys,
+			   devlink_resource_dump_req_dump& req)
+{
+	struct ynl_dump_no_alloc_state yds = {};
+	struct nlmsghdr *nlh;
+	int err;
+
+	auto ret = std::make_unique<devlink_resource_dump_list>();
+	yds.yarg.ys = ys;
+	yds.yarg.rsp_policy = &devlink_nest;
+	yds.yarg.data = ret.get();
+	yds.alloc_cb = [](void* arg)->void* {return &(static_cast<devlink_resource_dump_list*>(arg)->objs.emplace_back());};
+	yds.cb = devlink_resource_dump_rsp_parse;
+	yds.rsp_cmd = DEVLINK_CMD_RESOURCE_DUMP;
+
+	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, DEVLINK_CMD_RESOURCE_DUMP, 1);
+	((struct ynl_sock*)ys)->req_policy = &devlink_nest;
+
+	if (req.bus_name.size() > 0) {
+		ynl_attr_put_str(nlh, DEVLINK_ATTR_BUS_NAME, req.bus_name.data());
+	}
+	if (req.dev_name.size() > 0) {
+		ynl_attr_put_str(nlh, DEVLINK_ATTR_DEV_NAME, req.dev_name.data());
+	}
+	if (req.index.has_value()) {
+		ynl_attr_put_uint(nlh, DEVLINK_ATTR_INDEX, req.index.value());
+	}
+	if (req.resource_scope_mask.has_value()) {
+		ynl_attr_put_u32(nlh, DEVLINK_ATTR_RESOURCE_SCOPE_MASK, req.resource_scope_mask.value());
+	}
+
+	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
+	if (err < 0) {
+		return nullptr;
+	}
+
+	return ret;
 }
 
 /* ============== DEVLINK_CMD_RELOAD ============== */

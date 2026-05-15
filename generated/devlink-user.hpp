@@ -49,6 +49,7 @@ devlink_dpipe_action_type_str(devlink_dpipe_action_type value);
 std::string_view
 devlink_dpipe_field_mapping_type_str(devlink_dpipe_field_mapping_type value);
 std::string_view devlink_resource_unit_str(devlink_resource_unit value);
+std::string_view devlink_resource_scope_str(devlink_resource_scope value);
 std::string_view devlink_reload_action_str(devlink_reload_action value);
 std::string_view devlink_param_cmode_str(devlink_param_cmode value);
 std::string_view devlink_flash_overwrite_str(devlink_flash_overwrite value);
@@ -819,12 +820,14 @@ struct devlink_resource_dump_req {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u64> index;
+	std::optional<__u32> port_index;
 };
 
 struct devlink_resource_dump_rsp {
 	std::string bus_name;
 	std::string dev_name;
 	std::optional<__u64> index;
+	std::optional<__u32> port_index;
 	std::optional<devlink_dl_resource_list> resource_list;
 };
 
@@ -833,6 +836,22 @@ struct devlink_resource_dump_rsp {
  */
 std::unique_ptr<devlink_resource_dump_rsp>
 devlink_resource_dump(ynl_cpp::ynl_socket& ys, devlink_resource_dump_req& req);
+
+/* DEVLINK_CMD_RESOURCE_DUMP - dump */
+struct devlink_resource_dump_req_dump {
+	std::string bus_name;
+	std::string dev_name;
+	std::optional<__u64> index;
+	std::optional<__u32> resource_scope_mask;
+};
+
+struct devlink_resource_dump_list {
+	std::list<devlink_resource_dump_rsp> objs;
+};
+
+std::unique_ptr<devlink_resource_dump_list>
+devlink_resource_dump_dump(ynl_cpp::ynl_socket& ys,
+			   devlink_resource_dump_req_dump& req);
 
 /* ============== DEVLINK_CMD_RELOAD ============== */
 /* DEVLINK_CMD_RELOAD - do */

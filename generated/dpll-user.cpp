@@ -296,6 +296,8 @@ static std::array<ynl_policy_attr,DPLL_A_MAX + 1> dpll_policy = []() {
 	arr[DPLL_A_PHASE_OFFSET_MONITOR].type = YNL_PT_U32;
 	arr[DPLL_A_PHASE_OFFSET_AVG_FACTOR].name = "phase-offset-avg-factor";
 	arr[DPLL_A_PHASE_OFFSET_AVG_FACTOR].type = YNL_PT_U32;
+	arr[DPLL_A_FREQUENCY_MONITOR].name = "frequency-monitor";
+	arr[DPLL_A_FREQUENCY_MONITOR].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -371,6 +373,8 @@ static std::array<ynl_policy_attr,DPLL_A_PIN_MAX + 1> dpll_pin_policy = []() {
 	arr[DPLL_A_PIN_PHASE_ADJUST_GRAN].type = YNL_PT_U32;
 	arr[DPLL_A_PIN_FRACTIONAL_FREQUENCY_OFFSET_PPT].name = "fractional-frequency-offset-ppt";
 	arr[DPLL_A_PIN_FRACTIONAL_FREQUENCY_OFFSET_PPT].type = YNL_PT_UINT;
+	arr[DPLL_A_PIN_MEASURED_FREQUENCY].name = "measured-frequency";
+	arr[DPLL_A_PIN_MEASURED_FREQUENCY].type = YNL_PT_U64;
 	return arr;
 } ();
 
@@ -685,6 +689,11 @@ int dpll_device_get_rsp_parse(const struct nlmsghdr *nlh,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->phase_offset_avg_factor = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == DPLL_A_FREQUENCY_MONITOR) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->frequency_monitor = (enum dpll_feature_state)ynl_attr_get_u32(attr);
 		}
 	}
 
@@ -786,6 +795,9 @@ int dpll_device_set(ynl_cpp::ynl_socket& ys, dpll_device_set_req& req)
 	}
 	if (req.phase_offset_avg_factor.has_value()) {
 		ynl_attr_put_u32(nlh, DPLL_A_PHASE_OFFSET_AVG_FACTOR, req.phase_offset_avg_factor.value());
+	}
+	if (req.frequency_monitor.has_value()) {
+		ynl_attr_put_u32(nlh, DPLL_A_FREQUENCY_MONITOR, req.frequency_monitor.value());
 	}
 
 	err = ynl_exec(ys, nlh, &yrs);
@@ -996,6 +1008,11 @@ int dpll_pin_get_rsp_parse(const struct nlmsghdr *nlh,
 			dst->esync_pulse = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == DPLL_A_PIN_REFERENCE_SYNC) {
 			n_reference_sync++;
+		} else if (type == DPLL_A_PIN_MEASURED_FREQUENCY) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->measured_frequency = (__u64)ynl_attr_get_u64(attr);
 		}
 	}
 

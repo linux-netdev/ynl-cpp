@@ -117,6 +117,8 @@ static std::array<ynl_policy_attr,NFSD_A_SERVER_MAX + 1> nfsd_server_policy = []
 	arr[NFSD_A_SERVER_SCOPE].type  = YNL_PT_NUL_STR;
 	arr[NFSD_A_SERVER_MIN_THREADS].name = "min-threads";
 	arr[NFSD_A_SERVER_MIN_THREADS].type = YNL_PT_U32;
+	arr[NFSD_A_SERVER_FH_KEY].name = "fh-key";
+	arr[NFSD_A_SERVER_FH_KEY].type = YNL_PT_BINARY;
 	return arr;
 } ();
 
@@ -409,6 +411,9 @@ int nfsd_threads_set(ynl_cpp::ynl_socket& ys, nfsd_threads_set_req& req)
 	}
 	if (req.min_threads.has_value()) {
 		ynl_attr_put_u32(nlh, NFSD_A_SERVER_MIN_THREADS, req.min_threads.value());
+	}
+	if (req.fh_key.size() > 0) {
+		ynl_attr_put(nlh, NFSD_A_SERVER_FH_KEY, req.fh_key.data(), req.fh_key.size());
 	}
 
 	err = ynl_exec(ys, nlh, &yrs);
