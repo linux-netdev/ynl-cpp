@@ -2277,6 +2277,11 @@ def print_req(ri):
     if ri.fixed_hdr:
         local_vars += ["size_t hdr_len;", "void *hdr;"]
 
+    for _, arg in ri.struct["request"].member_list():
+        if arg.type == "indexed-array":
+            local_vars.append("struct nlattr *array;")
+            break
+
     print_prototype(ri, direction, terminate=False)
     ri.cw.block_start()
     ri.cw.write_func_lvar(local_vars)
