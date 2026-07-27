@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, TEAM_CMD_PORT_LIST_GET + 1> team_o
 
 std::string_view team_op_str(int op)
 {
-	if (op < 0 || op >= (int)(team_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(team_op_strmap.size())) {
 		return "";
 	}
 	return team_op_strmap[op];

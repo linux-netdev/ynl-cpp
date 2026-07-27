@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, OVS_VPORT_CMD_GET + 1> ovs_vport_o
 
 std::string_view ovs_vport_op_str(int op)
 {
-	if (op < 0 || op >= (int)(ovs_vport_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(ovs_vport_op_strmap.size())) {
 		return "";
 	}
 	return ovs_vport_op_strmap[op];
@@ -43,7 +43,7 @@ static constexpr std::array<std::string_view, 5 + 1> ovs_vport_vport_type_strmap
 
 std::string_view ovs_vport_vport_type_str(ovs_vport_type value)
 {
-	if (value < 0 || value >= (int)(ovs_vport_vport_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovs_vport_vport_type_strmap.size())) {
 		return "";
 	}
 	return ovs_vport_vport_type_strmap[value];

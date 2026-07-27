@@ -23,7 +23,7 @@ static constexpr std::array<std::string_view, LOCKD_CMD_SERVER_GET + 1> lockd_op
 
 std::string_view lockd_op_str(int op)
 {
-	if (op < 0 || op >= (int)(lockd_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(lockd_op_strmap.size())) {
 		return "";
 	}
 	return lockd_op_strmap[op];

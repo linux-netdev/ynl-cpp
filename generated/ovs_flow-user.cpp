@@ -23,7 +23,7 @@ static constexpr std::array<std::string_view, OVS_FLOW_CMD_GET + 1> ovs_flow_op_
 
 std::string_view ovs_flow_op_str(int op)
 {
-	if (op < 0 || op >= (int)(ovs_flow_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(ovs_flow_op_strmap.size())) {
 		return "";
 	}
 	return ovs_flow_op_strmap[op];
@@ -40,7 +40,7 @@ static constexpr std::array<std::string_view, 255 + 1> ovs_flow_ovs_frag_type_st
 
 std::string_view ovs_flow_ovs_frag_type_str(ovs_frag_type value)
 {
-	if (value < 0 || value >= (int)(ovs_flow_ovs_frag_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovs_flow_ovs_frag_type_strmap.size())) {
 		return "";
 	}
 	return ovs_flow_ovs_frag_type_strmap[value];
@@ -57,7 +57,7 @@ static constexpr std::array<std::string_view, 2 + 1> ovs_flow_ovs_ufid_flags_str
 std::string_view ovs_flow_ovs_ufid_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ovs_flow_ovs_ufid_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovs_flow_ovs_ufid_flags_strmap.size())) {
 		return "";
 	}
 	return ovs_flow_ovs_ufid_flags_strmap[value];
@@ -71,7 +71,7 @@ static constexpr std::array<std::string_view, 0 + 1> ovs_flow_ovs_hash_alg_strma
 
 std::string_view ovs_flow_ovs_hash_alg_str(ovs_hash_alg value)
 {
-	if (value < 0 || value >= (int)(ovs_flow_ovs_hash_alg_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovs_flow_ovs_hash_alg_strmap.size())) {
 		return "";
 	}
 	return ovs_flow_ovs_hash_alg_strmap[value];
@@ -93,7 +93,7 @@ static constexpr std::array<std::string_view, 7 + 1> ovs_flow_ct_state_flags_str
 std::string_view ovs_flow_ct_state_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ovs_flow_ct_state_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovs_flow_ct_state_flags_strmap.size())) {
 		return "";
 	}
 	return ovs_flow_ct_state_flags_strmap[value];

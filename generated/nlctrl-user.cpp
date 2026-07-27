@@ -23,7 +23,7 @@ static constexpr std::array<std::string_view, CTRL_CMD_GETPOLICY + 1> nlctrl_op_
 
 std::string_view nlctrl_op_str(int op)
 {
-	if (op < 0 || op >= (int)(nlctrl_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(nlctrl_op_strmap.size())) {
 		return "";
 	}
 	return nlctrl_op_strmap[op];
@@ -42,7 +42,7 @@ static constexpr std::array<std::string_view, 4 + 1> nlctrl_op_flags_strmap = []
 std::string_view nlctrl_op_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(nlctrl_op_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(nlctrl_op_flags_strmap.size())) {
 		return "";
 	}
 	return nlctrl_op_flags_strmap[value];
@@ -73,7 +73,7 @@ static constexpr std::array<std::string_view, 17 + 1> nlctrl_attr_type_strmap = 
 
 std::string_view nlctrl_attr_type_str(netlink_attribute_type value)
 {
-	if (value < 0 || value >= (int)(nlctrl_attr_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(nlctrl_attr_type_strmap.size())) {
 		return "";
 	}
 	return nlctrl_attr_type_strmap[value];

@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, OVS_DP_CMD_GET + 1> ovs_datapath_o
 
 std::string_view ovs_datapath_op_str(int op)
 {
-	if (op < 0 || op >= (int)(ovs_datapath_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(ovs_datapath_op_strmap.size())) {
 		return "";
 	}
 	return ovs_datapath_op_strmap[op];
@@ -42,7 +42,7 @@ static constexpr std::array<std::string_view, 3 + 1> ovs_datapath_user_features_
 std::string_view ovs_datapath_user_features_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ovs_datapath_user_features_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovs_datapath_user_features_strmap.size())) {
 		return "";
 	}
 	return ovs_datapath_user_features_strmap[value];

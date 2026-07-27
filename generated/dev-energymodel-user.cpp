@@ -26,7 +26,7 @@ static constexpr std::array<std::string_view, DEV_ENERGYMODEL_CMD_PERF_DOMAIN_DE
 
 std::string_view dev_energymodel_op_str(int op)
 {
-	if (op < 0 || op >= (int)(dev_energymodel_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(dev_energymodel_op_strmap.size())) {
 		return "";
 	}
 	return dev_energymodel_op_strmap[op];
@@ -42,7 +42,7 @@ std::string_view
 dev_energymodel_perf_state_flags_str(dev_energymodel_perf_state_flags value)
 {
 	value = (dev_energymodel_perf_state_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(dev_energymodel_perf_state_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dev_energymodel_perf_state_flags_strmap.size())) {
 		return "";
 	}
 	return dev_energymodel_perf_state_flags_strmap[value];
@@ -60,7 +60,7 @@ std::string_view
 dev_energymodel_perf_domain_flags_str(dev_energymodel_perf_domain_flags value)
 {
 	value = (dev_energymodel_perf_domain_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(dev_energymodel_perf_domain_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dev_energymodel_perf_domain_flags_strmap.size())) {
 		return "";
 	}
 	return dev_energymodel_perf_domain_flags_strmap[value];

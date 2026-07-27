@@ -23,7 +23,7 @@ static constexpr std::array<std::string_view, TCP_METRICS_CMD_DEL + 1> tcp_metri
 
 std::string_view tcp_metrics_op_str(int op)
 {
-	if (op < 0 || op >= (int)(tcp_metrics_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(tcp_metrics_op_strmap.size())) {
 		return "";
 	}
 	return tcp_metrics_op_strmap[op];

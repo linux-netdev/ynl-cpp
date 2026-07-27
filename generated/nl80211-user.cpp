@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, NL80211_CMD_GET_PROTOCOL_FEATURES 
 
 std::string_view nl80211_op_str(int op)
 {
-	if (op < 0 || op >= (int)(nl80211_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(nl80211_op_strmap.size())) {
 		return "";
 	}
 	return nl80211_op_strmap[op];
@@ -193,7 +193,7 @@ static constexpr std::array<std::string_view, 155 + 1> nl80211_commands_strmap =
 
 std::string_view nl80211_commands_str(nl80211_commands value)
 {
-	if (value < 0 || value >= (int)(nl80211_commands_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(nl80211_commands_strmap.size())) {
 		return "";
 	}
 	return nl80211_commands_strmap[value];
@@ -239,7 +239,7 @@ static constexpr std::array<std::string_view, 31 + 1> nl80211_feature_flags_strm
 std::string_view nl80211_feature_flags_str(nl80211_feature_flags value)
 {
 	value = (nl80211_feature_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(nl80211_feature_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(nl80211_feature_flags_strmap.size())) {
 		return "";
 	}
 	return nl80211_feature_flags_strmap[value];
@@ -256,7 +256,7 @@ static constexpr std::array<std::string_view, 3 + 1> nl80211_channel_type_strmap
 
 std::string_view nl80211_channel_type_str(nl80211_channel_type value)
 {
-	if (value < 0 || value >= (int)(nl80211_channel_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(nl80211_channel_type_strmap.size())) {
 		return "";
 	}
 	return nl80211_channel_type_strmap[value];
@@ -271,7 +271,7 @@ static constexpr std::array<std::string_view, 0 + 1> nl80211_protocol_features_s
 std::string_view nl80211_protocol_features_str(nl80211_protocol_features value)
 {
 	value = (nl80211_protocol_features)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(nl80211_protocol_features_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(nl80211_protocol_features_strmap.size())) {
 		return "";
 	}
 	return nl80211_protocol_features_strmap[value];
