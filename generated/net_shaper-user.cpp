@@ -26,7 +26,7 @@ static constexpr std::array<std::string_view, NET_SHAPER_CMD_CAP_GET + 1> net_sh
 
 std::string_view net_shaper_op_str(int op)
 {
-	if (op < 0 || op >= (int)(net_shaper_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(net_shaper_op_strmap.size())) {
 		return "";
 	}
 	return net_shaper_op_strmap[op];
@@ -43,7 +43,7 @@ static constexpr std::array<std::string_view, 3 + 1> net_shaper_scope_strmap = [
 
 std::string_view net_shaper_scope_str(net_shaper_scope value)
 {
-	if (value < 0 || value >= (int)(net_shaper_scope_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(net_shaper_scope_strmap.size())) {
 		return "";
 	}
 	return net_shaper_scope_strmap[value];
@@ -58,7 +58,7 @@ static constexpr std::array<std::string_view, 1 + 1> net_shaper_metric_strmap = 
 
 std::string_view net_shaper_metric_str(net_shaper_metric value)
 {
-	if (value < 0 || value >= (int)(net_shaper_metric_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(net_shaper_metric_strmap.size())) {
 		return "";
 	}
 	return net_shaper_metric_strmap[value];

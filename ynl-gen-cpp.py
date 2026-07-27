@@ -1902,7 +1902,7 @@ def _put_enum_to_str_helper(cw, render_name, map_name, arg_name, enum=None):
     cw.block_start()
     if enum and enum.type == "flags":
         cw.p(f"{arg_name} = ({enum.user_type})(ffs({arg_name}) - 1);")
-    cw.p(f"if ({arg_name} < 0 || {arg_name} >= (int)({map_name}.size()))")
+    cw.p(f"if ((int){arg_name} < 0 || (int){arg_name} >= (int)({map_name}.size()))")
     cw.p('return "";')
     cw.p(f"return {map_name}[{arg_name}];")
     cw.block_end()

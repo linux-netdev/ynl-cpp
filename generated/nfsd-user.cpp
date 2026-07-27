@@ -30,7 +30,7 @@ static constexpr std::array<std::string_view, NFSD_CMD_POOL_MODE_GET + 1> nfsd_o
 
 std::string_view nfsd_op_str(int op)
 {
-	if (op < 0 || op >= (int)(nfsd_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(nfsd_op_strmap.size())) {
 		return "";
 	}
 	return nfsd_op_strmap[op];

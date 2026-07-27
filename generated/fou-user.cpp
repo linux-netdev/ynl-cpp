@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, FOU_CMD_GET + 1> fou_op_strmap = [
 
 std::string_view fou_op_str(int op)
 {
-	if (op < 0 || op >= (int)(fou_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(fou_op_strmap.size())) {
 		return "";
 	}
 	return fou_op_strmap[op];
@@ -40,7 +40,7 @@ static constexpr std::array<std::string_view, 2 + 1> fou_encap_type_strmap = [](
 
 std::string_view fou_encap_type_str(int value)
 {
-	if (value < 0 || value >= (int)(fou_encap_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(fou_encap_type_strmap.size())) {
 		return "";
 	}
 	return fou_encap_type_strmap[value];

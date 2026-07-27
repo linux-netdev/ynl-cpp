@@ -22,7 +22,7 @@ static constexpr std::array<std::string_view, 24 + 1> rt_route_op_strmap = []() 
 
 std::string_view rt_route_op_str(int op)
 {
-	if (op < 0 || op >= (int)(rt_route_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(rt_route_op_strmap.size())) {
 		return "";
 	}
 	return rt_route_op_strmap[op];
@@ -47,7 +47,7 @@ static constexpr std::array<std::string_view, 11 + 1> rt_route_rtm_type_strmap =
 
 std::string_view rt_route_rtm_type_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_route_rtm_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_route_rtm_type_strmap.size())) {
 		return "";
 	}
 	return rt_route_rtm_type_strmap[value];

@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, HANDSHAKE_CMD_DONE + 1> handshake_
 
 std::string_view handshake_op_str(int op)
 {
-	if (op < 0 || op >= (int)(handshake_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(handshake_op_strmap.size())) {
 		return "";
 	}
 	return handshake_op_strmap[op];
@@ -40,7 +40,7 @@ static constexpr std::array<std::string_view, 2 + 1> handshake_handler_class_str
 
 std::string_view handshake_handler_class_str(handshake_handler_class value)
 {
-	if (value < 0 || value >= (int)(handshake_handler_class_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(handshake_handler_class_strmap.size())) {
 		return "";
 	}
 	return handshake_handler_class_strmap[value];
@@ -56,7 +56,7 @@ static constexpr std::array<std::string_view, 2 + 1> handshake_msg_type_strmap =
 
 std::string_view handshake_msg_type_str(handshake_msg_type value)
 {
-	if (value < 0 || value >= (int)(handshake_msg_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(handshake_msg_type_strmap.size())) {
 		return "";
 	}
 	return handshake_msg_type_strmap[value];
@@ -73,7 +73,7 @@ static constexpr std::array<std::string_view, 3 + 1> handshake_auth_strmap = [](
 
 std::string_view handshake_auth_str(handshake_auth value)
 {
-	if (value < 0 || value >= (int)(handshake_auth_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(handshake_auth_strmap.size())) {
 		return "";
 	}
 	return handshake_auth_strmap[value];

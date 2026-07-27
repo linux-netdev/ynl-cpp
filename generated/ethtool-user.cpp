@@ -76,7 +76,7 @@ static constexpr std::array<std::string_view, 54 + 1> ethtool_op_strmap = []() {
 
 std::string_view ethtool_op_str(int op)
 {
-	if (op < 0 || op >= (int)(ethtool_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(ethtool_op_strmap.size())) {
 		return "";
 	}
 	return ethtool_op_strmap[op];
@@ -92,7 +92,7 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_udp_tunnel_type_str
 
 std::string_view ethtool_udp_tunnel_type_str(int value)
 {
-	if (value < 0 || value >= (int)(ethtool_udp_tunnel_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_udp_tunnel_type_strmap.size())) {
 		return "";
 	}
 	return ethtool_udp_tunnel_type_strmap[value];
@@ -105,7 +105,7 @@ static constexpr std::array<std::string_view, 0 + 1> ethtool_stringset_strmap = 
 
 std::string_view ethtool_stringset_str(ethtool_stringset value)
 {
-	if (value < 0 || value >= (int)(ethtool_stringset_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_stringset_strmap.size())) {
 		return "";
 	}
 	return ethtool_stringset_strmap[value];
@@ -122,7 +122,7 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_header_flags_strmap
 std::string_view ethtool_header_flags_str(ethtool_header_flags value)
 {
 	value = (ethtool_header_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_header_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_header_flags_strmap.size())) {
 		return "";
 	}
 	return ethtool_header_flags_strmap[value];
@@ -140,7 +140,7 @@ static constexpr std::array<std::string_view, 3 + 1> ethtool_module_fw_flash_sta
 std::string_view
 ethtool_module_fw_flash_status_str(ethtool_module_fw_flash_status value)
 {
-	if (value < 0 || value >= (int)(ethtool_module_fw_flash_status_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_module_fw_flash_status_strmap.size())) {
 		return "";
 	}
 	return ethtool_module_fw_flash_status_strmap[value];
@@ -162,7 +162,7 @@ static constexpr std::array<std::string_view, 8 + 1> ethtool_c33_pse_ext_state_s
 
 std::string_view ethtool_c33_pse_ext_state_str(ethtool_c33_pse_ext_state value)
 {
-	if (value < 0 || value >= (int)(ethtool_c33_pse_ext_state_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_c33_pse_ext_state_strmap.size())) {
 		return "";
 	}
 	return ethtool_c33_pse_ext_state_strmap[value];
@@ -177,7 +177,7 @@ static constexpr std::array<std::string_view, 1 + 1> ethtool_phy_upstream_type_s
 
 std::string_view ethtool_phy_upstream_type_str(phy_upstream value)
 {
-	if (value < 0 || value >= (int)(ethtool_phy_upstream_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_phy_upstream_type_strmap.size())) {
 		return "";
 	}
 	return ethtool_phy_upstream_type_strmap[value];
@@ -193,7 +193,7 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_tcp_data_split_strm
 
 std::string_view ethtool_tcp_data_split_str(ethtool_tcp_data_split value)
 {
-	if (value < 0 || value >= (int)(ethtool_tcp_data_split_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_tcp_data_split_strmap.size())) {
 		return "";
 	}
 	return ethtool_tcp_data_split_strmap[value];
@@ -208,7 +208,7 @@ static constexpr std::array<std::string_view, 2 + 1> ethtool_hwtstamp_source_str
 
 std::string_view ethtool_hwtstamp_source_str(hwtstamp_source value)
 {
-	if (value < 0 || value >= (int)(ethtool_hwtstamp_source_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_hwtstamp_source_strmap.size())) {
 		return "";
 	}
 	return ethtool_hwtstamp_source_strmap[value];
@@ -229,7 +229,7 @@ static constexpr std::array<std::string_view, 6 + 1> ethtool_pse_event_strmap = 
 std::string_view ethtool_pse_event_str(ethtool_pse_event value)
 {
 	value = (ethtool_pse_event)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_pse_event_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_pse_event_strmap.size())) {
 		return "";
 	}
 	return ethtool_pse_event_strmap[value];
@@ -245,7 +245,7 @@ static constexpr std::array<std::string_view, 1 + 1> ethtool_input_xfrm_strmap =
 std::string_view ethtool_input_xfrm_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_input_xfrm_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_input_xfrm_strmap.size())) {
 		return "";
 	}
 	return ethtool_input_xfrm_strmap[value];
@@ -269,7 +269,7 @@ static constexpr std::array<std::string_view, 31 + 1> ethtool_rxfh_fields_strmap
 std::string_view ethtool_rxfh_fields_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(ethtool_rxfh_fields_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ethtool_rxfh_fields_strmap.size())) {
 		return "";
 	}
 	return ethtool_rxfh_fields_strmap[value];

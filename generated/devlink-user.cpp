@@ -47,7 +47,7 @@ static constexpr std::array<std::string_view, DEVLINK_CMD_SELFTESTS_GET + 1> dev
 
 std::string_view devlink_op_str(int op)
 {
-	if (op < 0 || op >= (int)(devlink_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(devlink_op_strmap.size())) {
 		return "";
 	}
 	return devlink_op_strmap[op];
@@ -62,7 +62,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_sb_pool_type_strmap
 
 std::string_view devlink_sb_pool_type_str(devlink_sb_pool_type value)
 {
-	if (value < 0 || value >= (int)(devlink_sb_pool_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_sb_pool_type_strmap.size())) {
 		return "";
 	}
 	return devlink_sb_pool_type_strmap[value];
@@ -79,7 +79,7 @@ static constexpr std::array<std::string_view, 3 + 1> devlink_port_type_strmap = 
 
 std::string_view devlink_port_type_str(devlink_port_type value)
 {
-	if (value < 0 || value >= (int)(devlink_port_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_port_type_strmap.size())) {
 		return "";
 	}
 	return devlink_port_type_strmap[value];
@@ -100,7 +100,7 @@ static constexpr std::array<std::string_view, 7 + 1> devlink_port_flavour_strmap
 
 std::string_view devlink_port_flavour_str(devlink_port_flavour value)
 {
-	if (value < 0 || value >= (int)(devlink_port_flavour_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_port_flavour_strmap.size())) {
 		return "";
 	}
 	return devlink_port_flavour_strmap[value];
@@ -115,7 +115,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_port_fn_state_strma
 
 std::string_view devlink_port_fn_state_str(devlink_port_fn_state value)
 {
-	if (value < 0 || value >= (int)(devlink_port_fn_state_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_port_fn_state_strmap.size())) {
 		return "";
 	}
 	return devlink_port_fn_state_strmap[value];
@@ -130,7 +130,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_port_fn_opstate_str
 
 std::string_view devlink_port_fn_opstate_str(devlink_port_fn_opstate value)
 {
-	if (value < 0 || value >= (int)(devlink_port_fn_opstate_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_port_fn_opstate_strmap.size())) {
 		return "";
 	}
 	return devlink_port_fn_opstate_strmap[value];
@@ -147,7 +147,7 @@ static constexpr std::array<std::string_view, 3 + 1> devlink_port_fn_attr_cap_st
 
 std::string_view devlink_port_fn_attr_cap_str(devlink_port_fn_attr_cap value)
 {
-	if (value < 0 || value >= (int)(devlink_port_fn_attr_cap_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_port_fn_attr_cap_strmap.size())) {
 		return "";
 	}
 	return devlink_port_fn_attr_cap_strmap[value];
@@ -162,7 +162,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_rate_type_strmap = 
 
 std::string_view devlink_rate_type_str(devlink_rate_type value)
 {
-	if (value < 0 || value >= (int)(devlink_rate_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_rate_type_strmap.size())) {
 		return "";
 	}
 	return devlink_rate_type_strmap[value];
@@ -177,7 +177,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_sb_threshold_type_s
 
 std::string_view devlink_sb_threshold_type_str(devlink_sb_threshold_type value)
 {
-	if (value < 0 || value >= (int)(devlink_sb_threshold_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_sb_threshold_type_strmap.size())) {
 		return "";
 	}
 	return devlink_sb_threshold_type_strmap[value];
@@ -193,7 +193,7 @@ static constexpr std::array<std::string_view, 2 + 1> devlink_eswitch_mode_strmap
 
 std::string_view devlink_eswitch_mode_str(devlink_eswitch_mode value)
 {
-	if (value < 0 || value >= (int)(devlink_eswitch_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_eswitch_mode_strmap.size())) {
 		return "";
 	}
 	return devlink_eswitch_mode_strmap[value];
@@ -211,7 +211,7 @@ static constexpr std::array<std::string_view, 3 + 1> devlink_eswitch_inline_mode
 std::string_view
 devlink_eswitch_inline_mode_str(devlink_eswitch_inline_mode value)
 {
-	if (value < 0 || value >= (int)(devlink_eswitch_inline_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_eswitch_inline_mode_strmap.size())) {
 		return "";
 	}
 	return devlink_eswitch_inline_mode_strmap[value];
@@ -227,7 +227,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_eswitch_encap_mode_
 std::string_view
 devlink_eswitch_encap_mode_str(devlink_eswitch_encap_mode value)
 {
-	if (value < 0 || value >= (int)(devlink_eswitch_encap_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_eswitch_encap_mode_strmap.size())) {
 		return "";
 	}
 	return devlink_eswitch_encap_mode_strmap[value];
@@ -243,7 +243,7 @@ static constexpr std::array<std::string_view, 2 + 1> devlink_dpipe_header_id_str
 
 std::string_view devlink_dpipe_header_id_str(devlink_dpipe_header_id value)
 {
-	if (value < 0 || value >= (int)(devlink_dpipe_header_id_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_dpipe_header_id_strmap.size())) {
 		return "";
 	}
 	return devlink_dpipe_header_id_strmap[value];
@@ -257,7 +257,7 @@ static constexpr std::array<std::string_view, 0 + 1> devlink_dpipe_match_type_st
 
 std::string_view devlink_dpipe_match_type_str(devlink_dpipe_match_type value)
 {
-	if (value < 0 || value >= (int)(devlink_dpipe_match_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_dpipe_match_type_strmap.size())) {
 		return "";
 	}
 	return devlink_dpipe_match_type_strmap[value];
@@ -271,7 +271,7 @@ static constexpr std::array<std::string_view, 0 + 1> devlink_dpipe_action_type_s
 
 std::string_view devlink_dpipe_action_type_str(devlink_dpipe_action_type value)
 {
-	if (value < 0 || value >= (int)(devlink_dpipe_action_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_dpipe_action_type_strmap.size())) {
 		return "";
 	}
 	return devlink_dpipe_action_type_strmap[value];
@@ -287,7 +287,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_dpipe_field_mapping
 std::string_view
 devlink_dpipe_field_mapping_type_str(devlink_dpipe_field_mapping_type value)
 {
-	if (value < 0 || value >= (int)(devlink_dpipe_field_mapping_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_dpipe_field_mapping_type_strmap.size())) {
 		return "";
 	}
 	return devlink_dpipe_field_mapping_type_strmap[value];
@@ -301,7 +301,7 @@ static constexpr std::array<std::string_view, 0 + 1> devlink_resource_unit_strma
 
 std::string_view devlink_resource_unit_str(devlink_resource_unit value)
 {
-	if (value < 0 || value >= (int)(devlink_resource_unit_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_resource_unit_strmap.size())) {
 		return "";
 	}
 	return devlink_resource_unit_strmap[value];
@@ -316,7 +316,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_resource_scope_strm
 
 std::string_view devlink_resource_scope_str(devlink_resource_scope value)
 {
-	if (value < 0 || value >= (int)(devlink_resource_scope_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_resource_scope_strmap.size())) {
 		return "";
 	}
 	return devlink_resource_scope_strmap[value];
@@ -331,7 +331,7 @@ static constexpr std::array<std::string_view, 2 + 1> devlink_reload_action_strma
 
 std::string_view devlink_reload_action_str(devlink_reload_action value)
 {
-	if (value < 0 || value >= (int)(devlink_reload_action_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_reload_action_strmap.size())) {
 		return "";
 	}
 	return devlink_reload_action_strmap[value];
@@ -347,7 +347,7 @@ static constexpr std::array<std::string_view, 2 + 1> devlink_param_cmode_strmap 
 
 std::string_view devlink_param_cmode_str(devlink_param_cmode value)
 {
-	if (value < 0 || value >= (int)(devlink_param_cmode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_param_cmode_strmap.size())) {
 		return "";
 	}
 	return devlink_param_cmode_strmap[value];
@@ -362,7 +362,7 @@ static constexpr std::array<std::string_view, 1 + 1> devlink_flash_overwrite_str
 
 std::string_view devlink_flash_overwrite_str(devlink_flash_overwrite value)
 {
-	if (value < 0 || value >= (int)(devlink_flash_overwrite_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_flash_overwrite_strmap.size())) {
 		return "";
 	}
 	return devlink_flash_overwrite_strmap[value];
@@ -378,7 +378,7 @@ static constexpr std::array<std::string_view, 2 + 1> devlink_trap_action_strmap 
 
 std::string_view devlink_trap_action_str(devlink_trap_action value)
 {
-	if (value < 0 || value >= (int)(devlink_trap_action_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_trap_action_strmap.size())) {
 		return "";
 	}
 	return devlink_trap_action_strmap[value];
@@ -394,7 +394,7 @@ static constexpr std::array<std::string_view, 2 + 1> devlink_trap_type_strmap = 
 
 std::string_view devlink_trap_type_str(devlink_trap_type value)
 {
-	if (value < 0 || value >= (int)(devlink_trap_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_trap_type_strmap.size())) {
 		return "";
 	}
 	return devlink_trap_type_strmap[value];
@@ -415,7 +415,7 @@ static constexpr std::array<std::string_view, 11 + 1> devlink_var_attr_type_strm
 
 std::string_view devlink_var_attr_type_str(devlink_var_attr_type value)
 {
-	if (value < 0 || value >= (int)(devlink_var_attr_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(devlink_var_attr_type_strmap.size())) {
 		return "";
 	}
 	return devlink_var_attr_type_strmap[value];

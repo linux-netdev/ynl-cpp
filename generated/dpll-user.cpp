@@ -33,7 +33,7 @@ static constexpr std::array<std::string_view, DPLL_CMD_PIN_CHANGE_NTF + 1> dpll_
 
 std::string_view dpll_op_str(int op)
 {
-	if (op < 0 || op >= (int)(dpll_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(dpll_op_strmap.size())) {
 		return "";
 	}
 	return dpll_op_strmap[op];
@@ -48,7 +48,7 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_mode_strmap = []() {
 
 std::string_view dpll_mode_str(dpll_mode value)
 {
-	if (value < 0 || value >= (int)(dpll_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_mode_strmap.size())) {
 		return "";
 	}
 	return dpll_mode_strmap[value];
@@ -65,7 +65,7 @@ static constexpr std::array<std::string_view, 4 + 1> dpll_lock_status_strmap = [
 
 std::string_view dpll_lock_status_str(dpll_lock_status value)
 {
-	if (value < 0 || value >= (int)(dpll_lock_status_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_lock_status_strmap.size())) {
 		return "";
 	}
 	return dpll_lock_status_strmap[value];
@@ -82,7 +82,7 @@ static constexpr std::array<std::string_view, 4 + 1> dpll_lock_status_error_strm
 
 std::string_view dpll_lock_status_error_str(dpll_lock_status_error value)
 {
-	if (value < 0 || value >= (int)(dpll_lock_status_error_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_lock_status_error_strmap.size())) {
 		return "";
 	}
 	return dpll_lock_status_error_strmap[value];
@@ -103,7 +103,7 @@ static constexpr std::array<std::string_view, 8 + 1> dpll_clock_quality_level_st
 
 std::string_view dpll_clock_quality_level_str(dpll_clock_quality_level value)
 {
-	if (value < 0 || value >= (int)(dpll_clock_quality_level_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_clock_quality_level_strmap.size())) {
 		return "";
 	}
 	return dpll_clock_quality_level_strmap[value];
@@ -118,7 +118,7 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_type_strmap = []() {
 
 std::string_view dpll_type_str(dpll_type value)
 {
-	if (value < 0 || value >= (int)(dpll_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_type_strmap.size())) {
 		return "";
 	}
 	return dpll_type_strmap[value];
@@ -136,7 +136,7 @@ static constexpr std::array<std::string_view, 5 + 1> dpll_pin_type_strmap = []()
 
 std::string_view dpll_pin_type_str(dpll_pin_type value)
 {
-	if (value < 0 || value >= (int)(dpll_pin_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_pin_type_strmap.size())) {
 		return "";
 	}
 	return dpll_pin_type_strmap[value];
@@ -151,7 +151,7 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_pin_direction_strmap =
 
 std::string_view dpll_pin_direction_str(dpll_pin_direction value)
 {
-	if (value < 0 || value >= (int)(dpll_pin_direction_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_pin_direction_strmap.size())) {
 		return "";
 	}
 	return dpll_pin_direction_strmap[value];
@@ -167,7 +167,7 @@ static constexpr std::array<std::string_view, 3 + 1> dpll_pin_state_strmap = [](
 
 std::string_view dpll_pin_state_str(dpll_pin_state value)
 {
-	if (value < 0 || value >= (int)(dpll_pin_state_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_pin_state_strmap.size())) {
 		return "";
 	}
 	return dpll_pin_state_strmap[value];
@@ -184,7 +184,7 @@ static constexpr std::array<std::string_view, 2 + 1> dpll_pin_capabilities_strma
 std::string_view dpll_pin_capabilities_str(dpll_pin_capabilities value)
 {
 	value = (dpll_pin_capabilities)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(dpll_pin_capabilities_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_pin_capabilities_strmap.size())) {
 		return "";
 	}
 	return dpll_pin_capabilities_strmap[value];
@@ -199,7 +199,7 @@ static constexpr std::array<std::string_view, 1 + 1> dpll_feature_state_strmap =
 
 std::string_view dpll_feature_state_str(dpll_feature_state value)
 {
-	if (value < 0 || value >= (int)(dpll_feature_state_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(dpll_feature_state_strmap.size())) {
 		return "";
 	}
 	return dpll_feature_state_strmap[value];
