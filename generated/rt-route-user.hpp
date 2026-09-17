@@ -28,6 +28,7 @@ const struct ynl_family& get_ynl_rt_route_family();
 /* Enums */
 std::string_view rt_route_op_str(int op);
 std::string_view rt_route_rtm_type_str(int value);
+std::string_view rt_route_del_reason_str(rt_del_reason value);
 
 /* Common nested types */
 struct rt_route_metrics {
@@ -100,6 +101,7 @@ struct rt_route_getroute_rsp {
 	std::optional<__u16> dport;
 	std::optional<__u32> nh_id;
 	std::optional<__u32> flowlabel /* big-endian */;
+	std::optional<enum rt_del_reason> del_reason;
 };
 
 /*
@@ -120,6 +122,15 @@ struct rt_route_getroute_list {
 std::unique_ptr<rt_route_getroute_list>
 rt_route_getroute_dump(ynl_cpp::ynl_socket& ys,
 		       rt_route_getroute_req_dump& req);
+
+/* RTM_GETROUTE - notify */
+struct rt_route_getroute_ntf {
+	__u16 family;
+	__u8 cmd;
+	struct ynl_ntf_base_type* next;
+	void (*free)(struct ynl_ntf_base_type* ntf);
+	rt_route_getroute_rsp obj __attribute__((aligned(8)));
+};
 
 /* ============== RTM_NEWROUTE ============== */
 /* RTM_NEWROUTE - do */

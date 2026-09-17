@@ -79,6 +79,20 @@ std::string_view nlctrl_attr_type_str(netlink_attribute_type value)
 	return nlctrl_attr_type_strmap[value];
 }
 
+static constexpr std::array<std::string_view, 1 + 1> nlctrl_policy_byte_order_strmap = []() {
+	std::array<std::string_view, 1 + 1> arr{};
+	arr[1] = "big-endian";
+	return arr;
+} ();
+
+std::string_view nlctrl_policy_byte_order_str(netlink_policy_byte_order value)
+{
+	if (value < 0 || value >= (int)(nlctrl_policy_byte_order_strmap.size())) {
+		return "";
+	}
+	return nlctrl_policy_byte_order_strmap[value];
+}
+
 /* Policies */
 static std::array<ynl_policy_attr,CTRL_ATTR_OP_MAX + 1> nlctrl_op_attrs_policy = []() {
 	std::array<ynl_policy_attr,CTRL_ATTR_OP_MAX + 1> arr{};
@@ -134,6 +148,8 @@ static std::array<ynl_policy_attr,NL_POLICY_TYPE_ATTR_MAX + 1> nlctrl_policy_att
 	arr[NL_POLICY_TYPE_ATTR_MASK].type = YNL_PT_U64;
 	arr[NL_POLICY_TYPE_ATTR_PAD].name = "pad";
 	arr[NL_POLICY_TYPE_ATTR_PAD].type = YNL_PT_IGNORE;
+	arr[NL_POLICY_TYPE_ATTR_BYTE_ORDER].name = "byte-order";
+	arr[NL_POLICY_TYPE_ATTR_BYTE_ORDER].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -313,6 +329,11 @@ int nlctrl_policy_attrs_parse(struct ynl_parse_arg *yarg,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->mask = (__u64)ynl_attr_get_u64(attr);
+		} else if (type == NL_POLICY_TYPE_ATTR_BYTE_ORDER) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->byte_order = (enum netlink_policy_byte_order)ynl_attr_get_u32(attr);
 		}
 	}
 

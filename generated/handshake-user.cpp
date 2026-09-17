@@ -30,11 +30,10 @@ std::string_view handshake_op_str(int op)
 	return handshake_op_strmap[op];
 }
 
-static constexpr std::array<std::string_view, 2 + 1> handshake_handler_class_strmap = []() {
-	std::array<std::string_view, 2 + 1> arr{};
+static constexpr std::array<std::string_view, 1 + 1> handshake_handler_class_strmap = []() {
+	std::array<std::string_view, 1 + 1> arr{};
 	arr[0] = "none";
 	arr[1] = "tlshd";
-	arr[2] = "max";
 	return arr;
 } ();
 
@@ -223,7 +222,7 @@ int handshake_accept_rsp_parse(const struct nlmsghdr *nlh,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
-			dst->keyring = (__u32)ynl_attr_get_u32(attr);
+			dst->keyring = (__s32)ynl_attr_get_s32(attr);
 		}
 	}
 
@@ -246,7 +245,7 @@ int handshake_accept_rsp_parse(const struct nlmsghdr *nlh,
 		i = 0;
 		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 			if (ynl_attr_type(attr) == HANDSHAKE_A_ACCEPT_PEER_IDENTITY) {
-				dst->peer_identity[i] = ynl_attr_get_u32(attr);
+				dst->peer_identity[i] = ynl_attr_get_s32(attr);
 				i++;
 			}
 		}
@@ -309,7 +308,7 @@ int handshake_done(ynl_cpp::ynl_socket& ys, handshake_done_req& req)
 		ynl_attr_put_s32(nlh, HANDSHAKE_A_DONE_SOCKFD, req.sockfd.value());
 	}
 	for (unsigned int i = 0; i < req.remote_auth.size(); i++) {
-		ynl_attr_put_u32(nlh, HANDSHAKE_A_DONE_REMOTE_AUTH, req.remote_auth[i]);
+		ynl_attr_put_s32(nlh, HANDSHAKE_A_DONE_REMOTE_AUTH, req.remote_auth[i]);
 	}
 
 	err = ynl_exec(ys, nlh, &yrs);

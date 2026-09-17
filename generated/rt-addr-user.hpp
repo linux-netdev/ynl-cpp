@@ -98,6 +98,7 @@ struct rt_addr_getmulticast_rsp {
 	struct ifaddrmsg _hdr;
 
 	std::vector<__u8> multicast;
+	std::optional<__u32> mc_users;
 	std::optional<struct ifa_cacheinfo> cacheinfo;
 };
 

@@ -14,8 +14,8 @@
 namespace ynl_cpp {
 
 /* Enums */
-static constexpr std::array<std::string_view, PSP_CMD_GET_STATS + 1> psp_op_strmap = []() {
-	std::array<std::string_view, PSP_CMD_GET_STATS + 1> arr{};
+static constexpr std::array<std::string_view, PSP_CMD_DEV_DISASSOC + 1> psp_op_strmap = []() {
+	std::array<std::string_view, PSP_CMD_DEV_DISASSOC + 1> arr{};
 	arr[PSP_CMD_DEV_GET] = "dev-get";
 	arr[PSP_CMD_DEV_ADD_NTF] = "dev-add-ntf";
 	arr[PSP_CMD_DEV_DEL_NTF] = "dev-del-ntf";
@@ -26,6 +26,8 @@ static constexpr std::array<std::string_view, PSP_CMD_GET_STATS + 1> psp_op_strm
 	arr[PSP_CMD_RX_ASSOC] = "rx-assoc";
 	arr[PSP_CMD_TX_ASSOC] = "tx-assoc";
 	arr[PSP_CMD_GET_STATS] = "get-stats";
+	arr[PSP_CMD_DEV_ASSOC] = "dev-assoc";
+	arr[PSP_CMD_DEV_DISASSOC] = "dev-disassoc";
 	return arr;
 } ();
 
@@ -55,6 +57,20 @@ std::string_view psp_version_str(psp_version value)
 }
 
 /* Policies */
+static std::array<ynl_policy_attr,PSP_A_ASSOC_DEV_INFO_MAX + 1> psp_assoc_dev_info_policy = []() {
+	std::array<ynl_policy_attr,PSP_A_ASSOC_DEV_INFO_MAX + 1> arr{};
+	arr[PSP_A_ASSOC_DEV_INFO_IFINDEX].name = "ifindex";
+	arr[PSP_A_ASSOC_DEV_INFO_IFINDEX].type = YNL_PT_U32;
+	arr[PSP_A_ASSOC_DEV_INFO_NSID].name = "nsid";
+	arr[PSP_A_ASSOC_DEV_INFO_NSID].type = YNL_PT_U32;
+	return arr;
+} ();
+
+struct ynl_policy_nest psp_assoc_dev_info_nest = {
+	.max_attr = static_cast<unsigned int>(PSP_A_ASSOC_DEV_INFO_MAX),
+	.table = psp_assoc_dev_info_policy.data(),
+};
+
 static std::array<ynl_policy_attr,PSP_A_KEYS_MAX + 1> psp_keys_policy = []() {
 	std::array<ynl_policy_attr,PSP_A_KEYS_MAX + 1> arr{};
 	arr[PSP_A_KEYS_KEY].name = "key";
@@ -79,6 +95,13 @@ static std::array<ynl_policy_attr,PSP_A_DEV_MAX + 1> psp_dev_policy = []() {
 	arr[PSP_A_DEV_PSP_VERSIONS_CAP].type = YNL_PT_U32;
 	arr[PSP_A_DEV_PSP_VERSIONS_ENA].name = "psp-versions-ena";
 	arr[PSP_A_DEV_PSP_VERSIONS_ENA].type = YNL_PT_U32;
+	arr[PSP_A_DEV_ASSOC_LIST].name = "assoc-list";
+	arr[PSP_A_DEV_ASSOC_LIST].type = YNL_PT_NEST;
+	arr[PSP_A_DEV_ASSOC_LIST].nest = &psp_assoc_dev_info_nest;
+	arr[PSP_A_DEV_NSID].name = "nsid";
+	arr[PSP_A_DEV_NSID].type = YNL_PT_U32;
+	arr[PSP_A_DEV_BY_ASSOCIATION].name = "by-association";
+	arr[PSP_A_DEV_BY_ASSOCIATION].type = YNL_PT_FLAG;
 	return arr;
 } ();
 
@@ -142,6 +165,31 @@ struct ynl_policy_nest psp_stats_nest = {
 };
 
 /* Common nested types */
+int psp_assoc_dev_info_parse(struct ynl_parse_arg *yarg,
+			     const struct nlattr *nested)
+{
+	psp_assoc_dev_info *dst = (psp_assoc_dev_info *)yarg->data;
+	const struct nlattr *attr;
+
+	ynl_attr_for_each_nested(attr, nested) {
+		unsigned int type = ynl_attr_type(attr);
+
+		if (type == PSP_A_ASSOC_DEV_INFO_IFINDEX) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->ifindex = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == PSP_A_ASSOC_DEV_INFO_NSID) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->nsid = (__s32)ynl_attr_get_s32(attr);
+		}
+	}
+
+	return 0;
+}
+
 int psp_keys_put(struct nlmsghdr *nlh, unsigned int attr_type,
 		 const psp_keys&  obj)
 {
@@ -190,10 +238,18 @@ int psp_keys_parse(struct ynl_parse_arg *yarg, const struct nlattr *nested)
 int psp_dev_get_rsp_parse(const struct nlmsghdr *nlh,
 			  struct ynl_parse_arg *yarg)
 {
+	unsigned int n_assoc_list = 0;
 	const struct nlattr *attr;
+	struct ynl_parse_arg parg;
 	psp_dev_get_rsp *dst;
+	int i;
 
 	dst = (psp_dev_get_rsp*)yarg->data;
+	parg.ys = yarg->ys;
+
+	if (dst->assoc_list.size() > 0) {
+		return ynl_error_parse(yarg, "attribute already present (dev.assoc-list)");
+	}
 
 	ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
 		unsigned int type = ynl_attr_type(attr);
@@ -218,6 +274,27 @@ int psp_dev_get_rsp_parse(const struct nlmsghdr *nlh,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->psp_versions_ena = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == PSP_A_DEV_ASSOC_LIST) {
+			n_assoc_list++;
+		} else if (type == PSP_A_DEV_BY_ASSOCIATION) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+		}
+	}
+
+	if (n_assoc_list) {
+		dst->assoc_list.resize(n_assoc_list);
+		i = 0;
+		parg.rsp_policy = &psp_assoc_dev_info_nest;
+		ynl_attr_for_each(attr, nlh, yarg->ys->family->hdr_len) {
+			if (ynl_attr_type(attr) == PSP_A_DEV_ASSOC_LIST) {
+				parg.data = &dst->assoc_list[i];
+				if (psp_assoc_dev_info_parse(&parg, attr)) {
+					return YNL_PARSE_CB_ERROR;
+				}
+				i++;
+			}
 		}
 	}
 
@@ -628,6 +705,92 @@ std::unique_ptr<psp_get_stats_list> psp_get_stats_dump(ynl_cpp::ynl_socket& ys)
 	}
 
 	return ret;
+}
+
+/* ============== PSP_CMD_DEV_ASSOC ============== */
+/* PSP_CMD_DEV_ASSOC - do */
+int psp_dev_assoc_rsp_parse(const struct nlmsghdr *nlh,
+			    struct ynl_parse_arg *yarg)
+{
+	return YNL_PARSE_CB_OK;
+}
+
+std::unique_ptr<psp_dev_assoc_rsp>
+psp_dev_assoc(ynl_cpp::ynl_socket& ys, psp_dev_assoc_req& req)
+{
+	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
+	std::unique_ptr<psp_dev_assoc_rsp> rsp;
+	struct nlmsghdr *nlh;
+	int err;
+
+	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, PSP_CMD_DEV_ASSOC, 1);
+	((struct ynl_sock*)ys)->req_policy = &psp_dev_nest;
+	yrs.yarg.rsp_policy = &psp_dev_nest;
+
+	if (req.id.has_value()) {
+		ynl_attr_put_u32(nlh, PSP_A_DEV_ID, req.id.value());
+	}
+	if (req.ifindex.has_value()) {
+		ynl_attr_put_u32(nlh, PSP_A_DEV_IFINDEX, req.ifindex.value());
+	}
+	if (req.nsid.has_value()) {
+		ynl_attr_put_s32(nlh, PSP_A_DEV_NSID, req.nsid.value());
+	}
+
+	rsp.reset(new psp_dev_assoc_rsp());
+	yrs.yarg.data = rsp.get();
+	yrs.cb = psp_dev_assoc_rsp_parse;
+	yrs.rsp_cmd = PSP_CMD_DEV_ASSOC;
+
+	err = ynl_exec(ys, nlh, &yrs);
+	if (err < 0) {
+		return nullptr;
+	}
+
+	return rsp;
+}
+
+/* ============== PSP_CMD_DEV_DISASSOC ============== */
+/* PSP_CMD_DEV_DISASSOC - do */
+int psp_dev_disassoc_rsp_parse(const struct nlmsghdr *nlh,
+			       struct ynl_parse_arg *yarg)
+{
+	return YNL_PARSE_CB_OK;
+}
+
+std::unique_ptr<psp_dev_disassoc_rsp>
+psp_dev_disassoc(ynl_cpp::ynl_socket& ys, psp_dev_disassoc_req& req)
+{
+	struct ynl_req_state yrs = { .yarg = { .ys = ys, }, };
+	std::unique_ptr<psp_dev_disassoc_rsp> rsp;
+	struct nlmsghdr *nlh;
+	int err;
+
+	nlh = ynl_gemsg_start_req(ys, ((struct ynl_sock*)ys)->family_id, PSP_CMD_DEV_DISASSOC, 1);
+	((struct ynl_sock*)ys)->req_policy = &psp_dev_nest;
+	yrs.yarg.rsp_policy = &psp_dev_nest;
+
+	if (req.id.has_value()) {
+		ynl_attr_put_u32(nlh, PSP_A_DEV_ID, req.id.value());
+	}
+	if (req.ifindex.has_value()) {
+		ynl_attr_put_u32(nlh, PSP_A_DEV_IFINDEX, req.ifindex.value());
+	}
+	if (req.nsid.has_value()) {
+		ynl_attr_put_s32(nlh, PSP_A_DEV_NSID, req.nsid.value());
+	}
+
+	rsp.reset(new psp_dev_disassoc_rsp());
+	yrs.yarg.data = rsp.get();
+	yrs.cb = psp_dev_disassoc_rsp_parse;
+	yrs.rsp_cmd = PSP_CMD_DEV_DISASSOC;
+
+	err = ynl_exec(ys, nlh, &yrs);
+	if (err < 0) {
+		return nullptr;
+	}
+
+	return rsp;
 }
 
 static constexpr std::array<ynl_ntf_info, PSP_CMD_KEY_ROTATE_NTF + 1> psp_ntf_info = []() {

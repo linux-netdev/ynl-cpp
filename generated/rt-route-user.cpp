@@ -14,9 +14,10 @@
 namespace ynl_cpp {
 
 /* Enums */
-static constexpr std::array<std::string_view, 24 + 1> rt_route_op_strmap = []() {
-	std::array<std::string_view, 24 + 1> arr{};
-	arr[24] = "getroute";
+static constexpr std::array<std::string_view, 25 + 1> rt_route_op_strmap = []() {
+	std::array<std::string_view, 25 + 1> arr{};
+	arr[24] = "newroute-ntf";
+	arr[25] = "delroute-ntf";
 	return arr;
 } ();
 
@@ -51,6 +52,22 @@ std::string_view rt_route_rtm_type_str(int value)
 		return "";
 	}
 	return rt_route_rtm_type_strmap[value];
+}
+
+static constexpr std::array<std::string_view, 2 + 1> rt_route_del_reason_strmap = []() {
+	std::array<std::string_view, 2 + 1> arr{};
+	arr[0] = "unspec";
+	arr[1] = "expired";
+	arr[2] = "ra-withdrawn";
+	return arr;
+} ();
+
+std::string_view rt_route_del_reason_str(rt_del_reason value)
+{
+	if (value < 0 || value >= (int)(rt_route_del_reason_strmap.size())) {
+		return "";
+	}
+	return rt_route_del_reason_strmap[value];
 }
 
 /* Policies */
@@ -165,6 +182,8 @@ static std::array<ynl_policy_attr,RTA_MAX + 1> rt_route_route_attrs_policy = [](
 	arr[RTA_NH_ID].type = YNL_PT_U32;
 	arr[RTA_FLOWLABEL].name = "flowlabel";
 	arr[RTA_FLOWLABEL].type = YNL_PT_U32;
+	arr[RTA_DEL_REASON].name = "del-reason";
+	arr[RTA_DEL_REASON].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -523,6 +542,11 @@ int rt_route_getroute_rsp_parse(const struct nlmsghdr *nlh,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->flowlabel = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == RTA_DEL_REASON) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->del_reason = (enum rt_del_reason)ynl_attr_get_u32(attr);
 		}
 	}
 
@@ -623,6 +647,13 @@ rt_route_getroute_dump(ynl_cpp::ynl_socket& ys,
 	}
 
 	return ret;
+}
+
+/* RTM_GETROUTE - notify */
+static void rt_route_getroute_ntf_free(struct ynl_ntf_base_type* ntf) {
+	auto* typed_ntf = reinterpret_cast<rt_route_getroute_ntf*>(ntf);
+	typed_ntf->obj.~rt_route_getroute_rsp();
+	free(ntf);
 }
 
 /* ============== RTM_NEWROUTE ============== */
@@ -845,11 +876,26 @@ int rt_route_delroute(ynl_cpp::ynl_socket& ys, rt_route_delroute_req& req)
 	return 0;
 }
 
+static constexpr std::array<ynl_ntf_info, RTM_DELROUTE + 1> rt_route_ntf_info = []() {
+	std::array<ynl_ntf_info, RTM_DELROUTE + 1> arr{};
+	arr[RTM_NEWROUTE].policy		= &rt_route_route_attrs_nest;
+	arr[RTM_NEWROUTE].cb		= rt_route_getroute_rsp_parse;
+	arr[RTM_NEWROUTE].alloc_sz	= sizeof(rt_route_getroute_ntf);
+	arr[RTM_NEWROUTE].free		= rt_route_getroute_ntf_free;
+	arr[RTM_DELROUTE].policy		= &rt_route_route_attrs_nest;
+	arr[RTM_DELROUTE].cb		= rt_route_getroute_rsp_parse;
+	arr[RTM_DELROUTE].alloc_sz	= sizeof(rt_route_getroute_ntf);
+	arr[RTM_DELROUTE].free		= rt_route_getroute_ntf_free;
+	return arr;
+} ();
+
 const struct ynl_family ynl_rt_route_family =  {
 	.name		= "rt_route",
 	.is_classic	= true,
 	.classic_id	= 0,
 	.hdr_len	= sizeof(struct rtmsg),
+	.ntf_info	= rt_route_ntf_info.data(),
+	.ntf_info_size	= rt_route_ntf_info.size(),
 };
 const struct ynl_family& get_ynl_rt_route_family() {
 	return ynl_rt_route_family;

@@ -36,6 +36,7 @@ std::string_view netdev_napi_threaded_str(netdev_napi_threaded value);
 
 /* Common nested types */
 struct netdev_io_uring_provider_info {
+	std::optional<__u64> rx_buf_len;
 };
 
 struct netdev_page_pool_info {
@@ -122,12 +123,17 @@ std::unique_ptr<netdev_page_pool_get_rsp>
 netdev_page_pool_get(ynl_cpp::ynl_socket& ys, netdev_page_pool_get_req& req);
 
 /* NETDEV_CMD_PAGE_POOL_GET - dump */
+struct netdev_page_pool_get_req_dump {
+	std::optional<__u32> ifindex;
+};
+
 struct netdev_page_pool_get_list {
 	std::list<netdev_page_pool_get_rsp> objs;
 };
 
 std::unique_ptr<netdev_page_pool_get_list>
-netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys);
+netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys,
+			  netdev_page_pool_get_req_dump& req);
 
 /* NETDEV_CMD_PAGE_POOL_GET - notify */
 struct netdev_page_pool_get_ntf {
@@ -167,12 +173,17 @@ netdev_page_pool_stats_get(ynl_cpp::ynl_socket& ys,
 			   netdev_page_pool_stats_get_req& req);
 
 /* NETDEV_CMD_PAGE_POOL_STATS_GET - dump */
+struct netdev_page_pool_stats_get_req_dump {
+	std::optional<netdev_page_pool_info> info;
+};
+
 struct netdev_page_pool_stats_get_list {
 	std::list<netdev_page_pool_stats_get_rsp> objs;
 };
 
 std::unique_ptr<netdev_page_pool_stats_get_list>
-netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys);
+netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys,
+				netdev_page_pool_stats_get_req_dump& req);
 
 /* ============== NETDEV_CMD_QUEUE_GET ============== */
 /* NETDEV_CMD_QUEUE_GET - do */
@@ -299,6 +310,7 @@ struct netdev_bind_rx_req {
 	std::optional<__u32> ifindex;
 	std::optional<__u32> fd;
 	std::vector<netdev_queue_id> queues;
+	std::optional<__u32> rx_page_size;
 };
 
 struct netdev_bind_rx_rsp {

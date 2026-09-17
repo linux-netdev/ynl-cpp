@@ -34,11 +34,12 @@ std::string_view fou_encap_type_str(int value);
 /* FOU_CMD_ADD - do */
 struct fou_add_req {
 	std::optional<__u16> port /* big-endian */;
+	std::optional<__u8> af;
 	std::optional<__u8> ipproto;
-	std::optional<__u8> type;
+	std::optional<int> type;
 	bool remcsum_nopartial{};
-	std::optional<__u32> local_v4;
-	std::optional<__u32> peer_v4;
+	std::optional<__u32> local_v4 /* big-endian */;
+	std::optional<__u32> peer_v4 /* big-endian */;
 	std::vector<__u8> local_v6;
 	std::vector<__u8> peer_v6;
 	std::optional<__u16> peer_port /* big-endian */;
@@ -57,8 +58,8 @@ struct fou_del_req {
 	std::optional<__s32> ifindex;
 	std::optional<__u16> port /* big-endian */;
 	std::optional<__u16> peer_port /* big-endian */;
-	std::optional<__u32> local_v4;
-	std::optional<__u32> peer_v4;
+	std::optional<__u32> local_v4 /* big-endian */;
+	std::optional<__u32> peer_v4 /* big-endian */;
 	std::vector<__u8> local_v6;
 	std::vector<__u8> peer_v6;
 };
@@ -75,19 +76,20 @@ struct fou_get_req {
 	std::optional<__s32> ifindex;
 	std::optional<__u16> port /* big-endian */;
 	std::optional<__u16> peer_port /* big-endian */;
-	std::optional<__u32> local_v4;
-	std::optional<__u32> peer_v4;
+	std::optional<__u32> local_v4 /* big-endian */;
+	std::optional<__u32> peer_v4 /* big-endian */;
 	std::vector<__u8> local_v6;
 	std::vector<__u8> peer_v6;
 };
 
 struct fou_get_rsp {
 	std::optional<__u16> port /* big-endian */;
+	std::optional<__u8> af;
 	std::optional<__u8> ipproto;
-	std::optional<__u8> type;
+	std::optional<int> type;
 	bool remcsum_nopartial{};
-	std::optional<__u32> local_v4;
-	std::optional<__u32> peer_v4;
+	std::optional<__u32> local_v4 /* big-endian */;
+	std::optional<__u32> peer_v4 /* big-endian */;
 	std::vector<__u8> local_v6;
 	std::vector<__u8> peer_v6;
 	std::optional<__u16> peer_port /* big-endian */;

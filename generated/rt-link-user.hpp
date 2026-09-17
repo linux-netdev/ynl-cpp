@@ -220,6 +220,8 @@ struct rt_link_linkinfo_geneve_attrs {
 	bool inner_proto_inherit{};
 	std::optional<struct ifla_geneve_port_range> port_range;
 	bool gro_hint{};
+	std::optional<__u32> local /* big-endian */;
+	std::vector<__u8> local6;
 };
 
 struct rt_link_linkinfo_hsr_attrs {
@@ -328,15 +330,15 @@ struct rt_link_linkinfo_brport_attrs {
 	std::optional<__u8> state;
 	std::optional<__u16> priority;
 	std::optional<__u32> cost;
-	bool mode{};
-	bool guard{};
-	bool protect{};
-	bool fast_leave{};
-	bool learning{};
-	bool unicast_flood{};
-	bool proxyarp{};
-	bool learning_sync{};
-	bool proxyarp_wifi{};
+	std::optional<__u8> mode;
+	std::optional<__u8> guard;
+	std::optional<__u8> protect;
+	std::optional<__u8> fast_leave;
+	std::optional<__u8> learning;
+	std::optional<__u8> unicast_flood;
+	std::optional<__u8> proxyarp;
+	std::optional<__u8> learning_sync;
+	std::optional<__u8> proxyarp_wifi;
 	std::optional<struct ifla_bridge_id> root_id;
 	std::optional<struct ifla_bridge_id> bridge_id;
 	std::optional<__u16> designated_port;
@@ -350,24 +352,25 @@ struct rt_link_linkinfo_brport_attrs {
 	std::optional<__u64> hold_timer;
 	bool flush{};
 	std::optional<__u8> multicast_router;
-	bool mcast_flood{};
-	bool mcast_to_ucast{};
-	bool vlan_tunnel{};
-	bool bcast_flood{};
+	std::optional<__u8> mcast_flood;
+	std::optional<__u8> mcast_to_ucast;
+	std::optional<__u8> vlan_tunnel;
+	std::optional<__u8> bcast_flood;
 	std::optional<__u16> group_fwd_mask;
-	bool neigh_suppress{};
-	bool isolated{};
+	std::optional<__u8> neigh_suppress;
+	std::optional<__u8> isolated;
 	std::optional<__u32> backup_port;
-	bool mrp_ring_open{};
-	bool mrp_in_open{};
+	std::optional<__u8> mrp_ring_open;
+	std::optional<__u8> mrp_in_open;
 	std::optional<__u32> mcast_eht_hosts_limit;
 	std::optional<__u32> mcast_eht_hosts_cnt;
-	bool locked{};
-	bool mab{};
+	std::optional<__u8> locked;
+	std::optional<__u8> mab;
 	std::optional<__u32> mcast_n_groups;
 	std::optional<__u32> mcast_max_groups;
-	bool neigh_vlan_suppress{};
+	std::optional<__u8> neigh_vlan_suppress;
 	std::optional<__u32> backup_nhid;
+	std::optional<__u8> neigh_forward_grat;
 };
 
 struct rt_link_bond_slave_attrs {
@@ -475,6 +478,8 @@ struct rt_link_linkinfo_bond_attrs {
 	std::optional<__u8> missed_max;
 	std::vector<std::array<__u8, 16>> ns_ip6_target;
 	std::optional<__u8> coupled_control;
+	std::optional<__u8> broadcast_neigh;
+	std::optional<__u8> lacp_strict;
 };
 
 struct rt_link_linkinfo_vlan_attrs {
@@ -591,11 +596,9 @@ struct rt_link_getlink_rsp {
 	std::optional<__u32> link;
 	std::string qdisc;
 	std::optional<struct rtnl_link_stats> stats;
-	std::string cost;
-	std::string priority;
 	std::optional<__u32> master;
-	std::string wireless;
-	std::string protinfo;
+	std::vector<__u8> wireless;
+	std::vector<__u8> protinfo;
 	std::optional<__u32> txqlen;
 	std::optional<struct rtnl_link_ifmap> map;
 	std::optional<__u32> weight;
@@ -646,6 +649,7 @@ struct rt_link_getlink_rsp {
 	std::vector<__u8> devlink_port;
 	std::optional<__u32> gso_ipv4_max_size;
 	std::optional<__u32> gro_ipv4_max_size;
+	std::optional<__u32> pacing_offload;
 };
 
 /*
@@ -694,11 +698,9 @@ struct rt_link_setlink_req {
 	std::optional<__u32> link;
 	std::string qdisc;
 	std::optional<struct rtnl_link_stats> stats;
-	std::string cost;
-	std::string priority;
 	std::optional<__u32> master;
-	std::string wireless;
-	std::string protinfo;
+	std::vector<__u8> wireless;
+	std::vector<__u8> protinfo;
 	std::optional<__u32> txqlen;
 	std::optional<struct rtnl_link_ifmap> map;
 	std::optional<__u32> weight;
@@ -749,6 +751,7 @@ struct rt_link_setlink_req {
 	std::vector<__u8> devlink_port;
 	std::optional<__u32> gso_ipv4_max_size;
 	std::optional<__u32> gro_ipv4_max_size;
+	std::optional<__u32> pacing_offload;
 };
 
 /*

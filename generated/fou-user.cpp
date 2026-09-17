@@ -96,6 +96,9 @@ int fou_add(ynl_cpp::ynl_socket& ys, fou_add_req& req)
 	if (req.port.has_value()) {
 		ynl_attr_put_u16(nlh, FOU_ATTR_PORT, req.port.value());
 	}
+	if (req.af.has_value()) {
+		ynl_attr_put_u8(nlh, FOU_ATTR_AF, req.af.value());
+	}
 	if (req.ipproto.has_value()) {
 		ynl_attr_put_u8(nlh, FOU_ATTR_IPPROTO, req.ipproto.value());
 	}
@@ -193,6 +196,11 @@ int fou_get_rsp_parse(const struct nlmsghdr *nlh, struct ynl_parse_arg *yarg)
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->port = (__u16)ynl_attr_get_u16(attr);
+		} else if (type == FOU_ATTR_AF) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->af = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == FOU_ATTR_IPPROTO) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -202,7 +210,7 @@ int fou_get_rsp_parse(const struct nlmsghdr *nlh, struct ynl_parse_arg *yarg)
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
-			dst->type = (__u8)ynl_attr_get_u8(attr);
+			dst->type = (int)ynl_attr_get_u8(attr);
 		} else if (type == FOU_ATTR_REMCSUM_NOPARTIAL) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;

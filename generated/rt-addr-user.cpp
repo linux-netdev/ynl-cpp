@@ -80,6 +80,8 @@ static std::array<ynl_policy_attr,IFA_MAX + 1> rt_addr_addr_attrs_policy = []() 
 	arr[IFA_TARGET_NETNSID].type = YNL_PT_BINARY;
 	arr[IFA_PROTO].name = "proto";
 	arr[IFA_PROTO].type = YNL_PT_U8;
+	arr[IFA_MC_USERS].name = "mc-users";
+	arr[IFA_MC_USERS].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -265,6 +267,11 @@ int rt_addr_getmulticast_rsp_parse(const struct nlmsghdr *nlh,
 			unsigned int len = ynl_attr_data_len(attr);
 			__u8 *data = (__u8*)ynl_attr_data(attr);
 			dst->multicast.assign(data, data + len);
+		} else if (type == IFA_MC_USERS) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->mc_users = (__u32)ynl_attr_get_u32(attr);
 		} else if (type == IFA_CACHEINFO) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;

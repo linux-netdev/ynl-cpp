@@ -29,6 +29,7 @@ const struct ynl_family& get_ynl_nlctrl_family();
 std::string_view nlctrl_op_str(int op);
 std::string_view nlctrl_op_flags_str(int value);
 std::string_view nlctrl_attr_type_str(netlink_attribute_type value);
+std::string_view nlctrl_policy_byte_order_str(netlink_policy_byte_order value);
 
 /* Common nested types */
 struct nlctrl_op_attrs {
@@ -57,6 +58,7 @@ struct nlctrl_policy_attrs {
 	std::optional<__u32> policy_maxtype;
 	std::optional<__u32> bitfield32_mask;
 	std::optional<__u64> mask;
+	std::optional<enum netlink_policy_byte_order> byte_order;
 };
 
 struct nlctrl_op_policy_attrs {

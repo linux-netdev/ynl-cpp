@@ -127,8 +127,8 @@ std::string_view rt_link_ipv4_devconf_str(int value)
 	return rt_link_ipv4_devconf_strmap[value];
 }
 
-static constexpr std::array<std::string_view, 57 + 1> rt_link_ipv6_devconf_strmap = []() {
-	std::array<std::string_view, 57 + 1> arr{};
+static constexpr std::array<std::string_view, 59 + 1> rt_link_ipv6_devconf_strmap = []() {
+	std::array<std::string_view, 59 + 1> arr{};
 	arr[0] = "forwarding";
 	arr[1] = "hoplimit";
 	arr[2] = "mtu6";
@@ -187,6 +187,8 @@ static constexpr std::array<std::string_view, 57 + 1> rt_link_ipv6_devconf_strma
 	arr[55] = "ioam6-id-wide";
 	arr[56] = "ndisc-evict-nocarrier";
 	arr[57] = "accept-untracked-na";
+	arr[58] = "accept-ra-min-lft";
+	arr[59] = "force-forwarding";
 	return arr;
 } ();
 
@@ -809,6 +811,10 @@ static std::array<ynl_policy_attr,IFLA_GENEVE_MAX + 1> rt_link_linkinfo_geneve_a
 	arr[IFLA_GENEVE_PORT_RANGE].type = YNL_PT_BINARY;
 	arr[IFLA_GENEVE_GRO_HINT].name = "gro-hint";
 	arr[IFLA_GENEVE_GRO_HINT].type = YNL_PT_FLAG;
+	arr[IFLA_GENEVE_LOCAL].name = "local";
+	arr[IFLA_GENEVE_LOCAL].type = YNL_PT_U32;
+	arr[IFLA_GENEVE_LOCAL6].name = "local6";
+	arr[IFLA_GENEVE_LOCAL6].type = YNL_PT_BINARY;
 	return arr;
 } ();
 
@@ -1066,23 +1072,23 @@ static std::array<ynl_policy_attr,IFLA_BRPORT_MAX + 1> rt_link_linkinfo_brport_a
 	arr[IFLA_BRPORT_COST].name = "cost";
 	arr[IFLA_BRPORT_COST].type = YNL_PT_U32;
 	arr[IFLA_BRPORT_MODE].name = "mode";
-	arr[IFLA_BRPORT_MODE].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_MODE].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_GUARD].name = "guard";
-	arr[IFLA_BRPORT_GUARD].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_GUARD].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_PROTECT].name = "protect";
-	arr[IFLA_BRPORT_PROTECT].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_PROTECT].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_FAST_LEAVE].name = "fast-leave";
-	arr[IFLA_BRPORT_FAST_LEAVE].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_FAST_LEAVE].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_LEARNING].name = "learning";
-	arr[IFLA_BRPORT_LEARNING].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_LEARNING].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_UNICAST_FLOOD].name = "unicast-flood";
-	arr[IFLA_BRPORT_UNICAST_FLOOD].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_UNICAST_FLOOD].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_PROXYARP].name = "proxyarp";
-	arr[IFLA_BRPORT_PROXYARP].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_PROXYARP].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_LEARNING_SYNC].name = "learning-sync";
-	arr[IFLA_BRPORT_LEARNING_SYNC].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_LEARNING_SYNC].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_PROXYARP_WIFI].name = "proxyarp-wifi";
-	arr[IFLA_BRPORT_PROXYARP_WIFI].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_PROXYARP_WIFI].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_ROOT_ID].name = "root-id";
 	arr[IFLA_BRPORT_ROOT_ID].type = YNL_PT_BINARY;
 	arr[IFLA_BRPORT_BRIDGE_ID].name = "bridge-id";
@@ -1112,41 +1118,43 @@ static std::array<ynl_policy_attr,IFLA_BRPORT_MAX + 1> rt_link_linkinfo_brport_a
 	arr[IFLA_BRPORT_PAD].name = "pad";
 	arr[IFLA_BRPORT_PAD].type = YNL_PT_IGNORE;
 	arr[IFLA_BRPORT_MCAST_FLOOD].name = "mcast-flood";
-	arr[IFLA_BRPORT_MCAST_FLOOD].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_MCAST_FLOOD].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_MCAST_TO_UCAST].name = "mcast-to-ucast";
-	arr[IFLA_BRPORT_MCAST_TO_UCAST].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_MCAST_TO_UCAST].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_VLAN_TUNNEL].name = "vlan-tunnel";
-	arr[IFLA_BRPORT_VLAN_TUNNEL].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_VLAN_TUNNEL].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_BCAST_FLOOD].name = "bcast-flood";
-	arr[IFLA_BRPORT_BCAST_FLOOD].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_BCAST_FLOOD].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_GROUP_FWD_MASK].name = "group-fwd-mask";
 	arr[IFLA_BRPORT_GROUP_FWD_MASK].type = YNL_PT_U16;
 	arr[IFLA_BRPORT_NEIGH_SUPPRESS].name = "neigh-suppress";
-	arr[IFLA_BRPORT_NEIGH_SUPPRESS].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_NEIGH_SUPPRESS].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_ISOLATED].name = "isolated";
-	arr[IFLA_BRPORT_ISOLATED].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_ISOLATED].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_BACKUP_PORT].name = "backup-port";
 	arr[IFLA_BRPORT_BACKUP_PORT].type = YNL_PT_U32;
 	arr[IFLA_BRPORT_MRP_RING_OPEN].name = "mrp-ring-open";
-	arr[IFLA_BRPORT_MRP_RING_OPEN].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_MRP_RING_OPEN].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_MRP_IN_OPEN].name = "mrp-in-open";
-	arr[IFLA_BRPORT_MRP_IN_OPEN].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_MRP_IN_OPEN].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_MCAST_EHT_HOSTS_LIMIT].name = "mcast-eht-hosts-limit";
 	arr[IFLA_BRPORT_MCAST_EHT_HOSTS_LIMIT].type = YNL_PT_U32;
 	arr[IFLA_BRPORT_MCAST_EHT_HOSTS_CNT].name = "mcast-eht-hosts-cnt";
 	arr[IFLA_BRPORT_MCAST_EHT_HOSTS_CNT].type = YNL_PT_U32;
 	arr[IFLA_BRPORT_LOCKED].name = "locked";
-	arr[IFLA_BRPORT_LOCKED].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_LOCKED].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_MAB].name = "mab";
-	arr[IFLA_BRPORT_MAB].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_MAB].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_MCAST_N_GROUPS].name = "mcast-n-groups";
 	arr[IFLA_BRPORT_MCAST_N_GROUPS].type = YNL_PT_U32;
 	arr[IFLA_BRPORT_MCAST_MAX_GROUPS].name = "mcast-max-groups";
 	arr[IFLA_BRPORT_MCAST_MAX_GROUPS].type = YNL_PT_U32;
 	arr[IFLA_BRPORT_NEIGH_VLAN_SUPPRESS].name = "neigh-vlan-suppress";
-	arr[IFLA_BRPORT_NEIGH_VLAN_SUPPRESS].type = YNL_PT_FLAG;
+	arr[IFLA_BRPORT_NEIGH_VLAN_SUPPRESS].type = YNL_PT_U8;
 	arr[IFLA_BRPORT_BACKUP_NHID].name = "backup-nhid";
 	arr[IFLA_BRPORT_BACKUP_NHID].type = YNL_PT_U32;
+	arr[IFLA_BRPORT_NEIGH_FORWARD_GRAT].name = "neigh-forward-grat";
+	arr[IFLA_BRPORT_NEIGH_FORWARD_GRAT].type = YNL_PT_U8;
 	return arr;
 } ();
 
@@ -1413,6 +1421,10 @@ static std::array<ynl_policy_attr,IFLA_BOND_MAX + 1> rt_link_linkinfo_bond_attrs
 	arr[IFLA_BOND_NS_IP6_TARGET].len = 16;
 	arr[IFLA_BOND_COUPLED_CONTROL].name = "coupled-control";
 	arr[IFLA_BOND_COUPLED_CONTROL].type = YNL_PT_U8;
+	arr[IFLA_BOND_BROADCAST_NEIGH].name = "broadcast-neigh";
+	arr[IFLA_BOND_BROADCAST_NEIGH].type = YNL_PT_U8;
+	arr[IFLA_BOND_LACP_STRICT].name = "lacp-strict";
+	arr[IFLA_BOND_LACP_STRICT].type = YNL_PT_U8;
 	return arr;
 } ();
 
@@ -1563,15 +1575,15 @@ static std::array<ynl_policy_attr,IFLA_MAX + 1> rt_link_link_attrs_policy = []()
 	arr[IFLA_STATS].name = "stats";
 	arr[IFLA_STATS].type = YNL_PT_BINARY;
 	arr[IFLA_COST].name = "cost";
-	arr[IFLA_COST].type  = YNL_PT_NUL_STR;
+	arr[IFLA_COST].type = YNL_PT_REJECT;
 	arr[IFLA_PRIORITY].name = "priority";
-	arr[IFLA_PRIORITY].type  = YNL_PT_NUL_STR;
+	arr[IFLA_PRIORITY].type = YNL_PT_REJECT;
 	arr[IFLA_MASTER].name = "master";
 	arr[IFLA_MASTER].type = YNL_PT_U32;
 	arr[IFLA_WIRELESS].name = "wireless";
-	arr[IFLA_WIRELESS].type  = YNL_PT_NUL_STR;
+	arr[IFLA_WIRELESS].type = YNL_PT_BINARY;
 	arr[IFLA_PROTINFO].name = "protinfo";
-	arr[IFLA_PROTINFO].type  = YNL_PT_NUL_STR;
+	arr[IFLA_PROTINFO].type = YNL_PT_BINARY;
 	arr[IFLA_TXQLEN].name = "txqlen";
 	arr[IFLA_TXQLEN].type = YNL_PT_U32;
 	arr[IFLA_MAP].name = "map";
@@ -1694,6 +1706,8 @@ static std::array<ynl_policy_attr,IFLA_MAX + 1> rt_link_link_attrs_policy = []()
 	arr[IFLA_HEADROOM].type = YNL_PT_U16;
 	arr[IFLA_TAILROOM].name = "tailroom";
 	arr[IFLA_TAILROOM].type = YNL_PT_U16;
+	arr[IFLA_PACING_OFFLOAD].name = "pacing-offload";
+	arr[IFLA_PACING_OFFLOAD].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -3022,6 +3036,12 @@ int rt_link_linkinfo_geneve_attrs_put(struct nlmsghdr *nlh,
 	if (obj.gro_hint) {
 		ynl_attr_put(nlh, IFLA_GENEVE_GRO_HINT, NULL, 0);
 	}
+	if (obj.local.has_value()) {
+		ynl_attr_put_u32(nlh, IFLA_GENEVE_LOCAL, obj.local.value());
+	}
+	if (obj.local6.size() > 0) {
+		ynl_attr_put(nlh, IFLA_GENEVE_LOCAL6, obj.local6.data(), obj.local6.size());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -3118,6 +3138,18 @@ int rt_link_linkinfo_geneve_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+		} else if (type == IFLA_GENEVE_LOCAL) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->local = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == IFLA_GENEVE_LOCAL6) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			unsigned int len = ynl_attr_data_len(attr);
+			__u8 *data = (__u8*)ynl_attr_data(attr);
+			dst->local6.assign(data, data + len);
 		}
 	}
 
@@ -4003,32 +4035,32 @@ int rt_link_linkinfo_brport_attrs_put(struct nlmsghdr *nlh,
 	if (obj.cost.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_COST, obj.cost.value());
 	}
-	if (obj.mode) {
-		ynl_attr_put(nlh, IFLA_BRPORT_MODE, NULL, 0);
+	if (obj.mode.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_MODE, obj.mode.value());
 	}
-	if (obj.guard) {
-		ynl_attr_put(nlh, IFLA_BRPORT_GUARD, NULL, 0);
+	if (obj.guard.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_GUARD, obj.guard.value());
 	}
-	if (obj.protect) {
-		ynl_attr_put(nlh, IFLA_BRPORT_PROTECT, NULL, 0);
+	if (obj.protect.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_PROTECT, obj.protect.value());
 	}
-	if (obj.fast_leave) {
-		ynl_attr_put(nlh, IFLA_BRPORT_FAST_LEAVE, NULL, 0);
+	if (obj.fast_leave.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_FAST_LEAVE, obj.fast_leave.value());
 	}
-	if (obj.learning) {
-		ynl_attr_put(nlh, IFLA_BRPORT_LEARNING, NULL, 0);
+	if (obj.learning.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_LEARNING, obj.learning.value());
 	}
-	if (obj.unicast_flood) {
-		ynl_attr_put(nlh, IFLA_BRPORT_UNICAST_FLOOD, NULL, 0);
+	if (obj.unicast_flood.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_UNICAST_FLOOD, obj.unicast_flood.value());
 	}
-	if (obj.proxyarp) {
-		ynl_attr_put(nlh, IFLA_BRPORT_PROXYARP, NULL, 0);
+	if (obj.proxyarp.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_PROXYARP, obj.proxyarp.value());
 	}
-	if (obj.learning_sync) {
-		ynl_attr_put(nlh, IFLA_BRPORT_LEARNING_SYNC, NULL, 0);
+	if (obj.learning_sync.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_LEARNING_SYNC, obj.learning_sync.value());
 	}
-	if (obj.proxyarp_wifi) {
-		ynl_attr_put(nlh, IFLA_BRPORT_PROXYARP_WIFI, NULL, 0);
+	if (obj.proxyarp_wifi.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_PROXYARP_WIFI, obj.proxyarp_wifi.value());
 	}
 	if (obj.root_id) {
 		ynl_attr_put(nlh, IFLA_BRPORT_ROOT_ID, &*obj.root_id, sizeof(struct ifla_bridge_id));
@@ -4069,35 +4101,35 @@ int rt_link_linkinfo_brport_attrs_put(struct nlmsghdr *nlh,
 	if (obj.multicast_router.has_value()) {
 		ynl_attr_put_u8(nlh, IFLA_BRPORT_MULTICAST_ROUTER, obj.multicast_router.value());
 	}
-	if (obj.mcast_flood) {
-		ynl_attr_put(nlh, IFLA_BRPORT_MCAST_FLOOD, NULL, 0);
+	if (obj.mcast_flood.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_MCAST_FLOOD, obj.mcast_flood.value());
 	}
-	if (obj.mcast_to_ucast) {
-		ynl_attr_put(nlh, IFLA_BRPORT_MCAST_TO_UCAST, NULL, 0);
+	if (obj.mcast_to_ucast.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_MCAST_TO_UCAST, obj.mcast_to_ucast.value());
 	}
-	if (obj.vlan_tunnel) {
-		ynl_attr_put(nlh, IFLA_BRPORT_VLAN_TUNNEL, NULL, 0);
+	if (obj.vlan_tunnel.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_VLAN_TUNNEL, obj.vlan_tunnel.value());
 	}
-	if (obj.bcast_flood) {
-		ynl_attr_put(nlh, IFLA_BRPORT_BCAST_FLOOD, NULL, 0);
+	if (obj.bcast_flood.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_BCAST_FLOOD, obj.bcast_flood.value());
 	}
 	if (obj.group_fwd_mask.has_value()) {
 		ynl_attr_put_u16(nlh, IFLA_BRPORT_GROUP_FWD_MASK, obj.group_fwd_mask.value());
 	}
-	if (obj.neigh_suppress) {
-		ynl_attr_put(nlh, IFLA_BRPORT_NEIGH_SUPPRESS, NULL, 0);
+	if (obj.neigh_suppress.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_NEIGH_SUPPRESS, obj.neigh_suppress.value());
 	}
-	if (obj.isolated) {
-		ynl_attr_put(nlh, IFLA_BRPORT_ISOLATED, NULL, 0);
+	if (obj.isolated.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_ISOLATED, obj.isolated.value());
 	}
 	if (obj.backup_port.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_BACKUP_PORT, obj.backup_port.value());
 	}
-	if (obj.mrp_ring_open) {
-		ynl_attr_put(nlh, IFLA_BRPORT_MRP_RING_OPEN, NULL, 0);
+	if (obj.mrp_ring_open.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_MRP_RING_OPEN, obj.mrp_ring_open.value());
 	}
-	if (obj.mrp_in_open) {
-		ynl_attr_put(nlh, IFLA_BRPORT_MRP_IN_OPEN, NULL, 0);
+	if (obj.mrp_in_open.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_MRP_IN_OPEN, obj.mrp_in_open.value());
 	}
 	if (obj.mcast_eht_hosts_limit.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_MCAST_EHT_HOSTS_LIMIT, obj.mcast_eht_hosts_limit.value());
@@ -4105,11 +4137,11 @@ int rt_link_linkinfo_brport_attrs_put(struct nlmsghdr *nlh,
 	if (obj.mcast_eht_hosts_cnt.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_MCAST_EHT_HOSTS_CNT, obj.mcast_eht_hosts_cnt.value());
 	}
-	if (obj.locked) {
-		ynl_attr_put(nlh, IFLA_BRPORT_LOCKED, NULL, 0);
+	if (obj.locked.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_LOCKED, obj.locked.value());
 	}
-	if (obj.mab) {
-		ynl_attr_put(nlh, IFLA_BRPORT_MAB, NULL, 0);
+	if (obj.mab.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_MAB, obj.mab.value());
 	}
 	if (obj.mcast_n_groups.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_MCAST_N_GROUPS, obj.mcast_n_groups.value());
@@ -4117,11 +4149,14 @@ int rt_link_linkinfo_brport_attrs_put(struct nlmsghdr *nlh,
 	if (obj.mcast_max_groups.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_MCAST_MAX_GROUPS, obj.mcast_max_groups.value());
 	}
-	if (obj.neigh_vlan_suppress) {
-		ynl_attr_put(nlh, IFLA_BRPORT_NEIGH_VLAN_SUPPRESS, NULL, 0);
+	if (obj.neigh_vlan_suppress.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_NEIGH_VLAN_SUPPRESS, obj.neigh_vlan_suppress.value());
 	}
 	if (obj.backup_nhid.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_BRPORT_BACKUP_NHID, obj.backup_nhid.value());
+	}
+	if (obj.neigh_forward_grat.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BRPORT_NEIGH_FORWARD_GRAT, obj.neigh_forward_grat.value());
 	}
 	ynl_attr_nest_end(nlh, nest);
 
@@ -4156,38 +4191,47 @@ int rt_link_linkinfo_brport_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->mode = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_GUARD) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->guard = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_PROTECT) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->protect = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_FAST_LEAVE) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->fast_leave = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_LEARNING) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->learning = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_UNICAST_FLOOD) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->unicast_flood = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_PROXYARP) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->proxyarp = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_LEARNING_SYNC) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->learning_sync = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_PROXYARP_WIFI) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->proxyarp_wifi = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_ROOT_ID) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -4262,18 +4306,22 @@ int rt_link_linkinfo_brport_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->mcast_flood = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_MCAST_TO_UCAST) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->mcast_to_ucast = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_VLAN_TUNNEL) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->vlan_tunnel = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_BCAST_FLOOD) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->bcast_flood = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_GROUP_FWD_MASK) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -4283,10 +4331,12 @@ int rt_link_linkinfo_brport_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->neigh_suppress = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_ISOLATED) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->isolated = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_BACKUP_PORT) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -4296,10 +4346,12 @@ int rt_link_linkinfo_brport_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->mrp_ring_open = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_MRP_IN_OPEN) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->mrp_in_open = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_MCAST_EHT_HOSTS_LIMIT) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -4314,10 +4366,12 @@ int rt_link_linkinfo_brport_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->locked = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_MAB) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->mab = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_MCAST_N_GROUPS) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -4332,11 +4386,17 @@ int rt_link_linkinfo_brport_attrs_parse(struct ynl_parse_arg *yarg,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
+			dst->neigh_vlan_suppress = (__u8)ynl_attr_get_u8(attr);
 		} else if (type == IFLA_BRPORT_BACKUP_NHID) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->backup_nhid = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == IFLA_BRPORT_NEIGH_FORWARD_GRAT) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->neigh_forward_grat = (__u8)ynl_attr_get_u8(attr);
 		}
 	}
 
@@ -5155,6 +5215,12 @@ int rt_link_linkinfo_bond_attrs_put(struct nlmsghdr *nlh,
 	if (obj.coupled_control.has_value()) {
 		ynl_attr_put_u8(nlh, IFLA_BOND_COUPLED_CONTROL, obj.coupled_control.value());
 	}
+	if (obj.broadcast_neigh.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BOND_BROADCAST_NEIGH, obj.broadcast_neigh.value());
+	}
+	if (obj.lacp_strict.has_value()) {
+		ynl_attr_put_u8(nlh, IFLA_BOND_LACP_STRICT, obj.lacp_strict.value());
+	}
 	ynl_attr_nest_end(nlh, nest);
 
 	return 0;
@@ -5349,6 +5415,16 @@ int rt_link_linkinfo_bond_attrs_parse(struct ynl_parse_arg *yarg,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->coupled_control = (__u8)ynl_attr_get_u8(attr);
+		} else if (type == IFLA_BOND_BROADCAST_NEIGH) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->broadcast_neigh = (__u8)ynl_attr_get_u8(attr);
+		} else if (type == IFLA_BOND_LACP_STRICT) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->lacp_strict = (__u8)ynl_attr_get_u8(attr);
 		}
 	}
 
@@ -5959,16 +6035,6 @@ int rt_link_getlink_rsp_parse(const struct nlmsghdr *nlh,
 			unsigned int struct_sz = sizeof(struct rtnl_link_stats);
 			dst->stats.emplace();
 			memcpy(&*dst->stats, ynl_attr_data(attr), std::min(struct_sz, len));
-		} else if (type == IFLA_COST) {
-			if (ynl_attr_validate(yarg, attr)) {
-				return YNL_PARSE_CB_ERROR;
-			}
-			dst->cost.assign(ynl_attr_get_str(attr));
-		} else if (type == IFLA_PRIORITY) {
-			if (ynl_attr_validate(yarg, attr)) {
-				return YNL_PARSE_CB_ERROR;
-			}
-			dst->priority.assign(ynl_attr_get_str(attr));
 		} else if (type == IFLA_MASTER) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -5978,12 +6044,16 @@ int rt_link_getlink_rsp_parse(const struct nlmsghdr *nlh,
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
-			dst->wireless.assign(ynl_attr_get_str(attr));
+			unsigned int len = ynl_attr_data_len(attr);
+			__u8 *data = (__u8*)ynl_attr_data(attr);
+			dst->wireless.assign(data, data + len);
 		} else if (type == IFLA_PROTINFO) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
 			}
-			dst->protinfo.assign(ynl_attr_get_str(attr));
+			unsigned int len = ynl_attr_data_len(attr);
+			__u8 *data = (__u8*)ynl_attr_data(attr);
+			dst->protinfo.assign(data, data + len);
 		} else if (type == IFLA_TXQLEN) {
 			if (ynl_attr_validate(yarg, attr)) {
 				return YNL_PARSE_CB_ERROR;
@@ -6283,6 +6353,11 @@ int rt_link_getlink_rsp_parse(const struct nlmsghdr *nlh,
 				return YNL_PARSE_CB_ERROR;
 			}
 			dst->gro_ipv4_max_size = (__u32)ynl_attr_get_u32(attr);
+		} else if (type == IFLA_PACING_OFFLOAD) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->pacing_offload = (__u32)ynl_attr_get_u32(attr);
 		}
 	}
 
@@ -6424,20 +6499,14 @@ int rt_link_setlink(ynl_cpp::ynl_socket& ys, rt_link_setlink_req& req)
 	if (req.stats) {
 		ynl_attr_put(nlh, IFLA_STATS, &*req.stats, sizeof(struct rtnl_link_stats));
 	}
-	if (req.cost.size() > 0) {
-		ynl_attr_put_str(nlh, IFLA_COST, req.cost.data());
-	}
-	if (req.priority.size() > 0) {
-		ynl_attr_put_str(nlh, IFLA_PRIORITY, req.priority.data());
-	}
 	if (req.master.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_MASTER, req.master.value());
 	}
 	if (req.wireless.size() > 0) {
-		ynl_attr_put_str(nlh, IFLA_WIRELESS, req.wireless.data());
+		ynl_attr_put(nlh, IFLA_WIRELESS, req.wireless.data(), req.wireless.size());
 	}
 	if (req.protinfo.size() > 0) {
-		ynl_attr_put_str(nlh, IFLA_PROTINFO, req.protinfo.data());
+		ynl_attr_put(nlh, IFLA_PROTINFO, req.protinfo.data(), req.protinfo.size());
 	}
 	if (req.txqlen.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_TXQLEN, req.txqlen.value());
@@ -6588,6 +6657,9 @@ int rt_link_setlink(ynl_cpp::ynl_socket& ys, rt_link_setlink_req& req)
 	}
 	if (req.gro_ipv4_max_size.has_value()) {
 		ynl_attr_put_u32(nlh, IFLA_GRO_IPV4_MAX_SIZE, req.gro_ipv4_max_size.value());
+	}
+	if (req.pacing_offload.has_value()) {
+		ynl_attr_put_u32(nlh, IFLA_PACING_OFFLOAD, req.pacing_offload.value());
 	}
 
 	err = ynl_exec(ys, nlh, &yrs);

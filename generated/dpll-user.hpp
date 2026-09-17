@@ -35,6 +35,7 @@ std::string_view dpll_type_str(dpll_type value);
 std::string_view dpll_pin_type_str(dpll_pin_type value);
 std::string_view dpll_pin_direction_str(dpll_pin_direction value);
 std::string_view dpll_pin_state_str(dpll_pin_state value);
+std::string_view dpll_pin_operstate_str(dpll_pin_operstate value);
 std::string_view dpll_pin_capabilities_str(dpll_pin_capabilities value);
 std::string_view dpll_feature_state_str(dpll_feature_state value);
 
@@ -49,7 +50,10 @@ struct dpll_pin_parent_device {
 	std::optional<enum dpll_pin_direction> direction;
 	std::optional<__u32> prio;
 	std::optional<enum dpll_pin_state> state;
+	std::optional<enum dpll_pin_operstate> operstate;
 	std::optional<__s64> phase_offset;
+	std::optional<__s64> fractional_frequency_offset;
+	std::optional<__s64> fractional_frequency_offset_ppt;
 };
 
 struct dpll_pin_parent_pin {
@@ -94,6 +98,7 @@ struct dpll_device_get_rsp {
 	std::vector<__u32> mode_supported;
 	std::optional<enum dpll_lock_status> lock_status;
 	std::optional<enum dpll_lock_status_error> lock_status_error;
+	std::vector<__u32> clock_quality_level;
 	std::optional<__s32> temp;
 	std::optional<__u64> clock_id;
 	std::optional<enum dpll_type> type;
@@ -198,27 +203,20 @@ struct dpll_pin_get_rsp {
 /*
  * Get list of pins and its attributes.
 
-- dump request without any attributes given - list all the pins in the
-  system
-- dump request with target dpll - list all the pins registered with
-  a given dpll device
-- do request with target dpll and target pin - single pin attributes
+- dump request - list all the registered, available pins in the
+  system, the request takes no attributes
+- do request with target pin - single pin attributes
 
  */
 std::unique_ptr<dpll_pin_get_rsp>
 dpll_pin_get(ynl_cpp::ynl_socket& ys, dpll_pin_get_req& req);
 
 /* DPLL_CMD_PIN_GET - dump */
-struct dpll_pin_get_req_dump {
-	std::optional<__u32> id;
-};
-
 struct dpll_pin_get_list {
 	std::list<dpll_pin_get_rsp> objs;
 };
 
-std::unique_ptr<dpll_pin_get_list>
-dpll_pin_get_dump(ynl_cpp::ynl_socket& ys, dpll_pin_get_req_dump& req);
+std::unique_ptr<dpll_pin_get_list> dpll_pin_get_dump(ynl_cpp::ynl_socket& ys);
 
 /* DPLL_CMD_PIN_GET - notify */
 struct dpll_pin_get_ntf {
@@ -234,9 +232,6 @@ struct dpll_pin_get_ntf {
 struct dpll_pin_set_req {
 	std::optional<__u32> id;
 	std::optional<__u64> frequency;
-	std::optional<enum dpll_pin_direction> direction;
-	std::optional<__u32> prio;
-	std::optional<enum dpll_pin_state> state;
 	std::vector<dpll_pin_parent_device> parent_device;
 	std::vector<dpll_pin_parent_pin> parent_pin;
 	std::optional<__s32> phase_adjust;

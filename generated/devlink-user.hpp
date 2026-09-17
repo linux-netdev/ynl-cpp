@@ -189,6 +189,12 @@ struct devlink_dl_rate_tc_bws {
 	std::optional<__u32> bw;
 };
 
+struct devlink_dl_parent_dev {
+	std::string bus_name;
+	std::string dev_name;
+	std::optional<__u64> index;
+};
+
 struct devlink_dl_dpipe_table_matches {
 	std::vector<devlink_dl_dpipe_match> dpipe_match;
 };
@@ -1501,6 +1507,7 @@ struct devlink_rate_set_req {
 	std::optional<__u32> rate_tx_weight;
 	std::string rate_parent_node_name;
 	std::vector<devlink_dl_rate_tc_bws> rate_tc_bws;
+	std::optional<devlink_dl_parent_dev> parent_dev;
 };
 
 /*
@@ -1521,6 +1528,7 @@ struct devlink_rate_new_req {
 	std::optional<__u32> rate_tx_weight;
 	std::string rate_parent_node_name;
 	std::vector<devlink_dl_rate_tc_bws> rate_tc_bws;
+	std::optional<devlink_dl_parent_dev> parent_dev;
 };
 
 /*

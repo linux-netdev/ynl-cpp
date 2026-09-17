@@ -400,8 +400,8 @@ std::string_view devlink_trap_type_str(devlink_trap_type value)
 	return devlink_trap_type_strmap[value];
 }
 
-static constexpr std::array<std::string_view, 11 + 1> devlink_var_attr_type_strmap = []() {
-	std::array<std::string_view, 11 + 1> arr{};
+static constexpr std::array<std::string_view, 129 + 1> devlink_var_attr_type_strmap = []() {
+	std::array<std::string_view, 129 + 1> arr{};
 	arr[1] = "u8";
 	arr[2] = "u16";
 	arr[3] = "u32";
@@ -410,6 +410,7 @@ static constexpr std::array<std::string_view, 11 + 1> devlink_var_attr_type_strm
 	arr[6] = "flag";
 	arr[10] = "nul-string";
 	arr[11] = "binary";
+	arr[129] = "u64-array";
 	return arr;
 } ();
 
@@ -765,6 +766,22 @@ static std::array<ynl_policy_attr,DEVLINK_RATE_TC_ATTR_MAX + 1> devlink_dl_rate_
 struct ynl_policy_nest devlink_dl_rate_tc_bws_nest = {
 	.max_attr = static_cast<unsigned int>(DEVLINK_RATE_TC_ATTR_MAX),
 	.table = devlink_dl_rate_tc_bws_policy.data(),
+};
+
+static std::array<ynl_policy_attr,DEVLINK_ATTR_MAX + 1> devlink_dl_parent_dev_policy = []() {
+	std::array<ynl_policy_attr,DEVLINK_ATTR_MAX + 1> arr{};
+	arr[DEVLINK_ATTR_BUS_NAME].name = "bus-name";
+	arr[DEVLINK_ATTR_BUS_NAME].type  = YNL_PT_NUL_STR;
+	arr[DEVLINK_ATTR_DEV_NAME].name = "dev-name";
+	arr[DEVLINK_ATTR_DEV_NAME].type  = YNL_PT_NUL_STR;
+	arr[DEVLINK_ATTR_INDEX].name = "index";
+	arr[DEVLINK_ATTR_INDEX].type = YNL_PT_UINT;
+	return arr;
+} ();
+
+struct ynl_policy_nest devlink_dl_parent_dev_nest = {
+	.max_attr = static_cast<unsigned int>(DEVLINK_ATTR_MAX),
+	.table = devlink_dl_parent_dev_policy.data(),
 };
 
 static std::array<ynl_policy_attr,DEVLINK_ATTR_MAX + 1> devlink_dl_dpipe_table_matches_policy = []() {
@@ -1419,6 +1436,9 @@ static std::array<ynl_policy_attr,DEVLINK_ATTR_MAX + 1> devlink_policy = []() {
 	arr[DEVLINK_ATTR_INDEX].type = YNL_PT_UINT;
 	arr[DEVLINK_ATTR_RESOURCE_SCOPE_MASK].name = "resource-scope-mask";
 	arr[DEVLINK_ATTR_RESOURCE_SCOPE_MASK].type = YNL_PT_U32;
+	arr[DEVLINK_ATTR_PARENT_DEV].name = "parent-dev";
+	arr[DEVLINK_ATTR_PARENT_DEV].type = YNL_PT_NEST;
+	arr[DEVLINK_ATTR_PARENT_DEV].nest = &devlink_dl_parent_dev_nest;
 	return arr;
 } ();
 
@@ -1903,6 +1923,26 @@ int devlink_dl_rate_tc_bws_put(struct nlmsghdr *nlh, unsigned int attr_type,
 	}
 	if (obj.bw.has_value()) {
 		ynl_attr_put_u32(nlh, DEVLINK_RATE_TC_ATTR_BW, obj.bw.value());
+	}
+	ynl_attr_nest_end(nlh, nest);
+
+	return 0;
+}
+
+int devlink_dl_parent_dev_put(struct nlmsghdr *nlh, unsigned int attr_type,
+			      const devlink_dl_parent_dev&  obj)
+{
+	struct nlattr *nest;
+
+	nest = ynl_attr_nest_start(nlh, attr_type);
+	if (obj.bus_name.size() > 0) {
+		ynl_attr_put_str(nlh, DEVLINK_ATTR_BUS_NAME, obj.bus_name.data());
+	}
+	if (obj.dev_name.size() > 0) {
+		ynl_attr_put_str(nlh, DEVLINK_ATTR_DEV_NAME, obj.dev_name.data());
+	}
+	if (obj.index.has_value()) {
+		ynl_attr_put_uint(nlh, DEVLINK_ATTR_INDEX, obj.index.value());
 	}
 	ynl_attr_nest_end(nlh, nest);
 
@@ -6291,6 +6331,9 @@ int devlink_rate_set(ynl_cpp::ynl_socket& ys, devlink_rate_set_req& req)
 	for (unsigned int i = 0; i < req.rate_tc_bws.size(); i++) {
 		devlink_dl_rate_tc_bws_put(nlh, DEVLINK_ATTR_RATE_TC_BWS, req.rate_tc_bws[i]);
 	}
+	if (req.parent_dev.has_value()) {
+		devlink_dl_parent_dev_put(nlh, DEVLINK_ATTR_PARENT_DEV, req.parent_dev.value());
+	}
 
 	err = ynl_exec(ys, nlh, &yrs);
 	if (err < 0) {
@@ -6340,6 +6383,9 @@ int devlink_rate_new(ynl_cpp::ynl_socket& ys, devlink_rate_new_req& req)
 	}
 	for (unsigned int i = 0; i < req.rate_tc_bws.size(); i++) {
 		devlink_dl_rate_tc_bws_put(nlh, DEVLINK_ATTR_RATE_TC_BWS, req.rate_tc_bws[i]);
+	}
+	if (req.parent_dev.has_value()) {
+		devlink_dl_parent_dev_put(nlh, DEVLINK_ATTR_PARENT_DEV, req.parent_dev.value());
 	}
 
 	err = ynl_exec(ys, nlh, &yrs);

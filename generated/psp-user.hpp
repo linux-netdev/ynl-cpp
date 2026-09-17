@@ -30,6 +30,11 @@ std::string_view psp_op_str(int op);
 std::string_view psp_version_str(psp_version value);
 
 /* Common nested types */
+struct psp_assoc_dev_info {
+	std::optional<__u32> ifindex;
+	std::optional<__s32> nsid;
+};
+
 struct psp_keys {
 	std::vector<__u8> key;
 	std::optional<__u32> spi;
@@ -46,6 +51,8 @@ struct psp_dev_get_rsp {
 	std::optional<__u32> ifindex;
 	std::optional<__u32> psp_versions_cap;
 	std::optional<__u32> psp_versions_ena;
+	std::vector<psp_assoc_dev_info> assoc_list;
+	bool by_association{};
 };
 
 /*
@@ -181,6 +188,40 @@ struct psp_get_stats_list {
 
 std::unique_ptr<psp_get_stats_list>
 psp_get_stats_dump(ynl_cpp::ynl_socket& ys);
+
+/* ============== PSP_CMD_DEV_ASSOC ============== */
+/* PSP_CMD_DEV_ASSOC - do */
+struct psp_dev_assoc_req {
+	std::optional<__u32> id;
+	std::optional<__u32> ifindex;
+	std::optional<__s32> nsid;
+};
+
+struct psp_dev_assoc_rsp {
+};
+
+/*
+ * Associate a network device with a PSP device.
+ */
+std::unique_ptr<psp_dev_assoc_rsp>
+psp_dev_assoc(ynl_cpp::ynl_socket& ys, psp_dev_assoc_req& req);
+
+/* ============== PSP_CMD_DEV_DISASSOC ============== */
+/* PSP_CMD_DEV_DISASSOC - do */
+struct psp_dev_disassoc_req {
+	std::optional<__u32> id;
+	std::optional<__u32> ifindex;
+	std::optional<__s32> nsid;
+};
+
+struct psp_dev_disassoc_rsp {
+};
+
+/*
+ * Disassociate a network device from a PSP device.
+ */
+std::unique_ptr<psp_dev_disassoc_rsp>
+psp_dev_disassoc(ynl_cpp::ynl_socket& ys, psp_dev_disassoc_req& req);
 
 } //namespace ynl_cpp
 #endif /* _LINUX_PSP_GEN_H */

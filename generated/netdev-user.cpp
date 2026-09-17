@@ -147,6 +147,8 @@ std::string_view netdev_napi_threaded_str(netdev_napi_threaded value)
 /* Policies */
 static std::array<ynl_policy_attr,NETDEV_A_IO_URING_PROVIDER_INFO_MAX + 1> netdev_io_uring_provider_info_policy = []() {
 	std::array<ynl_policy_attr,NETDEV_A_IO_URING_PROVIDER_INFO_MAX + 1> arr{};
+	arr[NETDEV_A_IO_URING_PROVIDER_INFO_RX_BUF_LEN].name = "rx-buf-len";
+	arr[NETDEV_A_IO_URING_PROVIDER_INFO_RX_BUF_LEN].type = YNL_PT_UINT;
 	return arr;
 } ();
 
@@ -432,6 +434,8 @@ static std::array<ynl_policy_attr,NETDEV_A_DMABUF_MAX + 1> netdev_dmabuf_policy 
 	arr[NETDEV_A_DMABUF_FD].type = YNL_PT_U32;
 	arr[NETDEV_A_DMABUF_ID].name = "id";
 	arr[NETDEV_A_DMABUF_ID].type = YNL_PT_U32;
+	arr[NETDEV_A_DMABUF_RX_PAGE_SIZE].name = "rx-page-size";
+	arr[NETDEV_A_DMABUF_RX_PAGE_SIZE].type = YNL_PT_U32;
 	return arr;
 } ();
 
@@ -449,6 +453,13 @@ int netdev_io_uring_provider_info_parse(struct ynl_parse_arg *yarg,
 
 	ynl_attr_for_each_nested(attr, nested) {
 		unsigned int type = ynl_attr_type(attr);
+
+		if (type == NETDEV_A_IO_URING_PROVIDER_INFO_RX_BUF_LEN) {
+			if (ynl_attr_validate(yarg, attr)) {
+				return YNL_PARSE_CB_ERROR;
+			}
+			dst->rx_buf_len = (__u64)ynl_attr_get_uint(attr);
+		}
 	}
 
 	return 0;
@@ -811,7 +822,8 @@ netdev_page_pool_get(ynl_cpp::ynl_socket& ys, netdev_page_pool_get_req& req)
 
 /* NETDEV_CMD_PAGE_POOL_GET - dump */
 std::unique_ptr<netdev_page_pool_get_list>
-netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys)
+netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys,
+			  netdev_page_pool_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -826,6 +838,11 @@ netdev_page_pool_get_dump(ynl_cpp::ynl_socket& ys)
 	yds.rsp_cmd = NETDEV_CMD_PAGE_POOL_GET;
 
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_PAGE_POOL_GET, 1);
+	((struct ynl_sock*)ys)->req_policy = &netdev_page_pool_nest;
+
+	if (req.ifindex.has_value()) {
+		ynl_attr_put_u32(nlh, NETDEV_A_PAGE_POOL_IFINDEX, req.ifindex.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
 	if (err < 0) {
@@ -960,7 +977,8 @@ netdev_page_pool_stats_get(ynl_cpp::ynl_socket& ys,
 
 /* NETDEV_CMD_PAGE_POOL_STATS_GET - dump */
 std::unique_ptr<netdev_page_pool_stats_get_list>
-netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys)
+netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys,
+				netdev_page_pool_stats_get_req_dump& req)
 {
 	struct ynl_dump_no_alloc_state yds = {};
 	struct nlmsghdr *nlh;
@@ -975,6 +993,11 @@ netdev_page_pool_stats_get_dump(ynl_cpp::ynl_socket& ys)
 	yds.rsp_cmd = NETDEV_CMD_PAGE_POOL_STATS_GET;
 
 	nlh = ynl_gemsg_start_dump(ys, ((struct ynl_sock*)ys)->family_id, NETDEV_CMD_PAGE_POOL_STATS_GET, 1);
+	((struct ynl_sock*)ys)->req_policy = &netdev_page_pool_stats_nest;
+
+	if (req.info.has_value()) {
+		netdev_page_pool_info_put(nlh, NETDEV_A_PAGE_POOL_STATS_INFO, req.info.value());
+	}
 
 	err = ynl_exec_dump_no_alloc(ys, nlh, &yds);
 	if (err < 0) {
@@ -1491,6 +1514,9 @@ netdev_bind_rx(ynl_cpp::ynl_socket& ys, netdev_bind_rx_req& req)
 	}
 	for (unsigned int i = 0; i < req.queues.size(); i++) {
 		netdev_queue_id_put(nlh, NETDEV_A_DMABUF_QUEUES, req.queues[i]);
+	}
+	if (req.rx_page_size.has_value()) {
+		ynl_attr_put_u32(nlh, NETDEV_A_DMABUF_RX_PAGE_SIZE, req.rx_page_size.value());
 	}
 
 	rsp.reset(new netdev_bind_rx_rsp());

@@ -48,10 +48,10 @@ struct handshake_accept_rsp {
 	std::optional<enum handshake_msg_type> message_type;
 	std::optional<__u32> timeout;
 	std::optional<enum handshake_auth> auth_mode;
-	std::vector<__u32> peer_identity;
+	std::vector<__s32> peer_identity;
 	std::vector<handshake_x509> certificate;
 	std::string peername;
-	std::optional<__u32> keyring;
+	std::optional<__s32> keyring;
 };
 
 /*
@@ -74,7 +74,7 @@ struct handshake_accept_ntf {
 struct handshake_done_req {
 	std::optional<__u32> status;
 	std::optional<__s32> sockfd;
-	std::vector<__u32> remote_auth;
+	std::vector<__s32> remote_auth;
 };
 
 /*

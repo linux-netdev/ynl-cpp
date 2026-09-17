@@ -494,6 +494,10 @@ definitions:
         name: ndisc-evict-nocarrier
       -
         name: accept-untracked-na
+      -
+        name: accept-ra-min-lft
+      -
+        name: force-forwarding
   -
     name: ifla-icmp6-stats
     enum-name:
@@ -880,22 +884,26 @@ attribute-sets:
         struct: rtnl-link-stats
       -
         name: cost
-        type: string
+        type: unused
       -
         name: priority
-        type: string
+        type: unused
       -
         name: master
         type: u32
       -
         name: wireless
-        type: string
+        type: binary
+        doc: struct iw_event
       -
         name: protinfo
-        type: string
+        type: binary
+        doc: A nest of ifla6-attrs or linkinfo-brport-attrs
       -
         name: txqlen
         type: u32
+        checks:
+          max: 32767
       -
         name: map
         type: binary
@@ -926,6 +934,11 @@ attribute-sets:
         name: vfinfo-list
         type: nest
         nested-attributes: vfinfo-list-attrs
+        doc: |
+          Per-VF details. The list holds at most 256 VFs, or 128 when
+          statistics are included, because it is one attribute and has to fit
+          in a u16 length. A device with more VFs than that reports a
+          truncated list; num-vf still carries the real count.
       -
         name: stats64
         type: binary
@@ -1078,6 +1091,10 @@ attribute-sets:
       -
         name: tailroom
         type: u16
+      -
+        name: pacing-offload
+        type: u32
+        doc: Enable EDT pacing offload (0 - disabled, 1 - enabled).
   -
     name: prop-list-link-attrs
     subset-of: link-attrs
@@ -1351,6 +1368,12 @@ attribute-sets:
       -
         name: coupled-control
         type: u8
+      -
+        name: broadcast-neigh
+        type: u8
+      -
+        name: lacp-strict
+        type: u8
   -
     name: bond-ad-info-attrs
     name-prefix: ifla-bond-ad-info-
@@ -1577,31 +1600,31 @@ attribute-sets:
         type: u32
       -
         name: mode
-        type: flag
+        type: u8
       -
         name: guard
-        type: flag
+        type: u8
       -
         name: protect
-        type: flag
+        type: u8
       -
         name: fast-leave
-        type: flag
+        type: u8
       -
         name: learning
-        type: flag
+        type: u8
       -
         name: unicast-flood
-        type: flag
+        type: u8
       -
         name: proxyarp
-        type: flag
+        type: u8
       -
         name: learning-sync
-        type: flag
+        type: u8
       -
         name: proxyarp-wifi
-        type: flag
+        type: u8
       -
         name: root-id
         type: binary
@@ -1648,34 +1671,34 @@ attribute-sets:
         type: pad
       -
         name: mcast-flood
-        type: flag
+        type: u8
       -
         name: mcast-to-ucast
-        type: flag
+        type: u8
       -
         name: vlan-tunnel
-        type: flag
+        type: u8
       -
         name: bcast-flood
-        type: flag
+        type: u8
       -
         name: group-fwd-mask
         type: u16
       -
         name: neigh-suppress
-        type: flag
+        type: u8
       -
         name: isolated
-        type: flag
+        type: u8
       -
         name: backup-port
         type: u32
       -
         name: mrp-ring-open
-        type: flag
+        type: u8
       -
         name: mrp-in-open
-        type: flag
+        type: u8
       -
         name: mcast-eht-hosts-limit
         type: u32
@@ -1684,10 +1707,10 @@ attribute-sets:
         type: u32
       -
         name: locked
-        type: flag
+        type: u8
       -
         name: mab
-        type: flag
+        type: u8
       -
         name: mcast-n-groups
         type: u32
@@ -1696,10 +1719,13 @@ attribute-sets:
         type: u32
       -
         name: neigh-vlan-suppress
-        type: flag
+        type: u8
       -
         name: backup-nhid
         type: u32
+      -
+        name: neigh-forward-grat
+        type: u8
   -
     name: linkinfo-gre-attrs
     name-prefix: ifla-gre-
@@ -1936,6 +1962,15 @@ attribute-sets:
       -
         name: gro-hint
         type: flag
+      -
+        name: local
+        type: u32
+        byte-order: big-endian
+        display-hint: ipv4
+      -
+        name: local6
+        type: binary
+        display-hint: ipv6
   -
     name: linkinfo-hsr-attrs
     name-prefix: ifla-hsr-
@@ -2193,7 +2228,7 @@ attribute-sets:
         name: conf
         type: binary
         sub-type: u32
-        doc: u32 indexed by ipv6-devconf - 1 on output, on input it's a nest
+        doc: u32 indexed by ipv6-devconf on output, input is not yet implemented
       -
         name: stats
         type: binary
@@ -2528,6 +2563,7 @@ operations:
             - devlink-port
             - gso-ipv4-max-size
             - gro-ipv4-max-size
+            - pacing-offload
       dump:
         request:
           value: 18
