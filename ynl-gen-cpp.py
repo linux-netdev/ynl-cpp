@@ -2726,8 +2726,12 @@ def main():
     cw.nl()
     headers = {parsed.uapi_header}
     for definition in parsed["definitions"] + parsed["attribute-sets"]:
-        if "header" in definition:
-            headers.add(definition["header"])
+        if "header" not in definition:
+            continue
+        scope = definition.get("scope", "uapi")
+        if scope != "uapi" and scope != args.mode:
+            continue
+        headers.add(definition["header"])
     for one in sorted(headers):
         cw.p(f"#include <{one}>")
     cw.nl()
