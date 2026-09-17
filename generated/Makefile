@@ -33,7 +33,7 @@ else
 Q = @
 endif
 
-all: $(LIBS)
+all: $(OBJS) $(LIBS)
 	@echo -e "\tAR libynl.a"
 	$(Q)ar rcs libynl.a $(OBJS)
 
