@@ -84,7 +84,7 @@ class Type(SpecAttr):
                 self.nested_struct_type = self.nested_render_name
 
         self.c_name = c_lower(self.name)
-        if self.c_name in _C_KW:
+        if self.c_name in _KW:
             self.c_name += "_"
         if self.c_name[0].isdigit():
             self.c_name = "_" + self.c_name
@@ -1034,7 +1034,7 @@ class AttrSet(SpecAttrSet):
 
     def resolve(self):
         self.c_name = c_lower(self.name)
-        if self.c_name in _C_KW:
+        if self.c_name in _KW:
             self.c_name += "_"
         if self.c_name == self.family.c_name:
             self.c_name = ""
@@ -1774,6 +1774,13 @@ _C_KW = {
     "volatile",
     "while",
 }
+
+# Kept separate from the list above, which is shared verbatim with ynl_gen_c.py.
+_CPP_KW = {
+    "class",
+}
+
+_KW = _C_KW | _CPP_KW
 
 
 def rdir(direction):
