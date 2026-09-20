@@ -23,7 +23,7 @@ static constexpr std::array<std::string_view, 33 + 1> rt_rule_op_strmap = []() {
 
 std::string_view rt_rule_op_str(int op)
 {
-	if (op < 0 || op >= (int)(rt_rule_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(rt_rule_op_strmap.size())) {
 		return "";
 	}
 	return rt_rule_op_strmap[op];
@@ -45,7 +45,7 @@ static constexpr std::array<std::string_view, 8 + 1> rt_rule_fr_act_strmap = [](
 
 std::string_view rt_rule_fr_act_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_rule_fr_act_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_rule_fr_act_strmap.size())) {
 		return "";
 	}
 	return rt_rule_fr_act_strmap[value];

@@ -27,7 +27,7 @@ static constexpr std::array<std::string_view, 92 + 1> rt_link_op_strmap = []() {
 
 std::string_view rt_link_op_str(int op)
 {
-	if (op < 0 || op >= (int)(rt_link_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(rt_link_op_strmap.size())) {
 		return "";
 	}
 	return rt_link_op_strmap[op];
@@ -60,7 +60,7 @@ static constexpr std::array<std::string_view, 18 + 1> rt_link_ifinfo_flags_strma
 std::string_view rt_link_ifinfo_flags_str(net_device_flags value)
 {
 	value = (net_device_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_link_ifinfo_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ifinfo_flags_strmap.size())) {
 		return "";
 	}
 	return rt_link_ifinfo_flags_strmap[value];
@@ -75,7 +75,7 @@ static constexpr std::array<std::string_view, 34984 + 1> rt_link_vlan_protocols_
 
 std::string_view rt_link_vlan_protocols_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_vlan_protocols_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_vlan_protocols_strmap.size())) {
 		return "";
 	}
 	return rt_link_vlan_protocols_strmap[value];
@@ -121,7 +121,7 @@ static constexpr std::array<std::string_view, 32 + 1> rt_link_ipv4_devconf_strma
 
 std::string_view rt_link_ipv4_devconf_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_ipv4_devconf_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ipv4_devconf_strmap.size())) {
 		return "";
 	}
 	return rt_link_ipv4_devconf_strmap[value];
@@ -194,7 +194,7 @@ static constexpr std::array<std::string_view, 59 + 1> rt_link_ipv6_devconf_strma
 
 std::string_view rt_link_ipv6_devconf_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_ipv6_devconf_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ipv6_devconf_strmap.size())) {
 		return "";
 	}
 	return rt_link_ipv6_devconf_strmap[value];
@@ -214,7 +214,7 @@ static constexpr std::array<std::string_view, 6 + 1> rt_link_ifla_icmp6_stats_st
 
 std::string_view rt_link_ifla_icmp6_stats_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_ifla_icmp6_stats_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ifla_icmp6_stats_strmap.size())) {
 		return "";
 	}
 	return rt_link_ifla_icmp6_stats_strmap[value];
@@ -264,7 +264,7 @@ static constexpr std::array<std::string_view, 36 + 1> rt_link_ifla_inet6_stats_s
 
 std::string_view rt_link_ifla_inet6_stats_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_ifla_inet6_stats_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ifla_inet6_stats_strmap.size())) {
 		return "";
 	}
 	return rt_link_ifla_inet6_stats_strmap[value];
@@ -283,7 +283,7 @@ static constexpr std::array<std::string_view, 4 + 1> rt_link_vlan_flags_strmap =
 std::string_view rt_link_vlan_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_link_vlan_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_vlan_flags_strmap.size())) {
 		return "";
 	}
 	return rt_link_vlan_flags_strmap[value];
@@ -299,7 +299,7 @@ static constexpr std::array<std::string_view, 2 + 1> rt_link_ifla_vf_link_state_
 
 std::string_view rt_link_ifla_vf_link_state_enum_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_ifla_vf_link_state_enum_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ifla_vf_link_state_enum_strmap.size())) {
 		return "";
 	}
 	return rt_link_ifla_vf_link_state_enum_strmap[value];
@@ -321,7 +321,7 @@ static constexpr std::array<std::string_view, 7 + 1> rt_link_rtext_filter_strmap
 std::string_view rt_link_rtext_filter_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_link_rtext_filter_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_rtext_filter_strmap.size())) {
 		return "";
 	}
 	return rt_link_rtext_filter_strmap[value];
@@ -336,7 +336,7 @@ static constexpr std::array<std::string_view, 2 + 1> rt_link_netkit_policy_strma
 
 std::string_view rt_link_netkit_policy_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_netkit_policy_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_netkit_policy_strmap.size())) {
 		return "";
 	}
 	return rt_link_netkit_policy_strmap[value];
@@ -351,7 +351,7 @@ static constexpr std::array<std::string_view, 1 + 1> rt_link_netkit_mode_strmap 
 
 std::string_view rt_link_netkit_mode_str(netkit_mode value)
 {
-	if (value < 0 || value >= (int)(rt_link_netkit_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_netkit_mode_strmap.size())) {
 		return "";
 	}
 	return rt_link_netkit_mode_strmap[value];
@@ -366,7 +366,7 @@ static constexpr std::array<std::string_view, 1 + 1> rt_link_netkit_scrub_strmap
 
 std::string_view rt_link_netkit_scrub_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_link_netkit_scrub_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_netkit_scrub_strmap.size())) {
 		return "";
 	}
 	return rt_link_netkit_scrub_strmap[value];
@@ -381,7 +381,7 @@ static constexpr std::array<std::string_view, 1 + 1> rt_link_netkit_pairing_strm
 
 std::string_view rt_link_netkit_pairing_str(netkit_pairing value)
 {
-	if (value < 0 || value >= (int)(rt_link_netkit_pairing_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_netkit_pairing_strmap.size())) {
 		return "";
 	}
 	return rt_link_netkit_pairing_strmap[value];
@@ -396,7 +396,7 @@ static constexpr std::array<std::string_view, 1 + 1> rt_link_ovpn_mode_strmap = 
 
 std::string_view rt_link_ovpn_mode_str(ovpn_mode value)
 {
-	if (value < 0 || value >= (int)(rt_link_ovpn_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_ovpn_mode_strmap.size())) {
 		return "";
 	}
 	return rt_link_ovpn_mode_strmap[value];
@@ -412,7 +412,7 @@ static constexpr std::array<std::string_view, 2 + 1> rt_link_br_stp_mode_strmap 
 
 std::string_view rt_link_br_stp_mode_str(br_stp_mode value)
 {
-	if (value < 0 || value >= (int)(rt_link_br_stp_mode_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_link_br_stp_mode_strmap.size())) {
 		return "";
 	}
 	return rt_link_br_stp_mode_strmap[value];

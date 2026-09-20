@@ -32,7 +32,7 @@ static constexpr std::array<std::string_view, MPTCP_PM_CMD_SUBFLOW_DESTROY + 1> 
 
 std::string_view mptcp_pm_op_str(int op)
 {
-	if (op < 0 || op >= (int)(mptcp_pm_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(mptcp_pm_op_strmap.size())) {
 		return "";
 	}
 	return mptcp_pm_op_strmap[op];
@@ -56,7 +56,7 @@ static constexpr std::array<std::string_view, 16 + 1> mptcp_pm_event_type_strmap
 
 std::string_view mptcp_pm_event_type_str(mptcp_event_type value)
 {
-	if (value < 0 || value >= (int)(mptcp_pm_event_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(mptcp_pm_event_type_strmap.size())) {
 		return "";
 	}
 	return mptcp_pm_event_type_strmap[value];

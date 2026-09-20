@@ -24,7 +24,7 @@ static constexpr std::array<std::string_view, 64 + 1> rt_neigh_op_strmap = []() 
 
 std::string_view rt_neigh_op_str(int op)
 {
-	if (op < 0 || op >= (int)(rt_neigh_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(rt_neigh_op_strmap.size())) {
 		return "";
 	}
 	return rt_neigh_op_strmap[op];
@@ -46,7 +46,7 @@ static constexpr std::array<std::string_view, 7 + 1> rt_neigh_nud_state_strmap =
 std::string_view rt_neigh_nud_state_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_neigh_nud_state_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_neigh_nud_state_strmap.size())) {
 		return "";
 	}
 	return rt_neigh_nud_state_strmap[value];
@@ -68,7 +68,7 @@ static constexpr std::array<std::string_view, 7 + 1> rt_neigh_ntf_flags_strmap =
 std::string_view rt_neigh_ntf_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_neigh_ntf_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_neigh_ntf_flags_strmap.size())) {
 		return "";
 	}
 	return rt_neigh_ntf_flags_strmap[value];
@@ -85,7 +85,7 @@ static constexpr std::array<std::string_view, 2 + 1> rt_neigh_ntf_ext_flags_strm
 std::string_view rt_neigh_ntf_ext_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_neigh_ntf_ext_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_neigh_ntf_ext_flags_strmap.size())) {
 		return "";
 	}
 	return rt_neigh_ntf_ext_flags_strmap[value];
@@ -110,7 +110,7 @@ static constexpr std::array<std::string_view, 11 + 1> rt_neigh_rtm_type_strmap =
 
 std::string_view rt_neigh_rtm_type_str(int value)
 {
-	if (value < 0 || value >= (int)(rt_neigh_rtm_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_neigh_rtm_type_strmap.size())) {
 		return "";
 	}
 	return rt_neigh_rtm_type_strmap[value];

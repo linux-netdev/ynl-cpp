@@ -37,7 +37,7 @@ static constexpr std::array<std::string_view, NETDEV_CMD_QUEUE_CREATE + 1> netde
 
 std::string_view netdev_op_str(int op)
 {
-	if (op < 0 || op >= (int)(netdev_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(netdev_op_strmap.size())) {
 		return "";
 	}
 	return netdev_op_strmap[op];
@@ -58,7 +58,7 @@ static constexpr std::array<std::string_view, 6 + 1> netdev_xdp_act_strmap = [](
 std::string_view netdev_xdp_act_str(netdev_xdp_act value)
 {
 	value = (netdev_xdp_act)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_xdp_act_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(netdev_xdp_act_strmap.size())) {
 		return "";
 	}
 	return netdev_xdp_act_strmap[value];
@@ -75,7 +75,7 @@ static constexpr std::array<std::string_view, 2 + 1> netdev_xdp_rx_metadata_strm
 std::string_view netdev_xdp_rx_metadata_str(netdev_xdp_rx_metadata value)
 {
 	value = (netdev_xdp_rx_metadata)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_xdp_rx_metadata_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(netdev_xdp_rx_metadata_strmap.size())) {
 		return "";
 	}
 	return netdev_xdp_rx_metadata_strmap[value];
@@ -92,7 +92,7 @@ static constexpr std::array<std::string_view, 2 + 1> netdev_xsk_flags_strmap = [
 std::string_view netdev_xsk_flags_str(netdev_xsk_flags value)
 {
 	value = (netdev_xsk_flags)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_xsk_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(netdev_xsk_flags_strmap.size())) {
 		return "";
 	}
 	return netdev_xsk_flags_strmap[value];
@@ -107,7 +107,7 @@ static constexpr std::array<std::string_view, 1 + 1> netdev_queue_type_strmap = 
 
 std::string_view netdev_queue_type_str(netdev_queue_type value)
 {
-	if (value < 0 || value >= (int)(netdev_queue_type_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(netdev_queue_type_strmap.size())) {
 		return "";
 	}
 	return netdev_queue_type_strmap[value];
@@ -122,7 +122,7 @@ static constexpr std::array<std::string_view, 0 + 1> netdev_qstats_scope_strmap 
 std::string_view netdev_qstats_scope_str(netdev_qstats_scope value)
 {
 	value = (netdev_qstats_scope)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(netdev_qstats_scope_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(netdev_qstats_scope_strmap.size())) {
 		return "";
 	}
 	return netdev_qstats_scope_strmap[value];
@@ -138,7 +138,7 @@ static constexpr std::array<std::string_view, 2 + 1> netdev_napi_threaded_strmap
 
 std::string_view netdev_napi_threaded_str(netdev_napi_threaded value)
 {
-	if (value < 0 || value >= (int)(netdev_napi_threaded_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(netdev_napi_threaded_strmap.size())) {
 		return "";
 	}
 	return netdev_napi_threaded_strmap[value];

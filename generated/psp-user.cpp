@@ -33,7 +33,7 @@ static constexpr std::array<std::string_view, PSP_CMD_DEV_DISASSOC + 1> psp_op_s
 
 std::string_view psp_op_str(int op)
 {
-	if (op < 0 || op >= (int)(psp_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(psp_op_strmap.size())) {
 		return "";
 	}
 	return psp_op_strmap[op];
@@ -50,7 +50,7 @@ static constexpr std::array<std::string_view, 3 + 1> psp_version_strmap = []() {
 
 std::string_view psp_version_str(psp_version value)
 {
-	if (value < 0 || value >= (int)(psp_version_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(psp_version_strmap.size())) {
 		return "";
 	}
 	return psp_version_strmap[value];

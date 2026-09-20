@@ -32,7 +32,7 @@ static constexpr std::array<std::string_view, OVPN_CMD_PEER_FLOAT_NTF + 1> ovpn_
 
 std::string_view ovpn_op_str(int op)
 {
-	if (op < 0 || op >= (int)(ovpn_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(ovpn_op_strmap.size())) {
 		return "";
 	}
 	return ovpn_op_strmap[op];
@@ -48,7 +48,7 @@ static constexpr std::array<std::string_view, 2 + 1> ovpn_cipher_alg_strmap = []
 
 std::string_view ovpn_cipher_alg_str(ovpn_cipher_alg value)
 {
-	if (value < 0 || value >= (int)(ovpn_cipher_alg_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovpn_cipher_alg_strmap.size())) {
 		return "";
 	}
 	return ovpn_cipher_alg_strmap[value];
@@ -66,7 +66,7 @@ static constexpr std::array<std::string_view, 4 + 1> ovpn_del_peer_reason_strmap
 
 std::string_view ovpn_del_peer_reason_str(ovpn_del_peer_reason value)
 {
-	if (value < 0 || value >= (int)(ovpn_del_peer_reason_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovpn_del_peer_reason_strmap.size())) {
 		return "";
 	}
 	return ovpn_del_peer_reason_strmap[value];
@@ -81,7 +81,7 @@ static constexpr std::array<std::string_view, 1 + 1> ovpn_key_slot_strmap = []()
 
 std::string_view ovpn_key_slot_str(ovpn_key_slot value)
 {
-	if (value < 0 || value >= (int)(ovpn_key_slot_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(ovpn_key_slot_strmap.size())) {
 		return "";
 	}
 	return ovpn_key_slot_strmap[value];

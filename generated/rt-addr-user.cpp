@@ -23,7 +23,7 @@ static constexpr std::array<std::string_view, RTM_GETMULTICAST + 1> rt_addr_op_s
 
 std::string_view rt_addr_op_str(int op)
 {
-	if (op < 0 || op >= (int)(rt_addr_op_strmap.size())) {
+	if ((int)op < 0 || (int)op >= (int)(rt_addr_op_strmap.size())) {
 		return "";
 	}
 	return rt_addr_op_strmap[op];
@@ -49,7 +49,7 @@ static constexpr std::array<std::string_view, 11 + 1> rt_addr_ifa_flags_strmap =
 std::string_view rt_addr_ifa_flags_str(int value)
 {
 	value = (int)(ffs(value) - 1);
-	if (value < 0 || value >= (int)(rt_addr_ifa_flags_strmap.size())) {
+	if ((int)value < 0 || (int)value >= (int)(rt_addr_ifa_flags_strmap.size())) {
 		return "";
 	}
 	return rt_addr_ifa_flags_strmap[value];
